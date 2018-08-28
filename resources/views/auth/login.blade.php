@@ -1,10 +1,48 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login User</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>Pawn Shop</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href = {{ asset("bootstrap/css/bootstrap.css") }} rel="stylesheet" />
+
+    <link href="{{asset('/assets/css/icons/icomoon/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/css/core.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/css/components.css')}}" rel="stylesheet">
+    <link href="{{asset('/assets/css/colors.css')}}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/extras/animate.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+</head>
+<body>
+
+</body>
+</html>
+
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-8" style="margin-top: 55px;">
+            <div class="card" style="box-shadow: 0px 1px 7px 0px;">
                 <div class="card-header">{{ __('ចូលប្រើប្រាស់ប្រព័ន្ឋ') }}</div>
 
                 <div class="card-body">
@@ -54,4 +92,3 @@
         </div>
     </div>
 </div>
-@endsection

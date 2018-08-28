@@ -32,8 +32,8 @@
   .sidebar {
     display: table-cell;
     vertical-align: top;
-    width: 280px;
-    padding-right: 20px;
+    width: 195px;
+    padding-right: 6px;
   }
 }
 .sidebar-main {

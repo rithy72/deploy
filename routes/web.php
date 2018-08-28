@@ -42,4 +42,13 @@ Route::middleware('auth')->group(function (){
         });
     });
 
+
+
+
+    Route::get('/admin/MainForm',function (){
+        return view('Admin.admin_main');
+    });
+    Route::get('/admin/Invoice',function (){
+        return view('Admin.Invoice.invoice_pajam');
+    });
 });
