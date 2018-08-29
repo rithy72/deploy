@@ -1,7 +1,29 @@
 @extends('layouts.app')
 @section('style')
     <style>
-        tr:nth-child(even){background-color: #efefefb3}
+        /*tr:nth-child(even){background-color: #efefefb3}*/
+        #table_show_frontEnd {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #table_show_frontEnd td, #table_show_frontEnd th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #table_show_frontEnd tr:nth-child(even){background-color: #f2f2f2;}
+        td {  height: 35px;  }
+        #table_show_frontEnd tr:hover {background-color: #ddd;}
+
+        #table_show_frontEnd th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #37474F;
+            color: white;
+        }
     </style>
 @endsection
 @section('content')
@@ -37,27 +59,27 @@
 
         <div class="panel-body">
             <div class="col-md-3">
-                <div class="panel" style="border-radius: 7px; background: red;box-shadow: 1px 3px 13px;">
+                <div class="panel" style="border-radius: 7px; background: #156b18b3;box-shadow: 1px 3px 13px;">
                     <h4 style="text-align: center;color: white;"><b>ទំនិញក្នុងឃ្លាំង</b></h4>
                     <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel" style="background: #4ec9ea; border-radius: 7px;box-shadow: 1px 3px 13px;">
-                    <h4 style="text-align: center;"><b>ទំនិញចូល</b></h4>
-                    <h5 style="text-align: center;font-size: 50px;"><b>0</b></h5>
+                <div class="panel" style="background: #3179f5cc; border-radius: 7px;box-shadow: 1px 3px 13px;">
+                    <h4 style="text-align: center;color: white;"><b>ទំនិញចូល</b></h4>
+                    <h5 style="text-align: center;font-size: 50px; color: white;"><b>0</b></h5>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel" style="border-radius: 7px;background: #c1fb3f;box-shadow: 1px 3px 13px;">
-                    <h4 style="text-align: center;"><b>ទំនិញចេញ</b></h4>
-                    <h5 style="text-align: center;font-size: 50px;"><b>0</b></h5>
+                <div class="panel" style="border-radius: 7px;background: #993616e6;box-shadow: 1px 3px 13px;">
+                    <h4 style="text-align: center;color: white;"><b>ទំនិញចេញ</b></h4>
+                    <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="panel" style="border-radius: 7px;background: #ffac1d;box-shadow: 1px 3px 13px;">
-                    <h4 style="text-align: center;"><b>ចំណូល</b></h4>
-                    <h5 style="text-align: center;font-size: 50px;"><b>0</b></h5>
+                <div class="panel" style="border-radius: 7px;background: #f38b26cc;box-shadow: 1px 3px 13px;">
+                    <h4 style="text-align: center;color: white;"><b>ចំណូល</b></h4>
+                    <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
 
@@ -72,9 +94,9 @@
             <br/><br/>
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table" style="background: #9aa6abb3;color: black;" id="table_show_frontEnd">
+                    <table class="table" id="table_show_frontEnd">{{--style="background: #9aa6abb3;color: black;"--}}
                         <thead style="font-size: 15px;">
-                        <tr class="bg-indigo-600" style="background: #37474F;color: #fcfcfc;">
+                        <tr class="bg-indigo-600">{{--style="background: #37474F;color: #fcfcfc;"--}}
                             <th><b>ការបរិច្ឆេត</b></th>
                             <th><b>ទំនិញចូល</b></th>
                             <th><b>ទំនិញចេញ</b></th>

@@ -1,7 +1,29 @@
 @extends('layouts.app')
 @section('style')
     <style>
-        tr:nth-child(even){background-color: #efefefb3}
+        /*tr:nth-child(even){background-color: #efefefb3}*/
+        #table_show_frontEnd {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #table_show_frontEnd td, #table_show_frontEnd th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #table_show_frontEnd tr:nth-child(even){background-color: #f2f2f2;}
+
+        #table_show_frontEnd tr:hover {background-color: #ddd;}
+        td {  height: 35px;  }
+        #table_show_frontEnd th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #37474F;
+            color: white;
+        }
     </style>
 @endsection
 @section('content')
@@ -28,7 +50,7 @@
             <div class="col-md-3">
                 <span>ស្វែងរកតាមវិក័យបត្រ៖</span>
                 <div class="form-group">
-                    <select class="form-control" id="" name="">
+                    <select class="form-control" id="selectSaPerPoun" name="">
                         <option selected="selected"></option>
                         <option selected="selected">005586 SE</option>
                     </select>
@@ -48,12 +70,12 @@
             <br/><br/>
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table" style="background: #9aa6abb3;color: black;" id="table_show_frontEnd">
+                    <table class="table DataTables" id="table_show_frontEnd">{{--style="background: #9aa6abb3;color: black;"--}}
                         <thead style="font-size: 15px;">
-                        <tr class="bg-indigo-600" style="background: #37474F;color: #fcfcfc;">
+                        <tr class="bg-indigo-600" >{{--style="background: #37474F;color: #fcfcfc;"--}}
                             <th><b>វិក័យបត្រ</b></th>
                             <th><b>ឈ្មោះអតិថិជន</b></th>
-                            <th><b>លេចទូរសព្ទ័</b></th>
+                            <th><b>លេខទូរសព្ទ័</b></th>
                             <th><b>ទឹកប្រាក់</b></th>
                             <th><b>ការប្រាក់</b></th>
                             <th><b>ទំនិញ</b></th>
@@ -125,6 +147,8 @@
 
 @section('script')
     <script>
+        $("#selectSaPerPoun").select2({
 
+        });
     </script>
 @endsection
