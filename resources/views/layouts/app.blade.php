@@ -86,11 +86,11 @@
                             <!-- Main -->
                             @if(Auth::user()->role == "admin")
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;">
-                                <a href="{{('/admin/MainForm')}}"><i class="icon-home4"></i> <span>ផ្ទាំងគ្រប់គ្រង</span></a>
+                                <a href="{{('admin/MainForm')}}"><i class="icon-home4"></i> <span>ផ្ទាំងគ្រប់គ្រង</span></a>
                             </li>
                             @endif
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                <a href="{{('/admin/Invoice')}}"><i class="icon-copy"></i> <span>វិក្ក័យបត្រ</span></a>
+                                <a href="{{('/Invoice')}}"><i class="icon-copy"></i> <span>វិក្ក័យបត្រ</span></a>
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="#"><i class="icon-store"></i> <span>សារពើភ័ណ្ឌ</span></a>
