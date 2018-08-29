@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function (){
             Route::get('/', function (){
                 return view('Admin.admin_main');
             });
-            Route::get('/admin/MainForm',function (){
+            Route::get('/MainForm',function (){
                 return view('Admin.admin_main');
             });
             Route::get('/admin/Invoice',function (){
@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function (){
             Route::get('/', function (){
                 return view('Front-Desk.front_desk_main');
             });
-            Route::get('/admin/Invoice',function (){
+            Route::get('/Invoice',function (){
                 return view('Admin.Invoice.invoice_pajam');
             });
         });
