@@ -1,33 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    {{--<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Pawn Shop</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href = {{ asset("bootstrap/css/bootstrap.css") }} rel="stylesheet" />
-
-    <link href="{{asset('/assets/css/icons/icomoon/styles.css')}}" rel="stylesheet">
-    <link href="{{asset('/assets/css/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{asset('/assets/css/core.css')}}" rel="stylesheet">
-    <link href="{{asset('/assets/css/components.css')}}" rel="stylesheet">
-    <link href="{{asset('/assets/css/colors.css')}}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/extras/animate.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">--}}
 
     <meta charset="UTF-8">
     <title>Pawn Shop</title>
@@ -77,11 +50,6 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                    {{--<li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>--}}
-                    {{--<li><a href="#"><i class="icon-coins"></i> My balance</a></li>--}}
-                    {{--<li><a href="#"><span class="badge bg-blue pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>--}}
-                    {{--<li class="divider"></li>--}}
-                    {{--<li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>--}}
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="icon-switch2"> {{ __('auth.logout') }}</i></a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -116,35 +84,22 @@
                         <ul class="navigation navigation-main navigation-accordion">
 
                             <!-- Main -->
-                            <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;"><a href="{{('/admin/MainForm')}}"><i class="icon-home4"></i> <span>ផ្ទាំងគ្រប់គ្រង</span></a></li>
+                            @if(Auth::user()->role == "admin")
+                            <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;">
+                                <a href="{{('/admin/MainForm')}}"><i class="icon-home4"></i> <span>ផ្ទាំងគ្រប់គ្រង</span></a>
+                            </li>
+                            @endif
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="{{('/admin/Invoice')}}"><i class="icon-copy"></i> <span>វិក្ក័យបត្រ</span></a>
-                                {{--<ul>--}}
-                                    {{--<li><a href="#">Boxed full width</a></li>--}}
-                                {{--</ul>--}}
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="#"><i class="icon-store"></i> <span>សារពើភ័ណ្ឌ</span></a>
-                                <ul>
-                                    <li><a href="#">Horizontal navigation</a></li>
-                                    <li>
-                                        <a href="#">1 columns</a>
-                                        <ul>
-                                            <li><a href="#">Dual sidebars</a></li>
-                                            <li><a href="#">Double sidebars</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Ding dak ey te!!!</a></li>
-                                </ul>
                             </li>
+                            @if(Auth::user()->role == "admin")
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="#"><i class="icon-user"></i> <span>អ្នកប្រើប្រាស់</span></a>
-                                <ul>
-                                    <li><a href="#" id="layout3">Layout 1</a></li>
-                                    <li><a href="#" id="layout4">Layout 2 <span class="label bg-warning-400">Current</span></a></li>
-                                    <li class="disabled"><a href="#" id="layout5">Layout 3 <span class="label bg-slate-800">Coming soon</span></a></li>
-                                </ul>
                             </li>
+                            @endif
                             <!-- /main -->
 
                         </ul>
