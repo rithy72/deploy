@@ -68,11 +68,11 @@
 
 
             <br/><br/>
-            <div class="col-md-12">
+            {{--<div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table DataTables" id="table_show_frontEnd">{{--style="background: #9aa6abb3;color: black;"--}}
+                    <table class="table DataTables" id="table_show_frontEnd">--}}{{--style="background: #9aa6abb3;color: black;"--}}{{--
                         <thead style="font-size: 15px;">
-                        <tr class="bg-indigo-600" >{{--style="background: #37474F;color: #fcfcfc;"--}}
+                        <tr class="bg-indigo-600" >--}}{{--style="background: #37474F;color: #fcfcfc;"--}}{{--
                             <th><b>វិក័យបត្រ</b></th>
                             <th><b>ឈ្មោះអតិថិជន</b></th>
                             <th><b>លេខទូរសព្ទ័</b></th>
@@ -139,7 +139,90 @@
                         </tbody>
                     </table>
                 </div>
+            </div>--}}
+
+
+            <div class="datatable-header" style="margin-top: -30px;"></div>
+            <div class="datatable-scroll">
+                <div class="dataTables_scroll">
+                    <!--============ scroll body oy trov 1 header table ===============-->
+                    <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
+                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                            <thead style="background: #e3e3ea99;">
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending"><b>វិក័យបត្រ</b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ឈ្មោះអតិថិជន</b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>លេខទូរសព្ទ័</b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ទឹកប្រាក់ </b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ការប្រាក់ </b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ទំនិញ </b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ថ្ងៃទទួល </b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ថ្ងៃផុតកំណត់ </b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ស្ថានភាព </b></th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>សកម្មភាព </b></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><b>000002</b></td>
+                                <td><b>កុយ</b></td>
+                                <td><b>012185693</b></td>
+                                <td><b>20$</b></td>
+                                <td><b>10%</b></td>
+                                <td><b>2</b></td>
+                                <td><b>2/9/2018</b></td>
+                                <td><b>2/10/2018</b></td>
+                                <td><b>មិនទាន់ទូទាត់</b></td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-uxpanded="false">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li id="updates_currency"><a><i class="icon-pencil7"></i>កែប្រែ</a></li>
+                                                <li id="updateRateChange"><a><i class="icon-price-tag"></i>បង់ប្រាក់</a></li>
+                                                <li id="detail_currency"><a><i class="icon-certificate"></i>ចូលមើល</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>000003</b></td>
+                                <td><b>កុយចេះ</b></td>
+                                <td><b>012185000</b></td>
+                                <td><b>25$</b></td>
+                                <td><b>15%</b></td>
+                                <td><b>5</b></td>
+                                <td><b>5/9/2018</b></td>
+                                <td><b>5/10/2018</b></td>
+                                <td><b>ទូទាត់រួច</b></td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-uxpanded="false">
+                                                <i class="icon-menu9"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li id="updates_currency"><a><i class="icon-pencil7"></i>កែប្រែ</a></li>
+                                                <li id="updateRateChange"><a><i class="icon-price-tag"></i>បង់ប្រាក់</a></li>
+                                                <li id="detail_currency"><a><i class="icon-certificate"></i>ចូលមើល</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+            {{--========================= footer of pagination ====================--}}
+            <div class="datatable-footer"><div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="DataTables_Table_3_previous">←</a><span><a class="paginate_button current" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_3" data-dt-idx="2" tabindex="0">2</a></span><a class="paginate_button next" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="DataTables_Table_3_next">→</a></div></div>
+            {{--====================== End footer of pagination ====================--}}
+
+
         </div>
     </div>
 

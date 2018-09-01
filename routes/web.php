@@ -51,4 +51,13 @@ Route::middleware('auth')->group(function (){
     Route::get('/admin/Invoice',function (){
         return view('Admin.Invoice.invoice_pajam');
     });
+    Route::get('/admin/SaPerPoun',function (){
+        return view('Admin.Sar_Per_Poun.sa_per_poun');
+    });
+    Route::get('/admin/User',function (){
+        return view('Admin.User_Use_System.user_use_system');
+    });
+    Route::get('/admin/History_User',function (){
+        return view('Admin.Action_History_User.history_user');
+    });
 });
