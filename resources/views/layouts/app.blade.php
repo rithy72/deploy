@@ -49,7 +49,7 @@
 <!-- Main navbar -->
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
-        <a class="navbar-brand"><p><b style="font-size: 26px;margin-left: 26px;">ហាងបញ្ចាំ ហុង ហ៊ីង</b></p></a>
+        <a class="navbar-brand"><p><b style="font-size: 26px;margin-left: 26px;">@lang('String.com_name')</b></p></a>
 
         <ul class="nav navbar-nav pull-right visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
