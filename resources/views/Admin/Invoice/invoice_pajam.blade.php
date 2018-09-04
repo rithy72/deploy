@@ -48,11 +48,13 @@
         <div class="panel-body">
 
             <div class="col-md-3">
-                <span>ស្វែងរកតាមវិក័យបត្រ៖</span>
+                <span>ស្វែងរកតាម ៖</span>
                 <div class="form-group">
-                    <select class="form-control" id="selectSaPerPoun" name="">
+                    <select class="form-control" id="" name="">
                         <option selected="selected"></option>
-                        <option selected="selected">005586 SE</option>
+                        <option selected="">លេខវិក្ក័យបត្រ</option>
+                        <option selected="">ឈ្មោះអតិថិជន</option>
+                        <option selected="">លេខទូរស័ព្ទ</option>
                     </select>
                 </div>
             </div>
@@ -63,7 +65,7 @@
 
 
             <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 19px;">
-                <a class="btn btn-success createNewCountry"><i class="icon-add position-left"></i>បង្កើតវិក័យបត្រថ្មី</a>
+                <a href="{{('/admin/Invoice/CreateNewInvoice')}}" class="btn btn-success createNewCountry"><i class="icon-add position-left"></i>បង្កើតវិក័្កយបត្រថ្មី</a>
             </div>
 
 
@@ -143,36 +145,36 @@
 
 
             <div class="datatable-header" style="margin-top: -30px;"></div>
-            <div class="datatable-scroll">
+            <div class="datatable-scroll" style="overflow-x: hidden;">
                 <div class="dataTables_scroll">
                     <!--============ scroll body oy trov 1 header table ===============-->
                     <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending"><b>វិក័យបត្រ</b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ឈ្មោះអតិថិជន</b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>លេខទូរសព្ទ័</b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ទឹកប្រាក់ </b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ការប្រាក់ </b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ទំនិញ </b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ថ្ងៃទទួល </b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ថ្ងៃផុតកំណត់ </b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ស្ថានភាព </b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>សកម្មភាព </b></th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">វិក័យបត្រ</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ឈ្មោះអតិថិជន</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លេខទូរសព្ទ័</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ទឹកប្រាក់</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ការប្រាក់</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ទំនិញ</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ថ្ងៃទទួល</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ថ្ងៃផុតកំណត់</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ស្ថានភាព</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">សកម្មភាព</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td><b>000002</b></td>
-                                <td><b>កុយ</b></td>
-                                <td><b>012185693</b></td>
-                                <td><b>20$</b></td>
-                                <td><b>10%</b></td>
-                                <td><b>2</b></td>
-                                <td><b>2/9/2018</b></td>
-                                <td><b>2/10/2018</b></td>
-                                <td><b>មិនទាន់ទូទាត់</b></td>
+                                <td>000002</td>
+                                <td>កុយ</td>
+                                <td>012185693</td>
+                                <td>20$</td>
+                                <td>10%</td>
+                                <td>2</td>
+                                <td>2/9/2018</td>
+                                <td>2/10/2018</td>
+                                <td>មិនទាន់ទូទាត់</td>
                                 <td class="text-center">
                                     <ul class="icons-list">
                                         <li class="dropdown">
@@ -180,24 +182,24 @@
                                                 <i class="icon-menu9"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="updates_currency"><a><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li id="updateRateChange"><a><i class="icon-price-tag"></i>បង់ប្រាក់</a></li>
-                                                <li id="detail_currency"><a><i class="icon-certificate"></i>ចូលមើល</a></li>
+                                                <li id="updates_currency"><a href="{{('/admin/Invoice/UpdateInvoice')}}"><i class="icon-pencil7"></i>កែប្រែ</a></li>
+                                                <li id="updateRateChange"><a href="{{('/admin/Invoice/PaymentInvoice')}}"><i class="icon-price-tag"></i>បង់ប្រាក់</a></li>
+                                                <li id="detail_currency"><a href="{{('/admin/Invoice/DetailInvoice')}}"><i class="icon-certificate"></i>ចូលមើល</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
                             <tr>
-                                <td><b>000003</b></td>
-                                <td><b>កុយចេះ</b></td>
-                                <td><b>012185000</b></td>
-                                <td><b>25$</b></td>
-                                <td><b>15%</b></td>
-                                <td><b>5</b></td>
-                                <td><b>5/9/2018</b></td>
-                                <td><b>5/10/2018</b></td>
-                                <td><b>ទូទាត់រួច</b></td>
+                                <td>000003</td>
+                                <td>កុយចេះ</td>
+                                <td>012185000</td>
+                                <td>25$</td>
+                                <td>15%</td>
+                                <td>5</td>
+                                <td>5/9/2018</td>
+                                <td>5/10/2018</td>
+                                <td>ទូទាត់រួច</td>
                                 <td class="text-center">
                                     <ul class="icons-list">
                                         <li class="dropdown">
@@ -205,9 +207,9 @@
                                                 <i class="icon-menu9"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="updates_currency"><a><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li id="updateRateChange"><a><i class="icon-price-tag"></i>បង់ប្រាក់</a></li>
-                                                <li id="detail_currency"><a><i class="icon-certificate"></i>ចូលមើល</a></li>
+                                                <li id="updates_currency"><a href="{{('/admin/Invoice/UpdateInvoice')}}"><i class="icon-pencil7"></i>កែប្រែ</a></li>
+                                                <li id="updateRateChange"><a href="{{('/admin/Invoice/PaymentInvoice')}}"><i class="icon-price-tag"></i>បង់ប្រាក់</a></li>
+                                                <li id="detail_currency"><a href="{{('/admin/Invoice/DetailInvoice')}}"><i class="icon-certificate"></i>ចូលមើល</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -230,8 +232,8 @@
 
 @section('script')
     <script>
-        $("#selectSaPerPoun").select2({
+        /*$("#selectSaPerPoun").select2({
 
-        });
+        });*/
     </script>
 @endsection

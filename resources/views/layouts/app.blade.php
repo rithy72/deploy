@@ -43,13 +43,21 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/extras/animate.min.css')}}">
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     @yield('style')
+    <style>
+        .box {
+            height: 90vh;
+            overflow-y: auto;
+            /*background-color: #333;
+            color: #fff;*/
+        }
+    </style>
 </head>
 
-<body>
+<body style="overflow: hidden;">
 <!-- Main navbar -->
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
-        <a class="navbar-brand"><p><b style="font-size: 26px;margin-left: 26px;">ហាងបញ្ចាំ ហុង ហ៊ីង</b></p></a>
+        <a class="navbar-brand"><p><b style="font-size: 26px;margin-left: -11px;">ហាងបញ្ចាំ ហុង ហ៊ីង</b></p></a>
 
         <ul class="nav navbar-nav pull-right visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -102,7 +110,7 @@
         <!-- Main sidebar -->
         <div class="sidebar sidebar-main"><!--sidebar-default  =  change collor navbar-->
             <!--<div class="sidebar-fixed">-->
-            <div class="sidebar-content" style="background: #37474F; height: 100vh;">
+            <div class="sidebar-content" style="background: #37474F; height: 90vh;">
                 <!-- Main navigation -->
                 <div class="sidebar-category sidebar-category-visible">
                     <div class="category-title h6">
@@ -153,6 +161,9 @@
                                     <li class="disabled"><a href="#" id="layout5">Layout 3 <span class="label bg-slate-800">Coming soon</span></a></li>
                                 </ul>--}}
                             </li>
+                            <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
+                                <a href="{{('/admin/RorBayKar')}}"><i class="icon-stack-text"></i> <span>របាយការណ៍</span></a>
+                            </li>
                             <!-- /main -->
 
                         </ul>
@@ -166,12 +177,11 @@
 
         <!-- Main content -->
         <div class="content-wrapper">
-            <!-- Page header -->
-            <!-- /page header -->
+            <div class="box"> {{--make scroll in content it the most powerful--}}
             <!-- Sidebars overview -->
-            @yield('content')
-
+             @yield('content')
             <!-- /sidebars overview -->
+            </div>
         </div>
         <!-- /main content -->
 

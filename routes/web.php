@@ -60,4 +60,19 @@ Route::middleware('auth')->group(function (){
     Route::get('/admin/History_User',function (){
         return view('Admin.Action_History_User.history_user');
     });
+    Route::get('/admin/Invoice/CreateNewInvoice',function (){
+        return view('Admin.Invoice.create_new_invoice');
+    });
+    Route::get('/admin/Invoice/DetailInvoice',function (){
+        return view('Admin.Invoice.detail_invoice');
+    });
+    Route::get('/admin/Invoice/UpdateInvoice',function (){
+        return view('Admin.Invoice.update_invoice');
+    });
+    Route::get('/admin/Invoice/PaymentInvoice',function (){
+        return view('Admin.Invoice.payment_invoice');
+    });
+    Route::get('/admin/RorBayKar',function (){
+        return view('Admin.Ror_Bay_kar.ror_bay_kar');
+    });
 });
