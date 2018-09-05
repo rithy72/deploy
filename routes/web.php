@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function (){
 
 
 
-
+    // Admin
     Route::get('/admin/MainForm',function (){
         return view('Admin.admin_main');
     });
@@ -75,4 +75,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/admin/RorBayKar',function (){
         return view('Admin.Ror_Bay_kar.ror_bay_kar');
     });
+
+    // User
+
 });

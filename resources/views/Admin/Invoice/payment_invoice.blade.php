@@ -23,19 +23,25 @@
         <div class="panel-body">
             {{-- Header show button and invoice id  --}}
             <div class="col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
-                <div class="col-md-8" style="margin-top: -20px;margin-bottom: 15px;">
-                    <div class="col-md-6">
-                        <h3><b>លេខបង្កាន់ដៃ ៖ </b><b>FE-999999</b></h3>
+                <div class="col-md-10" style="margin-top: -20px;margin-bottom: 15px;">
+                    <div class="col-md-4">
+                        <h4><b>លេខបង្កាន់ដៃ ៖ </b><b>FE-999999</b></h4>
                     </div>
-                    <div class="col-md-6">
-                        <h3><b>បង្កើតដោយ ៖ </b><b>Employee</b></h3>
+                    <div class="col-md-4">
+                        <h4><b>បង្កើតដោយ ៖ </b><b>Employee</b></h4>
                     </div>
+                    <div class="col-md-4" style="color: red;">
+                        <h4><b>យឺតអស់រយៈពេល ៖ </b><b>.......</b></h4>
+                    </div>
+                </div>
+                <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -13px;">
+                    <a class="btn createNewCountry" style="background: red;border-radius: 7px;color: white;border: 1px solid black;">យកដាច់</a>
                 </div>
             </div>
             {{-- End --}}
             <div class="col-xs-12 .col-sm-6 col-md-6">
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-size: 15px"><b>ឈ្មោះអតិថិជន ៖</b></label>
+                    <label class="control-label col-md-3" style="font-size: 15px">ឈ្មោះអតិថិជន ៖</label>
                     <div class="col-md-9">
                         <input type="text" placeholder="សរសេរឈ្មោះអតិថិជន...." name="" id="" class="form-control" style="border: 1px solid grey;">
                         <br>
@@ -44,7 +50,7 @@
             </div>
             <div class="col-xs-12 .col-sm-6 col-md-6">
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-size: 15px"><b>លេខទូរស័ព្ទ ៖</b></label>
+                    <label class="control-label col-md-3" style="font-size: 15px">លេខទូរស័ព្ទ ៖</label>
                     <div class="col-md-9">
                         <input type="number" placeholder="សរសេរលេខទូរស័ព្ទ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                         <br>
@@ -53,7 +59,7 @@
             </div>
             <div class="col-xs-12 .col-sm-6 col-md-6">
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-size: 15px"><b>ថ្ងៃទទួល ៖</b></label>
+                    <label class="control-label col-md-3" style="font-size: 15px">ថ្ងៃទទួល ៖</label>
                     <div class="col-md-9">
                         <input type="date" name="" id="" class="form-control" style="border: 1px solid grey;">
                         <br>
@@ -62,7 +68,7 @@
             </div>
             <div class="col-xs-12 .col-sm-6 col-md-6">
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-size: 15px"><b>ថ្ងៃផុតកំណត់ ៖</b></label>
+                    <label class="control-label col-md-3" style="font-size: 15px">ថ្ងៃផុតកំណត់ ៖</label>
                     <div class="col-md-9">
                         <input type="date" name="" id="" class="form-control" style="border: 1px solid grey;">
                         <br>
@@ -71,7 +77,7 @@
             </div>
             <div class="col-xs-12 .col-sm-6 col-md-6">
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-size: 15px"><b>អត្រាការប្រាក់ ៖</b></label>
+                    <label class="control-label col-md-3" style="font-size: 15px">អត្រាការប្រាក់ ៖</label>
                     <div class="col-md-9">
                         <select class="form-control" id="" name="">
                             <option selected="selected"></option>
@@ -88,7 +94,13 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs-12 .col-sm-6 col-md-6">
+                <div class="form-group col-md-12">
+                    <p style="margin-top: 7px;">តម្លៃប្រាក់ការក្នុង ១ ខែ ៖ ........</p>
+                </div>
+            </div>
         </div>
+
         <div class="datatable-header" style="margin-top: -25px;">
             <legend style="font-size: 17px;"><b style="margin-left: 16px;">ទំនិញបញ្ចាំ</b></legend>
         </div>
@@ -99,58 +111,36 @@
                     <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                         <thead style="background: #e3e3ea99;">
                         <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending"><b>លរ</b></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ក្រុុមទំនិញ</b></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>កំណត់សម្កាល់ ១</b></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>កំណត់សម្កាល់ ២</b></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>កំណត់សម្កាល់ ៣</b></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>តម្លៃ</b></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ស្ថានភាព</b></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>សកម្មភាព</b></th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">លរ</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ក្រុុមទំនិញ</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">កំណត់សម្កាល់ ១</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">កំណត់សម្កាល់ ២</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">កំណត់សម្កាល់ ៣</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">កំណត់សម្កាល់ ៤</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ស្ថានភាព</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">រំលស់</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td><b>1</b></td>
-                            <td><b>ម៉ូតូ</b></td>
-                            <td><b>ខ្មៅ</b></td>
-                            <td><b>1GG 9999</b></td>
-                            <td><b>Dream 2018</b></td>
-                            <td><b>450</b></td>
-                            <td><b>មិនទានរំលស់</b></td>
-                            <td class="text-center">
-                                <ul class="icons-list">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-uxpanded="false">
-                                            <i class="icon-menu9"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li id="update_item"><a><i class=""></i>រំលស់</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </td>
+                            <td>1</td>
+                            <td>ម៉ូតូ</td>
+                            <td>ស</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>មិនទានលស់</td>
+                            <td><input type="checkbox"></td>
                         </tr>
                         <tr>
-                            <td><b>2</b></td>
-                            <td><b>ឡាន</b></td>
-                            <td><b>ស</b></td>
-                            <td><b>1ZZ 9999</b></td>
-                            <td><b>Highlander</b></td>
-                            <td><b>1500</b></td>
-                            <td><b>មិនទាន់រំលស់</b></td>
-                            <td class="text-center">
-                                <ul class="icons-list">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-uxpanded="false">
-                                            <i class="icon-menu9"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li id="update_item"><a><i class=""></i>រំលស់</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </td>
+                            <td>1</td>
+                            <td>ឡាន</td>
+                            <td>លឿង</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>មិនទានលស់</td>
+                            <td><input type="checkbox"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -161,28 +151,35 @@
         <div class="datatable-footer">
             <div class="col-xs-12 .col-sm-12 col-md-12">
                 <div style="text-align: right;clear: both;">
-                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>តម្លៃដើមសរុប</b></label>
+                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ប្រាក់ដើមសរុប</b></label>
                     <div class="col-md-6">
                         <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
                         <br>
                     </div>
                 </div>
                 <div style="text-align: right;clear: both;">
-                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>តម្លៃដើមនៅសល់</b></label>
+                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ប្រាក់ដើមនៅសល់</b></label>
                     <div class="col-md-6">
                         <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
                         <br>
                     </div>
                 </div>
                 <div style="text-align: right;clear: both;">
-                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បង់ការប្រាក់</b></label>
+                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បង់ប្រាក់ដើម</b></label>
                     <div class="col-md-6">
                         <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;">
                         <br>
                     </div>
                 </div>
                 <div style="text-align: right;clear: both;">
-                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បង់ប្រាក់ដើម</b></label>
+                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ដក់ប្រាក់បន្ថែម  </b><input type="checkbox" id="checkme"></label>
+                    <div class="col-md-6">
+                        <input type="text" placeholder="...." name="" id="takeOutPriceMore" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                        <br>
+                    </div>
+                </div>
+                <div style="text-align: right;clear: both;">
+                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បង់ការប្រាក់</b></label>
                     <div class="col-md-6">
                         <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;">
                         <br>
@@ -205,6 +202,17 @@
 
 @section('script')
     <script>
+        // if check can take more price out of that invoice
+        var checker = document.getElementById('checkme');
+        var sendbtn = document.getElementById('takeOutPriceMore');
+        // when unchecked or checked, run the function
+        checker.onchange = function(){
+            if(this.checked){
+                sendbtn.disabled = false;
+            } else {
+                sendbtn.disabled = true;
+            }
+        };
         // select group of item
         $("#selectTomNanh").select2({
 
