@@ -47,7 +47,7 @@
 
         <div class="panel-body">
 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <span>ស្វែងរកតាម ៖</span>
                 <div class="form-group">
                     <select class="form-control" id="" name="">
@@ -55,6 +55,18 @@
                         <option selected="">លេខវិក្ក័យបត្រ</option>
                         <option selected="">ឈ្មោះអតិថិជន</option>
                         <option selected="">លេខទូរស័ព្ទ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <span>ស្ថានភាព ៖</span>
+                <div class="form-group">
+                    <select class="form-control" id="" name="">
+                        <option selected="selected"></option>
+                        <option selected="">មិនទាន់លួួស</option>
+                        <option selected="">ដាច់</option>
+                        <option selected="">ទូទាត់រួច</option>
+                        <option selected="">ទាំអស់</option>
                     </select>
                 </div>
             </div>

@@ -11,6 +11,7 @@
             <ul class="breadcrumb breadcrumb-caret position-right">
                 <li><a href="{{('/admin/MainForm')}}" style="color: #2577e1;"><span>ទំព័រដើម</span></a></li>
                 <li class="active"><span>សារពើភ័ណ្ឌ</span></li>
+                <li class="active"><span>ឈ្លាំងទំនិញ</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
             <div class="heading-elements">
@@ -55,12 +56,7 @@
 
                             <div class="dataTables_length">
                                 <div class="btn-group" style="margin-top: 20px;">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">ជ្រើសរើសការបង្កើតក្រុម និង ប្រភេទទំនិញ <span class="caret"></span></button>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li id="createGroupOfItem"><a><i class=""></i>បង្កើតក្រុមទំនិញ</a></li>
-                                        <li class="divider"></li>
-                                        <li id="createTypeOfItem"><a><i class=""></i>បង្កើតប្រភេទទំនិញ</a></li>
-                                    </ul>
+                                    <button type="button" class="btn btn-success" id="createNewType">បង្កើតប្រភេទទំនិញថ្មី</button>
                                 </div>
                             </div>
 
@@ -158,12 +154,7 @@
 
                             <div class="dataTables_length">
                                 <div class="btn-group" style="margin-top: 20px;">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">ជ្រើសរើសការបង្កើតក្រុម និង ប្រភេទទំនិញ <span class="caret"></span></button>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li id="createGroupOfItem"><a><i class=""></i>បង្កើតក្រុមទំនិញ</a></li>
-                                        <li class="divider"></li>
-                                        <li id="createTypeOfItem"><a><i class=""></i>បង្កើតប្រភេទទំនិញ</a></li>
-                                    </ul>
+                                    <button type="button" class="btn btn-success" id="createNewType">បង្កើតប្រភេទទំនិញថ្មី</button>
                                 </div>
                             </div>
 
@@ -277,12 +268,7 @@
 
                             <div class="dataTables_length">
                                 <div class="btn-group" style="margin-top: 20px;">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">ជ្រើសរើសការបង្កើតក្រុម និង ប្រភេទទំនិញ <span class="caret"></span></button>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li id="createGroupOfItem"><a><i class=""></i>បង្កើតក្រុមទំនិញ</a></li>
-                                        <li class="divider"></li>
-                                        <li id="createTypeOfItem"><a><i class=""></i>បង្កើតប្រភេទទំនិញ</a></li>
-                                    </ul>
+                                    <button type="button" class="btn btn-success" id="createNewType">បង្កើតប្រភេទទំនិញថ្មី</button>
                                 </div>
                             </div>
 
@@ -417,44 +403,6 @@
             </div>
         </div>
     </form>
-    {{------------ dialog tver ka create new of group item ------------}}
-    <form role="form" action="" method="">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div id="NewGroupDialog" class="modal fade">
-            <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">ធ្វើការបង្កើតនូវក្រុមទំនិញថ្មី</h5>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="col-md-12">
-                            <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
-                                <div class="datatable-header">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">បង្កើតក្រុមទំនិញថ្មី ៖</label>
-                                            <div class="col-lg-8" style="margin-bottom: 13px;">
-                                                <input type="text" class="form-control" placeholder="សរសេរឈ្មោះក្រុមទំនិញ..." style="border: 1px solid grey;">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>បោះបង់</button>
-                        {{ csrf_field() }}
-                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>??????</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>ធ្វើការបង្កើត</b><i class="icon-arrow-right13 position-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
     {{------------ dialog tver ka create new Type of item ------------}}
     <form role="form" action="" method="">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -503,14 +451,8 @@
                 backdrop: 'static'
             });
         });
-        // create new group of item
-        $(document).on("click","#createGroupOfItem",function(){
-            $('#NewGroupDialog').modal({
-                backdrop: 'static'
-            });
-        });
         // create new item type
-        $(document).on("click","#createTypeOfItem",function(){
+        $(document).on("click","#createNewType",function(){
             $('#NewTypeDialog').modal({
                 backdrop: 'static'
             });
