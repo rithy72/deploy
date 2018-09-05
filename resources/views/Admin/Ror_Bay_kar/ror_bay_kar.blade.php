@@ -6,7 +6,7 @@
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
                 <li><a href="{{('/admin/MainForm')}}" style="color: #2577e1;"><span>ទំព័រដើម</span></a></li>
-                <li class="active"><span>​អ្នកប្រើប្រាស់</span></li>
+                <li class="active"><span>របាយការណ៌</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
             <div class="heading-elements">
@@ -20,34 +20,12 @@
         </div>
 
         <div class="panel-body">
-            <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 19px;">
-                <a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>បង្កើតអ្នកប្រើប្រាស់ថ្មី</a>
-            </div>
 
             <div class="col-md-2">
-                <span>ស្វែងរកទាមរយៈ</span>
-                <div class="form-group">
-                    <select class="form-control" id="" name="">
-                        <option selected="selected"></option>
-                        <option selected="">លេខសំគាល់</option>
-                        <option selected="">ឈ្មោះអតិថិជន</option>
-                        <option selected="">លេខទូរស័ព្ទ</option>
-                    </select>
-                </div>
+                <span>ជ្រើសរើសថ្ងៃចាប់ផ្តើម</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
             </div>
             <div class="col-md-2">
-                <span>ស្ថានភាព</span>
-                <div class="form-group">
-                    <select class="form-control" id="" name="">
-                        <option selected="selected"></option>
-                        <option selected="">ទាំអស់</option>
-                        <option selected="">ដំណើរការ</option>
-                        <option selected="">ផ្អាកដំណើរការ</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <span>.</span><input type="text" class="form-control" placeholder="ស្វែងរកវត្ថុ">
+                <span>ជ្រើសរើសថ្ងៃរហូតដល់</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
             </div>
             <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>
             <br/><br/>
@@ -59,79 +37,27 @@
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">លេខសំគាល់</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ឈ្មោះពេញ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លេខទូរសព្ទ័</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ស្ថានភាព</th>
-                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">សកម្មភាព</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">កាលបរិច្ឆែទ</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ទំនិញចូល</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ទំនិញចេញ</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ចំណាយ</th>
+                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">ចំណូល</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>000003</td>
-                                <td>លុងសូ</td>
-                                <td>012185000</td>
-                                <td>ដំណើរការ</td>
-                                <td class="text-center">
-                                    <ul class="icons-list">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="icon-menu9"></i>
-                                            </a>
-
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>ដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>ផ្អាកដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>លុបចោល</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>000004</td>
-                                <td>ឆាយ</td>
-                                <td>01218553696</td>
-                                <td>ផ្អាកដំណើរការ</td>
-                                <td class="text-center">
-                                    <ul class="icons-list">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="icon-menu9"></i>
-                                            </a>
-
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>ដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>ផ្អាកដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>លុបចោល</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>000008</td>
+                                <td>4/9/2018</td>
+                                <td>ម៉ូតូ</td>
                                 <td>ឡាន</td>
-                                <td>0121882001</td>
-                                <td>ដំណើរការ</td>
-                                <td class="text-center">
-                                    <ul class="icons-list">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="icon-menu9"></i>
-                                            </a>
-
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>ដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>ផ្អាកដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>លុបចោល</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </td>
+                                <td>500$</td>
+                                <td>200$</td>
+                            </tr>
+                            <tr>
+                                <td>2/9/2018</td>
+                                <td>ម៉ូតូ</td>
+                                <td>ឡាន</td>
+                                <td>450$</td>
+                                <td>250$</td>
                             </tr>
                             </tbody>
                         </table>
@@ -153,7 +79,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">ការបង្កើតអ្នកប្រើបា្រស់ថ្មី</h5>
+                        <h5 class="modal-title"><b>ការបង្កើតអ្នកប្រើបា្រស់ថ្មី</b></h5>
                     </div>
 
                     <div class="modal-body">
@@ -162,38 +88,38 @@
                                 <div class="datatable-header" style="margin-top: -40px;">
                                     <div class="">
                                         <div class="form-group">
-                                        {{--Number som Kol--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខសំម្គាល់ ៖</label>
-                                            <div class="col-lg-9">
-                                            <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                        {{--full name--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">ឈ្មោះពេញ ៖</label>
+                                            {{--Number som Kol--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខសំម្គាល់ ៖</b></label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
-                                        {{--phone number--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខទូរស័ព្ទ ៖</label>
+                                            {{--full name--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>ឈ្មោះពេញ ៖</b></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                            {{--phone number--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខទូរស័ព្ទ ៖</b></label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Account--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">គណនេយ្យ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>គណនេយ្យ ៖</b></label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--password 1--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខសម្ងាត់ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខសម្ងាត់ ៖</b></label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--password 2--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">បញ្ជាក់លេខសម្ងាត់៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>បញ្ជាក់លេខសម្ងាត់៖</b></label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
@@ -224,7 +150,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">ធ្វើការកែប្រែអ្នកប្រើប្រាស់</h5>
+                        <h5 class="modal-title"><b>ធ្វើការកែប្រែអ្នកប្រើប្រាស់</b></h5>
                     </div>
 
                     <div class="modal-body">
@@ -234,19 +160,19 @@
                                     <div class="">
                                         <div class="form-group">
                                             {{--Number som Kol--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខសំម្គាល់ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខសំម្គាល់ ៖</b></label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--full name--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">ឈ្មោះពេញ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>ឈ្មោះពេញ ៖</b></label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--phone number--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខទូរស័ព្ទ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខទូរស័ព្ទ ៖</b></label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
@@ -272,17 +198,6 @@
 
 @section('script')
     <script>
-        // dialog show create new user
-        $(document).on("click","#createTomNagn",function(){
-            $('#createNewTomNanh').modal({
-                backdrop: 'static'
-            });
-        });
-        // dialog show update user
-        $(document).on("click","#update",function(){
-            $('#update_user').modal({
-                backdrop: 'static'
-            });
-        });
+
     </script>
 @endsection

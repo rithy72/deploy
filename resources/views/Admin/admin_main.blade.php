@@ -2,7 +2,7 @@
 @section('style')
     <style>
         /*tr:nth-child(even){background-color: rgba(245, 206, 231, 0.7)}*/
-        #table_show_frontEnd {
+        /*#table_show_frontEnd {
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
@@ -23,7 +23,7 @@
             text-align: left;
             background-color: #37474F;
             color: white;
-        }
+        }*/
     </style>
 @endsection
 @section('content')
@@ -58,40 +58,48 @@
         </div>
 
         <div class="panel-body">
-            <div class="col-md-3">
+            <div class="col-md-12" style="margin-bottom: 12px;">
+            <div class="col-md-2">
                 <div class="panel" style="border-radius: 7px; background: #156b18b3;box-shadow: 1px 3px 13px;">
                     <h4 style="text-align: center;color: white;"><b>ទំនិញក្នុងឃ្លាំង</b></h4>
                     <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="panel" style="background: #3179f5cc; border-radius: 7px;box-shadow: 1px 3px 13px;">
                     <h4 style="text-align: center;color: white;"><b>ទំនិញចូល</b></h4>
                     <h5 style="text-align: center;font-size: 50px; color: white;"><b>0</b></h5>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class="panel" style="border-radius: 7px;background: #3f2309cc;box-shadow: 1px 3px 13px;">
+                    <h4 style="text-align: center;color: white;"><b>ចំណាយ</b></h4>
+                    <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="panel" style="border-radius: 7px;background: #993616e6;box-shadow: 1px 3px 13px;">
                     <h4 style="text-align: center;color: white;"><b>ទំនិញចេញ</b></h4>
                     <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="panel" style="border-radius: 7px;background: #f38b26cc;box-shadow: 1px 3px 13px;">
                     <h4 style="text-align: center;color: white;"><b>ចំណូល</b></h4>
                     <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
+            </div>
 
-            <legend style="font-size: 17px;"><b>គំណត់ត្រារបាយការណ៌ប្រចាំថ្ងៃ</b></legend>
-            <div class="col-md-3">
+            <legend style="font-size: 17px;"><b>វិក្ក័យបត្រផុតកំណត់</b></legend>
+            {{--<div class="col-md-3">
                 <span>ជ្រើសរើសថ្ងៃចាប់ផ្តើម</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
             </div>
             <div class="col-md-3">
                 <span>ជ្រើសរើសថ្ងៃរហូតដល់</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
             </div>
-            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>
-            <br/><br/>
+            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>--}}
+
             {{--<div class="col-md-12">
                 <div class="table-responsive">
                     <table class="table" id="table_show_frontEnd">--}}{{--style="background: #9aa6abb3;color: black;"--}}{{--
@@ -124,31 +132,31 @@
 
 
             <div class="datatable-header" style="margin-top: -30px;"></div>
-            <div class="datatable-scroll">
+            <div class="datatable-scroll" style="overflow-x: hidden;">
                 <div class="dataTables_scroll">
                     <!--============ scroll body oy trov 1 header table ===============-->
                     <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending"><b>ការបរិច្ឆេត</b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ទំនិញចូល</b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ទំនិញចេញ</b></th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending"><b>ចំណូល </b></th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">លេខវិក្ក័យបត្រ</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ឈ្មោះអតិថិជន</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លេខទូរស័ព្ឌ</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ហួសរយៈពេល</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td><b>1/9/2018</b></td>
-                                <td><b>0</b></td>
-                                <td><b>0</b></td>
-                                <td><b>0</b></td>
+                                <td>85555</td>
+                                <td>កកងងសស</td>
+                                <td>55996633666</td>
+                                <td>12/5/2018</td>
                             </tr>
                             <tr>
-                                <td><b>30/8/2018</b></td>
-                                <td><b>1</b></td>
-                                <td><b>2</b></td>
-                                <td><b>3</b></td>
+                                <td>80000</td>
+                                <td>ឋឋឋឋឋឋឋ</td>
+                                <td>0000005555</td>
+                                <td>25/6/2018</td>
                             </tr>
                             </tbody>
                         </table>
