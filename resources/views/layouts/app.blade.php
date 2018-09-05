@@ -132,25 +132,24 @@
                                 {{--</ul>--}}
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                <a href="{{('/admin/SaPerPoun')}}"><i class="icon-store"></i> <span>សារពើភ័ណ្ឌ</span></a>
-                                {{--<ul>--}}
-                                    {{--<li><a href="#">Horizontal navigation</a></li>--}}
-                                    {{--<li>--}}
-                                        {{--<a href="#">1 columns</a>--}}
-                                        {{--<ul>--}}
-                                            {{--<li><a href="#">Dual sidebars</a></li>--}}
-                                            {{--<li><a href="#">Double sidebars</a></li>--}}
-                                        {{--</ul>--}}
-                                    {{--</li>--}}
-                                    {{--<li><a href="#">Ding dak ey te!!!</a></li>--}}
-                                {{--</ul>--}}
+                                <a><i class="icon-store"></i> <span>សារពើភ័ណ្ឌ</span></a>
+                                <ul>
+                                    <li><a href="{{('/admin/SaPerPoun')}}" id="layout3">ឈ្លាំងទំនិញ</a></li>
+                                    <li><a href="{{('/admin/TypeOfItem')}}" id="layout3">ប្រភេទទំនិញ</a></li>
+                                </ul>
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="{{('/admin/User')}}"><i class="icon-user"></i> <span>អ្នកប្រើប្រាស់</span></a>
                                 {{--<ul>
-                                    <li><a href="#" id="layout3">Layout 1</a></li>
-                                    <li><a href="#" id="layout4">Layout 2 <span class="label bg-warning-400">Current</span></a></li>
-                                    <li class="disabled"><a href="#" id="layout5">Layout 3 <span class="label bg-slate-800">Coming soon</span></a></li>
+                                    <li><a href="#">Horizontal navigation</a></li>
+                                    <li>
+                                        <a href="#">1 columns</a>
+                                        <ul>
+                                            <li><a href="#">Dual sidebars</a></li>
+                                            <li><a href="#">Double sidebars</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Ding dak ey te!!!</a></li>
                                 </ul>--}}
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">

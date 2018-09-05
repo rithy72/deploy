@@ -109,7 +109,6 @@
                         <thead style="background: #e3e3ea99;">
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">លរ</th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ក្រុុមទំនិញ</th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ប្រភេទទំនិញ</th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">កំណត់សម្កាល់ ១</th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">កំណត់សម្កាល់ ២</th>
@@ -122,7 +121,6 @@
                         <tr>
                             <td>1</td>
                             <td>ម៉ូតូ</td>
-                            <td>Dream 2018</td>
                             <td>ខ្មៅ</td>
                             <td>1GG 9999</td>
                             <td>....</td>
@@ -144,7 +142,6 @@
                         <tr>
                             <td>2</td>
                             <td>ឡាន</td>
-                            <td>Highlander</td>
                             <td>1ZZ 9999</td>
                             <td>ស</td>
                             <td>....</td>

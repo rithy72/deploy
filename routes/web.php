@@ -76,6 +76,8 @@ Route::middleware('auth')->group(function (){
         return view('Admin.Ror_Bay_kar.ror_bay_kar');
     });
 
-    // User
+    Route::get('/admin/TypeOfItem',function (){
+        return view('Admin.TypeOfItems.typeItem');
+    });
 
 });
