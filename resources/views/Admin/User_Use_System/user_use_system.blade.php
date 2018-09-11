@@ -5,8 +5,8 @@
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
-                <li><a href="{{('/admin/MainForm')}}" style="color: #2577e1;"><span>ទំព័រដើម</span></a></li>
-                <li class="active"><span>​អ្នកប្រើប្រាស់</span></li>
+                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a></li>
+                <li class="active"><span>@lang('string.users')</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
             <div class="heading-elements">
@@ -21,35 +21,35 @@
 
         <div class="panel-body">
             <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 19px;">
-                <a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>បង្កើតអ្នកប្រើប្រាស់ថ្មី</a>
+                <a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>{{__('auth.createNewItems')}}</a>
             </div>
 
             <div class="col-md-2">
-                <span>ស្វែងរកទាមរយៈ</span>
+                <span>@lang('string.fine')</span>
                 <div class="form-group">
                     <select class="form-control" id="" name="">
                         <option selected="selected"></option>
-                        <option selected="">លេខសំគាល់</option>
-                        <option selected="">ឈ្មោះអតិថិជន</option>
-                        <option selected="">លេខទូរស័ព្ទ</option>
+                        <option selected="">@lang('string.number')</option>
+                        <option selected="">@lang('string.nameCustomer')</option>
+                        <option selected="">@lang('string.phoneNumber')</option>
                     </select>
                 </div>
             </div>
             <div class="col-md-2">
-                <span>ស្ថានភាព</span>
+                <span>@lang('string.situation')</span>
                 <div class="form-group">
                     <select class="form-control" id="" name="">
                         <option selected="selected"></option>
-                        <option selected="">ទាំអស់</option>
-                        <option selected="">ដំណើរការ</option>
-                        <option selected="">ផ្អាកដំណើរការ</option>
+                        <option selected="">@lang('string.all')</option>
+                        <option selected="">@lang('string.active')</option>
+                        <option selected="">@lang('string.deActive')</option>
                     </select>
                 </div>
             </div>
             <div class="col-md-2">
-                <span>.</span><input type="text" class="form-control" placeholder="ស្វែងរកវត្ថុ">
+                <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchItems')">
             </div>
-            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>
+            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
             <br/><br/>
             <div class="datatable-header" style="margin-top: -19px;"></div>
             <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -59,11 +59,11 @@
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">លេខសំគាល់</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ឈ្មោះពេញ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លេខទូរសព្ទ័</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ស្ថានភាព</th>
-                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">សកម្មភាព</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.number')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.fullName')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.phoneNumber')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
+                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">@lang('string.actions')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -80,10 +80,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>ដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>ផ្អាកដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>លុបចោល</a></li>
+                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
+                                                <li><a href="#"><i class="icon-checkmark4"></i>@lang('string.active')</a></li>
+                                                <li><a href="#"><i class="icon-blocked"></i>@lang('string.deActive')</a></li>
+                                                <li><a href="#"><i class="icon-trash"></i>@lang('string.delete')</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -102,10 +102,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>ដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>ផ្អាកដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>លុបចោល</a></li>
+                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
+                                                <li><a href="#"><i class="icon-checkmark4"></i>@lang('string.active')</a></li>
+                                                <li><a href="#"><i class="icon-blocked"></i>@lang('string.deActive')</a></li>
+                                                <li><a href="#"><i class="icon-trash"></i>@lang('string.delete')</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -124,10 +124,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>ដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>ផ្អាកដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>លុបចោល</a></li>
+                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
+                                                <li><a href="#"><i class="icon-checkmark4"></i>@lang('string.active')</a></li>
+                                                <li><a href="#"><i class="icon-blocked"></i>@lang('string.deActive')</a></li>
+                                                <li><a href="#"><i class="icon-trash"></i>@lang('string.delete')</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -153,7 +153,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">ការបង្កើតអ្នកប្រើបា្រស់ថ្មី</h5>
+                        <h5 class="modal-title">@lang('string.createNewUser')</h5>
                     </div>
 
                     <div class="modal-body">
@@ -163,39 +163,39 @@
                                     <div class="">
                                         <div class="form-group">
                                         {{--Number som Kol--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខសំម្គាល់ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.number')</label>
                                             <div class="col-lg-9">
-                                            <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                            <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         {{--full name--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">ឈ្មោះពេញ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.fullName')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         {{--phone number--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខទូរស័ព្ទ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.phoneNumber')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Account--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">គណនេយ្យ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.accounting')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--password 1--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខសម្ងាត់ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.password')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--password 2--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">បញ្ជាក់លេខសម្ងាត់៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.confrimPass')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -206,10 +206,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>បោះបង់</button>
+                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
                         {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>រក្សាទុក</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -224,7 +224,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">ធ្វើការកែប្រែអ្នកប្រើប្រាស់</h5>
+                        <h5 class="modal-title">@lang('string.updateUser')</h5>
                     </div>
 
                     <div class="modal-body">
@@ -234,21 +234,21 @@
                                     <div class="">
                                         <div class="form-group">
                                             {{--Number som Kol--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខសំម្គាល់ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.number')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--full name--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">ឈ្មោះពេញ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.fullName')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--phone number--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">លេខទូរស័ព្ទ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.phoneNumber')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.writeHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -259,10 +259,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>បោះបង់</button>
+                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
                         {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>ធ្វើការកែប្រែ</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>

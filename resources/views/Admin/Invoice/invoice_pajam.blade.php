@@ -2,7 +2,7 @@
 @section('style')
     <style>
         /*tr:nth-child(even){background-color: #efefefb3}*/
-        #table_show_frontEnd {
+        /*#table_show_frontEnd {
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
@@ -23,7 +23,7 @@
             text-align: left;
             background-color: #37474F;
             color: white;
-        }
+        }*/
     </style>
 @endsection
 @section('content')
@@ -31,8 +31,8 @@
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
-                <li><a href="{{('/admin/MainForm')}}" style="color: #2577e1;"><span>ទំព័រដើម</span></a></li>
-                <li class="active"><span>វិក័យបត្រ</span></li>
+                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a></li>
+                <li class="active"><span>@lang('string.invoice')</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
             <div class="heading-elements">
@@ -48,18 +48,18 @@
         <div class="panel-body">
 
             <div class="col-md-2">
-                <span>ស្វែងរកតាម ៖</span>
+                <span>@lang('string.searchBy')</span>
                 <div class="form-group">
                     <select class="form-control" id="" name="">
                         <option selected="selected"></option>
-                        <option selected="">លេខវិក្ក័យបត្រ</option>
-                        <option selected="">ឈ្មោះអតិថិជន</option>
-                        <option selected="">លេខទូរស័ព្ទ</option>
+                        <option selected="">@lang('string.invoiceID')</option>
+                        <option selected="">@lang('string.nameCustomer')</option>
+                        <option selected="">@lang('string.phoneNumber')</option>
                     </select>
                 </div>
             </div>
             <div class="col-md-2">
-                <span>ស្ថានភាព ៖</span>
+                <span>@lang('string.situation')</span>
                 <div class="form-group">
                     <select class="form-control" id="" name="">
                         <option selected="selected"></option>
@@ -73,11 +73,11 @@
             <div class="col-md-3">
                 <span>.</span><input type="text" class="form-control" placeholder="ស្វែងរកវត្ថុ">
             </div>
-            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>
+            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
 
 
             <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 19px;">
-                <a href="{{('/admin/Invoice/CreateNewInvoice')}}" class="btn btn-success createNewCountry"><i class="icon-add position-left"></i>បង្កើតវិក័្កយបត្រថ្មី</a>
+                <a href="{{('/admin/invoice/create_new_invoice')}}" class="btn btn-success createNewCountry"><i class="icon-add position-left"></i>@lang('string.createNewInvoice')</a>
             </div>
 
 
@@ -164,16 +164,16 @@
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">វិក័យបត្រ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ឈ្មោះអតិថិជន</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លេខទូរសព្ទ័</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ទឹកប្រាក់</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.nameCustomer')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.phoneNumber')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.money')</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ការប្រាក់</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ទំនិញ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ថ្ងៃទទួល</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ថ្ងៃផុតកំណត់</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ស្ថានភាព</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">សកម្មភាព</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.item')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.dayGetMoney')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.expiredDay')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.actions')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -194,9 +194,9 @@
                                                 <i class="icon-menu9"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="updates_currency"><a href="{{('/admin/Invoice/UpdateInvoice')}}"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li id="updateRateChange"><a href="{{('/admin/Invoice/PaymentInvoice')}}"><i class="icon-price-tag"></i>បង់ប្រាក់</a></li>
-                                                <li id="detail_currency"><a href="{{('/admin/Invoice/DetailInvoice')}}"><i class="icon-certificate"></i>ចូលមើល</a></li>
+                                                <li id="updates_currency"><a href="{{('/admin/invoice/update_invoice')}}"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
+                                                <li id="updateRateChange"><a href="{{('/admin/invoice/invoice_payment')}}"><i class="icon-price-tag"></i>@lang('string.payment')</a></li>
+                                                <li id="detail_currency"><a href="{{('/admin/invoice/invoice_detail')}}"><i class="icon-certificate"></i>@lang('string.details')</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -219,9 +219,9 @@
                                                 <i class="icon-menu9"></i>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="updates_currency"><a href="{{('/admin/Invoice/UpdateInvoice')}}"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li id="updateRateChange"><a href="{{('/admin/Invoice/PaymentInvoice')}}"><i class="icon-price-tag"></i>បង់ប្រាក់</a></li>
-                                                <li id="detail_currency"><a href="{{('/admin/Invoice/DetailInvoice')}}"><i class="icon-certificate"></i>ចូលមើល</a></li>
+                                                <li id="updates_currency"><a href="{{('/admin/invoice/update_invoice')}}"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
+                                                <li id="updateRateChange"><a href="{{('/admin/invoice/invoice_payment')}}"><i class="icon-price-tag"></i>@lang('string.payment')</a></li>
+                                                <li id="detail_currency"><a href="{{('/admin/invoice/invoice_detail')}}"><i class="icon-certificate"></i>@lang('string.details')</a></li>
                                             </ul>
                                         </li>
                                     </ul>

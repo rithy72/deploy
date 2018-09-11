@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
+{{--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">--}}
 <head>
     {{--<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -90,10 +91,14 @@
                     {{--<li><a href="#"><span class="badge bg-blue pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>--}}
                     {{--<li class="divider"></li>--}}
                     {{--<li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>--}}
-                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="icon-switch2"> {{ __('auth.logout') }}</i></a>
+                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="icon-switch2"> @lang('string.logout') </i></a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
-                        </form></li>
+                        </form>
+                    </li>
+                    <li>
+                        <a id="ChangePassword"><i class=" icon-user-check"> @lang('string.changePass') </i></a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -114,7 +119,7 @@
                 <!-- Main navigation -->
                 <div class="sidebar-category sidebar-category-visible">
                     <div class="category-title h6">
-                        <span>ជ្រើសរើសការធ្វើ</span>
+                        <span>{{__('auth.chooseOption')}}</span>
                         <ul class="icons-list">
                             <li><a href="#" data-action="collapse"></a></li>
                         </ul>
@@ -124,22 +129,22 @@
                         <ul class="navigation navigation-main navigation-accordion">
 
                             <!-- Main -->
-                            <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;"><a href="{{('/admin/MainForm')}}"><i class="icon-home4"></i> <span>ផ្ទាំងគ្រប់គ្រង</span></a></li>
+                            <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;"><a href="{{('/admin/mainform')}}"><i class="icon-home4"></i> <span> @lang('string.desboard') </span></a></li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                <a href="{{('/admin/Invoice')}}"><i class="icon-copy"></i> <span>វិក្ក័យបត្រ</span></a>
+                                <a href="{{('/admin/invoice')}}"><i class="icon-copy"></i> <span>@lang('string.invoice')</span></a>
                                 {{--<ul>--}}
                                     {{--<li><a href="#">Boxed full width</a></li>--}}
                                 {{--</ul>--}}
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                <a><i class="icon-store"></i> <span>សារពើភ័ណ្ឌ</span></a>
+                                <a><i class="icon-store"></i> <span>{{__('auth.inventory')}}</span></a>
                                 <ul>
-                                    <li><a href="{{('/admin/SaPerPoun')}}" id="layout3">ឈ្លាំងទំនិញ</a></li>
-                                    <li><a href="{{('/admin/TypeOfItem')}}" id="layout3">ប្រភេទទំនិញ</a></li>
+                                    <li><a href="{{('/admin/inventory')}}" id="layout3">@lang('string.inventoryItems')</a></li>
+                                    <li><a href="{{('/admin/item_type')}}" id="layout3">@lang('string.typeItems')</a></li>
                                 </ul>
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                <a href="{{('/admin/User')}}"><i class="icon-user"></i> <span>អ្នកប្រើប្រាស់</span></a>
+                                <a href="{{('/admin/user')}}"><i class="icon-user"></i> <span>@lang('string.users')</span></a>
                                 {{--<ul>
                                     <li><a href="#">Horizontal navigation</a></li>
                                     <li>
@@ -153,7 +158,7 @@
                                 </ul>--}}
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                <a href="{{('/admin/History_User')}}"><i class="icon-clipboard3"></i> <span>សកម្មភាព</span></a>
+                                <a href="{{('/admin/history_user')}}"><i class="icon-clipboard3"></i> <span>@lang('string.actionUsers')</span></a>
                                 {{--<ul>
                                     <li><a href="#" id="layout3">Layout 1</a></li>
                                     <li><a href="#" id="layout4">Layout 2 <span class="label bg-warning-400">Current</span></a></li>
@@ -161,7 +166,7 @@
                                 </ul>--}}
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                <a href="{{('/admin/RorBayKar')}}"><i class="icon-stack-text"></i> <span>របាយការណ៍</span></a>
+                                <a href="{{('/admin/report')}}"><i class="icon-stack-text"></i> <span>@lang('string.reportHistory')</span></a>
                             </li>
                             <!-- /main -->
 
@@ -189,7 +194,64 @@
 
 </div>
 <!-- /page container -->
+{{--------- dialog change password user and admin ---------}}
+<form role="form" action="" method="">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <div id="changePassword" class="modal fade">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">@lang('string.changePassword')</h5>
+                </div>
 
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer" style="margin-top: -14px;">
+                            <div class="datatable-header">
+                                <div class="form-group">
+                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.username')</label>
+                                    <div class="col-lg-7">
+                                        <input type="text" placeholder="@lang('string.writeYourUserNameHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.oldPassword')</label>
+                                    <div class="col-lg-7">
+                                        <input type="text" placeholder="@lang('string.writeOldPasswordHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.newPassword')</label>
+                                    <div class="col-lg-7">
+                                        <input type="text" placeholder="@lang('string.writeNewPasswordHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.confirmPassword')</label>
+                                    <div class="col-lg-7">
+                                        <input type="text" placeholder="@lang('string.writeNewPasswordHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                    {{ csrf_field() }}
+                    {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
+                    <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 </body>
 <!-- Core JS files -->
 <script src="{{asset('/assets/js/plugins/loaders/pace.min.js')}}"></script>
@@ -298,5 +360,11 @@
         }, 500);
     }
     startTime();
+    // dialog chang password user and admin
+    $(document).on("click","#ChangePassword",function(){
+        $('#changePassword').modal({
+            backdrop: 'static'
+        });
+    });
 </script>
 </html>

@@ -45,38 +45,38 @@ Route::middleware('auth')->group(function (){
 
 
     // Admin
-    Route::get('/admin/MainForm',function (){
+    Route::get('/admin/mainform',function (){
         return view('Admin.admin_main');
     });
-    Route::get('/admin/Invoice',function (){
+    Route::get('/admin/invoice',function (){
         return view('Admin.Invoice.invoice_pajam');
     });
-    Route::get('/admin/SaPerPoun',function (){
+    Route::get('/admin/inventory',function (){
         return view('Admin.Sar_Per_Poun.sa_per_poun');
     });
-    Route::get('/admin/User',function (){
+    Route::get('/admin/user',function (){
         return view('Admin.User_Use_System.user_use_system');
     });
-    Route::get('/admin/History_User',function (){
+    Route::get('/admin/history_user',function (){
         return view('Admin.Action_History_User.history_user');
     });
-    Route::get('/admin/Invoice/CreateNewInvoice',function (){
+    Route::get('/admin/invoice/create_new_invoice',function (){
         return view('Admin.Invoice.create_new_invoice');
     });
-    Route::get('/admin/Invoice/DetailInvoice',function (){
+    Route::get('/admin/invoice/invoice_detail',function (){
         return view('Admin.Invoice.detail_invoice');
     });
-    Route::get('/admin/Invoice/UpdateInvoice',function (){
+    Route::get('/admin/invoice/update_invoice',function (){
         return view('Admin.Invoice.update_invoice');
     });
-    Route::get('/admin/Invoice/PaymentInvoice',function (){
+    Route::get('/admin/invoice/invoice_payment',function (){
         return view('Admin.Invoice.payment_invoice');
     });
-    Route::get('/admin/RorBayKar',function (){
+    Route::get('/admin/report',function (){
         return view('Admin.Ror_Bay_kar.ror_bay_kar');
     });
 
-    Route::get('/admin/TypeOfItem',function (){
+    Route::get('/admin/item_type',function (){
         return view('Admin.TypeOfItems.typeItem');
     });
 

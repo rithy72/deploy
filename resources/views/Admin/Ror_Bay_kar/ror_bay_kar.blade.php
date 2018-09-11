@@ -5,8 +5,8 @@
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
-                <li><a href="{{('/admin/MainForm')}}" style="color: #2577e1;"><span>ទំព័រដើម</span></a></li>
-                <li class="active"><span>របាយការណ៌</span></li>
+                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a></li>
+                <li class="active"><span>@lang('string.reportHistory')</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
             <div class="heading-elements">
@@ -22,12 +22,12 @@
         <div class="panel-body">
 
             <div class="col-md-2">
-                <span>ជ្រើសរើសថ្ងៃចាប់ផ្តើម</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
+                <span>@lang('string.startDate')</span><input type="date" class="form-control" placeholder="">
             </div>
             <div class="col-md-2">
-                <span>ជ្រើសរើសថ្ងៃរហូតដល់</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
+                <span>@lang('string.startDateTo')</span><input type="date" class="form-control" placeholder="">
             </div>
-            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>
+            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
             <br/><br/>
             <div class="datatable-header" style="margin-top: -19px;"></div>
             <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -37,11 +37,11 @@
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">កាលបរិច្ឆែទ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ទំនិញចូល</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ទំនិញចេញ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ចំណាយ</th>
-                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">ចំណូល</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.date')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemIn')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemOut')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.pay')</th>
+                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">@lang('string.income')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -70,130 +70,6 @@
             {{--==========================================================================================================--}}
         </div>
     </div>
-
-    {{-----   Create New User   -----}}
-    <form role="form" action="" method="">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div id="createNewTomNanh" class="modal fade">
-            <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title"><b>ការបង្កើតអ្នកប្រើបា្រស់ថ្មី</b></h5>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="col-md-12">
-                            <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
-                                <div class="datatable-header" style="margin-top: -40px;">
-                                    <div class="">
-                                        <div class="form-group">
-                                            {{--Number som Kol--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខសំម្គាល់ ៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                            {{--full name--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>ឈ្មោះពេញ ៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                            {{--phone number--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខទូរស័ព្ទ ៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                            {{--Account--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>គណនេយ្យ ៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                            {{--password 1--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខសម្ងាត់ ៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                            {{--password 2--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>បញ្ជាក់លេខសម្ងាត់៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>បោះបង់</button>
-                        {{ csrf_field() }}
-                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>រក្សាទុក</b><i class="icon-arrow-right13 position-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    {{-----   Update User   -----}}
-    <form role="form" action="" method="">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div id="update_user" class="modal fade">
-            <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title"><b>ធ្វើការកែប្រែអ្នកប្រើប្រាស់</b></h5>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="col-md-12">
-                            <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
-                                <div class="datatable-header" style="margin-top: -40px;">
-                                    <div class="">
-                                        <div class="form-group">
-                                            {{--Number som Kol--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខសំម្គាល់ ៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                            {{--full name--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>ឈ្មោះពេញ ៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                            {{--phone number--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"><b>លេខទូរស័ព្ទ ៖</b></label>
-                                            <div class="col-lg-9">
-                                                <input type="text" placeholder="សរសេរនៅទីនេះ...." name="" id="" class="form-control" style="border: 1px solid grey;">
-                                                <br>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>បោះបង់</button>
-                        {{ csrf_field() }}
-                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>ធ្វើការកែប្រែ</b><i class="icon-arrow-right13 position-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
 @endsection
 
 @section('script')

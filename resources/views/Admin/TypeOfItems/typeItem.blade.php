@@ -5,9 +5,9 @@
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
-                <li><a href="{{('/admin/MainForm')}}" style="color: #2577e1;"><span>ទំព័រដើម</span></a></li>
-                <li class="active"><span>សារពើភ័ណ្ឌ</span></li>
-                <li class="active"><span>ប្រភេទទំនិញ</span></li>
+                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a></li>
+                <li class="active"><span>@lang('string.inventory')</span></li>
+                <li class="active"><span>@lang('string.type')</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
             <div class="heading-elements">
@@ -22,7 +22,7 @@
 
         <div class="panel-body">
             <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 19px;">
-                <a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>បង្កើតប្រភេទទំនិញថ្មី</a>
+                <a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>@lang('string.createNewItems')</a>
             </div>
 
             {{--<div class="col-md-2">
@@ -48,9 +48,17 @@
                 </div>
             </div>--}}
             <div class="col-md-3">
-                <span>.</span><input type="text" class="form-control" placeholder="ធ្វើការស្វែងរកប្រភេទទំនិញ...">
+                <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchTypeItems')">
             </div>
-            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>
+            <div class="col-md-3">
+                <span>@lang('string.chooseSituation')</span>
+                <select class="form-control" id="" name="">
+                    <option selected="selected">@lang('string.all')</option>
+                    <option selected="">@lang('string.active')</option>
+                    <option selected="">@lang('string.deActive')</option>
+                </select>
+            </div>
+            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
             <br/><br/>
             <div class="datatable-header" style="margin-top: -19px;"></div>
             <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -60,9 +68,9 @@
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">ឈ្មោះប្រភេទទំនិញ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ស្ថានភាព</th>
-                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">សកម្មភាព</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.nameItem')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
+                                <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">@lang('string.actions')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -77,10 +85,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>ដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>ផ្អាកដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>លុបចោល</a></li>
+                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
+                                                <li><a href="#"><i class="icon-checkmark4"></i>@lang('string.active')</a></li>
+                                                <li><a href="#"><i class="icon-blocked"></i>@lang('string.deActive')</a></li>
+                                                <li><a href="#"><i class="icon-trash"></i>@lang('string.delete')</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -97,10 +105,10 @@
                                             </a>
 
                                             <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>កែប្រែ</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>ដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>ផ្អាកដំណើរការ</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>លុបចោល</a></li>
+                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
+                                                <li><a href="#"><i class="icon-checkmark4"></i>@lang('string.active')</a></li>
+                                                <li><a href="#"><i class="icon-blocked"></i>@lang('string.deActive')</a></li>
+                                                <li><a href="#"><i class="icon-trash"></i>@lang('string.delete')</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -118,7 +126,7 @@
         </div>
     </div>
 
-    {{-----   Create New User   -----}}
+    {{-----   Create New Type Of Item   -----}}
     <form role="form" action="" method="">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div id="createNewTomNanh" class="modal fade">
@@ -126,7 +134,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">ការបង្កើតប្រភេទំនិញថ្មី</h5>
+                        <h5 class="modal-title">@lang('string.createNewItem')</h5>
                     </div>
 
                     <div class="modal-body">
@@ -135,9 +143,9 @@
                                 <div class="datatable-header" style="margin-top: -40px;">
                                     <div class="">
                                         <div class="form-group">
-                                            <label class="control-label col-lg-3" style="font-size: 15px">ប្រភេទទំនិញថ្មី ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.typeItems')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="បញ្ខូលប្រភេទទំនិញថ្មី...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.addNewTypeItemHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -148,17 +156,17 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>បោះបង់</button>
+                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
                         {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>ធ្វើការបង្កើត</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
 
-    {{-----   Update User   -----}}
+    {{-----   Update Type Of Item   -----}}
     <form role="form" action="" method="">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div id="update_user" class="modal fade">
@@ -166,7 +174,7 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">ធ្វើការកែប្រែប្រភេទទំនិញ</h5>
+                        <h5 class="modal-title">@lang('string.updateItemType')</h5>
                     </div>
 
                     <div class="modal-body">
@@ -175,9 +183,9 @@
                                 <div class="datatable-header" style="margin-top: -40px;">
                                     <div class="">
                                         <div class="form-group">
-                                            <label class="control-label col-lg-3" style="font-size: 15px">ប្រភេទទំនិញ ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.typeItems')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="បញ្ខូលប្រភេទទំនិញចាស់ដើម្បីធ្វើការកែប្រែ...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.addOldItemForUpdate')" name="" id="" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -188,10 +196,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>បោះបង់</button>
+                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
                         {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>ធ្វើការកែប្រែ</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
