@@ -80,4 +80,5 @@ Route::middleware('auth')->group(function (){
         return view('Admin.TypeOfItems.typeItem');
     });
 
+    Route::get('/test', 'TestController@Test');
 });

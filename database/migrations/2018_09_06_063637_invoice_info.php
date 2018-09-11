@@ -16,13 +16,12 @@ class InvoiceInfo extends Migration
         //
         Schema::create('invoice_info', function (Blueprint $table){
             $table->increments('id');
-            $table->string('invoice_number')->unique();
             $table->text('customer_name');
             $table->dateTime('created_date_time');
             $table->date('expired_date');
             $table->integer('user_id');
             $table->string('status');
-            $table->boolean('delete_able');
+            $table->boolean('delete_able')->default(false);
             $table->float('grand_total');
             $table->float('paid');
             $table->integer('interests_rate');
