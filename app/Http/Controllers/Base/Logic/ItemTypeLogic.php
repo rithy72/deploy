@@ -9,28 +9,20 @@
 namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Model\BaseModel;
-use App\Http\Controllers\Base\Model\GeneralStatus;
+use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\ItemTypeModel;
 use Illuminate\Support\Facades\DB;
 
 class ItemTypeLogic
 {
 
-    private function ManipulateDataArray(array $datas){
-        $array = array();
-
-        foreach ($datas as $data){
-            $model = BaseModel::Model(BaseModel::ITEM_TYPE);
-            $model->id = $data->id;
-            $model->item_type_name = $data->type_name;
-            $model->status = $data->status;
-            $model->display_status = ($data->status === true) ? "Active":"Inactive";
-            $model->delete_able = $data->delete_able;
-
-            array_push($array, $model);
+    //Finalize General Status
+    private function FinalizeStatus($status){
+        if ($status == GeneralStatus::ACTIVE){
+            return 1;
+        }elseif ($status == GeneralStatus::INACTIVE){
+            return 0;
         }
-
-        return $array;
     }
 
     //Check duplicate before update
@@ -149,33 +141,35 @@ class ItemTypeLogic
     }
 
     //Filter search Item Type
-    public function FilterSearch($search, $status = null, $page_size){
+    public function FilterSearch($search, $status, $page_size){
         //Condition Page Size
         $finalPageSize = ($page_size > 0) ? $page_size:10;
+        //Condition Status
+        $finalStatus = $this->FinalizeStatus($status);
 
-        if ($status == null){
+        if (empty($status)){
             if (empty($search)){
                 $getResult = DB::table('item_type')->paginate($finalPageSize);
 
                 return $getResult;
             }else{
                 $getResult = DB::table('item_type')
-                    ->where('type_name','like', $search)
+                    ->where('type_name','like', '%'.$search.'%')
                     ->paginate($finalPageSize);
 
                 return $getResult;
             }
-        }elseif ($status != null){
+        }elseif (!empty($status)){
             if (empty($search)){
                 $getResult = DB::table('item_type')
-                    ->where('status','=', $status)
+                    ->where('status','=', $finalStatus)
                     ->paginate($finalPageSize);
 
                 return $getResult;
             }else{
                 $getResult = DB::table('item_type')
-                    ->where('type_name','like', $search)
-                    ->where('status','=', $status)
+                    ->where('type_name','like', '%'.$search.'%')
+                    ->where('status','=', $finalStatus)
                     ->paginate($finalPageSize);
 
                 return $getResult;
