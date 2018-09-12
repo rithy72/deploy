@@ -28,4 +28,6 @@ class InvoiceInfoLogic
     public function InterestsPayment($interestsFee, array $takeOutItems, $id){
 
     }
+
+
 }

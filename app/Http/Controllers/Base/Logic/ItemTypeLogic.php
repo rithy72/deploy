@@ -172,6 +172,8 @@ class ItemTypeLogic
                     ->where('status','=', $finalStatus)
                     ->paginate($finalPageSize);
 
+                //$getResult->get
+
                 return $getResult;
             }
         }
