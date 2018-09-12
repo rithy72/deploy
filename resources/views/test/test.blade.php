@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <title>Laravel</title>
 
@@ -13,6 +14,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 
     <!-- Styles -->
     <style>
@@ -76,20 +80,126 @@
         </div>
     @endif
 
-    <div class="content">
-        <ul>
-            @foreach($filter as $item)
-                <li>
-                    {{$item->id}}
-                </li>
-                <li>
-                    {{$item->type_name}}
-                </li>
-            @endforeach
-        </ul>
+    {{--<div class="content">--}}
+        {{--<table class="table table-striped">--}}
+            {{--<tr>--}}
+                {{--<th>id</th>--}}
+                {{--<th>name</th>--}}
+            {{--</tr>--}}
+            {{--@foreach($filter as $item)--}}
+                {{--<tr>--}}
+                    {{--<td>--}}
+                        {{--{{$item->id}}--}}
+                    {{--</td>--}}
+                    {{--<td>--}}
+                        {{--{{$item->type_name}}--}}
+                    {{--</td>--}}
+                {{--</tr>--}}
+            {{--@endforeach--}}
+        {{--</table>--}}
 
-        {{ $filter->appends(request()->except('page'))->links() }}
+        {{--{{$filter->appends(request()->except('page'))->links()}}--}}
+    {{--</div>--}}
+
+    <div class="content">
+        <form method="post" action="{{'/test_post'}}">
+
+            {{csrf_field()}}
+
+            <table class="table table-striped">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Product Quantity</th>
+                    <th>Product Total</th>
+                    <th>Delete</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="products[0][name]" title="Product Name" value="Hello">
+                    </td>
+                    <td>
+                        <input name="products[0][price]" title="Product Price" value="Hello">
+                    </td>
+                    <td>
+                        <input name="products[0][qty]" title="Product Quantity" value="Hello">
+                    </td>
+                    <td>
+                        <input name="products[0][total]" title="Product Total" value="Hello">
+                    </td>
+                    <td>
+                        <input type="checkbox" name="products[0][is_delete]" title="Delete">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="products[1][name]" title="Product Name">
+                    </td>
+                    <td>
+                        <input name="products[1][price]" title="Product Price">
+                    </td>
+                    <td>
+                        <input name="products[1][qty]" title="Product Quantity">
+                    </td>
+                    <td>
+                        <input name="products[1][total]" title="Product Total">
+                    </td>
+                    <td>
+                        <input type="checkbox" name="products[1][is_delete]" title="Delete">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input name="products[2][name]" title="Product Name">
+                    </td>
+                    <td>
+                        <input name="products[2][price]" title="Product Price">
+                    </td>
+                    <td>
+                        <input name="products[2][qty]" title="Product Quantity">
+                    </td>
+                    <td>
+                        <input name="products[2][total]" title="Product Total">
+                    </td>
+                    <td>
+                        <input type="checkbox" name="products[2][is_delete]" title="Delete">
+                    </td>
+                </tr>
+            </table>
+
+            <button type="submit" >Submit</button>
+        </form>
+
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <button type="button" id="getData">Ajax Request</button>
+
+        <div style="color: black">
+            {{json_encode($products)}}
+        </div>
     </div>
 </div>
 </body>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('#getData').on('click',function () {
+        $.ajax({
+            type:"GET",
+            url:"test_api",
+            success:function (response) {
+                console.log(response);
+            }
+        })
+    })
+</script>
 </html>
+
+
+
+
+
+
+

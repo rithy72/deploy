@@ -81,4 +81,6 @@ Route::middleware('auth')->group(function (){
     });
 
     Route::get('/test', 'TestController@Test');
+    Route::post('/test_post', 'TestController@Post');
+    Route::get('/test_api','TestController@API');
 });

@@ -65,15 +65,15 @@ class ItemTypeLogic
     }
 
     //Create item Type
-    public function Create(ItemTypeModel $itemTypeModel){
+    public function Create($type_name){
         //Check Duplicate
-        $duplicate = $this->CheckDuplicateBeforeInsert($itemTypeModel->item_type_name);
+        $duplicate = $this->CheckDuplicateBeforeInsert($type_name);
 
         if (!$duplicate){
             //Can Insert
             $insertResult = DB::table('item_type')
                 ->insertGetId([
-                    'type_name' => $itemTypeModel->item_type_name,
+                    'type_name' => $type_name,
                 ]);
 
             $model = $this->Find($insertResult);

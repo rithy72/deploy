@@ -13,12 +13,17 @@ class TestController extends Controller
 {
     //
     public function Test(Request $request){
-        $search = $request->input('search','');
-        $status = $request->input('status','');
+        $input = "";
+        return view('test.test')->with('products',$input);
+    }
 
-        $insert = new ItemTypeLogic();
-        $insertResult = $insert->FilterSearch($search, $status,1);
+    //
+    public function Post(Request $request){
+        $input = $request->input('products','');
+        return view('test.test')->with('products',$input);
+    }
 
-        return view('test.test')->with('filter', $insertResult);
+    public function API(){
+        return "Hello World";
     }
 }
