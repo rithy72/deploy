@@ -74,7 +74,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    ហាងបញ្ចាំ ហុង​ ហ៊ីង
+                  @lang('String.com_name')
                 </div>
             </div>
         </div>
