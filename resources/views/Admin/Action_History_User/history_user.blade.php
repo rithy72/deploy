@@ -5,8 +5,8 @@
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
-                <li><a href="{{('/admin/MainForm')}}" style="color: #2577e1;"><span>ទំព័រដើម</span></a></li>
-                <li class="active"><span>សកម្មភាព</span></li>
+                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a></li>
+                <li class="active"><span>@lang('string.actionUsers')</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
             <div class="heading-elements">
@@ -34,8 +34,8 @@
                 <div class="panel-body" style="padding: 25px 0;">
                     <div class="tabbable">
                         <ul class="nav nav-tabs nav-tabs-highlight">
-                            <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">ថ្ងៃនេះ</a></li>
-                            <li><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">ស្វែងរកតាមថ្ងៃ</a></li>
+                            <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">@lang('string.today')</a></li>
+                            <li><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">@lang('string.fineByDate')</a></li>
                             {{--<li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
                                 <ul class="dropdown-menu dropdown-menu-right">
@@ -53,32 +53,32 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <span>ស្វែងរកតាមរយៈ</span>
+                                        <span>@lang('string.fine')</span>
                                         <div class="form-group">
                                             <select class="form-control" id="" name="">
                                                 <option selected="selected"></option>
-                                                <option selected="">លេខសំម្គាល់អ្នកប្រើប្រាស់</option>
-                                                <option selected="">ឈ្មោះអ្នកប្រើប្រាស់</option>
-                                                <option selected="">លេខទូរស័ព្ទអ្នកប្រើប្រាស់</option>
+                                                <option selected="">@lang('string.IdOfUser')</option>
+                                                <option selected="">@lang('string.nameUser')</option>
+                                                <option selected="">@lang('string.phoneNumberUser')</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <span>សកម្មភាព</span>
+                                        <span>@lang('string.situation')</span>
                                         <div class="form-group">
                                             <select class="form-control" id="" name="">
                                                 <option selected="selected"></option>
-                                                <option selected="">ទាំងអស់</option>
-                                                <option selected="">បង្កើតវិក្ក័យបត្រ</option>
-                                                <option selected="">បង់ប្រាក់</option>
+                                                <option selected="">@lang('string.all')</option>
+                                                <option selected="">@lang('string.createNewInvoice')</option>
+                                                <option selected="">@lang('string.payment')</option>
                                                 <option selected="">លួសទំនិញ</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <span>.</span><input type="text" class="form-control" placeholder="ស្វែងរក...">
+                                        <span>.</span><input type="text" class="form-control" placeholder="@lang('string.fine')">
                                     </div>
-                                    <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>
+                                    <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                                     <br/><br/>
                                     <div class="datatable-header" style="margin-top: -19px;"></div>
                                     <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -88,11 +88,11 @@
                                                 <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                                                     <thead style="background: #e3e3ea99;">
                                                     <tr role="row">
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">អ្នកប្រើប្រាស់</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">សកម្មភាព</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លំអិត</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លេខវិក្ក័យបត្រ</th>
-                                                        <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">កាលបរិច្ឆែត</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.users')</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.actions')</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.detail')</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.invoiceID')</th>
+                                                        <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">@lang('string.date')</th>
                                                     </tr>
                                                     </thead>
 
@@ -117,26 +117,26 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        <span>ស្វែងរកតាមរយៈ</span>
+                                        <span>@lang('string.fine')</span>
                                         <div class="form-group">
                                             <select class="form-control" id="" name="">
                                                 <option selected="selected"></option>
-                                                <option selected="">លេខសំម្គាល់អ្នកប្រើប្រាស់</option>
-                                                <option selected="">ឈ្មោះអ្នកប្រើប្រាស់</option>
-                                                <option selected="">លេខទូរស័ព្ទអ្នកប្រើប្រាស់</option>
+                                                <option selected="">@lang('string.IdOfUser')</option>
+                                                <option selected="">@lang('string.nameUser')</option>
+                                                <option selected="">@lang('string.phoneNumberUser')</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <span>ចាប់ពី</span><input type="date" class="form-control">
+                                        <span>@lang('string.startDate')</span><input type="date" class="form-control">
                                     </div>
                                     <div class="col-md-2">
-                                        <span>ដល់</span><input type="date" class="form-control">
+                                        <span>@lang('string.startDateTo')</span><input type="date" class="form-control">
                                     </div>
                                     <div class="col-md-2">
-                                        <span>.</span><input type="text" class="form-control" placeholder="ស្វែងរក...">
+                                        <span>.</span><input type="text" class="form-control" placeholder="@lang('string.fine')">
                                     </div>
-                                    <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>ធ្វើការស្វែងរក</a>
+                                    <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                                     <br/><br/>
                                     <div class="datatable-header" style="margin-top: -19px;"></div>
                                     <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -146,11 +146,11 @@
                                                 <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                                                     <thead style="background: #e3e3ea99;">
                                                     <tr role="row">
-                                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">អ្នកប្រើប្រាស់</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">សកម្មភាព</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លំអិត</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លេខវិក្ក័យបត្រ</th>
-                                                        <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">កាលបរិច្ឆែត</th>
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.users')</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.detail')</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.invoiceID')</th>
+                                                        <th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions" style="width: 100px;">@lang('string.date')</th>
                                                     </tr>
                                                     </thead>
 

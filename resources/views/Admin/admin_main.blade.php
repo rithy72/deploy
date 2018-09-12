@@ -43,8 +43,8 @@
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
-                <li><a href="{{('/admin/MainForm')}}" style="color: #2577e1;"><span>ទំព័រដើម</span></a></li>
-                <li class="active"><span>ផ្ទាំងគ្រប់គ្រង</span></li>
+                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a></li>
+                <li class="active"><span>@lang('string.desboard')</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
             <div class="heading-elements">
@@ -61,37 +61,37 @@
             <div class="col-md-12" style="margin-bottom: 12px;">
             <div class="col-md-2">
                 <div class="panel" style="border-radius: 7px; background: #156b18b3;box-shadow: 1px 3px 13px;">
-                    <h4 style="text-align: center;color: white;"><b>ទំនិញក្នុងឃ្លាំង</b></h4>
+                    <h4 style="text-align: center;color: white;"><b>@lang('string.InventoryItems')</b></h4>
                     <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="panel" style="background: #3179f5cc; border-radius: 7px;box-shadow: 1px 3px 13px;">
-                    <h4 style="text-align: center;color: white;"><b>ទំនិញចូល</b></h4>
+                    <h4 style="text-align: center;color: white;"><b>@lang('string.itemIn')</b></h4>
                     <h5 style="text-align: center;font-size: 50px; color: white;"><b>0</b></h5>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="panel" style="border-radius: 7px;background: #3f2309cc;box-shadow: 1px 3px 13px;">
-                    <h4 style="text-align: center;color: white;"><b>ចំណាយ</b></h4>
+                    <h4 style="text-align: center;color: white;"><b>@lang('string.pay')</b></h4>
                     <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="panel" style="border-radius: 7px;background: #993616e6;box-shadow: 1px 3px 13px;">
-                    <h4 style="text-align: center;color: white;"><b>ទំនិញចេញ</b></h4>
+                    <h4 style="text-align: center;color: white;"><b>@lang('string.itemOut')</b></h4>
                     <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="panel" style="border-radius: 7px;background: #f38b26cc;box-shadow: 1px 3px 13px;">
-                    <h4 style="text-align: center;color: white;"><b>ចំណូល</b></h4>
+                    <h4 style="text-align: center;color: white;"><b>@lang('string.income')</b></h4>
                     <h5 style="text-align: center;font-size: 50px;color: white;"><b>0</b></h5>
                 </div>
             </div>
             </div>
 
-            <legend style="font-size: 17px;"><b>វិក្ក័យបត្រផុតកំណត់</b></legend>
+            <legend style="font-size: 17px;"><b>@lang('string.invoiceExpired')</b></legend>
             {{--<div class="col-md-3">
                 <span>ជ្រើសរើសថ្ងៃចាប់ផ្តើម</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
             </div>
@@ -139,10 +139,10 @@
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">លេខវិក្ក័យបត្រ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ឈ្មោះអតិថិជន</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">លេខទូរស័ព្ឌ</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">ហួសរយៈពេល</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.nameCustomer')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.phoneNumber')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.expiredTime')</th>
                             </tr>
                             </thead>
                             <tbody>
