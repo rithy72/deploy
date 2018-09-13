@@ -15,13 +15,13 @@ class InvoiceItem extends Migration
     {
         //
         Schema::create('invoice_item', function (Blueprint $table){
-           $table->increments('id');
+           $table->integer('id');
            $table->integer('invoice_id');
            $table->integer('item_type_id');
-           $table->text('first_feature');
-            $table->text('second_feature');
-            $table->text('third_feature');
-            $table->text('fourth_feature');
+           $table->text('first_feature')->nullable(true);
+            $table->text('second_feature')->nullable(true);
+            $table->text('third_feature')->nullable(true);
+            $table->text('fourth_feature')->nullable(true);
             $table->integer('status');
             $table->boolean('delete_able')->default(true);
             $table->dateTime('out_date')->nullable(true);

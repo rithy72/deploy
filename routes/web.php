@@ -79,8 +79,19 @@ Route::middleware('auth')->group(function (){
     Route::get('/admin/item_type',function (){
         return view('Admin.TypeOfItems.typeItem');
     });
-
+//================================ Test =================================
     Route::get('/test', 'TestController@Test');
     Route::post('/test_post', 'TestController@Post');
     Route::get('/test_api','TestController@API');
+//========================================================================
+//============================= API ======================================
+    Route::prefix('api')->group(function (){
+        /* *
+         * Item Type
+         * */
+        Route::prefix('item_group')->group(function (){
+
+        });
+    });
+
 });

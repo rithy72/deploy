@@ -14,6 +14,7 @@ class InvoiceItemModel
     public $id;
     public $invoice_id;
     public $item_type_id;
+    public $item_type_name;
     public $first_feature;
     public $second_feature;
     public $third_feature;
@@ -23,4 +24,8 @@ class InvoiceItemModel
     public $delete_able;
     public $out_date;
     public $user_id;
+
+    public static function Instance(){
+        return new InvoiceItemModel();
+    }
 }

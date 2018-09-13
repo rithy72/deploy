@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\DB;
 class ItemTypeLogic
 {
 
+    //Instance Method
+    public static function Instance(){
+        return new ItemTypeLogic();
+    }
+
     //Finalize General Status
     private function FinalizeStatus($status){
         if ($status == GeneralStatus::ACTIVE){
@@ -171,8 +176,6 @@ class ItemTypeLogic
                     ->where('type_name','like', '%'.$search.'%')
                     ->where('status','=', $finalStatus)
                     ->paginate($finalPageSize);
-
-                //$getResult->get
 
                 return $getResult;
             }
