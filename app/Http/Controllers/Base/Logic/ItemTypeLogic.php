@@ -30,6 +30,17 @@ class ItemTypeLogic
         }
     }
 
+    //Make Item Type Can not Delete
+    public function MakeItemTypeUnDeleteAble($id){
+        $updateResult = DB::table('item_type')
+            ->where('id','=', $id)
+            ->update([
+                'delete_able' => false
+            ]);
+
+        return $updateResult;
+    }
+
     //Check duplicate before update
     public function CheckDuplicateBeforeUpdate($new_type_name, $id){
         $checkResult = DB::table('item_type')
@@ -95,7 +106,7 @@ class ItemTypeLogic
 
         if (!$duplicate){
             //Can Update
-            DB::table('item_type')->where('id','', $id)
+            DB::table('item_type')->where('id','=', $id)
                 ->update([
                     'type_name' => $newTypeName
                 ]);

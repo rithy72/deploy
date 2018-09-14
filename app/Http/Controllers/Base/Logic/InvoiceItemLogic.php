@@ -22,7 +22,7 @@ class InvoiceItemLogic
     }
 
     //Insert Item Method
-    public function Create(InvoiceItemModel $invoice_item_model, $line_number, $invoice_id){
+    public function Create($invoice_item_model, $line_number, $invoice_id){
         $insertResult = DB::table('invoice_item')
             ->insert([
                 'id' => $line_number,
@@ -35,7 +35,45 @@ class InvoiceItemLogic
                 'status' => InvoiceItemStatusEnum::OPEN,
             ]);
 
+        //Make Item Type Can Not Delete
+        ItemTypeLogic::Instance()->MakeItemTypeUnDeleteAble($invoice_item_model->item_type_id);
+
         return $insertResult;
+    }
+
+    //Get Invoice Item For Invoice
+    public function GetInvoiceItemsForInvoice($invoice_id){
+        $getResult = DB::table('invoice_item')
+            ->select(
+                'invoice_item.id','invoice_item.item_type_id','invoice_item.first_feature',
+                'invoice_item.second_feature','invoice_item.third_feature','invoice_item.fourth_feature',
+                'invoice_item.status','invoice_item.delete_able','invoice_item.out_date','invoice_item.user_id',
+                'item_type.type_name'
+            )
+            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+            ->where('invoice_item.invoice_id','=', $invoice_id)
+            ->get();
+
+        $returnArray = array();
+        foreach ($getResult as $item){
+            $itemModel = InvoiceItemModel::Instance();
+            $itemModel->id = $item->id;
+            $itemModel->item_type_id = $item->item_type_id;
+            $itemModel->item_type_name = $item->type_name;
+            $itemModel->first_feature = $item->first_feature;
+            $itemModel->second_feature = $item->second_feature;
+            $itemModel->third_feature = $item->third_feature;
+            $itemModel->fourth_feature = $item->fourth_feature;
+            $itemModel->status = $item->status;
+            $itemModel->display_status = InvoiceItemStatusEnum::$StatusArray[intval($itemModel->status)];
+            $itemModel->delete_able = $item->delete_able;
+            $itemModel->out_date = $item->out_date;
+            $itemModel->user_id = $item->user_id;
+
+            array_push($returnArray, $itemModel);
+        }
+
+        return $returnArray;
     }
 
 }

@@ -57,11 +57,11 @@ class InvoiceInfoLogic
         $invoiceModel->grand_total = $invoiceResult->grand_total;
         $invoiceModel->paid = $invoiceResult->paid;
         $invoiceModel->interests_rate = intval($invoiceResult->interests_rate);
-        $invoiceModel->interests_value = $invoiceResult->grand_total / $invoiceResult->interests_rate;
+        $invoiceModel->interests_value = ($invoiceResult->grand_total * $invoiceResult->interests_rate) / 100;
         $invoiceModel->final_date_time = $invoiceResult->final_date_time;
 
         //Get Invoice Items
-        $invoiceItems = $this->GetInvoiceItems($id);
+        $invoiceItems = InvoiceItemLogic::Instance()->GetInvoiceItemsForInvoice($id);
 
         //Return Class
         $class = new \stdClass();
@@ -89,6 +89,10 @@ class InvoiceInfoLogic
                 'interests_rate' => intval($invoice_info_model->interests_rate),
             ]);
 
+        //Update Display ID
+        DB::table('invoice_info')->where('id','=', $insertID)
+            ->update(['display_id' => str_pad(intval($insertID),7,"0", STR_PAD_LEFT)]);
+
         //Insert Item
         $i = 0;
         foreach ($invoice_item_array as $item){
@@ -99,12 +103,16 @@ class InvoiceInfoLogic
         //User Audit
         UserAuditLogic::Instance()->UserAddNewInvoice($insertID);
 
+        //Update Report
+        DailyReportLogic::Instance()
+            ->UpdateCurrentReport(sizeof($invoice_item_array), 0, $invoice_info_model->grand_total, 0);
+
         //Return Invoice ID
         return $insertID;
     }
 
     public function Update(InvoiceInfoModel $invoice_info_model, array $modify_item_array, array $insert_new_item_array,
-    array $delete_item_array){
+    array $delete_item_array, $invoice_id){
 
 
     }
@@ -125,41 +133,6 @@ class InvoiceInfoLogic
     public function TookInvoice($id){
 
 
-    }
-
-    //Get Invoice Item
-    private function GetInvoiceItems($invoice_id){
-        $getResult = DB::table('invoice_item')
-            ->select(
-                'invoice_item.id','invoice_item.item_type_id','invoice_item.first_feature',
-                'invoice_item.second_feature','invoice_item.third_feature','invoice_item.fourth_feature',
-                'invoice_item.status','invoice_item.delete_able','invoice_item.out_date','invoice_item.user_id',
-                'item_type.type_name'
-            )
-            ->join('item_type','invoice_item.item_type_id','=','item_type.id')
-            ->where('invoice_item.invoice_id','=', $invoice_id)
-            ->get();
-
-        $returnArray = array();
-        foreach ($getResult as $item){
-            $itemModel = InvoiceItemModel::Instance();
-            $itemModel->id = $item->id;
-            $itemModel->item_type_id = $item->item_type_id;
-            $itemModel->item_type_name = $item->type_name;
-            $itemModel->first_feature = $item->first_feature;
-            $itemModel->second_feature = $item->second_feature;
-            $itemModel->third_feature = $item->third_feature;
-            $itemModel->fourth_feature = $item->fourth_feature;
-            $itemModel->status = $item->status;
-            $itemModel->display_status = InvoiceItemStatusEnum::$StatusArray[intval($itemModel->status)];
-            $itemModel->delete_able = $item->delete_able;
-            $itemModel->out_date = $item->out_date;
-            $itemModel->user_id = $item->user_id;
-
-            array_push($returnArray, $itemModel);
-        }
-
-        return $returnArray;
     }
 
 }

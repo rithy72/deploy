@@ -85,13 +85,21 @@ Route::middleware('auth')->group(function (){
     Route::get('/test_api','TestController@API');
 //========================================================================
 //============================= API ======================================
-    Route::prefix('api')->group(function (){
-        /* *
-         * Item Type
-         * */
-        Route::prefix('item_group')->group(function (){
 
-        });
+
+});
+
+
+Route::prefix('api')->group(function (){
+    /* *
+     * Item Type
+     * */
+    Route::prefix('item_group')->group(function (){
+        Route::get('/', 'APIController\ItemTypeController@index');
+        Route::post('/', 'APIController\ItemTypeController@create');
+        Route::put('/{id}','APIController\ItemTypeController@edit');
+        Route::delete('/{id}','APIController\ItemTypeController@destroy');
+        Route::put('/deactivate/{id}','APIController\ItemTypeController@deactivate');
+        Route::put('/activate/{id}','APIController\ItemTypeController@activate');
     });
-
 });

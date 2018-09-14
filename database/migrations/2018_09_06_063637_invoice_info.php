@@ -16,6 +16,7 @@ class InvoiceInfo extends Migration
         //
         Schema::create('invoice_info', function (Blueprint $table){
             $table->increments('id');
+            $table->text('display_id')->nullable(true);
             $table->text('customer_name')->nullable(true);
             $table->text('customer_phone')->nullable(true);
             $table->dateTime('created_date_time');

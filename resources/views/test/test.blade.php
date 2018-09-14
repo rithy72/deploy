@@ -186,9 +186,14 @@
         }
     });
     $('#getData').on('click',function () {
+        var obj = {
+            "item_type_name":"Motor 1"
+        };
+
         $.ajax({
-            type:"GET",
-            url:"test_api",
+            type:"PUT",
+            url:"api/item_group/1",
+            data:obj,
             success:function (response) {
                 console.log(response);
             }

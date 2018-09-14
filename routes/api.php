@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+//Route::middleware('auth')->group(function (){
+//    Route::prefix('item_group')->group(function (){
+//        Route::get('/', 'APIController\ItemTypeController@index');
+//        Route::post('/', 'APIController\ItemTypeController@create');
+//    });
+//});
 
-Route::middleware('auth')->group(function () {
-    Route::get('test', function (){
-        return "Hello World";
-    });
-});
