@@ -148,10 +148,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="display: flex;margin-top: 21px;">
                                 <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchItems')">
+                                <a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>
                             </div>
-                            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+
 
                             <div class="dataTables_length">
                                 <div class="btn-group" style="margin-top: 20px;">
@@ -262,10 +263,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <span>.</span><input type="text" class="form-control" placeholder="ស្វែងរកវត្ថុ">
+                            <div class="col-md-2" style="display: flex;margin-top: 21px;">
+                                <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchItems')">
+                                <a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>
                             </div>
-                            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+
 
                             <div class="dataTables_length">
                                 <div class="btn-group" style="margin-top: 20px;">

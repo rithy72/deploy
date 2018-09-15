@@ -380,7 +380,7 @@
                 backdrop: 'static'
             });
         });
-        // dialog show create new user
+        // dialog show create new item
         $(document).on("click","#createNewTypeItem",function(){
             $('#createNewTomNanh').modal({
                 backdrop: 'static'
