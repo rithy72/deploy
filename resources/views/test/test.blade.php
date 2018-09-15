@@ -191,9 +191,8 @@
         };
 
         $.ajax({
-            type:"PUT",
-            url:"api/item_group/1",
-            data:obj,
+            type:"GET",
+            url:"admin/api/item_group",
             success:function (response) {
                 console.log(response);
             }

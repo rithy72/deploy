@@ -21,28 +21,6 @@ Auth::routes();
 //
 //Admin
 Route::middleware('auth')->group(function (){
-//    /* *
-//     * Admin Route Group
-//     * */
-//    Route::middleware('admin')->group(function (){
-//        Route::prefix('admin')->group(function () {
-//            Route::get('/', function (){
-//                return view('Admin.admin_main');
-//            });
-//        });
-//    });
-//    /* *
-//     * User Route Group
-//     * */
-//    Route::middleware('user')->group(function (){
-//        Route::prefix('user')->group(function () {
-//            Route::get('/', function (){
-//                return view('Front-Desk.front_desk_main');
-//            });
-//        });
-//    });
-
-
 
     // Admin
     Route::prefix('admin')->group(function(){
