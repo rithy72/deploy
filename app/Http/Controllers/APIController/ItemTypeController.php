@@ -18,7 +18,7 @@ class ItemTypeController extends Controller
         $class = ReturnModel::Instance();
 
         $search = $request->input('search','');
-        $status = $request->input('','');
+        $status = $request->input('status','');
         $pageSize = $request->input('page_size',10);
 
         $getResult = ItemTypeLogic::Instance()->FilterSearch($search, $status, $pageSize);
