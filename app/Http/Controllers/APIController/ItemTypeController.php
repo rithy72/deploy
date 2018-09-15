@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 class ItemTypeController extends Controller
 {
 
+    //Filter Search
     public function index(Request $request)
     {
         $class = ReturnModel::Instance();
@@ -30,7 +31,7 @@ class ItemTypeController extends Controller
         return json_encode($class);
     }
 
-
+    //Insert Item Type
     public function create(Request $request)
     {
         $class = ReturnModel::Instance();
@@ -52,7 +53,7 @@ class ItemTypeController extends Controller
         return json_encode($class);
     }
 
-
+    //Edit Item Type
     public function edit(Request $request, $id)
     {
         $class = ReturnModel::Instance();
@@ -74,12 +75,7 @@ class ItemTypeController extends Controller
         return json_encode($class);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //Delete Item Type
     public function destroy($id)
     {
         $class = ReturnModel::Instance();
@@ -97,6 +93,7 @@ class ItemTypeController extends Controller
         return json_decode($class);
     }
 
+    //Deactivate Item Type
     public function deactivate($id){
         $class = ReturnModel::Instance();
 
@@ -108,6 +105,7 @@ class ItemTypeController extends Controller
         return json_decode($class);
     }
 
+    //Activate Item Type
     public function activate($id){
         $class = ReturnModel::Instance();
 
