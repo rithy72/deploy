@@ -103,6 +103,9 @@
 
         <div class="datatable-header" style="margin-top: -25px;">
             <legend style="font-size: 17px;"><b style="margin-left: 16px;">ទំនិញបញ្ចាំ</b></legend>
+            <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
+                <a class="btn btn-success" id="add_item"><i class="icon-add position-left"></i>បន្ថែមទំនិញ</a>
+            </div>
         </div>
         <div class="datatable-scroll" style="overflow-x: hidden;">
             <div class="dataTables_scroll">
@@ -198,6 +201,116 @@
         </div>
         {{--====================== End footer of pagination ====================--}}
     </div>
+    {{--=================== dialog add more item type ====================--}}
+    <form role="form" action="" method="">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div id="add_more_item_to_invoice" class="modal fade">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
+                        <h5 class="modal-title">@lang('string.addMoreItemsToInvoice')</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="datatable-header" style="margin-top: -40px;">
+                                    <div class="">
+                                        <div class="form-group">
+                                            {{--Group Of Items--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.groupItem')</label>
+                                            <div class="col-lg-7" style="margin-bottom: 13px;">
+                                                <select class="form-control" id="selectTomNanh" name="">
+                                                    <option selected="selected"></option>
+                                                    <option selected="selected">ម៉ូតូ</option>
+                                                    <option selected="selected">ឡាន</option>
+                                                    <option selected="selected">ទូរស័ព្ទ</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2" style="margin-bottom: 13px;">
+                                                <button type="button" class="btn btn-success btn-icon btn-rounded" title="បង្កើតប្រភេទទំនិញថ្មី" id="createNewTypeItem"><i class="icon-plus3"></i></button>
+                                            </div>
+                                            {{--Number som Kol--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.notice')</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemNotice1')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                            {{--full name--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemNotice2')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                            {{--phone number--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemNotice3')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                            {{--Cost--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemNotice4')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        {{ csrf_field() }}
+                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
+                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {{-----   Create New Type Of Item   -----}}
+    <form role="form" action="" method="">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div id="createNewTomNanh" class="modal fade">
+            <div class="modal-dialog ">
+                <div class="modal-content" style="box-shadow: -3px 50px 164px 110px #0006;">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
+                        <h5 class="modal-title">@lang('string.createNewItems')</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="datatable-header" style="margin-top: -40px;">
+                                    <div class="">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.newTypeItem')</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.addNewTypeItemHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        {{ csrf_field() }}
+                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
+                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 @endsection
 
 @section('script')
@@ -217,9 +330,17 @@
         $("#selectTomNanh").select2({
 
         });
-        // select item in one group
-        $("#name_item_select").select2({
-
+        // dialog add item to invoice
+        $(document).on("click","#add_item",function(){
+            $('#add_more_item_to_invoice').modal({
+                backdrop: 'static'
+            });
+        });
+        // dialog show create new item
+        $(document).on("click","#createNewTypeItem",function(){
+            $('#createNewTomNanh').modal({
+                backdrop: 'static'
+            });
         });
     </script>
 @endsection

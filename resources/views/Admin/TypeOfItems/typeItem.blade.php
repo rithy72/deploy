@@ -145,7 +145,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.typeItems')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.addNewTypeItemHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.addNewTypeItemHere...')" name="" id="new_item_type" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                         <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
                         {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_create_new_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -205,6 +205,21 @@
             </div>
         </div>
     </form>
+
+    <div id="loading" style="display: none;
+    width:100px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    text-align:center;
+    margin-left: -50px;
+    margin-top: -100px;
+    z-index:2;
+    overflow: auto;">
+        <img src="/assets/images/ajax_loader.gif" alt=""/>
+    </div>
+
 @endsection
 
 @section('script')
@@ -220,6 +235,30 @@
             $('#update_user').modal({
                 backdrop: 'static'
             });
+        });
+
+
+        $( document ).ajaxStart(function() {
+            $( "#loading" ).show();
+        });
+        $( document ).ajaxStop(function() {
+            $( "#loading" ).hide();
+        });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        //create new item type
+        $(document).on("click",".btn_create_new_item_type",function () {
+           $.ajax({
+              type:"POST",
+               url:'api/item_group',
+               data: {"item_type_name" : $('#new_item_type').val()},
+               success: function (response) {
+                   console.log(response);
+               }
+           });
         });
     </script>
 @endsection
