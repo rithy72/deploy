@@ -29,27 +29,27 @@ class TestController extends Controller
     }
 
     public function API(){
-//        $invoiceModel = new \stdClass();
-//        $invoiceModel->customer_name = "Johnny";
-//        $invoiceModel->customer_phone = "023221121";
-//        $invoiceModel->grand_total = 3000;
-//        $invoiceModel->interests_rate = 5;
-//
-//        $itemArray = array();
-//        for ($i = 0; $i < 5; $i++){
-//            $itemModel = new \stdClass();
-//            $itemModel->item_type_id = 1;
-//            $itemModel->first_feature = "Honda Dream";
-//            $itemModel->second_feature = "Black";
-//            $itemModel->third_feature = "2AH-1035";
-//            $itemModel->fourth_feature = "Skull Sticker";
-//
-//            array_push($itemArray, $itemModel);
-//        }
-//
-//        $invoiceModel->invoice_items = $itemArray;
+        $invoiceModel = new \stdClass();
+        $invoiceModel->customer_name = "Johnny";
+        $invoiceModel->customer_phone = "023221121";
+        $invoiceModel->grand_total = 3000;
+        $invoiceModel->interests_rate = 5;
 
-        $insertResult = InvoiceInfoLogic::Instance()->Find(1);
+        $itemArray = array();
+        for ($i = 0; $i < 5; $i++){
+            $itemModel = new \stdClass();
+            $itemModel->item_type_id = 1;
+            $itemModel->first_feature = "Honda Dream";
+            $itemModel->second_feature = "Black";
+            $itemModel->third_feature = "2AH-1035";
+            $itemModel->fourth_feature = "Skull Sticker";
+
+            array_push($itemArray, $itemModel);
+        }
+
+        $invoiceModel->invoice_items = $itemArray;
+
+        $insertResult = InvoiceInfoLogic::Instance()->Create($invoiceModel, $itemArray);
         return json_encode($insertResult);
 
 

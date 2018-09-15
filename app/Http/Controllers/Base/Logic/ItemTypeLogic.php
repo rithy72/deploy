@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Model\BaseModel;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
+use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\ItemTypeModel;
 use Illuminate\Support\Facades\DB;
 
@@ -92,6 +93,9 @@ class ItemTypeLogic
                     'type_name' => $type_name,
                 ]);
 
+            //User Auditrail
+            UserAuditLogic::Instance()->UserItemTypeAction($insertResult, UserActionEnum::INSERT);
+
             $model = $this->Find($insertResult);
             return $model;
         }else{
@@ -111,6 +115,9 @@ class ItemTypeLogic
                     'type_name' => $newTypeName
                 ]);
 
+            //User Auditrail
+            UserAuditLogic::Instance()->UserItemTypeAction($id, UserActionEnum::UPDATE);
+
             $model = $this->Find($id);
             return $model;
         }else{
@@ -125,6 +132,9 @@ class ItemTypeLogic
                 'status' => false
             ]);
 
+        //User Auditrail
+        UserAuditLogic::Instance()->UserItemTypeAction($id, UserActionEnum::DEACTIVATE);
+
         $model = $this->Find($id);
         return $model;
     }
@@ -135,6 +145,9 @@ class ItemTypeLogic
             ->update([
                 'status' => true
             ]);
+
+        //User Auditrail
+        UserAuditLogic::Instance()->UserItemTypeAction($id, UserActionEnum::ACTIVATE);
 
         $model = $this->Find($id);
         return $model;
@@ -149,6 +162,9 @@ class ItemTypeLogic
             //Can Delete
             DB::table('item_type')->where('$id','=', $id)
                 ->delete();
+
+            //User Auditrail
+            UserAuditLogic::Instance()->UserItemTypeAction($id, UserActionEnum::DELETE);
 
             return true;
         }else{

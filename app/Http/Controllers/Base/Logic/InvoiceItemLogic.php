@@ -27,16 +27,16 @@ class InvoiceItemLogic
             ->insert([
                 'id' => $line_number,
                 'invoice_id' => $invoice_id,
-                'item_type_id' => $invoice_item_model->item_type_id,
-                'first_feature' => $invoice_item_model->first_feature,
-                'second_feature' => $invoice_item_model->second_feature,
-                'third_feature' => $invoice_item_model->third_feature,
-                'fourth_feature' => $invoice_item_model->fourth_feature,
+                'item_type_id' => $invoice_item_model['item_type_id'],
+                'first_feature' => $invoice_item_model['first_feature'],
+                'second_feature' => $invoice_item_model['second_feature'],
+                'third_feature' => $invoice_item_model['third_feature'],
+                'fourth_feature' => $invoice_item_model['fourth_feature'],
                 'status' => InvoiceItemStatusEnum::OPEN,
             ]);
 
         //Make Item Type Can Not Delete
-        ItemTypeLogic::Instance()->MakeItemTypeUnDeleteAble($invoice_item_model->item_type_id);
+        ItemTypeLogic::Instance()->MakeItemTypeUnDeleteAble($invoice_item_model['item_type_id']);
 
         return $insertResult;
     }

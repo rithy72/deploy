@@ -22,14 +22,29 @@ class UserAuditLogic
         return new UserAuditLogic();
     }
 
-    //Record User Create Invoice
-    public function UserAddNewInvoice($invoice_id){
+    //Record User Action Invoice
+    public function UserInvoiceAction($invoice_id, $action_enum){
         $insertResult = DB::table('user_record')
-            ->insert([
+            ->insertGetId([
                 'user_id' => Auth::id(),
                 'invoice_id' => $invoice_id,
                 'action' => UserActionEnum::INSERT,
-                'action_detail' => UserActionEnum::ActionArray[UserActionEnum::INSERT],
+                'action_detail' => UserActionEnum::ActionArray[$action_enum]." - "."វិក្ក័យបត្រ",
+                'date_time' => DateTimeLogic::Instance()
+                    ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
+            ]);
+
+        return $insertResult;
+    }
+
+    //Record User Action Item Type
+    public function UserItemTypeAction($type_id, $action_enum){
+        $insertResult = DB::table('user_record')
+            ->insertGetId([
+                'user_id' => Auth::id(),
+                'invoice_id' => $type_id,
+                'action' => UserActionEnum::INSERT,
+                'action_detail' => UserActionEnum::ActionArray[$action_enum]." - "."ប្រភេទទំនិញ",
                 'date_time' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
             ]);
