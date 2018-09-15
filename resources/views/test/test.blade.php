@@ -192,7 +192,7 @@
 
         $.ajax({
             type:"GET",
-            url:"admin/api/item_group",
+            url:"api/item_group",
             success:function (response) {
                 console.log(response);
             }

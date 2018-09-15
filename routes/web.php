@@ -73,12 +73,15 @@ Route::middleware('auth')->group(function (){
                 Route::put('/activate/{id}','APIController\ItemTypeController@activate');
             });
         });
+//================================================================================================================
+//================================ Test ==========================================================================
+        Route::get('/test', 'TestController@Test');
+        Route::post('/test_post', 'TestController@Post');
+        Route::get('/test_api','TestController@API');
+//================================================================================================================
     });
-//================================ Test =================================
-    Route::get('/test', 'TestController@Test');
-    Route::post('/test_post', 'TestController@Post');
-    Route::get('/test_api','TestController@API');
-//========================================================================
+
+
 });
 
 
