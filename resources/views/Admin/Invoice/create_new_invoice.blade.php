@@ -184,8 +184,7 @@
         </div>
 
     {{--====================== add more item to invoice ====================--}}
-    <form role="form" action="" method="">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
         <div id="add_more_item_to_invoice" class="modal fade">
             <div class="modal-dialog ">
                 <div class="modal-content">
@@ -204,10 +203,7 @@
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.groupItem')</label>
                                             <div class="col-lg-7" style="margin-bottom: 13px;">
                                                 <select class="form-control" id="selectTomNanh" name="">
-                                                    <option selected="selected"></option>
-                                                    <option selected="selected">ម៉ូតូ</option>
-                                                    <option selected="selected">ឡាន</option>
-                                                    <option selected="selected">ទូរស័ព្ទ</option>
+
                                                 </select>
                                             </div>
                                             <div class="col-lg-2" style="margin-bottom: 13px;">
@@ -253,7 +249,6 @@
                 </div>
             </div>
         </div>
-    </form>
     {{--====================== add more item to invoice ====================--}}
     <form role="form" action="" method="">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -386,9 +381,43 @@
                 backdrop: 'static'
             });
         });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         // select group of item
         $("#selectTomNanh").select2({
-
+            ajax: {
+                method: "GET",
+                url: "../api/item_group?page_size=15",
+                delay: 1000,
+                data: function (params) {
+                    if (params.term){ // if have user input key in input text it work the statement
+                        query = {
+                            search: params.term
+                        };
+                    } else {
+                        query = {
+                            search: ""
+                        };
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    //console.log(data);
+                    var GG = JSON.parse(data);
+                    const result = $.map(GG.data.data, function (value) {
+                        return {id: value.id, text: value.type_name}
+                    });
+                    return {
+                        results: result,
+                        "pagination": {
+                            "more": true
+                        }
+                    }
+                }
+            }
         });
         // select item in one group
         $("#selectTomNanh1").select2({
