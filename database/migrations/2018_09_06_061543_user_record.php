@@ -15,6 +15,7 @@ class UserRecord extends Migration
     {
         //
         Schema::create('user_record', function (Blueprint $table){
+            $table->increments('id');
             $table->integer('user_id');
             $table->integer('invoice_id');
             $table->string('action');

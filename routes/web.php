@@ -72,6 +72,18 @@ Route::middleware('auth')->group(function (){
                 Route::put('/deactivate/{id}','APIController\ItemTypeController@deactivate');
                 Route::put('/activate/{id}','APIController\ItemTypeController@activate');
             });
+            /* *
+             * Invoice
+             * */
+            Route::prefix('invoice')->group(function (){
+                Route::post('/','APIController\InvoiceController@create');
+            });
+            /* *
+             * Daily Report
+             * */
+            Route::prefix('daily_report')->group(function (){
+
+            });
         });
 //================================================================================================================
 //================================ Test ==========================================================================
