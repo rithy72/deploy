@@ -187,32 +187,14 @@
     });
     $('#getData').on('click',function () {
         var obj = {
-            "customer_name": "",
-            "customer_phone": "023221121",
-            "grand_total": 3000,
-            "interests_rate": 5,
-            "invoice_items": [
-                {
-                    "item_type_id": 1,
-                    "first_feature": "Honda Dream",
-                    "second_feature": "Black",
-                    "third_feature": "2AH-1035",
-                    "fourth_feature": "Skull Sticker"
-                },
-                {
-                    "item_type_id": 1,
-                    "first_feature": "Honda Dream",
-                    "second_feature": "Black",
-                    "third_feature": "2AH-1035",
-                    "fourth_feature": "Skull Sticker"
-                }  ]
-        }
+            "item_type_name" : "Car"
+        };
 
 
         $.ajax({
-            type:"POST",
-            url:"api/invoice",
-            data: obj,
+            type:"DELETE",
+            url:"api/item_group/2",
+            //data: obj,
             success:function (response) {
                 console.log(response);
             }
