@@ -187,14 +187,33 @@
     });
     $('#getData').on('click',function () {
         var obj = {
-            "item_type_name" : "Car"
+            "customer_name": "Johnny",
+            "customer_phone": "023221121",
+            "grand_total": 3000,
+            "interests_rate": 5,
+            "invoice_items": [
+                {
+                    "item_type_id": 1,
+                    "first_feature": "Honda Dream",
+                    "second_feature": "Black",
+                    "third_feature": "2AH-1035",
+                    "fourth_feature": ""
+                },
+                {
+                    "item_type_id": 1,
+                    "first_feature": "Honda Dream",
+                    "second_feature": "",
+                    "third_feature": "2AH-1035",
+                    "fourth_feature": ""
+                }  ]
         };
 
 
+
         $.ajax({
-            type:"DELETE",
-            url:"api/item_group/2",
-            //data: obj,
+            type:"POST",
+            url:"api/invoice",
+            data: obj,
             success:function (response) {
                 console.log(response);
             }

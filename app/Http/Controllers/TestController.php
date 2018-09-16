@@ -29,9 +29,9 @@ class TestController extends Controller
     }
 
     public function API(){
-        $invoiceModel = new \stdClass();
+        $invoiceModel = new InvoiceInfoModel();
         $invoiceModel->customer_name = "Johnny";
-        $invoiceModel->customer_phone = "023221121";
+        $invoiceModel->customer_phone = "023211112";
         $invoiceModel->grand_total = 3000;
         $invoiceModel->interests_rate = 5;
 
@@ -49,7 +49,7 @@ class TestController extends Controller
 
         $invoiceModel->invoice_items = $itemArray;
 
-        $insertResult = InvoiceInfoLogic::Instance()->Create($invoiceModel, $itemArray);
+        $insertResult = InvoiceInfoLogic::Instance()->Find(2);
         return json_encode($insertResult);
 
 
