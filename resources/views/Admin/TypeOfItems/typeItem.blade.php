@@ -250,16 +250,35 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        //create new item type
+        //create new item type, and ,close dialog clear input
+        $(document).on("click","#close_update_rate",function () {
+            $('#new_item_type').val('');
+        });
         $(document).on("click",".btn_create_new_item_type",function () {
            $.ajax({
               type:"POST",
                url:'api/item_group',
                data: {"item_type_name" : $('#new_item_type').val()},
                success: function (response) {
-                   console.log(response);
+                   var convert = JSON.parse(response);
+                   if (convert.status === "200") {
+                       alert('ធ្វើការបង្កើតរួចរាល់');
+                       $('#new_item_type').val('');
+                   } else if (convert.status === "301"){
+                       alert('ឈ្មោះមានរួចហើយ សូមធ្វើការបញ្ចូលម្តងទៀត');
+                   }
                }
            });
         });
+        // show item type
+        (function () {
+            $.ajax({
+                type:"GET",
+                url:'api/item_group',
+                success: function (response) {
+                   console.log(response);
+                }
+            })
+        })();
     </script>
 @endsection
