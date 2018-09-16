@@ -90,7 +90,7 @@ class ItemTypeController extends Controller
             $class->data = "Item Type Can not Delete";
         }
 
-        return json_decode($class);
+        return json_encode($class);
     }
 
     //Deactivate Item Type
@@ -102,7 +102,7 @@ class ItemTypeController extends Controller
         $class->status = "200";
         $class->data = "Item Type Deactivate";
 
-        return json_decode($class);
+        return json_encode($class);
     }
 
     //Activate Item Type
@@ -112,9 +112,9 @@ class ItemTypeController extends Controller
         ItemTypeLogic::Instance()->Activate($id);
 
         $class->status = "200";
-        $class->data = "Item Type Deactivate";
+        $class->data = "Item Type Activate";
 
-        return json_decode($class);
+        return json_encode($class);
     }
 
 }

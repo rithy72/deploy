@@ -127,7 +127,7 @@ class ItemTypeLogic
 
     //Deactivate Item Type
     public function Deactivate($id){
-        DB::table('item_type')->where('$id','=', $id)
+        DB::table('item_type')->where('id','=', $id)
             ->update([
                 'status' => false
             ]);
@@ -141,7 +141,7 @@ class ItemTypeLogic
 
     //Activate Item Type
     public function Activate($id){
-        DB::table('item_type')->where('$id','=', $id)
+        DB::table('item_type')->where('id','=', $id)
             ->update([
                 'status' => true
             ]);
@@ -160,7 +160,7 @@ class ItemTypeLogic
 
         if ($model->delete_able){
             //Can Delete
-            DB::table('item_type')->where('$id','=', $id)
+            DB::table('item_type')->where('id','=', $id)
                 ->delete();
 
             //User Auditrail
