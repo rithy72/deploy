@@ -25,37 +25,15 @@
                 <a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>@lang('string.createNewItems')</a>
             </div>
 
-            {{--<div class="col-md-2">
-                <span>ស្វែងរកទាមរយៈ</span>
-                <div class="form-group">
-                    <select class="form-control" id="" name="">
-                        <option selected="selected"></option>
-                        <option selected="">លេខសំគាល់</option>
-                        <option selected="">ឈ្មោះអតិថិជន</option>
-                        <option selected="">លេខទូរស័ព្ទ</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <span>ស្ថានភាព</span>
-                <div class="form-group">
-                    <select class="form-control" id="" name="">
-                        <option selected="selected"></option>
-                        <option selected="">ទាំអស់</option>
-                        <option selected="">ដំណើរការ</option>
-                        <option selected="">ផ្អាកដំណើរការ</option>
-                    </select>
-                </div>
-            </div>--}}
             <div class="col-md-3">
-                <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchTypeItems')">
+                <span>.</span><input type="text" class="form-control" id="search" placeholder="@lang('string.searchTypeItems')">
             </div>
             <div class="col-md-3">
                 <span>@lang('string.chooseSituation')</span>
-                <select class="form-control" id="" name="">
-                    <option selected="selected">@lang('string.all')</option>
-                    <option selected="">@lang('string.active')</option>
-                    <option selected="">@lang('string.deActive')</option>
+                <select class="form-control" id="statusSelect" name="">
+                    <option value="">@lang('string.all')</option>
+                    <option value="1">@lang('string.active')</option>
+                    <option value="0">@lang('string.deActive')</option>
                 </select>
             </div>
             <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
@@ -65,7 +43,7 @@
                 <div class="dataTables_scroll">
                     <!--============ scroll body oy trov 1 header table ===============-->
                     <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
-                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Items" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.nameItem')</th>
@@ -74,53 +52,21 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>ម៉ូតូ</td>
-                                <td>ដំណើរការ</td>
-                                <td class="text-center">
-                                    <ul class="icons-list">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="icon-menu9"></i>
-                                            </a>
 
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>@lang('string.active')</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>@lang('string.deActive')</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>@lang('string.delete')</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>ឡាន</td>
-                                <td>ផ្អាកដំណើរការ</td>
-                                <td class="text-center">
-                                    <ul class="icons-list">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="icon-menu9"></i>
-                                            </a>
-
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li id="update"><a href="#"><i class="icon-pencil7"></i>@lang('string.update')</a></li>
-                                                <li><a href="#"><i class="icon-checkmark4"></i>@lang('string.active')</a></li>
-                                                <li><a href="#"><i class="icon-blocked"></i>@lang('string.deActive')</a></li>
-                                                <li><a href="#"><i class="icon-trash"></i>@lang('string.delete')</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             {{--========================= footer of pagination ====================--}}
-            <div class="datatable-footer"><div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="DataTables_Table_3_previous">←</a><span><a class="paginate_button current" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_3" data-dt-idx="2" tabindex="0">2</a></span><a class="paginate_button next" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="DataTables_Table_3_next">→</a></div></div>
+            <div class="datatable-footer">
+                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page1"></b> មាន <b id="first1"></b> វត្ថុដល់ <b id="last1"></b> នៃចំនួនវត្ថុទាំងអស់ <b id="all1"></b> </div>
+                <div class="dataTables_paginate paging_simple_numbers" id="">
+                    <a class="paginate_button previous_currency" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="Item_click_Back" style="display:none;">←</a>
+                    <span><a class="paginate_button current" id="Num_Page1" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0"></a></span>
+                    <a class="paginate_button next_currency" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="Item_click_Next" style="display:none;">→</a>
+                </div>
+            </div>
             {{--====================== End footer of pagination ====================--}}
             {{--==========================================================================================================--}}
         </div>
@@ -185,7 +131,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.typeItems')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.addOldItemForUpdate')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.addOldItemForUpdate')" name="" id="updateItem" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -200,7 +146,7 @@
                         {{ csrf_field() }}
                         {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_update_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -250,16 +196,216 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        //create new item type
+        //create new item type, and ,close dialog clear input
+        $(document).on("click","#close_update_rate",function () {
+            $('#new_item_type').val('');
+        });
         $(document).on("click",".btn_create_new_item_type",function () {
            $.ajax({
               type:"POST",
                url:'api/item_group',
                data: {"item_type_name" : $('#new_item_type').val()},
                success: function (response) {
-                   console.log(response);
+                   var convert = JSON.parse(response);
+                   if (convert.status === "200") {
+                       alert('ធ្វើការបង្កើតរួចរាល់');
+                       $('#new_item_type').val('');
+                       window.location.href = '{{('item_type')}}';
+                   } else if (convert.status === "301"){
+                       alert('ឈ្មោះមានរួចហើយ សូមធ្វើការបញ្ចូលម្តងទៀត');
+                   }
                }
            });
+        });
+        // show item type
+        // ------------ store model of table -------------------
+        var stringStatus , stringDeletable , storeValue , stringShowDeActiveOrActive;
+        function ModelShowInTable(getJsonValue) {
+            storeValue = JSON.parse(getJsonValue);
+            document.getElementById("page1").innerHTML = storeValue.data.current_page;
+            document.getElementById("first1").innerHTML = storeValue.data.from;
+            document.getElementById("last1").innerHTML = storeValue.data.to;
+            document.getElementById("all1").innerHTML = storeValue.data.total;
+            document.getElementById("Num_Page1").innerHTML = storeValue.data.current_page;
+
+            if (storeValue.data.last_page === 1){ $('.previous_currency').hide(); $('.next_currency').hide();
+            }else { $('.previous_currency').show(); $('.next_currency').show(); }
+
+            for (var i = 0; i < storeValue.data.data.length; i++){
+                if (storeValue.data.data[i].status === 1){
+                    //Active
+                    stringStatus = '<span class="label label-success A" style="font-size: 12px;">@lang('string.active')</span>';
+                    stringShowDeActiveOrActive = '<li id="deActive"><a><i class="icon-blocked"></i>@lang('string.deActive')</a></li>';
+                }else if (storeValue.data.data[i].status === 0){
+                    //Deactive
+                    stringStatus = '<span class="label label-default I" style="font-size: 12px;">@lang('string.deActive')</span></td>';
+                    stringShowDeActiveOrActive = '<li id="active"><a><i class="icon-checkmark4"></i>@lang('string.active')</a></li>';
+                }
+
+                // ============ if deltetable == 1 show btn delete in table Actions ================
+                if (storeValue.data.data[i].delete_able === 1){
+                    stringDeletable = '<li id="deleteItem"><a><i class="icon-trash"></i>@lang('string.delete')</a></li>';
+                }else if (storeValue.data.data[i].delete_able === 0){
+                    stringDeletable = '';
+                }
+
+                // ============= End Parse Json ===========================
+                var _tr = '<tr role="row" class="odd">' +
+                    '<td style="display:none;">' + storeValue.data.data[i].id + '</td>' +
+                    '<td>' + storeValue.data.data[i].type_name + '</td>' +
+                    '<td>' + stringStatus + '</td>' +
+                    '<td class="text-center"> ' +
+                    '<ul class="icons-list">'+
+                    '<li class="dropdown">'+
+                    '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+                    '<i class="icon-menu9"></i>'+
+                    '</a>'+
+                    '<ul class="dropdown-menu dropdown-menu-right">'+
+                    '<li id="update"><a><i class="icon-pencil7"></i>@lang('string.update')</a></li>'+
+                    stringShowDeActiveOrActive +
+                    stringDeletable +
+                    '</ul>'+
+                    '</li>'+
+                    '</ul>'+
+                    '</td>' +
+                    '</tr>';
+                $('#Show_All_Items tbody').append(_tr);
+            }
+        }
+        // ------------ define class constructor ---------------
+        function Constructor(methods, linkUrl) {
+            this.method = methods;
+            this.urls = linkUrl;
+        }
+        // ------------ ajax request to server -----------------
+        Constructor.prototype.reads =  function() {
+            $.ajax({
+                type: this.method, // "GET"
+                url: this.urls, // 'GetAllListCurrency'
+                success: function (ResponseJson) {
+                    //console.log(ResponseJson);
+                    ModelShowInTable(ResponseJson); // response to another fucntion
+                }
+            });
+        };
+        // -------------- function main ------------------------
+        (function () {
+            var showDataInTable = new Constructor("GET" , 'api/item_group?search=&status=&page_size=15');
+            showDataInTable.reads(); // invoke method show data in table
+        })();
+        // =============================== update item type ===================================
+        $(document).on("click","#update",function () {
+            var _selectRow = $(this).closest('tr');
+            _storeID = $(_selectRow).find('td:eq(0)').text();
+            var _storeNameItemType = $(_selectRow).find('td:eq(1)').text();
+            (function(){
+                $('#updateItem').val(_storeNameItemType);
+            })();
+        });
+        var _storeID;
+        $(".btn_update_item_type").click(function () {
+            $.ajax({
+                type:"PUT",
+                url:'api/item_group/'+_storeID+'',
+                data: {"item_type_name" : $('#updateItem').val()},
+                success: function (response) {
+                    var convert = JSON.parse(response);
+                    if (convert.status === "200") {
+                        alert('ធ្វើការកែប្រែរួចរាល់');
+                        $('#updateItem').val('');
+                        window.location.href = '{{('item_type')}}';
+                    } else if (convert.status === "301"){
+                        alert('ឈ្មោះមានរួចហើយ សូមធ្វើការកែប្រែម្តងទៀត');
+                    }
+                }
+            });
+        });
+        //================================= make Active  =======================================
+        $(document).on("click","#active",function () {
+            var _selectRow = $(this).closest('tr');
+            _storeID = $(_selectRow).find('td:eq(0)').text();
+            $.ajax({
+                type: "PUT",
+                url: 'api/item_group/activate/' + _storeID + '',
+                success: function (response) {
+                    var convert = JSON.parse(response);
+                    if (convert.status === "200") {
+                        alert('ធ្វើអោយដំណើរការ');
+                        window.location.href = '{{('item_type')}}';
+                    }
+                }
+            });
+        });
+        //================================= make deActive  ======================================
+        $(document).on("click","#deActive",function () {
+            var _selectRow = $(this).closest('tr');
+            _storeID = $(_selectRow).find('td:eq(0)').text();
+            $.ajax({
+                type: "PUT",
+                url: 'api/item_group/deactivate/' + _storeID + '',
+                success: function (response) {
+                    var convert = JSON.parse(response);
+                    if (convert.status === "200") {
+                        alert('ធ្វើការផ្អាកដំណើរការ');
+                        window.location.href = '{{('item_type')}}';
+                    }
+                }
+            });
+        });
+        //================================= Delete item  =======================================
+        $(document).on("click","#deleteItem",function () {
+            var _selectRow = $(this).closest('tr');
+            _storeID = $(_selectRow).find('td:eq(0)').text();
+            $.ajax({
+                type: "DELETE",
+                url: 'api/item_group/' + _storeID + '',
+                success: function (response) {
+                    var convert = JSON.parse(response);
+                    if (convert.status === "200"){
+                        alert('ធ្វើការលុបរួចរាល់');
+                        window.location.href = '{{('item_type')}}';
+                    } else if (convert.status === "210"){
+                        alert('មិនអាចស្វែងរក ដើម្បីធ្វើការលុបបានឡើយ');
+                    }
+                }
+            });
+        });
+        //================================= Click back  ========================================
+        $(".previous_currency").click(function () {
+            var url = storeValue.data.prev_page_url;
+            if (storeValue.data.prev_page_url === null){
+                alert('មិនអាចខ្លីកត្រលប់បានទេ ពីព្រោះគឺជាទំព័រដំបូង');
+            }else {
+                $('#Show_All_Items td').remove();
+                var clickBack = new Constructor("GET" , url);
+                clickBack.reads();
+            }
+        });
+        //================================= Click next  ========================================
+        $(".next_currency").click(function () {
+            var url = storeValue.data.next_page_url;
+            if (storeValue.data.next_page_url === null){
+                alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
+            }else {
+                $('#Show_All_Items td').remove();
+                var clickNext = new Constructor("GET" , url);
+                clickNext.reads();
+            }
+        });
+
+
+        //======================= Click button Search Item ========================================
+        var timeout1 = null;
+        $('.btn-Search').click(function () {
+            var _getSearch = $('#search').val();
+            var _getStatus = $('#statusSelect').val();
+            var url = 'api/item_group?search='+_getSearch+'&status='+_getStatus+'&page_size=15';
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_Items td').remove();
+                var searchItemType = new Constructor("GET" , url);
+                searchItemType.reads();
+            }, 1000);
         });
     </script>
 @endsection
