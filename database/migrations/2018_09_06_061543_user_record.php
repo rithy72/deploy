@@ -17,9 +17,11 @@ class UserRecord extends Migration
         Schema::create('user_record', function (Blueprint $table){
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('invoice_id');
-            $table->string('action');
-            $table->text('action_detail');
+            $table->integer('parent_id');
+            $table->integer('action');
+            $table->integer('audit_group');
+            $table->string('display_audit');
+            $table->text('detail')->nullable(true);
             $table->dateTime('date_time');
         });
     }

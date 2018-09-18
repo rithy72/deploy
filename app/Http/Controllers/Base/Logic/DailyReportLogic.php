@@ -25,6 +25,26 @@ class DailyReportLogic
 
     }
 
+    //Find Report
+    public function Find($date){
+        $finDate = date('Y-m-d',strtotime($date));
+
+        $getResult = DB::table('daily_report')
+            ->where('date','=', $finDate)
+            ->first();
+        //
+        $class = new \stdClass();
+        if ($getResult != null){
+            $class = new \stdClass();
+            $class->in_item = $getResult->in_item;
+            $class->out_item = $getResult->out_item;
+            $class->outcome = $getResult->outcome;
+            $class->income = $getResult->income;
+        }
+        //
+        return $class;
+    }
+
     //Create Report
     public function UpdateCurrentReport($in_items, $out_items, $expense, $income){
         $currentDate = DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT);
@@ -63,7 +83,23 @@ class DailyReportLogic
 
     //Edit Old Report
     public function UpdateOldReport($date, $in_items, $out_items, $expense, $income){
+        $finDate = date('Y-m-d', strtotime($date));
+        $oldData = $this->Find($finDate);
+        //
+        if ($oldData != null){
+            $updateResult = DB::table('daily_report')
+                ->where('date','=', $finDate)
+                ->update([
+                    'in_item' => $in_items + $oldData->in_item,
+                    'out_item' => $out_items + $oldData->out_item,
+                    'outcome' => $expense + $oldData->outcome,
+                    'income' => $income + $oldData->income
+                ]);
 
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

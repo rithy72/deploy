@@ -116,44 +116,69 @@ class InvoiceInfoLogic
         }
     }
 
-    public function Update(InvoiceInfoModel $invoice_info_model, array $modify_item_array, array $insert_new_item_array,
-    array $delete_item_array, $invoice_id){
+    public function Update($invoice_info, $modify_items, $new_items, $delete_items, $invoice_id){
         //Get Old Object of Invoice
         $oldInvoiceObj = $this->Find($invoice_id);
 
         //Check New Object
-        $invoice_info_model->customer_name = (empty($invoice_info_model->customer_name)) ?
-            $oldInvoiceObj->invoice_info->customer_name : $invoice_info_model->customer_name;
-        $invoice_info_model->customer_phone = (empty($invoice_info_model->customer_phone)) ?
-            $oldInvoiceObj->invoice_info->customer_phone : $invoice_info_model->customer_phone;
-        $invoice_info_model->interests_rate = (empty($invoice_info_model->interests_rate)) ?
-            $oldInvoiceObj->invoice_info->interests_rate : $invoice_info_model->interests_rate;
+        $invoice_info->customer_name = (empty($invoice_info->customer_name)) ?
+            $oldInvoiceObj->invoice_info->customer_name : $invoice_info->customer_name;
+        $invoice_info->customer_phone = (empty($invoice_info->customer_phone)) ?
+            $oldInvoiceObj->invoice_info->customer_phone : $invoice_info->customer_phone;
+        $invoice_info->interests_rate = (empty($invoice_info->interests_rate)) ?
+            $oldInvoiceObj->invoice_info->interests_rate : $invoice_info->interests_rate;
 
-        //Update Invoice Info Information
-        DB::table('invoice_info')
-            ->where('id','=', $invoice_id)
-            ->update([
-                'customer_name' => $invoice_info_model->customer_name,
-                'customer_phone' => $invoice_info_model->customer_phone,
-                'interests_rate' => intval($invoice_info_model->interests_rate),
-            ]);
+        //Check if invoice can be delete or not
+        if ($oldInvoiceObj->invoice_info->status != InvoiceStatusEnum::OPEN){
+            //When invoice can not be delete
+            return false;
+        }else{
+            //Update Invoice Info Information
+            DB::table('invoice_info')
+                ->where('id','=', $invoice_id)
+                ->update([
+                    'customer_name' => $invoice_info->customer_name,
+                    'customer_phone' => $invoice_info->customer_phone,
+                    'interests_rate' => intval($invoice_info->interests_rate),
+                ]);
 
-        //Insert New Items
-        foreach ($insert_new_item_array as $item){
-            InvoiceItemLogic::Instance()->Create($item, $invoice_id);
+            //Insert New Items
+            $newItemsAmount = 0;
+            if (!empty($new_items)){
+                foreach ($new_items as $item){
+                    ++$newItemsAmount;
+                    InvoiceItemLogic::Instance()->Create($item, $invoice_id);
+                }
+            }
+
+            //Modify Items
+            if (!empty($modify_items)){
+                foreach ($modify_items as $item){
+                    InvoiceItemLogic::Instance()->Update($item, InvoiceItemStatusEnum::OPEN, $invoice_id);
+                }
+            }
+
+            //Delete Items
+            $deleteItemsAmount = 0;
+            if (!empty($delete_items)){
+                foreach ($delete_items as $item){
+                    ++$deleteItemsAmount;
+                    InvoiceItemLogic::Instance()->Delete($item, $invoice_id);
+                }
+            }
+
+            //User Audit Trail
+            UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::UPDATE);
+
+            //Update Report
+            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->invoice_info->created_date, intval($deleteItemsAmount*-1),
+                0,0,0);
+            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->invoice_info->created_date, intval($newItemsAmount*1),
+                0,0,0);
+
+            //Return Result
+            return $invoice_id;
         }
-
-        //Modify Items
-        foreach ($modify_item_array as $item){
-            InvoiceItemLogic::Instance()->Update($item, InvoiceItemStatusEnum::OPEN, $invoice_id);
-        }
-
-        //Delete Items
-        foreach ($delete_item_array as $item){
-            InvoiceItemLogic::Instance()->Delete($item, $invoice_id);
-        }
-
-        return $invoice_info_model;
     }
 
     public function InterestsPaymentTransaction($interests_fee, $id){

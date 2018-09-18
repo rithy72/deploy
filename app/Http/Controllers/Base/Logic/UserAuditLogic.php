@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Base\Logic;
 
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,9 +28,11 @@ class UserAuditLogic
         $insertResult = DB::table('user_record')
             ->insertGetId([
                 'user_id' => Auth::id(),
-                'invoice_id' => $invoice_id,
-                'action' => UserActionEnum::INSERT,
-                'action_detail' => UserActionEnum::ActionArray[$action_enum]." - "."វិក្ក័យបត្រ",
+                'parent_id' => $invoice_id,
+                'action' => $action_enum,
+                'audit_group' => AuditGroup::INVOICE,
+                'display_audit' => UserActionEnum::ActionArray[$action_enum]." - ".
+                    AuditGroup::AUDIT_GROUP_STRING[AuditGroup::INVOICE],
                 'date_time' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
             ]);
@@ -42,9 +45,11 @@ class UserAuditLogic
         $insertResult = DB::table('user_record')
             ->insertGetId([
                 'user_id' => Auth::id(),
-                'invoice_id' => $type_id,
-                'action' => UserActionEnum::INSERT,
-                'action_detail' => UserActionEnum::ActionArray[$action_enum]." - "."ប្រភេទទំនិញ",
+                'parent_id' => $type_id,
+                'action' => $action_enum,
+                'audit_group' => AuditGroup::ITEM_TYPE,
+                'display_audit' => UserActionEnum::ActionArray[$action_enum]." - ".
+                    AuditGroup::AUDIT_GROUP_STRING[AuditGroup::ITEM_TYPE],
                 'date_time' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
             ]);

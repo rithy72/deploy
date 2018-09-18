@@ -76,7 +76,9 @@ Route::middleware('auth')->group(function (){
              * Invoice
              * */
             Route::prefix('invoice')->group(function (){
+                Route::get('/{id}','APIController\InvoiceController@find');
                 Route::post('/','APIController\InvoiceController@create');
+                Route::put('/{id}','APIController\InvoiceController@edit');
             });
             /* *
              * Daily Report

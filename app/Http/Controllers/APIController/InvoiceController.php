@@ -10,6 +10,21 @@ use App\Http\Controllers\Controller;
 
 class InvoiceController extends Controller
 {
+
+    //Find one invoice
+    public function find($id){
+        $class = ReturnModel::Instance();
+
+        //Get Data
+        $invoiceResult = InvoiceInfoLogic::Instance()->Find(intval($id));
+
+        //Return Data
+        $class->status = "200";
+        $class->data = $invoiceResult;
+
+        return json_encode($class);
+    }
+
     //Create New Invoice
     public function create(Request $request){
         $class = ReturnModel::Instance();
@@ -35,6 +50,39 @@ class InvoiceController extends Controller
             //Success
             $class->status = "200";
             $class->data = $insertResult;
+        }
+
+        return json_encode($class);
+    }
+
+    //Edit One Invoice
+    public function edit(Request $request, $id){
+        $class = ReturnModel::Instance();
+
+        //Invoice Info
+        $invoiceModel = InvoiceInfoModel::Instance();
+        $invoiceModel->customer_name = $request->input('customer_name','');
+        $invoiceModel->customer_phone = $request->input('customer_phone','');
+        $invoiceModel->grand_total = $request->input('grand_total',0);
+        $invoiceModel->interests_rate = $request->input('interests_rate','');
+        //Invoice Items
+        $addNewItemsArray = $request->new_items;
+        $editItemsArray = $request->modify_items;
+        $deletedItemsArray = $request->delete_items;
+
+        //Update Invoice
+        $updateResult = InvoiceInfoLogic::Instance()->Update($invoiceModel, $editItemsArray, $addNewItemsArray,
+            $deletedItemsArray, $id);
+
+        //Return Result
+        if ($updateResult == false){
+            //Can not update
+            $class->status = "401";
+            $class->data = "Can not edit invoice";
+        }else{
+            //Update Success
+            $class->status = "200";
+            $class->data = $updateResult;
         }
 
         return json_encode($class);
