@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
+use App\Http\Controllers\Base\Model\Enum\InvoiceSearchOptionEnum;
 use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\InvoiceInfoModel;
@@ -25,8 +26,80 @@ class InvoiceInfoLogic
         return new InvoiceInfoLogic();
     }
 
-    public function FilterSearch($search, $search_option, $status, $page_size){
+    //Finalize Search Option
+    private function FinalizeSearchOption($searchOption){
+        if ($searchOption == InvoiceSearchOptionEnum::CUSTOMER_NAME){
+            return "invoice_info.customer_name";
+        }elseif ($searchOption == InvoiceSearchOptionEnum::CUSTOMER_PHONE){
+            return "invoice_info.customer_phone";
+        }elseif ($searchOption == InvoiceSearchOptionEnum::INVOICE_NUMBER){
+            return "invoice_info.id";
+        }
+    }
 
+    //Filter Search
+    public function FilterSearch($search, $search_option, $status, $page_size){
+        $searchColumn = $this->FinalizeSearchOption($search_option);
+        //
+        if (empty($status)){
+            //When user don't care about status
+            if (empty($search)){
+                //When user don't search
+                $getResult = DB::table('invoice_info')
+                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                        'invoice_info.expired_date','invoice_info.status')
+                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+                    ->groupBy('invoice_info.id')
+                    ->paginate($page_size);
+
+                return $getResult;
+            }elseif (!empty($search)){
+                //When user search
+                $getResult = DB::table('invoice_info')
+                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                        'invoice_info.expired_date','invoice_info.status')
+                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+                    ->where($searchColumn, 'like', '%'.$search.'%')
+                    ->groupBy('invoice_info.id')
+                    ->paginate($page_size);
+
+                return $getResult;
+            }
+        }elseif (!empty($status)){
+            //When user care about status
+            if (empty($search)){
+                //When user don't search
+                $getResult = DB::table('invoice_info')
+                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                        'invoice_info.expired_date','invoice_info.status')
+                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+                    ->where('invoice_info.status','=', $status)
+                    ->groupBy('invoice_info.id')
+                    ->paginate($page_size);
+
+                return $getResult;
+            }elseif (!empty($search)){
+                //When user search
+                $getResult = DB::table('invoice_info')
+                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                        'invoice_info.expired_date','invoice_info.status')
+                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+                    ->where($searchColumn, 'like', '%'.$search.'%')
+                    ->where('invoice_info.status','=', $status)
+                    ->groupBy('invoice_info.id')
+                    ->paginate($page_size);
+
+                return $getResult;
+            }
+        }
     }
 
     //Get One Invoice

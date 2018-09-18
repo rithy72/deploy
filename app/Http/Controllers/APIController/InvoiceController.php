@@ -7,6 +7,7 @@ use App\Http\Controllers\Base\Model\InvoiceInfoModel;
 use App\Http\Controllers\Base\Model\Other\ReturnModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class InvoiceController extends Controller
 {
@@ -23,6 +24,24 @@ class InvoiceController extends Controller
         $class->data = $invoiceResult;
 
         return json_encode($class);
+    }
+
+    //Filter Search
+    public function search(Request $request){
+        $search = $request->input('search','');
+        $searchOption = $request->input('option','');
+        $status = $request->input('status','');
+        $pageSize = $request->input('page_size',10);
+
+        //
+        $getResult = InvoiceInfoLogic::Instance()->FilterSearch($search, $searchOption, $status, $pageSize);
+        $getResult->appends(Input::except('page'));
+
+        $class = ReturnModel::Instance();
+        $class->status = "200";
+        $class->data = $getResult;
+        return json_encode($class);
+
     }
 
     //Create New Invoice

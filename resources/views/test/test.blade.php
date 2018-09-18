@@ -225,7 +225,7 @@
 
         $.ajax({
             type:"GET",
-            url:"api/invoice/1",
+            url:"api/invoice",
             //data: obj,
             success:function (response) {
                 console.log(response);
