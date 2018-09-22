@@ -9,16 +9,45 @@
 namespace App\Http\Controllers\Base\Logic;
 
 
+use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceItemLogic
 {
 
+    //Depreciation Type
+    public const DEPRECIATION_ALL = 1;
+    public const DEPRECIATION_ONE = 2;
+
     //Instance Method
     public static function Instance(){
         return new InvoiceItemLogic();
+    }
+
+    public function Find($item_id){
+        $item = DB::table('invoice_item')
+            ->where('id','=', $item_id)
+            ->first();
+
+        $itemModel = InvoiceItemModel::Instance();
+        $itemModel->id = $item->id;
+        $itemModel->invoice_id = $item->invoice_id;
+        $itemModel->item_type_id = $item->item_type_id;
+        $itemModel->item_type_name = $item->type_name;
+        $itemModel->first_feature = $item->first_feature;
+        $itemModel->second_feature = $item->second_feature;
+        $itemModel->third_feature = $item->third_feature;
+        $itemModel->fourth_feature = $item->fourth_feature;
+        $itemModel->status = $item->status;
+        $itemModel->display_status = InvoiceItemStatusEnum::$StatusArray[intval($itemModel->status)];
+        $itemModel->delete_able = $item->delete_able;
+        $itemModel->out_date = $item->out_date;
+        $itemModel->user_id = $item->user_id;
+
+        return $itemModel;
     }
 
     //Insert Item Method
@@ -70,6 +99,73 @@ class InvoiceItemLogic
             ->delete();
 
         return $insertResult;
+    }
+
+    //Depreciation Items
+    public function DepreciationItems($choice, $id, $invoice_id){
+        if ($invoice_id == null || empty($invoice_id)) return 0;
+
+        $outItem = 0;
+
+        if ($choice == InvoiceItemLogic::DEPRECIATION_ONE){
+            //Mean depreciate only item with id
+            DB::table('invoice_item')
+                ->where('invoice_id','=', $invoice_id)
+                ->where('id','=', $id)
+                ->update([
+                    'status' => InvoiceItemStatusEnum::CLOSE,
+                    'out_date' => DateTimeLogic::Instance()->
+                        GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+                    'user_id' => Auth::id()
+                ]);
+
+            $outItem = 1;
+        }elseif ($choice == InvoiceItemLogic::DEPRECIATION_ALL){
+            //Get Remain Item of Invoice
+            $items = DB::table('invoice_item')
+                ->where('invoice_id','=', $invoice_id)
+                ->where('status','=', InvoiceItemStatusEnum::OPEN)
+                ->count();
+
+            //Mean depreciate all item with invoice id
+            DB::table('invoice_item')
+                ->where('invoice_id','=', $invoice_id)
+                ->update([
+                    'status' => InvoiceItemStatusEnum::CLOSE,
+                    'out_date' => DateTimeLogic::Instance()->
+                    GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+                    'user_id' => Auth::id()
+                ]);
+
+            $outItem = $items;
+        }
+
+        //Update Daily Report
+        DailyReportLogic::Instance()->UpdateCurrentReport(0, abs($outItem), 0,0);
+
+        return $outItem;
+    }
+
+    //Sale Item
+    public function SaleInvoiceItem($item_id, $sale_price){
+        $item = $this->Find($item_id);
+
+        if ($item->status != InvoiceItemStatusEnum::TOOK) return;
+
+        DB::table('invoice_item')
+            ->where('id','=', $item_id)
+            ->update([
+                'status' => InvoiceItemStatusEnum::SOLD,
+                'out_date' => DateTimeLogic::Instance()->
+                GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+                'user_id' => Auth::id()
+            ]);
+
+        //Update Daily Report
+        DailyReportLogic::Instance()->UpdateCurrentReport(0, abs(1), 0, abs($sale_price));
+
+        //User Audit
+        //TODO: User Audit
     }
 
     //Get Invoice Item For Invoice

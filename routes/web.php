@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function (){
              * Daily Report
              * */
             Route::prefix('daily_report')->group(function (){
-
+                Route::get('/', 'APIController\DailyReport@getCurrentReport');
             });
         });
 //================================================================================================================

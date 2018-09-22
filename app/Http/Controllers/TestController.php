@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Base\Logic\DailyReportLogic;
 use App\Http\Controllers\Base\Logic\InvoiceInfoLogic;
+use App\Http\Controllers\Base\Logic\InvoiceItemLogic;
 use App\Http\Controllers\Base\Logic\ItemTypeLogic;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Logic\OtherLogic\InvoicePaymentLogic;
+use App\Http\Controllers\Base\Logic\UserAuditLogic;
 use App\Http\Controllers\Base\Model\BaseModel;
+use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\InvoiceSearchOptionEnum;
 use App\Http\Controllers\Base\Model\InvoiceInfoModel;
@@ -32,9 +36,19 @@ class TestController extends Controller
 
     public function API(){
 
-        $getResult = InvoiceInfoLogic::Instance()->FilterSearch('',InvoiceSearchOptionEnum::CUSTOMER_PHONE,
-            '1', 15);
-        return $getResult;
+//        $getResult = InvoiceInfoLogic::Instance()->FilterSearch('',InvoiceSearchOptionEnum::CUSTOMER_PHONE,
+//            '1', 15);
+//        return $getResult;
+//        $changeLogArray = array();
+//
+//        for ($i = 0; $i < 10; $i++){
+//            $changeLogArray = UserAuditLogic::Instance()->CompareField(
+//                random_int(1,3), $i, $i +1, random_int(1,2), $changeLogArray
+//            );
+//        }
 
+        $result = DailyReportLogic::Instance()->GetCurrentReport();
+
+        return json_encode($result);
     }
 }

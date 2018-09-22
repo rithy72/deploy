@@ -22,4 +22,15 @@ class AuditGroup
         3 => "អ្នកប្រើប្រាស់",
         4 => "ទំនិញ"
     );
+
+    //Field
+    public const CUSTOMER_NAME = 1;
+    public const PHONE = 2;
+    public const INTEREST_RATE = 3;
+
+    public const FIELD_STRING = array(
+        1 => "ឈ្មោះអតិថិជន",
+        2 => "ទូរស័ព្ទ",
+        3 => "ការប្រាក់",
+    );
 }

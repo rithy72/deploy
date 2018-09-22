@@ -18,6 +18,7 @@ class InvoicePaymentRecord extends Migration
             $table->increments('id');
             $table->integer('invoice_id');
             $table->integer('transaction_type');
+            $table->string('display_transaction')->nullable(true);
             $table->float('amount');
             $table->integer('user_id');
             $table->dateTime('date_time');

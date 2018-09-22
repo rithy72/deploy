@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Model\ChangeLogModel;
+use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\InvoiceSearchOptionEnum;
 use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
@@ -143,6 +145,15 @@ class InvoiceInfoLogic
         $class->invoice_items = $invoiceItems;
 
         return $class;
+    }
+
+
+    private function GenerateChangeLogProperty($old_val, $new_val, $type, $change_log_array){
+        $changeLogModel = ChangeLogModel::Instance();
+
+        if ($old_val != $new_val){
+
+        }
     }
 
     //Create Invoice

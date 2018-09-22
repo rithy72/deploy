@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Base\Logic;
 
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
 use Illuminate\Support\Facades\DB;
 
 class DailyReportLogic
@@ -22,7 +23,29 @@ class DailyReportLogic
 
     //Get Current Report
     public function GetCurrentReport(){
+        $date = DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT);
+        $finDate = date('Y-m-d',strtotime($date));
 
+        $getResult = DB::table('daily_report')
+            ->where('date','=', $finDate)
+            ->first();
+
+        //Get All Item In warehouse
+        $itemsInWarehouse = 0;
+        if ($getResult != null){
+            $itemsInWarehouse = DB::table('invoice_item')
+                ->where('status','<>',[InvoiceItemStatusEnum::CLOSE, InvoiceItemStatusEnum::SOLD])
+                ->count();
+        }
+
+        $class = new \stdClass();
+        $class->items_in_warehouse = $itemsInWarehouse;
+        $class->in_item = ($getResult != null) ? $getResult->in_item:0;
+        $class->out_item = ($getResult != null) ? $getResult->out_item:0;
+        $class->outcome = ($getResult != null) ? $getResult->outcome:0;
+        $class->income = ($getResult != null) ? $getResult->income:0;
+
+        return $class;
     }
 
     //Find Report
