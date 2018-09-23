@@ -9,7 +9,10 @@
 namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Model\ChangeLogModel;
+use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
+use App\Http\Controllers\Base\Model\Enum\InvoiceSearchOptionEnum;
 use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\InvoiceInfoModel;
@@ -25,8 +28,80 @@ class InvoiceInfoLogic
         return new InvoiceInfoLogic();
     }
 
-    public function FilterSearch($search, $search_option, $status, $page_size){
+    //Finalize Search Option
+    private function FinalizeSearchOption($searchOption){
+        if ($searchOption == InvoiceSearchOptionEnum::CUSTOMER_NAME){
+            return "invoice_info.customer_name";
+        }elseif ($searchOption == InvoiceSearchOptionEnum::CUSTOMER_PHONE){
+            return "invoice_info.customer_phone";
+        }elseif ($searchOption == InvoiceSearchOptionEnum::INVOICE_NUMBER){
+            return "invoice_info.id";
+        }
+    }
 
+    //Filter Search
+    public function FilterSearch($search, $search_option, $status, $page_size){
+        $searchColumn = $this->FinalizeSearchOption($search_option);
+        //
+        if (empty($status)){
+            //When user don't care about status
+            if (empty($search)){
+                //When user don't search
+                $getResult = DB::table('invoice_info')
+                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                        'invoice_info.expired_date','invoice_info.status')
+                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+                    ->groupBy('invoice_info.id')
+                    ->paginate($page_size);
+
+                return $getResult;
+            }elseif (!empty($search)){
+                //When user search
+                $getResult = DB::table('invoice_info')
+                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                        'invoice_info.expired_date','invoice_info.status')
+                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+                    ->where($searchColumn, 'like', '%'.$search.'%')
+                    ->groupBy('invoice_info.id')
+                    ->paginate($page_size);
+
+                return $getResult;
+            }
+        }elseif (!empty($status)){
+            //When user care about status
+            if (empty($search)){
+                //When user don't search
+                $getResult = DB::table('invoice_info')
+                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                        'invoice_info.expired_date','invoice_info.status')
+                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+                    ->where('invoice_info.status','=', $status)
+                    ->groupBy('invoice_info.id')
+                    ->paginate($page_size);
+
+                return $getResult;
+            }elseif (!empty($search)){
+                //When user search
+                $getResult = DB::table('invoice_info')
+                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                        'invoice_info.expired_date','invoice_info.status')
+                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+                    ->where($searchColumn, 'like', '%'.$search.'%')
+                    ->where('invoice_info.status','=', $status)
+                    ->groupBy('invoice_info.id')
+                    ->paginate($page_size);
+
+                return $getResult;
+            }
+        }
     }
 
     //Get One Invoice
@@ -72,6 +147,15 @@ class InvoiceInfoLogic
         return $class;
     }
 
+
+    private function GenerateChangeLogProperty($old_val, $new_val, $type, $change_log_array){
+        $changeLogModel = ChangeLogModel::Instance();
+
+        if ($old_val != $new_val){
+
+        }
+    }
+
     //Create Invoice
     public function Create($invoice_info_model, array $invoice_item_array){
         $dateInstance = DateTimeLogic::Instance();
@@ -100,10 +184,8 @@ class InvoiceInfoLogic
                 ->update(['display_id' => str_pad(intval($insertID),7,"0", STR_PAD_LEFT)]);
 
             //Insert Item
-            $i = 0;
             foreach ($invoice_item_array as $item){
-                ++$i;
-                InvoiceItemLogic::Instance()->Create($item, $i, $insertID);
+                InvoiceItemLogic::Instance()->Create($item, $insertID);
             }
 
             //User Audit
@@ -118,10 +200,69 @@ class InvoiceInfoLogic
         }
     }
 
-    public function Update(InvoiceInfoModel $invoice_info_model, array $modify_item_array, array $insert_new_item_array,
-    array $delete_item_array, $invoice_id){
+    public function Update($invoice_info, $modify_items, $new_items, $delete_items, $invoice_id){
+        //Get Old Object of Invoice
+        $oldInvoiceObj = $this->Find($invoice_id);
 
+        //Check New Object
+        $invoice_info->customer_name = (empty($invoice_info->customer_name)) ?
+            $oldInvoiceObj->invoice_info->customer_name : $invoice_info->customer_name;
+        $invoice_info->customer_phone = (empty($invoice_info->customer_phone)) ?
+            $oldInvoiceObj->invoice_info->customer_phone : $invoice_info->customer_phone;
+        $invoice_info->interests_rate = (empty($invoice_info->interests_rate)) ?
+            $oldInvoiceObj->invoice_info->interests_rate : $invoice_info->interests_rate;
 
+        //Check if invoice can be delete or not
+        if ($oldInvoiceObj->invoice_info->status != InvoiceStatusEnum::OPEN){
+            //When invoice can not be delete
+            return false;
+        }else{
+            //Update Invoice Info Information
+            DB::table('invoice_info')
+                ->where('id','=', $invoice_id)
+                ->update([
+                    'customer_name' => $invoice_info->customer_name,
+                    'customer_phone' => $invoice_info->customer_phone,
+                    'interests_rate' => intval($invoice_info->interests_rate),
+                ]);
+
+            //Insert New Items
+            $newItemsAmount = 0;
+            if (!empty($new_items)){
+                foreach ($new_items as $item){
+                    ++$newItemsAmount;
+                    InvoiceItemLogic::Instance()->Create($item, $invoice_id);
+                }
+            }
+
+            //Modify Items
+            if (!empty($modify_items)){
+                foreach ($modify_items as $item){
+                    InvoiceItemLogic::Instance()->Update($item, InvoiceItemStatusEnum::OPEN, $invoice_id);
+                }
+            }
+
+            //Delete Items
+            $deleteItemsAmount = 0;
+            if (!empty($delete_items)){
+                foreach ($delete_items as $item){
+                    ++$deleteItemsAmount;
+                    InvoiceItemLogic::Instance()->Delete($item, $invoice_id);
+                }
+            }
+
+            //User Audit Trail
+            UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::UPDATE);
+
+            //Update Report
+            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->invoice_info->created_date, intval($deleteItemsAmount*-1),
+                0,0,0);
+            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->invoice_info->created_date, intval($newItemsAmount*1),
+                0,0,0);
+
+            //Return Result
+            return $invoice_id;
+        }
     }
 
     public function InterestsPaymentTransaction($interests_fee, $id){

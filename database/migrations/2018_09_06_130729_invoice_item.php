@@ -15,7 +15,7 @@ class InvoiceItem extends Migration
     {
         //
         Schema::create('invoice_item', function (Blueprint $table){
-           $table->integer('id');
+           $table->increments('id');
            $table->integer('invoice_id');
            $table->integer('item_type_id');
            $table->text('first_feature')->nullable(true);

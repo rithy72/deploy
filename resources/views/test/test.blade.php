@@ -187,13 +187,45 @@
     });
     $('#getData').on('click',function () {
         var obj = {
-            "item_type_name" : "Car"
-        };
-
+                "customer_name": "Johnny (Edited)",
+                "customer_phone": "023211112 (Edited)",
+                "grand_total": 10000,
+                "interests_rate": 7,
+                "new_items": [
+                    {
+                        "item_type_id": 1,
+                        "first_feature": "Honda Dream",
+                        "second_feature": "Black",
+                        "third_feature": "2AH-1035",
+                        "fourth_feature": "Skull Sticker"
+                    }
+                ],
+                "modify_items": [
+                    {
+                        "id": 4,
+                        "item_type_id": 1,
+                        "first_feature": "Honda Dream (Edited)",
+                        "second_feature": "Black (Edited)",
+                        "third_feature": "2AH-1035 (Edited)",
+                        "fourth_feature": "Skull Sticker (Edited)"
+                    },
+                    {
+                        "id": 5,
+                        "item_type_id": 1,
+                        "first_feature": "Honda Dream (Edited)",
+                        "second_feature": "Black (Edited)",
+                        "third_feature": "2AH-1035 (Edited)",
+                        "fourth_feature": "Skull Sticker (Edited)"
+                    }
+                ],
+                "delete_items": [
+                    2,8,6,7,9,10,11,12,13
+                ]
+            };
 
         $.ajax({
-            type:"DELETE",
-            url:"api/item_group/2",
+            type:"GET",
+            url:"api/invoice",
             //data: obj,
             success:function (response) {
                 console.log(response);

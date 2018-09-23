@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Base\Logic\DailyReportLogic;
 use App\Http\Controllers\Base\Logic\InvoiceInfoLogic;
+use App\Http\Controllers\Base\Logic\InvoiceItemLogic;
 use App\Http\Controllers\Base\Logic\ItemTypeLogic;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Logic\OtherLogic\InvoicePaymentLogic;
+use App\Http\Controllers\Base\Logic\UserAuditLogic;
 use App\Http\Controllers\Base\Model\BaseModel;
+use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
+use App\Http\Controllers\Base\Model\Enum\InvoiceSearchOptionEnum;
 use App\Http\Controllers\Base\Model\InvoiceInfoModel;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
 use Illuminate\Http\Request;
@@ -29,29 +35,20 @@ class TestController extends Controller
     }
 
     public function API(){
-        $invoiceModel = new \stdClass();
-        $invoiceModel->customer_name = "Johnny";
-        $invoiceModel->customer_phone = "023221121";
-        $invoiceModel->grand_total = 3000;
-        $invoiceModel->interests_rate = 5;
 
-        $itemArray = array();
-        for ($i = 0; $i < 5; $i++){
-            $itemModel = new \stdClass();
-            $itemModel->item_type_id = 1;
-            $itemModel->first_feature = "Honda Dream";
-            $itemModel->second_feature = "Black";
-            $itemModel->third_feature = "2AH-1035";
-            $itemModel->fourth_feature = "Skull Sticker";
+//        $getResult = InvoiceInfoLogic::Instance()->FilterSearch('',InvoiceSearchOptionEnum::CUSTOMER_PHONE,
+//            '1', 15);
+//        return $getResult;
+//        $changeLogArray = array();
+//
+//        for ($i = 0; $i < 10; $i++){
+//            $changeLogArray = UserAuditLogic::Instance()->CompareField(
+//                random_int(1,3), $i, $i +1, random_int(1,2), $changeLogArray
+//            );
+//        }
 
-            array_push($itemArray, $itemModel);
-        }
+        $result = DailyReportLogic::Instance()->GetCurrentReport();
 
-        $invoiceModel->invoice_items = $itemArray;
-
-        $insertResult = InvoiceInfoLogic::Instance()->Create($invoiceModel, $itemArray);
-        return json_encode($insertResult);
-
-
+        return json_encode($result);
     }
 }
