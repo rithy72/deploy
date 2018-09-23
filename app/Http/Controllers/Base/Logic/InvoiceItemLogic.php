@@ -29,7 +29,14 @@ class InvoiceItemLogic
 
     public function Find($item_id){
         $item = DB::table('invoice_item')
-            ->where('id','=', $item_id)
+            ->select(
+                'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
+            )
+            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+            ->where('invoice_item.id','=', $item_id)
             ->first();
 
         $itemModel = InvoiceItemModel::Instance();
