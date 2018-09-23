@@ -201,21 +201,26 @@
             $('#new_item_type').val('');
         });
         $(document).on("click",".btn_create_new_item_type",function () {
-           $.ajax({
-              type:"POST",
-               url:'api/item_group',
-               data: {"item_type_name" : $('#new_item_type').val()},
-               success: function (response) {
-                   var convert = JSON.parse(response);
-                   if (convert.status === "200") {
-                       alert('ធ្វើការបង្កើតរួចរាល់');
-                       $('#new_item_type').val('');
-                       window.location.href = '{{('item_type')}}';
-                   } else if (convert.status === "301"){
-                       alert('ឈ្មោះមានរួចហើយ សូមធ្វើការបញ្ចូលម្តងទៀត');
-                   }
-               }
-           });
+            var storeInput = $('#new_item_type').val();
+            if (storeInput === ""){
+                alert('បំពេញសិន មុនពេលធ្វើការបង្កើត');
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: 'api/item_group',
+                    data: {"item_type_name": storeInput},
+                    success: function (response) {
+                        var convert = JSON.parse(response);
+                        if (convert.status === "200") {
+                            alert('ធ្វើការបង្កើតរួចរាល់');
+                            $('#new_item_type').val('');
+                            window.location.href = '{{('item_type')}}';
+                        } else if (convert.status === "301") {
+                            alert('ឈ្មោះមានរួចហើយ សូមធ្វើការបញ្ចូលម្តងទៀត');
+                        }
+                    }
+                });
+            }
         });
         // show item type
         // ------------ store model of table -------------------
@@ -304,21 +309,26 @@
         });
         var _storeID;
         $(".btn_update_item_type").click(function () {
-            $.ajax({
-                type:"PUT",
-                url:'api/item_group/'+_storeID+'',
-                data: {"item_type_name" : $('#updateItem').val()},
-                success: function (response) {
-                    var convert = JSON.parse(response);
-                    if (convert.status === "200") {
-                        alert('ធ្វើការកែប្រែរួចរាល់');
-                        $('#updateItem').val('');
-                        window.location.href = '{{('item_type')}}';
-                    } else if (convert.status === "301"){
-                        alert('ឈ្មោះមានរួចហើយ សូមធ្វើការកែប្រែម្តងទៀត');
+            var storeInput = $('#updateItem').val();
+            if (storeInput === ""){
+                alert('បំពេញសិន មុនពេលធ្វើការកែប្រែ');
+            } else {
+                $.ajax({
+                    type: "PUT",
+                    url: 'api/item_group/' + _storeID + '',
+                    data: {"item_type_name": storeInput},
+                    success: function (response) {
+                        var convert = JSON.parse(response);
+                        if (convert.status === "200") {
+                            alert('ធ្វើការកែប្រែរួចរាល់');
+                            $('#updateItem').val('');
+                            window.location.href = '{{('item_type')}}';
+                        } else if (convert.status === "301") {
+                            alert('ឈ្មោះមានរួចហើយ សូមធ្វើការកែប្រែម្តងទៀត');
+                        }
                     }
-                }
-            });
+                });
+            }
         });
         //================================= make Active  =======================================
         $(document).on("click","#active",function () {

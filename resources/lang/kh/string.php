@@ -133,5 +133,7 @@ return[
     'phoneNumberUser' => 'លេខទូរស័ព្ទអ្នកប្រើប្រាស់',
     'date' => 'កាលបរិច្ឆែត',
     'chooseSituation' => 'ជ្រើសរើសស្ថានភាព',
-    'com_name' => 'ហាងបញ្ចាំ ហ៊ីទូច'
+    'com_name' => 'ហាងបញ្ចាំ ហ៊ីទូច',
+    'createSuccess' => 'ធ្វើការបង្កើតជោកជ័យ',
+    'This_Is_Invoice_Numbers' => 'នេះគឺជាលេខវិក័្កយបត្រ',
 ];
