@@ -241,9 +241,9 @@
 
 
         $.ajax({
-            type:"PUT",
-            url:"api/invoice/1",
-            data: obj,
+            type:"GET",
+            url:"api/invoice/0000011",
+            //data: obj,
             success:function (response) {
                 console.log(response);
             }

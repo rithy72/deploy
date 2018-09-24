@@ -162,15 +162,7 @@ class InvoiceInfoLogic
         $invoiceModel->interests_value = ($invoiceResult->grand_total * $invoiceResult->interests_rate) / 100;
         $invoiceModel->final_date_time = $invoiceResult->final_date_time;
 
-        //Get Invoice Items
-        $invoiceItems = InvoiceItemLogic::Instance()->GetInvoiceItemsForInvoice($id);
-
-        //Return Class
-        $class = new \stdClass();
-        $class->invoice_info = $invoiceModel;
-        $class->invoice_items = $invoiceItems;
-
-        return $class;
+        return $invoiceModel;
     }
 
     //Create Invoice
@@ -224,7 +216,7 @@ class InvoiceInfoLogic
                 ->UpdateCurrentReport(sizeof($invoice_item_array), 0, $invoice_info_model->grand_total, 0);
 
             //Return Invoice ID
-            return $insertID;
+            return $displayId;
         }
     }
 
@@ -236,14 +228,14 @@ class InvoiceInfoLogic
 
         //Check New Object
         $invoice_info->customer_name = (empty($invoice_info->customer_name)) ?
-            $oldInvoiceObj->invoice_info->customer_name : $invoice_info->customer_name;
+            $oldInvoiceObj->customer_name : $invoice_info->customer_name;
         $invoice_info->customer_phone = (empty($invoice_info->customer_phone)) ?
-            $oldInvoiceObj->invoice_info->customer_phone : $invoice_info->customer_phone;
+            $oldInvoiceObj->customer_phone : $invoice_info->customer_phone;
         $invoice_info->interests_rate = (empty($invoice_info->interests_rate)) ?
-            $oldInvoiceObj->invoice_info->interests_rate : $invoice_info->interests_rate;
+            $oldInvoiceObj->interests_rate : $invoice_info->interests_rate;
 
         //Check if invoice can be update or not
-        if ($oldInvoiceObj->invoice_info->status != InvoiceStatusEnum::OPEN){
+        if ($oldInvoiceObj->status != InvoiceStatusEnum::OPEN){
             //When invoice can not be update
             return false;
         }else{
@@ -257,9 +249,9 @@ class InvoiceInfoLogic
                 ]);
             //Change Log Invoice Info
             $changeLogArray = $this->ChangeLogEditInvoiceInfo(
-                $oldInvoiceObj->invoice_info->customer_name, $invoice_info->customer_name,
-                $oldInvoiceObj->invoice_info->customer_phone, $invoice_info->customer_phone,
-                $oldInvoiceObj->invoice_info->interests_rate, $invoice_info->interests_rate,
+                $oldInvoiceObj->customer_name, $invoice_info->customer_name,
+                $oldInvoiceObj->customer_phone, $invoice_info->customer_phone,
+                $oldInvoiceObj->interests_rate, $invoice_info->interests_rate,
                 $changeLogArray
             );
 
@@ -300,12 +292,12 @@ class InvoiceInfoLogic
 
             //User Audit Trail
             UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::UPDATE,
-                $oldInvoiceObj->invoice_info->display_id, $changeLogArray);
+                $oldInvoiceObj->display_id, $changeLogArray);
 
             //Update Report
-            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->invoice_info->created_date,
+            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->created_date,
                 intval($deleteItemsAmount*-1),0,0,0);
-            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->invoice_info->created_date,
+            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->created_date,
                 intval($newItemsAmount*1), 0,0,0);
 
             //Return Result

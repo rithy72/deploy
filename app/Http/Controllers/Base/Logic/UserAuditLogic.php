@@ -55,8 +55,8 @@ class UserAuditLogic
                 'audit_group' => AuditGroup::ITEM_TYPE,
                 'display_audit' => UserActionEnum::ActionArray[$action_enum]." - ".
                     AuditGroup::AUDIT_GROUP_STRING[AuditGroup::ITEM],
-                'detail' => $description,
-                'change_log' => $change_log,
+                'description' => $description,
+                'change_log' => json_encode($change_log),
                 'date_time' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
             ]);
