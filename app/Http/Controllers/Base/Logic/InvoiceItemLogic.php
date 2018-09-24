@@ -198,17 +198,37 @@ class InvoiceItemLogic
     }
 
     //Get Invoice Item For Invoice
-    public function GetInvoiceItemsForInvoice($invoice_id){
-        $getResult = DB::table('invoice_item')
-            ->select(
-                'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
-                'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
-                'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
-                'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
-            )
-            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
-            ->where('invoice_item.invoice_id','=', $invoice_id)
-            ->get();
+    public function GetInvoiceItemsForInvoice($invoice_id, $status){
+        $getResult = null;
+        if (empty($status)){
+            //When get all items
+            $getResult = DB::table('invoice_item')
+                ->select(
+                    'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                    'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                    'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                    'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
+                )
+                ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+                ->leftJoin('users','invoice_item.user_id','=','users.id')
+                ->where('invoice_item.invoice_id','=', $invoice_id)
+                ->get();
+        }elseif (!empty($status)){
+            //When user want filter items
+            $getResult = DB::table('invoice_item')
+                ->select(
+                    'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                    'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                    'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                    'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
+                )
+                ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+                ->leftJoin('users','invoice_item.user_id','=','users.id')
+                ->where('invoice_item.invoice_id','=', $invoice_id)
+                ->where('invoice_item.status','=', $status)
+                ->get();
+        }
+
 
         $returnArray = array();
         foreach ($getResult as $item){

@@ -242,7 +242,7 @@
 
         $.ajax({
             type:"GET",
-            url:"api/invoice/0000011",
+            url:"api/item/invoice/0000011?status=2",
             //data: obj,
             success:function (response) {
                 console.log(response);
