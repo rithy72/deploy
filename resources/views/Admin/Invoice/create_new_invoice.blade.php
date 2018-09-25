@@ -109,7 +109,7 @@
             </div>
             {{--========================= footer of pagination ====================--}}
         <div class="datatable-footer">
-            <div class="col-xs-12 .col-sm-12 col-md-12">
+            <div class="col-md-12">
                 <div style="text-align: right;clear: both;">
                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>@lang('string.amountPrice')</b></label>
                     <div class="col-md-6">
@@ -140,6 +140,7 @@
             </div>--}}
         </div>
             {{--====================== End footer of pagination ====================--}}
+        {{--btn hide and use javascript to click auto for show dialog create new item type--}}
         <input type="button" class="btn_show_invoice_numbers" id="btn_show_invoice_numbers" style="display: none;">
         </div>
 
@@ -202,7 +203,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link close_update_rate1" id="close_update_rate1" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                     {{ csrf_field() }}
-                    {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
                     <button type="button" class="btn btn-primary btn_add_item_type_to_table" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                 </div>
             </div>
@@ -429,7 +429,7 @@
                     return {
                         results: result,
                         "pagination": {
-                            "more": true
+                            "more": false
                         }
                     }
                 }
@@ -462,7 +462,7 @@
                     return {
                         results: result,
                         "pagination": {
-                            "more": true
+                            "more": false
                         }
                     }
                 }

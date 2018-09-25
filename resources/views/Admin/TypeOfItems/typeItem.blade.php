@@ -214,7 +214,7 @@
                         if (convert.status === "200") {
                             alert('ធ្វើការបង្កើតរួចរាល់');
                             $('#new_item_type').val('');
-                            window.location.href = '{{('item_type')}}';
+                            window.location.href = '{{('/admin/item_type')}}';
                         } else if (convert.status === "301") {
                             alert('ឈ្មោះមានរួចហើយ សូមធ្វើការបញ្ចូលម្តងទៀត');
                         }
@@ -243,7 +243,7 @@
                     stringShowDeActiveOrActive = '<li id="deActive"><a><i class="icon-blocked"></i>@lang('string.deActive')</a></li>';
                 }else if (storeValue.data.data[i].status === 0){
                     //Deactive
-                    stringStatus = '<span class="label label-default I" style="font-size: 12px;">@lang('string.deActive')</span></td>';
+                    stringStatus = '<span class="label label-default I" style="font-size: 12px;">@lang('string.deActive')</span>';
                     stringShowDeActiveOrActive = '<li id="active"><a><i class="icon-checkmark4"></i>@lang('string.active')</a></li>';
                 }
 
@@ -322,7 +322,7 @@
                         if (convert.status === "200") {
                             alert('ធ្វើការកែប្រែរួចរាល់');
                             $('#updateItem').val('');
-                            window.location.href = '{{('item_type')}}';
+                            window.location.href = '{{('/admin/item_type')}}';
                         } else if (convert.status === "301") {
                             alert('ឈ្មោះមានរួចហើយ សូមធ្វើការកែប្រែម្តងទៀត');
                         }
@@ -341,7 +341,7 @@
                     var convert = JSON.parse(response);
                     if (convert.status === "200") {
                         alert('ធ្វើអោយដំណើរការ');
-                        window.location.href = '{{('item_type')}}';
+                        window.location.href = '{{('/admin/item_type')}}';
                     }
                 }
             });
@@ -357,7 +357,7 @@
                     var convert = JSON.parse(response);
                     if (convert.status === "200") {
                         alert('ធ្វើការផ្អាកដំណើរការ');
-                        window.location.href = '{{('item_type')}}';
+                        window.location.href = '{{('/admin/item_type')}}';
                     }
                 }
             });
@@ -373,7 +373,7 @@
                     var convert = JSON.parse(response);
                     if (convert.status === "200"){
                         alert('ធ្វើការលុបរួចរាល់');
-                        window.location.href = '{{('item_type')}}';
+                        window.location.href = '{{('/admin/item_type')}}';
                     } else if (convert.status === "210"){
                         alert('មិនអាចស្វែងរក ដើម្បីធ្វើការលុបបានឡើយ');
                     }
