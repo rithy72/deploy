@@ -52,7 +52,7 @@ class UserAuditLogic
                 'user_id' => Auth::id(),
                 'parent_id' => $invoice_id,
                 'action' => $action_enum,
-                'audit_group' => AuditGroup::ITEM_TYPE,
+                'audit_group' => AuditGroup::ITEM,
                 'display_audit' => UserActionEnum::ActionArray[$action_enum]." - ".
                     AuditGroup::AUDIT_GROUP_STRING[AuditGroup::ITEM],
                 'description' => $description,
