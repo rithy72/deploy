@@ -242,7 +242,7 @@
 
         $.ajax({
             type:"GET",
-            url:"api/item/invoice/0000011?status=2",
+            url:"api/item?search=honda,black,,&item_type=&status=&page_size=1",
             //data: obj,
             success:function (response) {
                 console.log(response);

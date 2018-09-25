@@ -47,7 +47,8 @@ class TestController extends Controller
 //            );
 //        }
 
-        $result = InvoiceItemLogic::Instance()->Find(1);
+        $result = InvoiceItemLogic::Instance()->FilterSearch("", "", "",10);
+        //$result = explode(',',"Camry 2016,White,2RE-4568,");
 
         return json_encode($result);
     }

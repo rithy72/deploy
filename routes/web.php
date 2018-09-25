@@ -85,7 +85,8 @@ Route::middleware('auth')->group(function (){
              * Invoice Item
              * */
             Route::prefix('item')->group(function (){
-               Route::get('/invoice/{invoice_id}','APIController\InvoiceItemController@GetInvoiceItems');
+                Route::get('/','APIController\InvoiceItemController@FilterSearch');
+                Route::get('/invoice/{invoice_id}','APIController\InvoiceItemController@GetInvoiceItems');
             });
             /* *
              * Daily Report
