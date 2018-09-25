@@ -26,10 +26,10 @@
             <div class="col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
                 <div class="col-md-8" style="margin-top: -6px;margin-bottom: 0;">
                     <div class="col-md-6">
-                        <h3><b>@lang('string.invoiceId') ៖ </b><b>FE-999999</b></h3>
+                        <h3><b>@lang('string.invoiceId') ៖ </b><b id="id_invoice"></b></h3>
                     </div>
                     <div class="col-md-6">
-                        <h3><b>@lang('string.createBy') ៖ </b><b>Employee</b></h3>
+                        <h3><b>@lang('string.createBy') ៖ </b><b id="employee_name"></b></h3>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.nameCustomer')</label>
                                     <div class="col-md-9">
-                                        <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                        <p id="customer_name"></p>
                                         <br>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.phoneNumber')</label>
                                     <div class="col-md-9">
-                                        <input type="number" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                        <p id="phone_number"></p>
                                         <br>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.dayGetMoney')</label>
                                     <div class="col-md-9">
-                                        <input type="date" name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                        <p id="date_in"></p>
                                         <br>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.expiredDay')</label>
                                     <div class="col-md-9">
-                                        <input type="date" name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                        <p id="date_out"></p>
                                         <br>
                                     </div>
                                 </div>
@@ -94,15 +94,14 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.paymentTerm')</label>
                                     <div class="col-md-9">
-                                        <select class="form-control" id="" name="" disabled="disabled">
-                                            <option selected="selected">....</option>
-                                        </select>
+                                        <p><b id="payment_term"></b><b> %</b></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group col-md-12">
-                                    <p style="margin-top: 7px;">@lang('string.priceAmountPerMonth') ........</p>
+                                <div class="form-group col-md-12" style="display: inline-flex;">
+                                    <p style="margin-top: 7px;">@lang('string.priceAmountPerMonth')</p>
+                                    <p style="margin-top: 6px;margin-left: 30px;" id="interests_value"></p>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +112,7 @@
                             <div class="dataTables_scroll">
                                 <!--============ scroll body oy trov 1 header table ===============-->
                                 <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 250px; width: 100%;">
-                                    <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                                    <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Invoice_Items" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                                         <thead style="background: #e3e3ea99;">
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
@@ -126,24 +125,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>ម៉ូតូ</td>
-                                            <td>ខ្មៅ</td>
-                                            <td>1GG 9999</td>
-                                            <td>Dream 2018</td>
-                                            <td>....</td>
-                                            <td>មិនទាន់រំលួស</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>ឡាន</td>
-                                            <td>ស</td>
-                                            <td>1ZZ 9999</td>
-                                            <td>Highlander</td>
-                                            <td>....</td>
-                                            <td>មិនទាន់រំលួស</td>
-                                        </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -156,7 +138,7 @@
                                 <div style="text-align: right;clear: both;">
                                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>តម្លៃដើមសរុប</b></label>
                                     <div class="col-md-6">
-                                        <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                        <input type="text" placeholder="...." name="" id="grand_total" class="form-control" style="border: 1px solid grey;" disabled="disabled">
                                         <br>
                                     </div>
                                 </div>
@@ -164,7 +146,7 @@
                                 <div style="text-align: right;clear: both;">
                                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>តម្លៃដើមបង់រួច</b></label>
                                     <div class="col-md-6">
-                                        <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                        <input type="text" placeholder="...." name="" id="paid" class="form-control" style="border: 1px solid grey;" disabled="disabled">
                                         <br>
                                     </div>
                                 </div>
@@ -316,10 +298,65 @@
         </div>
     </div>
 
+    <div id="loading" style="display: none;
+    width:100px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    text-align:center;
+    margin-left: -50px;
+    margin-top: -100px;
+    z-index:2;
+    overflow: auto;">
+        <img src="/assets/images/ajax_loader.gif" alt=""/>
+    </div>
 @endsection
 
 @section('script')
     <script>
+        $( document ).ajaxStart(function() {
+            $( "#loading" ).show();
+        });
+        $( document ).ajaxStop(function() {
+            $( "#loading" ).hide();
+        });
+        (function () {
+            var _ID = atob($.cookie("KeyInvoice")); // convert id unique from base64
+            $.ajax({
+               type: "GET",
+                url: '../api/invoice/'+ _ID +'',
+                success: function (response) {
+                    console.log(response);
+                    var getResponse = JSON.parse(response);
+                    document.getElementById("id_invoice").innerHTML = getResponse.data.invoice_info.display_id;
+                    document.getElementById("employee_name").innerHTML = getResponse.data.invoice_info.user_full_name;
 
+                    document.getElementById("customer_name").innerHTML = getResponse.data.invoice_info.customer_name;
+                    document.getElementById("phone_number").innerHTML = getResponse.data.invoice_info.customer_phone;
+                    document.getElementById("date_in").innerHTML = getResponse.data.invoice_info.created_date;
+                    document.getElementById("date_out").innerHTML = getResponse.data.invoice_info.expire_date;
+                    document.getElementById("payment_term").innerHTML = getResponse.data.invoice_info.interests_rate;
+                    document.getElementById("interests_value").innerHTML = getResponse.data.invoice_info.interests_value;
+
+                    document.getElementById("grand_total").value = getResponse.data.invoice_info.grand_total;
+                    document.getElementById("paid").value = getResponse.data.invoice_info.paid;
+
+                    for (var i = 0; i < getResponse.data.invoice_items.length; i++){
+                        var _tr = '<tr>' +
+                            '<td style="display:none;">' + getResponse.data.invoice_items[i].id + '</td>' +
+                            '<td>' + [i+1] + '</td>' +
+                            '<td>' + getResponse.data.invoice_items[i].item_type_name + '</td>' +
+                            '<td>' + getResponse.data.invoice_items[i].first_feature + '</td>' +
+                            '<td>' + getResponse.data.invoice_items[i].second_feature + '</td>' +
+                            '<td>' + getResponse.data.invoice_items[i].third_feature + '</td>' +
+                            '<td>' + getResponse.data.invoice_items[i].fourth_feature + '</td>' +
+                            '<td>' + getResponse.data.invoice_items[i].display_status + '</td>' +
+                            '</tr>';
+                        $('#Show_All_Invoice_Items tbody').append(_tr);
+                    }
+                }
+            });
+        })();
     </script>
 @endsection
