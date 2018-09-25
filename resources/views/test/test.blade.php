@@ -238,12 +238,15 @@
 //                }
 //            ]
 //        };
+        var obj = {
+          "sale_price":300
+        };
 
 
         $.ajax({
-            type:"GET",
-            url:"api/item?search=honda,black,,&item_type=&status=&page_size=1",
-            //data: obj,
+            type:"PUT",
+            url:"api/item/sale/5",
+            data: obj,
             success:function (response) {
                 console.log(response);
             }

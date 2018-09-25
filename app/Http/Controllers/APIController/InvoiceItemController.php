@@ -23,6 +23,8 @@ class InvoiceItemController extends Controller
 
     //Filter Search all item
     public function FilterSearch(Request $request){
+        $returnModel = ReturnModel::Instance();
+        //
         $search = $request->input('search','');
         $status = $request->input('status','');
         $item_type = $request->input('item_type','');
@@ -30,6 +32,29 @@ class InvoiceItemController extends Controller
 
         $getResult = InvoiceItemLogic::Instance()->FilterSearch($search, $status, $item_type, $pageSize);
 
-        return json_encode($getResult);
+        $returnModel->status = "200";
+        $returnModel->data = $getResult;
+        return json_encode($returnModel);
+    }
+
+    //Sale Item
+    public function SaleItem(Request $request, $item_id){
+        $returnModel = ReturnModel::Instance();
+
+        $salePrice = $request->sale_price;
+
+        $result = InvoiceItemLogic::Instance()->SaleInvoiceItem($item_id, floatval($salePrice));
+
+        if ($result){
+            //Sale Success
+            $returnModel->status = "200";
+            $returnModel->data = "Item Sold";
+        }else{
+            //Can not Sale
+            $returnModel->status = "300";
+            $returnModel->data = "Item can not be sold";
+        }
+
+        return json_encode($returnModel);
     }
 }
