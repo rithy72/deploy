@@ -13,6 +13,7 @@ use App\Http\Controllers\Base\Logic\DailyReportLogic;
 use App\Http\Controllers\Base\Logic\InvoiceInfoLogic;
 use App\Http\Controllers\Base\Logic\InvoiceItemLogic;
 use App\Http\Controllers\Base\Logic\UserAuditLogic;
+use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
@@ -63,7 +64,7 @@ class InvoicePaymentLogic
 
         //Save User Audit Record
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::INTERESTS_PAYMENT,
-            $oldObj->invoice_info->display_id.'-'.$amount."$");
+            $oldObj->display_id.'-'.$amount."$",[]);
 
         //Income
         $this->income += $amount;
@@ -73,12 +74,13 @@ class InvoicePaymentLogic
     private function GrandCostPayment($amount, $invoice_id){
         if ($amount < 0 || $amount == 0) return;
 
+        $changeLogArray = array();
         //Find
         $oldObj = InvoiceInfoLogic::Instance()->Find($invoice_id);
 
         //Update Invoice Expire Date
-        $oldCost = $oldObj->invoice_info->grand_total;
-        $paidAmount = $oldObj->invoice_info->paid;
+        $oldCost = $oldObj->grand_total;
+        $paidAmount = $oldObj->paid;
         $remain = $oldCost - ($paidAmount + $amount);
         if ($remain == 0 || $remain < 0){
             //Mean that invoice is full paid
@@ -107,8 +109,10 @@ class InvoicePaymentLogic
         $this->TransactionRecord($invoice_id, UserActionEnum::GRAND_TOTAL_PAYMENT, $amount);
 
         //Save User Audit Record
+        $changeLogArray = UserAuditLogic::Instance()
+            ->CompareField(AuditGroup::GRAND_COST, $oldCost, $amount, UserActionEnum::UPDATE, $changeLogArray);
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::GRAND_TOTAL_PAYMENT,
-            $oldObj->invoice_info->display_id.'-'.$amount."$");
+            $oldObj->display_id.'-'.$amount."$", $changeLogArray);
 
         //Income
         $this->income += $amount;
@@ -118,32 +122,35 @@ class InvoicePaymentLogic
     private function AddMoreCost($amount, $invoice_id){
         if ($amount < 0 || $amount == 0) return;
 
+        $changeLogArray = array();
         //Find
         $oldObj = InvoiceInfoLogic::Instance()->Find($invoice_id);
 
         //Update Invoice Expire Date
-        $oldCost = $oldObj->invoice_info->grand_total;
-
+        $oldCost = $oldObj->grand_total;
+        $newCost = $oldCost + $amount;
         //Update Invoice Info
         DB::table('invoice_info')
             ->where('id','=', $invoice_id)
             ->update([
-                'grand_total' => $oldCost + $amount
+                'grand_total' => $newCost
             ]);
 
         //Save Transaction Record
         $this->TransactionRecord($invoice_id, UserActionEnum::ADD_ON_GRAND_TOTAL, $amount);
 
         //Save User Audit Record
+        $changeLogArray = UserAuditLogic::Instance()
+            ->CompareField(AuditGroup::GRAND_COST, $oldCost, $newCost, UserActionEnum::UPDATE, $changeLogArray);
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::ADD_ON_GRAND_TOTAL,
-            $oldObj->invoice_info->display_id.'-'.$amount."$");
+            $oldObj->display_id.'-'.$amount."$", $changeLogArray);
 
         //Income
         $this->expense += $amount;
     }
 
     //Item Depreciation
-    public function DepreciationItems($items, $invoice_id){
+    private function DepreciationItems($items, $invoice_id){
         if ($items == null || empty($items)) return;
 
         //Check
@@ -164,18 +171,25 @@ class InvoicePaymentLogic
     private function AddItemsWhenPayment($items, $invoice_id){
         if ($items == null || empty($items)) return;
 
+        $changeLogArray = array();
         //Add More Item
         foreach ($items as $item){
             InvoiceItemLogic::Instance()->Create($item, $invoice_id);
+
+            //Change Log
+            $itemObj = InvoiceItemLogic::Instance()->Find($item);
+            $changeLogArray = UserAuditLogic::Instance()
+                ->CompareEditItem((object)$itemObj, (object)$itemObj, $changeLogArray, UserActionEnum::Add);
         }
 
+        //User Audit Trail
+        //TODO: User Audit Log and Update Daily Report
         //Update Daily Report
 
     }
 
     //Invoice Payment Method
     public function InvoicePayment($interests_payment, $cost_payment, $add_cost, $invoice_id){
-
         //Interests Payment
         $this->InterestsPayment($interests_payment, $invoice_id);
 

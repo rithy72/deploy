@@ -189,7 +189,6 @@
         var obj = {
                 "customer_name": "Johnny (Edited)",
                 "customer_phone": "023211112 (Edited)",
-                "grand_total": 10000,
                 "interests_rate": 7,
                 "new_items": [
                     {
@@ -202,30 +201,48 @@
                 ],
                 "modify_items": [
                     {
-                        "id": 4,
+                        "id": 1,
                         "item_type_id": 1,
-                        "first_feature": "Honda Dream (Edited)",
-                        "second_feature": "Black (Edited)",
-                        "third_feature": "2AH-1035 (Edited)",
-                        "fourth_feature": "Skull Sticker (Edited)"
-                    },
-                    {
-                        "id": 5,
-                        "item_type_id": 1,
-                        "first_feature": "Honda Dream (Edited)",
-                        "second_feature": "Black (Edited)",
+                        "first_feature": "Honda Dream (Edited) zxc",
+                        "second_feature": "Black (Edited) vnbv",
                         "third_feature": "2AH-1035 (Edited)",
                         "fourth_feature": "Skull Sticker (Edited)"
                     }
                 ],
                 "delete_items": [
-                    2,8,6,7,9,10,11,12,13
+                    22
                 ]
             };
+//        var obj = {
+//            "item_type_name" : "Motor Edited"
+//        };
+//        var obj = {
+//            "customer_name": "Johnny",
+//            "customer_phone": "023221121",
+//            "grand_total": 3000,
+//            "interests_rate": 5,
+//            "invoice_items": [
+//                {
+//                    "item_type_id": 1,
+//                    "first_feature": "Honda Dream",
+//                    "second_feature": "Black",
+//                    "third_feature": "2AH-1035",
+//                    "fourth_feature": "Skull Sticker"
+//                },
+//                {
+//                    "item_type_id": 1,
+//                    "first_feature": "Honda Dream",
+//                    "second_feature": "Black",
+//                    "third_feature": "2AH-1035",
+//                    "fourth_feature": "Skull Sticker"
+//                }
+//            ]
+//        };
+
 
         $.ajax({
             type:"GET",
-            url:"api/invoice",
+            url:"api/item/invoice/0000011?status=2",
             //data: obj,
             success:function (response) {
                 console.log(response);

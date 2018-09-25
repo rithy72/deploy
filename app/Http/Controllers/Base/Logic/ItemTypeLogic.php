@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Model\BaseModel;
+use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\ItemTypeModel;
@@ -87,14 +88,20 @@ class ItemTypeLogic
         $duplicate = $this->CheckDuplicateBeforeInsert($type_name);
 
         if (!$duplicate){
+            $changeLogArray = array();
             //Can Insert
             $insertResult = DB::table('item_type')
                 ->insertGetId([
                     'type_name' => $type_name,
                 ]);
 
+            //Change Log
+            $changeLogArray = UserAuditLogic::Instance()
+                ->CompareField(AuditGroup::ITEM_TYPE_NAME,$type_name,$type_name,UserActionEnum::Add,$changeLogArray);
+
             //User Auditrail
-            UserAuditLogic::Instance()->UserItemTypeAction($insertResult, UserActionEnum::INSERT);
+            UserAuditLogic::Instance()
+                ->UserItemTypeAction($insertResult, UserActionEnum::INSERT, $type_name, $changeLogArray);
 
             $model = $this->Find($insertResult);
             return $model;
@@ -109,14 +116,22 @@ class ItemTypeLogic
         $duplicate = $this->CheckDuplicateBeforeUpdate($newTypeName, $id);
 
         if (!$duplicate){
+            $oldModel = $this->Find($id);
+            $changeLogArray = array();
             //Can Update
             DB::table('item_type')->where('id','=', $id)
                 ->update([
                     'type_name' => $newTypeName
                 ]);
 
+            //Change Log
+            $changeLogArray = UserAuditLogic::Instance()
+                ->CompareField(AuditGroup::ITEM_TYPE_NAME,$oldModel->item_type_name, $newTypeName,
+                    UserActionEnum::UPDATE, $changeLogArray);
+
             //User Auditrail
-            UserAuditLogic::Instance()->UserItemTypeAction($id, UserActionEnum::UPDATE);
+            UserAuditLogic::Instance()
+                ->UserItemTypeAction($id, UserActionEnum::UPDATE, $newTypeName, $changeLogArray);
 
             $model = $this->Find($id);
             return $model;
@@ -132,8 +147,11 @@ class ItemTypeLogic
                 'status' => false
             ]);
 
-        //User Auditrail
-        UserAuditLogic::Instance()->UserItemTypeAction($id, UserActionEnum::DEACTIVATE);
+        $object = $this->Find($id);
+
+        //User AuditTrail
+        UserAuditLogic::Instance()
+            ->UserItemTypeAction($id, UserActionEnum::DEACTIVATE, $object->item_type_name, []);
 
         $model = $this->Find($id);
         return $model;
@@ -146,8 +164,11 @@ class ItemTypeLogic
                 'status' => true
             ]);
 
-        //User Auditrail
-        UserAuditLogic::Instance()->UserItemTypeAction($id, UserActionEnum::ACTIVATE);
+        $object = $this->Find($id);
+
+        //User AuditTrail
+        UserAuditLogic::Instance()
+            ->UserItemTypeAction($id, UserActionEnum::ACTIVATE, $object->item_type_name, []);
 
         $model = $this->Find($id);
         return $model;
@@ -163,8 +184,9 @@ class ItemTypeLogic
             DB::table('item_type')->where('id','=', $id)
                 ->delete();
 
-            //User Auditrail
-            UserAuditLogic::Instance()->UserItemTypeAction($id, UserActionEnum::DELETE);
+            //User AuditTrail
+            UserAuditLogic::Instance()
+                ->UserItemTypeAction($id, UserActionEnum::DELETE, $model->item_type_name, []);
 
             return true;
         }else{

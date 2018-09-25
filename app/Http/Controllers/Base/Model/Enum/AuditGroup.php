@@ -11,26 +11,30 @@ namespace App\Http\Controllers\Base\Model\Enum;
 
 class AuditGroup
 {
+    //Audit Group
     public const INVOICE = 1;
     public const ITEM_TYPE = 2;
     public const USER = 3;
     public const ITEM = 4;
+    //Field
+    public const CUSTOMER_NAME = 5;
+    public const PHONE = 6;
+    public const INTEREST_RATE = 7;
+    public const ITEM_TYPE_NAME = 8;
+    public const INVOICE_ITEM = 9;
+    public const GRAND_COST = 10;
 
     public const AUDIT_GROUP_STRING = array(
         1 => "វិក្ក័យប័ត្រ",
         2 => "ប្រភេទទំនិញ",
         3 => "អ្នកប្រើប្រាស់",
-        4 => "ទំនិញ"
+        4 => "ទំនិញ",
+        5 => "ឈ្មោះអតិថិជន",
+        6 => "ទូរស័ព្ទ",
+        7 => "ការប្រាក់",
+        8 => "ឈ្មោះប្រភេទទំនិញ",
+        9 => "ទំនិញ",
+        10 => "ប្រាក់ដើម"
     );
 
-    //Field
-    public const CUSTOMER_NAME = 1;
-    public const PHONE = 2;
-    public const INTEREST_RATE = 3;
-
-    public const FIELD_STRING = array(
-        1 => "ឈ្មោះអតិថិជន",
-        2 => "ទូរស័ព្ទ",
-        3 => "ការប្រាក់",
-    );
 }

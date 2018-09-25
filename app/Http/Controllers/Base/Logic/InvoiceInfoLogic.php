@@ -39,6 +39,32 @@ class InvoiceInfoLogic
         }
     }
 
+    //Change Log Edit Invoice Info
+    private function ChangeLogEditInvoiceInfo($old_name, $new_name, $old_phone, $new_phone, $old_rate, $new_rate, $array){
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::CUSTOMER_NAME, $old_name, $new_name,
+            UserActionEnum::UPDATE, $array);
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::PHONE, $old_phone, $new_phone,
+            UserActionEnum::UPDATE, $array);
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::INTEREST_RATE, $old_rate, $new_rate,
+            UserActionEnum::UPDATE, $array);
+
+        return $array;
+    }
+
+    //Change Log Insert New Invoice Info
+    private function ChangeLogInsertInvoiceInfo($name, $phone, $rate, $grand_total, $array){
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::CUSTOMER_NAME, $name, $name,
+            UserActionEnum::INSERT, $array);
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::PHONE, $phone, $phone,
+            UserActionEnum::INSERT, $array);
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::INTEREST_RATE, $rate, $rate,
+            UserActionEnum::INSERT, $array);
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::GRAND_COST, $grand_total, $grand_total,
+            UserActionEnum::INSERT, $array);
+
+        return $array;
+    }
+
     //Filter Search
     public function FilterSearch($search, $search_option, $status, $page_size){
         $searchColumn = $this->FinalizeSearchOption($search_option);
@@ -136,28 +162,12 @@ class InvoiceInfoLogic
         $invoiceModel->interests_value = ($invoiceResult->grand_total * $invoiceResult->interests_rate) / 100;
         $invoiceModel->final_date_time = $invoiceResult->final_date_time;
 
-        //Get Invoice Items
-        $invoiceItems = InvoiceItemLogic::Instance()->GetInvoiceItemsForInvoice($id);
-
-        //Return Class
-        $class = new \stdClass();
-        $class->invoice_info = $invoiceModel;
-        $class->invoice_items = $invoiceItems;
-
-        return $class;
-    }
-
-
-    private function GenerateChangeLogProperty($old_val, $new_val, $type, $change_log_array){
-        $changeLogModel = ChangeLogModel::Instance();
-
-        if ($old_val != $new_val){
-
-        }
+        return $invoiceModel;
     }
 
     //Create Invoice
     public function Create($invoice_info_model, array $invoice_item_array){
+        $changeLogArray = array();
         $dateInstance = DateTimeLogic::Instance();
 
         if (empty($invoice_info_model->customer_name) || empty($invoice_info_model->grand_total) ||
@@ -178,43 +188,55 @@ class InvoiceInfoLogic
                     'grand_total' => $invoice_info_model->grand_total,
                     'interests_rate' => intval($invoice_info_model->interests_rate),
                 ]);
+            //Change Log
+            $changeLogArray = $this->ChangeLogInsertInvoiceInfo(
+                $invoice_info_model->customer_name, $invoice_info_model->customer_phone, $invoice_info_model->interests_rate,
+                $invoice_info_model->grand_total, $changeLogArray
+            );
 
             //Update Display ID
+            $displayId = str_pad(intval($insertID),7,"0", STR_PAD_LEFT);
             DB::table('invoice_info')->where('id','=', $insertID)
-                ->update(['display_id' => str_pad(intval($insertID),7,"0", STR_PAD_LEFT)]);
+                ->update(['display_id' => $displayId]);
 
             //Insert Item
             foreach ($invoice_item_array as $item){
                 InvoiceItemLogic::Instance()->Create($item, $insertID);
+                //
+                $changeLogArray = UserAuditLogic::Instance()
+                    ->CompareEditItem((object)$item, (object)$item, $changeLogArray, UserActionEnum::Add);
             }
 
             //User Audit
-            UserAuditLogic::Instance()->UserInvoiceAction($insertID, UserActionEnum::INSERT);
+            UserAuditLogic::Instance()
+                ->UserInvoiceAction($insertID, UserActionEnum::INSERT, $displayId, $changeLogArray);
 
             //Update Report
             DailyReportLogic::Instance()
                 ->UpdateCurrentReport(sizeof($invoice_item_array), 0, $invoice_info_model->grand_total, 0);
 
             //Return Invoice ID
-            return $insertID;
+            return $displayId;
         }
     }
 
+    //Edit or Update Invoice
     public function Update($invoice_info, $modify_items, $new_items, $delete_items, $invoice_id){
+        $changeLogArray = array();
         //Get Old Object of Invoice
         $oldInvoiceObj = $this->Find($invoice_id);
 
         //Check New Object
         $invoice_info->customer_name = (empty($invoice_info->customer_name)) ?
-            $oldInvoiceObj->invoice_info->customer_name : $invoice_info->customer_name;
+            $oldInvoiceObj->customer_name : $invoice_info->customer_name;
         $invoice_info->customer_phone = (empty($invoice_info->customer_phone)) ?
-            $oldInvoiceObj->invoice_info->customer_phone : $invoice_info->customer_phone;
+            $oldInvoiceObj->customer_phone : $invoice_info->customer_phone;
         $invoice_info->interests_rate = (empty($invoice_info->interests_rate)) ?
-            $oldInvoiceObj->invoice_info->interests_rate : $invoice_info->interests_rate;
+            $oldInvoiceObj->interests_rate : $invoice_info->interests_rate;
 
-        //Check if invoice can be delete or not
-        if ($oldInvoiceObj->invoice_info->status != InvoiceStatusEnum::OPEN){
-            //When invoice can not be delete
+        //Check if invoice can be update or not
+        if ($oldInvoiceObj->status != InvoiceStatusEnum::OPEN){
+            //When invoice can not be update
             return false;
         }else{
             //Update Invoice Info Information
@@ -225,6 +247,13 @@ class InvoiceInfoLogic
                     'customer_phone' => $invoice_info->customer_phone,
                     'interests_rate' => intval($invoice_info->interests_rate),
                 ]);
+            //Change Log Invoice Info
+            $changeLogArray = $this->ChangeLogEditInvoiceInfo(
+                $oldInvoiceObj->customer_name, $invoice_info->customer_name,
+                $oldInvoiceObj->customer_phone, $invoice_info->customer_phone,
+                $oldInvoiceObj->interests_rate, $invoice_info->interests_rate,
+                $changeLogArray
+            );
 
             //Insert New Items
             $newItemsAmount = 0;
@@ -232,6 +261,8 @@ class InvoiceInfoLogic
                 foreach ($new_items as $item){
                     ++$newItemsAmount;
                     InvoiceItemLogic::Instance()->Create($item, $invoice_id);
+                    $changeLogArray = UserAuditLogic::Instance()
+                        ->CompareEditItem((object)$item, (object)$item, $changeLogArray, UserActionEnum::Add);
                 }
             }
 
@@ -239,6 +270,10 @@ class InvoiceInfoLogic
             if (!empty($modify_items)){
                 foreach ($modify_items as $item){
                     InvoiceItemLogic::Instance()->Update($item, InvoiceItemStatusEnum::OPEN, $invoice_id);
+                    //
+                    $oldObj = InvoiceItemLogic::Instance()->Find($item['id']);
+                    $changeLogArray = UserAuditLogic::Instance()
+                        ->CompareEditItem($oldObj, (object)$item, $changeLogArray, UserActionEnum::UPDATE);
                 }
             }
 
@@ -247,18 +282,23 @@ class InvoiceInfoLogic
             if (!empty($delete_items)){
                 foreach ($delete_items as $item){
                     ++$deleteItemsAmount;
+                    $oldObj = InvoiceItemLogic::Instance()->Find($item);
                     InvoiceItemLogic::Instance()->Delete($item, $invoice_id);
+                    //
+                    $changeLogArray = UserAuditLogic::Instance()
+                        ->CompareEditItem($oldObj, $oldObj, $changeLogArray, UserActionEnum::DELETE);
                 }
             }
 
             //User Audit Trail
-            UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::UPDATE);
+            UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::UPDATE,
+                $oldInvoiceObj->display_id, $changeLogArray);
 
             //Update Report
-            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->invoice_info->created_date, intval($deleteItemsAmount*-1),
-                0,0,0);
-            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->invoice_info->created_date, intval($newItemsAmount*1),
-                0,0,0);
+            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->created_date,
+                intval($deleteItemsAmount*-1),0,0,0);
+            DailyReportLogic::Instance()->UpdateOldReport($oldInvoiceObj->created_date,
+                intval($newItemsAmount*1), 0,0,0);
 
             //Return Result
             return $invoice_id;

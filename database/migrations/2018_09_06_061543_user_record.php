@@ -21,8 +21,8 @@ class UserRecord extends Migration
             $table->integer('action');
             $table->integer('audit_group');
             $table->string('display_audit');
-            $table->text('detail')->nullable(true);
-            $table->text('change_log')->nullable(true);
+            $table->text('description')->nullable(true);
+            $table->json('change_log')->nullable(true);
             $table->dateTime('date_time');
         });
     }

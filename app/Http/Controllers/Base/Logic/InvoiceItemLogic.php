@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
+use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,14 @@ class InvoiceItemLogic
 
     public function Find($item_id){
         $item = DB::table('invoice_item')
-            ->where('id','=', $item_id)
+            ->select(
+                'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
+            )
+            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+            ->where('invoice_item.id','=', $item_id)
             ->first();
 
         $itemModel = InvoiceItemModel::Instance();
@@ -105,9 +113,16 @@ class InvoiceItemLogic
     public function DepreciationItems($choice, $id, $invoice_id){
         if ($invoice_id == null || empty($invoice_id)) return 0;
 
+        $changeLogArray = array();
+        $items = array();
         $outItem = 0;
 
         if ($choice == InvoiceItemLogic::DEPRECIATION_ONE){
+            //Get this item
+            $items = DB::table('invoice_item')
+                ->where('id','=', $id)
+                ->where('status','=', InvoiceItemStatusEnum::OPEN)
+                ->get();
             //Mean depreciate only item with id
             DB::table('invoice_item')
                 ->where('invoice_id','=', $invoice_id)
@@ -125,7 +140,7 @@ class InvoiceItemLogic
             $items = DB::table('invoice_item')
                 ->where('invoice_id','=', $invoice_id)
                 ->where('status','=', InvoiceItemStatusEnum::OPEN)
-                ->count();
+                ->get();
 
             //Mean depreciate all item with invoice id
             DB::table('invoice_item')
@@ -137,9 +152,19 @@ class InvoiceItemLogic
                     'user_id' => Auth::id()
                 ]);
 
-            $outItem = $items;
+            $outItem = sizeof($items);
         }
 
+        //Change Logs
+        foreach ($items as $item){
+            $changeLogArray = UserAuditLogic::Instance()
+                ->CompareEditItem((object)$item, (object)$item, $changeLogArray, UserActionEnum::DEPRECIATE_ITEM);
+        }
+        //User Audit Trail
+        $invoiceObj = InvoiceInfoLogic::Instance()->Find($invoice_id);
+        UserAuditLogic::Instance()
+            ->UserInvoiceItemAction($invoice_id, UserActionEnum::DEPRECIATE_ITEM,
+                $invoiceObj->display_id, $changeLogArray);
         //Update Daily Report
         DailyReportLogic::Instance()->UpdateCurrentReport(0, abs($outItem), 0,0);
 
@@ -150,7 +175,7 @@ class InvoiceItemLogic
     public function SaleInvoiceItem($item_id, $sale_price){
         $item = $this->Find($item_id);
 
-        if ($item->status != InvoiceItemStatusEnum::TOOK) return;
+        if ($item->status != InvoiceItemStatusEnum::TOOK) return false;
 
         DB::table('invoice_item')
             ->where('id','=', $item_id)
@@ -165,21 +190,45 @@ class InvoiceItemLogic
         DailyReportLogic::Instance()->UpdateCurrentReport(0, abs(1), 0, abs($sale_price));
 
         //User Audit
-        //TODO: User Audit
+        $description = $item->item_type_name.', '.$item->first_feature.' ,'.$item->second_feature.', '.$item->third_feature
+            .', '.$item->fourth_feature.' -- តម្លៃ៖ '.$sale_price;
+        UserAuditLogic::Instance()->UserInvoiceItemAction($item->invoice_id, UserActionEnum::SALE_ITEM, $description, []);
+
+        return true;
     }
 
     //Get Invoice Item For Invoice
-    public function GetInvoiceItemsForInvoice($invoice_id){
-        $getResult = DB::table('invoice_item')
-            ->select(
-                'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
-                'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
-                'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
-                'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
-            )
-            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
-            ->where('invoice_item.invoice_id','=', $invoice_id)
-            ->get();
+    public function GetInvoiceItemsForInvoice($invoice_id, $status){
+        $getResult = null;
+        if (empty($status)){
+            //When get all items
+            $getResult = DB::table('invoice_item')
+                ->select(
+                    'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                    'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                    'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                    'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
+                )
+                ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+                ->leftJoin('users','invoice_item.user_id','=','users.id')
+                ->where('invoice_item.invoice_id','=', $invoice_id)
+                ->get();
+        }elseif (!empty($status)){
+            //When user want filter items
+            $getResult = DB::table('invoice_item')
+                ->select(
+                    'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                    'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                    'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                    'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
+                )
+                ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+                ->leftJoin('users','invoice_item.user_id','=','users.id')
+                ->where('invoice_item.invoice_id','=', $invoice_id)
+                ->where('invoice_item.status','=', $status)
+                ->get();
+        }
+
 
         $returnArray = array();
         foreach ($getResult as $item){

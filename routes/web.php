@@ -82,6 +82,12 @@ Route::middleware('auth')->group(function (){
                 Route::put('/{id}','APIController\InvoiceController@edit');
             });
             /* *
+             * Invoice Item
+             * */
+            Route::prefix('item')->group(function (){
+               Route::get('/invoice/{invoice_id}','APIController\InvoiceItemController@GetInvoiceItems');
+            });
+            /* *
              * Daily Report
              * */
             Route::prefix('daily_report')->group(function (){

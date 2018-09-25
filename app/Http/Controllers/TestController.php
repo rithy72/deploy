@@ -47,7 +47,7 @@ class TestController extends Controller
 //            );
 //        }
 
-        $result = DailyReportLogic::Instance()->GetCurrentReport();
+        $result = InvoiceItemLogic::Instance()->Find(1);
 
         return json_encode($result);
     }
