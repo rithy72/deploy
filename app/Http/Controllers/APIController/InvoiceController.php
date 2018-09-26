@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\APIController;
 
 use App\Http\Controllers\Base\Logic\InvoiceInfoLogic;
+use App\Http\Controllers\Base\Logic\InvoicePaymentLogic;
 use App\Http\Controllers\Base\Model\InvoiceInfoModel;
 use App\Http\Controllers\Base\Model\Other\ReturnModel;
 use Illuminate\Http\Request;
@@ -105,6 +106,32 @@ class InvoiceController extends Controller
         }
 
         return json_encode($class);
+    }
+
+    //Invoice Payment
+    public function InvoicePaymentAndItemsTransaction(Request $request, $invoice_id){
+        $returnModel = ReturnModel::Instance();
+
+        $interests = $request->input('interests_payment',0);
+        $costPayment = $request->input('cost_payment', 0);
+        $addCost = $request->input('add_cost',0);
+        $addMoreItems = $request->input('add_items', null);
+        $depreciateItem = $request->input('depreciate_items', null);
+
+        //Payment and Items Transaction
+        $result = InvoicePaymentLogic::Instance()->InvoicePayment(
+            $interests, $costPayment, $addCost, $addMoreItems, $depreciateItem, $invoice_id
+        );
+
+        if ($result){
+            $returnModel->status = "200";
+            $returnModel->data = "Payment Complete";
+        }else{
+            $returnModel->status = "300";
+            $returnModel->data = "Invoice can not do any more transaction";
+        }
+
+        return json_encode($returnModel);
     }
 
 }

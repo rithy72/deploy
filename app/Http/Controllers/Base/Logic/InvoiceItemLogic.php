@@ -182,7 +182,7 @@ class InvoiceItemLogic
     }
 
     //Depreciation Items
-    public function DepreciationItems($choice, $id, $invoice_id){
+    public function DepreciationItems($choice, $array_of_item, $invoice_id){
         if ($invoice_id == null || empty($invoice_id)) return 0;
 
         $changeLogArray = array();
@@ -190,23 +190,26 @@ class InvoiceItemLogic
         $outItem = 0;
 
         if ($choice == InvoiceItemLogic::DEPRECIATION_ONE){
-            //Get this item
-            $items = DB::table('invoice_item')
-                ->where('id','=', $id)
-                ->where('status','=', InvoiceItemStatusEnum::OPEN)
-                ->get();
-            //Mean depreciate only item with id
-            DB::table('invoice_item')
-                ->where('invoice_id','=', $invoice_id)
-                ->where('id','=', $id)
-                ->update([
-                    'status' => InvoiceItemStatusEnum::CLOSE,
-                    'out_date' => DateTimeLogic::Instance()->
+            foreach ($array_of_item as $item){
+                //Get this item
+                $getItem = DB::table('invoice_item')
+                    ->where('id','=', $item)
+                    ->where('status','=', InvoiceItemStatusEnum::OPEN)
+                    ->first();
+                array_push($items, $getItem);
+                //Mean depreciate only item with id
+                DB::table('invoice_item')
+                    ->where('invoice_id','=', $invoice_id)
+                    ->where('id','=', $item)
+                    ->update([
+                        'status' => InvoiceItemStatusEnum::CLOSE,
+                        'out_date' => DateTimeLogic::Instance()->
                         GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-                    'user_id' => Auth::id()
-                ]);
+                        'user_id' => Auth::id()
+                    ]);
+                $outItem++;
+            }
 
-            $outItem = 1;
         }elseif ($choice == InvoiceItemLogic::DEPRECIATION_ALL){
             //Get Remain Item of Invoice
             $items = DB::table('invoice_item')

@@ -239,13 +239,35 @@
 //            ]
 //        };
         var obj = {
-          "sale_price":300
+            "interests_payment":30,
+            "cost_payment":1000,
+            "add_cost":0,
+            "add_items":[
+                {
+                    "item_type_id": 1,
+                    "first_feature": "Honda Dream",
+                    "second_feature": "Black",
+                    "third_feature": "2AH-1035",
+                    "fourth_feature": "Skull Sticker"
+                },
+                {
+                    "item_type_id": 1,
+                    "first_feature": "Honda Dream",
+                    "second_feature": "Black",
+                    "third_feature": "2AH-1035",
+                    "fourth_feature": "Skull Sticker"
+                }
+
+            ],
+            "depreciate_items":[
+                14,15,16
+            ]
         };
 
 
         $.ajax({
             type:"PUT",
-            url:"api/item/sale/5",
+            url:"api/invoice/payment/8",
             data: obj,
             success:function (response) {
                 console.log(response);

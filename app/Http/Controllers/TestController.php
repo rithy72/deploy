@@ -36,20 +36,14 @@ class TestController extends Controller
 
     public function API(){
 
-//        $getResult = InvoiceInfoLogic::Instance()->FilterSearch('',InvoiceSearchOptionEnum::CUSTOMER_PHONE,
-//            '1', 15);
-//        return $getResult;
-//        $changeLogArray = array();
-//
-//        for ($i = 0; $i < 10; $i++){
-//            $changeLogArray = UserAuditLogic::Instance()->CompareField(
-//                random_int(1,3), $i, $i +1, random_int(1,2), $changeLogArray
-//            );
-//        }
+        $model = new \stdClass();
+        $model->interests_payment = 0;
+        $model->cost_payment = 0;
+        $model->add_cost = 0;
+        $model->add_items = [];
+        $model->depreciate_items = [];
 
-        $result = InvoiceItemLogic::Instance()->FilterSearch("", "", "",10);
-        //$result = explode(',',"Camry 2016,White,2RE-4568,");
 
-        return json_encode($result);
+        return json_encode($model);
     }
 }

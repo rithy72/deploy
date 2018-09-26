@@ -6,13 +6,12 @@
  * Time: 12:51 PM
  */
 
-namespace App\Http\Controllers\Base\Logic\OtherLogic;
+namespace App\Http\Controllers\Base\Logic;
 
 
-use App\Http\Controllers\Base\Logic\DailyReportLogic;
-use App\Http\Controllers\Base\Logic\InvoiceInfoLogic;
-use App\Http\Controllers\Base\Logic\InvoiceItemLogic;
-use App\Http\Controllers\Base\Logic\UserAuditLogic;
+
+
+use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
@@ -22,9 +21,6 @@ use Illuminate\Support\Facades\DB;
 
 class InvoicePaymentLogic
 {
-    private $expense = 0;
-    private $income = 0;
-
     //Invoice Payment Instance
     public static function Instance(){
         return new InvoicePaymentLogic();
@@ -65,9 +61,6 @@ class InvoicePaymentLogic
         //Save User Audit Record
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::INTERESTS_PAYMENT,
             $oldObj->display_id.'-'.$amount."$",[]);
-
-        //Income
-        $this->income += $amount;
     }
 
     //Grand Cost Payment
@@ -92,15 +85,16 @@ class InvoicePaymentLogic
                 ->where('id','=', $invoice_id)
                 ->update([
                     'status' => InvoiceStatusEnum::CLOSE,
-                    'paid' => $paidAmount + $amount
+                    'paid' => $paidAmount + $amount,
+                    'final_date_time' => DateTimeLogic::Instance()
+                        ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+                    'final_action_user' => Auth::id()
                 ]);
         }else{
             //Mean that invoice not full paid
             DB::table('invoice_info')
                 ->where('id','=',$invoice_id)
                 ->update([
-                    'expired_date' => DateTimeLogic::Instance()
-                        ->AddDaysToCurrentDateDBFormat(30, DateTimeLogic::DB_DATE_TIME_FORMAT),
                     'paid' => $paidAmount + $amount
                 ]);
         }
@@ -113,9 +107,6 @@ class InvoicePaymentLogic
             ->CompareField(AuditGroup::GRAND_COST, $oldCost, $amount, UserActionEnum::UPDATE, $changeLogArray);
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::GRAND_TOTAL_PAYMENT,
             $oldObj->display_id.'-'.$amount."$", $changeLogArray);
-
-        //Income
-        $this->income += $amount;
     }
 
     //Add More Cost
@@ -144,14 +135,15 @@ class InvoicePaymentLogic
             ->CompareField(AuditGroup::GRAND_COST, $oldCost, $newCost, UserActionEnum::UPDATE, $changeLogArray);
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::ADD_ON_GRAND_TOTAL,
             $oldObj->display_id.'-'.$amount."$", $changeLogArray);
-
-        //Income
-        $this->expense += $amount;
     }
 
     //Item Depreciation
     private function DepreciationItems($items, $invoice_id){
         if ($items == null || empty($items)) return;
+
+        $invoiceObj = InvoiceInfoLogic::Instance()->Find($invoice_id);
+
+        if ($invoiceObj->status == InvoiceStatusEnum::CLOSE || $invoiceObj->status == InvoiceStatusEnum::TOOK) return;
 
         //Check
         $itemsCheck = DB::table('invoice_item')
@@ -162,14 +154,16 @@ class InvoicePaymentLogic
         if ($itemsCheck == 0 || empty($itemsCheck)) return;
 
         //Depreciate Item
-        foreach ($items as $item){
-            InvoiceItemLogic::Instance()->DepreciationItems(InvoiceItemLogic::DEPRECIATION_ONE, $item, $invoice_id);
-        }
+        InvoiceItemLogic::Instance()->DepreciationItems(InvoiceItemLogic::DEPRECIATION_ONE, $items, $invoice_id);
     }
 
     //Add More Items
     private function AddItemsWhenPayment($items, $invoice_id){
         if ($items == null || empty($items)) return;
+
+        $invoiceobj = InvoiceInfoLogic::Instance()->Find($invoice_id);
+
+        if ($invoiceobj->status == InvoiceStatusEnum::CLOSE || $invoiceobj->status == InvoiceStatusEnum::TOOK) return;
 
         $changeLogArray = array();
         //Add More Item
@@ -183,24 +177,44 @@ class InvoicePaymentLogic
         }
 
         //User Audit Trail
-        //TODO: User Audit Log and Update Daily Report
+        UserAuditLogic::Instance()
+            ->UserInvoiceItemAction($invoice_id, UserActionEnum::Add, $invoiceobj->display_id, $changeLogArray);
         //Update Daily Report
-
+        DailyReportLogic::Instance()->UpdateCurrentReport(intval(sizeof($items)),0,0,0);
     }
 
     //Invoice Payment Method
-    public function InvoicePayment($interests_payment, $cost_payment, $add_cost, $invoice_id){
+    public function InvoicePayment($interests_payment, $cost_payment, $add_cost, $add_items, $depreciate_items, $invoice_id){
+        $expense = 0;
+        $income = 0;
+
+        $invoiceObj = InvoiceInfoLogic::Instance()->Find($invoice_id);
+
+        //Check if invoice can do any more transaction
+        if ($invoiceObj->status == InvoiceStatusEnum::CLOSE || $invoiceObj->status == InvoiceStatusEnum::TOOK) return false;
+
         //Interests Payment
         $this->InterestsPayment($interests_payment, $invoice_id);
+        $income += $interests_payment;
 
         //Cost Payment
         $this->GrandCostPayment($cost_payment, $invoice_id);
+        $income += $cost_payment;
 
         //Add more cost
         $this->AddMoreCost($add_cost, $invoice_id);
+        $expense += $add_cost;
+
+        //Add more Items
+        $this->AddItemsWhenPayment($add_items, $invoice_id);
+
+        //Depreciate Items
+        $this->DepreciationItems($depreciate_items, $invoice_id);
 
         //Update Daily Report
-        DailyReportLogic::Instance()->UpdateCurrentReport(0,0, $this->expense, $this->income);
+        DailyReportLogic::Instance()->UpdateCurrentReport(0,0, $expense, $income);
+
+        return true;
     }
 
 }
