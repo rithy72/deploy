@@ -36,14 +36,8 @@ class TestController extends Controller
 
     public function API(){
 
-        $model = new \stdClass();
-        $model->interests_payment = 0;
-        $model->cost_payment = 0;
-        $model->add_cost = 0;
-        $model->add_items = [];
-        $model->depreciate_items = [];
 
-
-        return json_encode($model);
+        $result = InvoiceInfoLogic::Instance()->TookInvoice(10);
+        return $result;
     }
 }

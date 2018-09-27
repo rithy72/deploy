@@ -134,4 +134,20 @@ class InvoiceController extends Controller
         return json_encode($returnModel);
     }
 
+    public function TookInvoice($invoice_id){
+        $returnModel = ReturnModel::Instance();
+
+        $result = InvoiceInfoLogic::Instance()->TookInvoice($invoice_id);
+
+        if ($result){
+            $returnModel->status = "200";
+            $returnModel->data = "Took Invoice";
+        }else{
+            $returnModel->status = "300";
+            $returnModel->data = "Can not took Invoice";
+        }
+
+        return json_encode($returnModel);
+    }
+
 }

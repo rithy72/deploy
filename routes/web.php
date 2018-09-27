@@ -82,6 +82,7 @@ Route::middleware('auth')->group(function (){
                 Route::put('/{id}','APIController\InvoiceController@edit');
                 Route::put('/payment/{invoice_id}',
                     'APIController\InvoiceController@InvoicePaymentAndItemsTransaction');
+                Route::put('/took/{invoice_id}', 'APIController\InvoiceController@TookInvoice');
             });
             /* *
              * Invoice Item

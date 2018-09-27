@@ -272,6 +272,29 @@ class InvoiceItemLogic
         return true;
     }
 
+    public function TookItems($invoice_id){
+        $changeLogArray = array();
+
+        $getRemainItem = $this->GetInvoiceItemsForInvoice($invoice_id, InvoiceItemStatusEnum::OPEN);
+
+        if (empty($getRemainItem)) return $changeLogArray;
+
+        DB::table('invoice_item')
+            ->where('invoice_id','=', $invoice_id)
+            ->where('status','=', InvoiceItemStatusEnum::OPEN)
+            ->update([
+               'status' => InvoiceItemStatusEnum::TOOK
+            ]);
+
+        foreach ($getRemainItem as $item){
+            //Update status
+            $changeLogArray = UserAuditLogic::Instance()
+                ->CompareEditItem((object)$item, (object)$item, $changeLogArray, UserActionEnum::MARK_TOOK_INVOICE);
+        }
+
+        return $changeLogArray;
+    }
+
     //Get Invoice Item For Invoice
     public function GetInvoiceItemsForInvoice($invoice_id, $status){
         $getResult = DB::table('invoice_item')

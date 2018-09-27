@@ -267,8 +267,8 @@
 
         $.ajax({
             type:"PUT",
-            url:"api/invoice/payment/8",
-            data: obj,
+            url:"api/invoice/took/8",
+            //data: obj,
             success:function (response) {
                 console.log(response);
             }
