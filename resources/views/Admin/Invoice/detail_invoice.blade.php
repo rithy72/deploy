@@ -35,7 +35,7 @@
                 <div class="col-md-4">
                     <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;margin-bottom: 0;">
                         <a href="{{('/admin/invoice/create_new_invoice')}}" class="btn btn-success" id="" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
-                        <a href="{{('/admin/invoice/update_invoice')}}" class="btn btn-primary" id="" style="margin-bottom: 4px;"><i class="icon-pencil7 position-left"></i>@lang('string.update')</a> ||
+                        <a class="btn btn-primary" id="updates_invoice" style="margin-bottom: 4px;"><i class="icon-pencil7 position-left"></i>@lang('string.update')</a> ||
                         <a href="{{('/admin/invoice/invoice_payment')}}" class="btn createNewCountry" id="add_item" style="background: #ff840d;color: white;margin-bottom: 4px;"><i class="icon-price-tag position-left"></i>@lang('string.payment')</a>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.paymentTerm')</label>
                                     <div class="col-md-9">
-                                        <p><b id="payment_term"></b><b> %</b></p>
+                                        <p id="payment_term"></p>
                                     </div>
                                 </div>
                             </div>
@@ -321,42 +321,70 @@
         $( document ).ajaxStop(function() {
             $( "#loading" ).hide();
         });
+        // ------------------ show data for detail ----------------------
+        var getResponse;
         (function () {
             var _ID = atob($.cookie("KeyInvoice")); // convert id unique from base64
             $.ajax({
                type: "GET",
-                url: '../api/invoice/'+ _ID +'',
+                url: '../api/invoice/'+_ID+'',
                 success: function (response) {
                     console.log(response);
-                    var getResponse = JSON.parse(response);
-                    document.getElementById("id_invoice").innerHTML = getResponse.data.invoice_info.display_id;
-                    document.getElementById("employee_name").innerHTML = getResponse.data.invoice_info.user_full_name;
+                    getResponse = JSON.parse(response);
+                    document.getElementById("id_invoice").innerHTML = getResponse.data.display_id;
+                    document.getElementById("employee_name").innerHTML = getResponse.data.user_full_name;
 
-                    document.getElementById("customer_name").innerHTML = getResponse.data.invoice_info.customer_name;
-                    document.getElementById("phone_number").innerHTML = getResponse.data.invoice_info.customer_phone;
-                    document.getElementById("date_in").innerHTML = getResponse.data.invoice_info.created_date;
-                    document.getElementById("date_out").innerHTML = getResponse.data.invoice_info.expire_date;
-                    document.getElementById("payment_term").innerHTML = getResponse.data.invoice_info.interests_rate;
-                    document.getElementById("interests_value").innerHTML = getResponse.data.invoice_info.interests_value;
+                    document.getElementById("customer_name").innerHTML = getResponse.data.customer_name;
+                    document.getElementById("phone_number").innerHTML = getResponse.data.customer_phone;
 
-                    document.getElementById("grand_total").value = getResponse.data.invoice_info.grand_total;
-                    document.getElementById("paid").value = getResponse.data.invoice_info.paid;
+                    //document.getElementById("date_in").innerHTML = getResponse.data.created_date.slice(0, 10); // best
+                    document.getElementById("date_in").innerHTML = getResponse.data.created_date;
+//                    const storeString = getResponse.data.created_date;
+//                    const splitString = storeString.split(" ");
+//                    document.getElementById("date_in").innerHTML = splitString[0];
 
-                    for (var i = 0; i < getResponse.data.invoice_items.length; i++){
-                        var _tr = '<tr>' +
-                            '<td style="display:none;">' + getResponse.data.invoice_items[i].id + '</td>' +
-                            '<td>' + [i+1] + '</td>' +
-                            '<td>' + getResponse.data.invoice_items[i].item_type_name + '</td>' +
-                            '<td>' + getResponse.data.invoice_items[i].first_feature + '</td>' +
-                            '<td>' + getResponse.data.invoice_items[i].second_feature + '</td>' +
-                            '<td>' + getResponse.data.invoice_items[i].third_feature + '</td>' +
-                            '<td>' + getResponse.data.invoice_items[i].fourth_feature + '</td>' +
-                            '<td>' + getResponse.data.invoice_items[i].display_status + '</td>' +
-                            '</tr>';
-                        $('#Show_All_Invoice_Items tbody').append(_tr);
-                    }
+                    document.getElementById("date_out").innerHTML = getResponse.data.expire_date;
+                    document.getElementById("payment_term").innerHTML = getResponse.data.interests_rate+" %";
+                    document.getElementById("interests_value").innerHTML = getResponse.data.interests_value+" $";
+
+                    document.getElementById("grand_total").value = getResponse.data.grand_total+" $";
+                    document.getElementById("paid").value = getResponse.data.paid+" $";
+
+                    $.ajax({
+                       type: "GET",
+                        url: '../api/item/invoice/'+ _ID +'',
+                        success: function (response) {
+                            //console.log(response);
+                            var ConvertJson = JSON.parse(response);
+                            for (var i = 0; i < ConvertJson.data.length; i++){
+                                var short = ConvertJson.data[i], notice1, notice2, notice3, notice4;
+                                if (short.first_feature === null){notice1 = "";}else{notice1 = short.first_feature}
+                                if (short.second_feature === null){notice2 = "";}else{notice2 = short.second_feature}
+                                if (short.third_feature === null){notice3 = "";}else{notice3 = short.third_feature}
+                                if (short.fourth_feature === null){notice4 = "";}else{notice4 = short.fourth_feature}
+
+                                var _tr = '<tr>' +
+                                    '<td style="display:none;">' + ConvertJson.data[i].id + '</td>' +
+                                    '<td>' + [i+1] + '</td>' +
+                                    '<td>' + ConvertJson.data[i].item_type_name + '</td>' +
+                                    '<td>' + notice1 + '</td>' +
+                                    '<td>' + notice2 + '</td>' +
+                                    '<td>' + notice3 + '</td>' +
+                                    '<td>' + notice4 + '</td>' +
+                                    '<td>' + ConvertJson.data[i].display_status + '</td>' +
+                                    '</tr>';
+                                $('#Show_All_Invoice_Items tbody').append(_tr);
+                            }
+                        }
+                    });
                 }
             });
         })();
+        // ---------------- update one invoice --------------------------
+        $(document).on("click", "#updates_invoice", function () {
+           // var dd = $.cookie("KeyInvoice", _ID);// atob = decode from base64,  btoa = encode to base 64
+            $.cookie("KeyInvoice", btoa(getResponse.data.id));
+            window.location.href = '{{('/admin/invoice/update_invoice')}}';
+        });
     </script>
 @endsection
