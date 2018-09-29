@@ -305,22 +305,30 @@ class InvoiceInfoLogic
         }
     }
 
-    public function InterestsPaymentTransaction($interests_fee, $id){
-
-    }
-
-    public function CostPaymentTransaction($cost_fee, $id){
-
-
-    }
-
-    public function AddCostPaymentTransaction($add_on_cost, $id){
-
-    }
-
     public function TookInvoice($id){
+        $getObj = $this->Find($id);
+        $changeLogArray = array();
+        $expireDate = $getObj->expire_date;
+        $now = DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT);
 
+        //Check if invoice can be took or not
+        if ($getObj->status != InvoiceStatusEnum::OPEN || $expireDate > $now) return false;
 
+        //Update Status of Invoice
+        DB::table('invoice_info')
+            ->where('id','=', $id)
+            ->update([
+                'status' => InvoiceStatusEnum::TOOK
+            ]);
+
+        //Change Log
+        $changeLogArray = InvoiceItemLogic::Instance()->TookItems($id);
+
+        //User Audit Trail
+        UserAuditLogic::Instance()
+            ->UserInvoiceAction($id, UserActionEnum::MARK_TOOK_INVOICE, $getObj->display_id, $changeLogArray);
+
+        return true;
     }
 
 }

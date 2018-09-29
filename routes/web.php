@@ -80,12 +80,17 @@ Route::middleware('auth')->group(function (){
                 Route::get('/{id}','APIController\InvoiceController@find');
                 Route::post('/','APIController\InvoiceController@create');
                 Route::put('/{id}','APIController\InvoiceController@edit');
+                Route::put('/payment/{invoice_id}',
+                    'APIController\InvoiceController@InvoicePaymentAndItemsTransaction');
+                Route::put('/took/{invoice_id}', 'APIController\InvoiceController@TookInvoice');
             });
             /* *
              * Invoice Item
              * */
             Route::prefix('item')->group(function (){
-               Route::get('/invoice/{invoice_id}','APIController\InvoiceItemController@GetInvoiceItems');
+                Route::get('/','APIController\InvoiceItemController@FilterSearch');
+                Route::get('/invoice/{invoice_id}','APIController\InvoiceItemController@GetInvoiceItems');
+                Route::put('/sale/{item_id}','APIController\InvoiceItemController@SaleItem');
             });
             /* *
              * Daily Report

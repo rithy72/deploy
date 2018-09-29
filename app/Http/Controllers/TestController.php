@@ -36,19 +36,8 @@ class TestController extends Controller
 
     public function API(){
 
-//        $getResult = InvoiceInfoLogic::Instance()->FilterSearch('',InvoiceSearchOptionEnum::CUSTOMER_PHONE,
-//            '1', 15);
-//        return $getResult;
-//        $changeLogArray = array();
-//
-//        for ($i = 0; $i < 10; $i++){
-//            $changeLogArray = UserAuditLogic::Instance()->CompareField(
-//                random_int(1,3), $i, $i +1, random_int(1,2), $changeLogArray
-//            );
-//        }
 
-        $result = InvoiceItemLogic::Instance()->Find(1);
-
-        return json_encode($result);
+        $result = InvoiceInfoLogic::Instance()->TookInvoice(10);
+        return $result;
     }
 }

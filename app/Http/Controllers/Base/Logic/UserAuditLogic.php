@@ -52,7 +52,7 @@ class UserAuditLogic
                 'user_id' => Auth::id(),
                 'parent_id' => $invoice_id,
                 'action' => $action_enum,
-                'audit_group' => AuditGroup::ITEM_TYPE,
+                'audit_group' => AuditGroup::ITEM,
                 'display_audit' => UserActionEnum::ActionArray[$action_enum]." - ".
                     AuditGroup::AUDIT_GROUP_STRING[AuditGroup::ITEM],
                 'description' => $description,
@@ -83,7 +83,7 @@ class UserAuditLogic
         return $insertResult;
     }
 
-    //Compare Old and New Item Value, create, edit , delete, deprecation
+    //Compare Old and New Item Value, create, edit , delete, deprecation, took
     public function CompareEditItem($old_val, $new_val, $change_log_array, $flag){
         $changeLogModel = ChangeLogModel::Instance();
         //Change Log Action and Display Name
@@ -112,8 +112,8 @@ class UserAuditLogic
                 $iemType->item_type_name.', '.$new_val->first_feature.', '.$new_val->second_feature.', '.$new_val->third_feature
                 .', '.$new_val->fourth_feature;
         }
-        //Delete or Depreciation
-        elseif ($flag == UserActionEnum::DELETE || $flag == UserActionEnum::DEPRECIATE_ITEM){
+        //Delete or Depreciation or Took
+        elseif ($flag == UserActionEnum::DELETE || $flag == UserActionEnum::DEPRECIATE_ITEM || $flag == UserActionEnum::MARK_TOOK_INVOICE){
             //
             $iemType = ItemTypeLogic::Instance()->Find($old_val->item_type_id);
             $changeLogModel->oldValue =

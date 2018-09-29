@@ -13,8 +13,10 @@ use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
+use App\Http\Controllers\Base\Model\Other\PaginateModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class InvoiceItemLogic
 {
@@ -28,18 +30,8 @@ class InvoiceItemLogic
         return new InvoiceItemLogic();
     }
 
-    public function Find($item_id){
-        $item = DB::table('invoice_item')
-            ->select(
-                'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
-                'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
-                'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
-                'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
-            )
-            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
-            ->where('invoice_item.id','=', $item_id)
-            ->first();
-
+    //Finalize Item Object
+    private function FinalizeItemObject($item){
         $itemModel = InvoiceItemModel::Instance();
         $itemModel->id = $item->id;
         $itemModel->invoice_id = $item->invoice_id;
@@ -56,6 +48,86 @@ class InvoiceItemLogic
         $itemModel->user_id = $item->user_id;
 
         return $itemModel;
+    }
+
+    //Find Item
+    public function Find($item_id){
+        $item = DB::table('invoice_item')
+            ->select(
+                'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
+            )
+            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+            ->where('invoice_item.id','=', $item_id)
+            ->first();
+
+        $itemModel = $this->FinalizeItemObject($item);
+
+        return $itemModel;
+    }
+
+    //Filter Search Items
+    public function FilterSearch($search, $status, $item_type, $page_size){
+        $splitSearch = explode(',', $search);
+        $firstFeature = (array_key_exists(0, $splitSearch)) ? $splitSearch[0] : "";
+        $secondFeature = (array_key_exists(1, $splitSearch)) ? $splitSearch[1] : "";
+        $thirdFeature = (array_key_exists(2, $splitSearch)) ? $splitSearch[2] : "";
+        $fourthFeature = (array_key_exists(3, $splitSearch)) ? $splitSearch[3] : "";
+        //Querying
+        $getResult = DB::table('invoice_item')
+            ->select(
+                'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                'invoice_item.out_date','invoice_item.user_id','item_type.type_name','invoice_info.id as id_invoice',
+                'invoice_info.display_id'
+            )
+            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+            ->leftJoin('users','invoice_item.user_id','=','users.id')
+            ->join('invoice_info','invoice_item.invoice_id','=', 'invoice_info.id')
+            //When user want status
+            ->when(!empty($status), function ($query) use ($status){
+                return $query->where('invoice_item.status','=',$status);
+            })
+            //When user want item type
+            ->when(!empty($item_type), function ($query) use ($item_type){
+                return $query->where('invoice_item.item_type_id','=',$item_type);
+            })
+            //When user search only have 1st feature
+            ->when(!empty($firstFeature) && $firstFeature != "", function ($query) use ($firstFeature){
+                return $query
+                    ->where('invoice_item.first_feature','like','%'.$firstFeature.'%');
+            })
+            //When user search only have 2nd feature
+            ->when(!empty($secondFeature) && $secondFeature != "", function ($query) use ($secondFeature){
+                return $query
+                    ->where('invoice_item.second_feature','like','%'.$secondFeature.'%');
+            })
+            //When user search only have 3rd feature
+            ->when(!empty($thirdFeature) && $thirdFeature != "", function ($query) use ($thirdFeature){
+                return $query
+                    ->where('invoice_item.third_feature','like','%'.$thirdFeature.'%');
+            })
+            //When user search only have 4th feature
+            ->when(!empty($fourthFeature) && $fourthFeature != "", function ($query) use ($fourthFeature){
+                return $query
+                    ->where('invoice_item.fourth_feature','like','%'.$fourthFeature.'%');
+            })
+            ->paginate($page_size);
+        //Append Every Parameter
+        $getResult->appends(Input::except('page'));
+        //Modify Result
+        $returnArray = array();
+        foreach ($getResult as $item){
+            $itemModel = $this->FinalizeItemObject($item);
+            array_push($returnArray, $itemModel);
+        }
+        //Generate New Paginate Model
+        $newModel = PaginateModel::Instance()->FinalizePaginateModel($returnArray, $getResult);
+
+        return $newModel;
     }
 
     //Insert Item Method
@@ -78,7 +150,7 @@ class InvoiceItemLogic
         return $insertResult;
     }
 
-    //Update Invoice
+    //Update Item
     public function Update($invoice_item_model, $item_status, $invoice_id){
         //Modify Invoice Items
         $insertResult = DB::table('invoice_item')
@@ -110,7 +182,7 @@ class InvoiceItemLogic
     }
 
     //Depreciation Items
-    public function DepreciationItems($choice, $id, $invoice_id){
+    public function DepreciationItems($choice, $array_of_item, $invoice_id){
         if ($invoice_id == null || empty($invoice_id)) return 0;
 
         $changeLogArray = array();
@@ -118,23 +190,26 @@ class InvoiceItemLogic
         $outItem = 0;
 
         if ($choice == InvoiceItemLogic::DEPRECIATION_ONE){
-            //Get this item
-            $items = DB::table('invoice_item')
-                ->where('id','=', $id)
-                ->where('status','=', InvoiceItemStatusEnum::OPEN)
-                ->get();
-            //Mean depreciate only item with id
-            DB::table('invoice_item')
-                ->where('invoice_id','=', $invoice_id)
-                ->where('id','=', $id)
-                ->update([
-                    'status' => InvoiceItemStatusEnum::CLOSE,
-                    'out_date' => DateTimeLogic::Instance()->
+            foreach ($array_of_item as $item){
+                //Get this item
+                $getItem = DB::table('invoice_item')
+                    ->where('id','=', $item)
+                    ->where('status','=', InvoiceItemStatusEnum::OPEN)
+                    ->first();
+                array_push($items, $getItem);
+                //Mean depreciate only item with id
+                DB::table('invoice_item')
+                    ->where('invoice_id','=', $invoice_id)
+                    ->where('id','=', $item)
+                    ->update([
+                        'status' => InvoiceItemStatusEnum::CLOSE,
+                        'out_date' => DateTimeLogic::Instance()->
                         GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-                    'user_id' => Auth::id()
-                ]);
+                        'user_id' => Auth::id()
+                    ]);
+                $outItem++;
+            }
 
-            $outItem = 1;
         }elseif ($choice == InvoiceItemLogic::DEPRECIATION_ALL){
             //Get Remain Item of Invoice
             $items = DB::table('invoice_item')
@@ -197,56 +272,51 @@ class InvoiceItemLogic
         return true;
     }
 
+    public function TookItems($invoice_id){
+        $changeLogArray = array();
+
+        $getRemainItem = $this->GetInvoiceItemsForInvoice($invoice_id, InvoiceItemStatusEnum::OPEN);
+
+        if (empty($getRemainItem)) return $changeLogArray;
+
+        DB::table('invoice_item')
+            ->where('invoice_id','=', $invoice_id)
+            ->where('status','=', InvoiceItemStatusEnum::OPEN)
+            ->update([
+               'status' => InvoiceItemStatusEnum::TOOK
+            ]);
+
+        foreach ($getRemainItem as $item){
+            //Update status
+            $changeLogArray = UserAuditLogic::Instance()
+                ->CompareEditItem((object)$item, (object)$item, $changeLogArray, UserActionEnum::MARK_TOOK_INVOICE);
+        }
+
+        return $changeLogArray;
+    }
+
     //Get Invoice Item For Invoice
     public function GetInvoiceItemsForInvoice($invoice_id, $status){
-        $getResult = null;
-        if (empty($status)){
-            //When get all items
-            $getResult = DB::table('invoice_item')
-                ->select(
-                    'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
-                    'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
-                    'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
-                    'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
-                )
-                ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
-                ->leftJoin('users','invoice_item.user_id','=','users.id')
-                ->where('invoice_item.invoice_id','=', $invoice_id)
-                ->get();
-        }elseif (!empty($status)){
-            //When user want filter items
-            $getResult = DB::table('invoice_item')
-                ->select(
-                    'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
-                    'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
-                    'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
-                    'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
-                )
-                ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
-                ->leftJoin('users','invoice_item.user_id','=','users.id')
-                ->where('invoice_item.invoice_id','=', $invoice_id)
-                ->where('invoice_item.status','=', $status)
-                ->get();
-        }
+        $getResult = DB::table('invoice_item')
+            ->select(
+                'invoice_item.id','invoice_item.invoice_id','invoice_item.item_type_id',
+                'invoice_item.first_feature','invoice_item.second_feature','invoice_item.third_feature',
+                'invoice_item.fourth_feature','invoice_item.status','invoice_item.delete_able',
+                'invoice_item.out_date','invoice_item.user_id','item_type.type_name'
+            )
+            ->leftJoin('item_type','invoice_item.item_type_id','=','item_type.id')
+            ->leftJoin('users','invoice_item.user_id','=','users.id')
+            ->where('invoice_item.invoice_id','=', $invoice_id)
+            //When user want status
+            ->when(!empty($status), function ($query) use ($status){
+                return $query->where('invoice_item.status','=',$status);
+            })
+            ->get();
 
 
         $returnArray = array();
         foreach ($getResult as $item){
-            $itemModel = InvoiceItemModel::Instance();
-            $itemModel->id = $item->id;
-            $itemModel->invoice_id = $item->invoice_id;
-            $itemModel->item_type_id = $item->item_type_id;
-            $itemModel->item_type_name = $item->type_name;
-            $itemModel->first_feature = $item->first_feature;
-            $itemModel->second_feature = $item->second_feature;
-            $itemModel->third_feature = $item->third_feature;
-            $itemModel->fourth_feature = $item->fourth_feature;
-            $itemModel->status = $item->status;
-            $itemModel->display_status = InvoiceItemStatusEnum::$StatusArray[intval($itemModel->status)];
-            $itemModel->delete_able = $item->delete_able;
-            $itemModel->out_date = $item->out_date;
-            $itemModel->user_id = $item->user_id;
-
+            $itemModel = $this->FinalizeItemObject($item);
             array_push($returnArray, $itemModel);
         }
 
