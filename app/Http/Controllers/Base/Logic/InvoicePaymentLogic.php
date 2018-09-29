@@ -72,9 +72,8 @@ class InvoicePaymentLogic
         $oldObj = InvoiceInfoLogic::Instance()->Find($invoice_id);
 
         //Update Invoice Expire Date
-        $oldCost = $oldObj->grand_total;
         $paidAmount = $oldObj->paid;
-        $remain = $oldCost - ($paidAmount + $amount);
+        $remain = $oldObj->remain - $amount;
         if ($remain == 0 || $remain < 0){
             //Mean that invoice is full paid
             //Depreciate all items
@@ -86,6 +85,7 @@ class InvoicePaymentLogic
                 ->update([
                     'status' => InvoiceStatusEnum::CLOSE,
                     'paid' => $paidAmount + $amount,
+                    'remain' => 0,
                     'final_date_time' => DateTimeLogic::Instance()
                         ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
                     'final_action_user' => Auth::id()
@@ -95,7 +95,8 @@ class InvoicePaymentLogic
             DB::table('invoice_info')
                 ->where('id','=',$invoice_id)
                 ->update([
-                    'paid' => $paidAmount + $amount
+                    'paid' => $paidAmount + $amount,
+                    'remain' => $remain
                 ]);
         }
 
@@ -104,7 +105,7 @@ class InvoicePaymentLogic
 
         //Save User Audit Record
         $changeLogArray = UserAuditLogic::Instance()
-            ->CompareField(AuditGroup::GRAND_COST, $oldCost, $amount, UserActionEnum::UPDATE, $changeLogArray);
+            ->CompareField(AuditGroup::REMAIN_COST, $oldObj->remain, $remain, UserActionEnum::UPDATE, $changeLogArray);
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::GRAND_TOTAL_PAYMENT,
             $oldObj->display_id.'-'.$amount."$", $changeLogArray);
     }
@@ -120,19 +121,26 @@ class InvoicePaymentLogic
         //Update Invoice Expire Date
         $oldCost = $oldObj->grand_total;
         $newCost = $oldCost + $amount;
+        //
+        $oldRemain = $oldObj->remain;
+        $newRemain = $oldRemain + $amount;
         //Update Invoice Info
         DB::table('invoice_info')
             ->where('id','=', $invoice_id)
             ->update([
-                'grand_total' => $newCost
+                'grand_total' => $newCost,
+                'remain' => $newRemain
             ]);
 
         //Save Transaction Record
         $this->TransactionRecord($invoice_id, UserActionEnum::ADD_ON_GRAND_TOTAL, $amount);
 
-        //Save User Audit Record
+        //Change Log
         $changeLogArray = UserAuditLogic::Instance()
             ->CompareField(AuditGroup::GRAND_COST, $oldCost, $newCost, UserActionEnum::UPDATE, $changeLogArray);
+        $changeLogArray = UserAuditLogic::Instance()
+            ->CompareField(AuditGroup::REMAIN_COST, $oldRemain, $newRemain, UserActionEnum::UPDATE, $changeLogArray);
+        //Save User Audit Record
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::ADD_ON_GRAND_TOTAL,
             $oldObj->display_id.'-'.$amount."$", $changeLogArray);
     }
@@ -161,9 +169,9 @@ class InvoicePaymentLogic
     private function AddItemsWhenPayment($items, $invoice_id){
         if ($items == null || empty($items)) return;
 
-        $invoiceobj = InvoiceInfoLogic::Instance()->Find($invoice_id);
+        $invoiceObj = InvoiceInfoLogic::Instance()->Find($invoice_id);
 
-        if ($invoiceobj->status == InvoiceStatusEnum::CLOSE || $invoiceobj->status == InvoiceStatusEnum::TOOK) return;
+        if ($invoiceObj->status == InvoiceStatusEnum::CLOSE || $invoiceObj->status == InvoiceStatusEnum::TOOK) return;
 
         $changeLogArray = array();
         //Add More Item
@@ -178,7 +186,7 @@ class InvoicePaymentLogic
 
         //User Audit Trail
         UserAuditLogic::Instance()
-            ->UserInvoiceItemAction($invoice_id, UserActionEnum::Add, $invoiceobj->display_id, $changeLogArray);
+            ->UserInvoiceItemAction($invoice_id, UserActionEnum::Add, $invoiceObj->display_id, $changeLogArray);
         //Update Daily Report
         DailyReportLogic::Instance()->UpdateCurrentReport(intval(sizeof($items)),0,0,0);
     }

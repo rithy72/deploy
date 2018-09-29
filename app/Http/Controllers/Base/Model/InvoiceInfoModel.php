@@ -23,6 +23,7 @@ class InvoiceInfoModel
     public $display_status;
     public $grand_total;
     public $paid;
+    public $remain;
     public $interests_rate;
     public $interests_value;
     public $final_date_time;

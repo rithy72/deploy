@@ -186,23 +186,14 @@
         }
     });
     $('#getData').on('click',function () {
-        var obj = {
-                "customer_name": "Johnny (Edited 2nd time)",
-                "customer_phone": "023211112 (Edited 2nd time)",
-                "interests_rate": 10,
-                "new_items": [],
-                "modify_items": [
-                    {
-                        "id": 26,
-                        "item_type_id": 1,
-                        "first_feature": "Honda Dream",
-                        "second_feature": "Black",
-                        "third_feature": "2AH-1035",
-                        "fourth_feature": "Skull Sticker"
-                    }
-                ],
-                "delete_items": []
-            };
+    var obj = {
+        "interests_payment": 30,
+        "cost_payment": 0,
+        "add_cost": 100,
+        "add_items": [],
+        "depreciate_items": []
+    };
+
 //        var obj = {
 //            "item_type_name" : "Motor Edited"
 //        };
@@ -254,9 +245,9 @@
 //            ]
 //        };
         $.ajax({
-            type:"PUT",
-            url:"api/invoice/11",
-            data: obj,
+            type:"GET",
+            url:"api/invoice/2",
+            //data: obj,
             success:function (response) {
                 console.log(response);
             }

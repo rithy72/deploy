@@ -26,6 +26,7 @@ class InvoiceInfo extends Migration
             $table->boolean('delete_able')->default(false);
             $table->float('grand_total');
             $table->float('paid')->default(0);
+            $table->float('remain')->default(0);
             $table->integer('interests_rate');
             $table->dateTime('final_date_time')->nullable(true);
             $table->integer('final_action_user')->nullable(true);
