@@ -187,10 +187,19 @@
     });
     $('#getData').on('click',function () {
     var obj = {
-        "interests_payment": 30,
+        "interests_payment": 0,
         "cost_payment": 0,
         "add_cost": 100,
-        "add_items": [],
+        "add_items": [
+            {
+                "item_type_id": 1,
+                "first_feature": "HondaDream",
+                "second_feature": "Black",
+                "third_feature": "2AH-1035",
+                "fourth_feature": "SkullSticker"
+            }
+
+        ],
         "depreciate_items": []
     };
 
@@ -245,9 +254,9 @@
 //            ]
 //        };
         $.ajax({
-            type:"GET",
-            url:"api/invoice/2",
-            //data: obj,
+            type:"PUT",
+            url:"api/invoice/payment/2",
+            data: obj,
             success:function (response) {
                 console.log(response);
             }

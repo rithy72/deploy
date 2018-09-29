@@ -38,7 +38,7 @@ class TestController extends Controller
 
 
         $result = InvoiceInfoLogic::Instance()
-            ->InvoiceAndItemTransaction("","","1","4",1,10);
+            ->InvoiceAndItemTransaction("","","","4",1,10);
         return json_encode($result);
     }
 }

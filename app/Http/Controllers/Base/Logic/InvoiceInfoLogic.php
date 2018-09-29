@@ -295,7 +295,7 @@ class InvoiceInfoLogic
     }
 
     //Invoice and Item Transaction
-    public function InvoiceAndItemTransaction($from_date, $to_date, $action, $group, $invoice_id, $page_size){
+    public function InvoiceAndItemTransactionHistory($from_date, $to_date, $action, $group, $invoice_id, $page_size){
         $dateInstance = DateTimeLogic::Instance();
         //
         $oldInvoiceObj = $this->Find($invoice_id);
