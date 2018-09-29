@@ -775,7 +775,7 @@
             var invoiceRate = $('#percent_rate').val();
 
             if (customerName === "" || customerPhoneNumber === ""){
-                alert("សូមមេត្តាបំពេញ ឈ្មោះអតិថិជន និង លេខទូរស័ព្ទ ជាមុនសិន");
+                alert("សូមមេត្តាបំពេញ ឈ្មោះអតិថិជន និង លេខទូរស័ព្ទ មិនត្រូវមានអក្សរដាច់ខាត");
             } else {
                 // array create new item type
                 for (var i = 0; i < addMoreItemType.length; i++){
@@ -804,18 +804,19 @@
                 var JsonSentToServer = {
                     "customer_name":customerName,
                     "customer_phone":customerPhoneNumber,
-                    "interests_rate":invoiceRate,
+                    "interests_rate":Number(invoiceRate),
                     "new_items":storeNewItemType,
                     "modify_items":storeUpdateItemType,
                     "delete_items":deleteItemType,
                 };
                 var ConvertToJson1 = JSON.stringify(JsonSentToServer);
-                //console.log(ConvertToJson);
+                console.log(ConvertToJson1);
                 var idInvoice = atob($.cookie("KeyInvoice"));
-                var storeIdUniquew = ConvertJson.data.display_id;
+                //var storeIdUniquew = ConvertJson.data.display_id;
+
                 $.ajax({
                    type: "PUT",
-                    url: '../api/invoice/'+storeIdUniquew+'',
+                    url: '../api/invoice/'+idInvoice+'',
                     data: ConvertToJson1,
                     success: function (ResponseRequest) {
                        console.log(ResponseRequest);
