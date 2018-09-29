@@ -187,11 +187,13 @@
     });
     $('#getData').on('click',function () {
         var obj = {
-                "customer_name": "Johnny (Edited)",
-                "customer_phone": "023211112 (Edited)",
-                "interests_rate": 7,
-                "new_items": [
+                "customer_name": "Johnny (Edited 2nd time)",
+                "customer_phone": "023211112 (Edited 2nd time)",
+                "interests_rate": 10,
+                "new_items": [],
+                "modify_items": [
                     {
+                        "id": 26,
                         "item_type_id": 1,
                         "first_feature": "Honda Dream",
                         "second_feature": "Black",
@@ -199,19 +201,7 @@
                         "fourth_feature": "Skull Sticker"
                     }
                 ],
-                "modify_items": [
-                    {
-                        "id": 1,
-                        "item_type_id": 1,
-                        "first_feature": "Honda Dream (Edited) zxc",
-                        "second_feature": "Black (Edited) vnbv",
-                        "third_feature": "2AH-1035 (Edited)",
-                        "fourth_feature": "Skull Sticker (Edited)"
-                    }
-                ],
-                "delete_items": [
-                    22
-                ]
+                "delete_items": []
             };
 //        var obj = {
 //            "item_type_name" : "Motor Edited"
@@ -238,37 +228,35 @@
 //                }
 //            ]
 //        };
-        var obj = {
-            "interests_payment":30,
-            "cost_payment":1000,
-            "add_cost":0,
-            "add_items":[
-                {
-                    "item_type_id": 1,
-                    "first_feature": "Honda Dream",
-                    "second_feature": "Black",
-                    "third_feature": "2AH-1035",
-                    "fourth_feature": "Skull Sticker"
-                },
-                {
-                    "item_type_id": 1,
-                    "first_feature": "Honda Dream",
-                    "second_feature": "Black",
-                    "third_feature": "2AH-1035",
-                    "fourth_feature": "Skull Sticker"
-                }
-
-            ],
-            "depreciate_items":[
-                14,15,16
-            ]
-        };
-
-
+//        var obj = {
+//            "interests_payment":30,
+//            "cost_payment":1000,
+//            "add_cost":0,
+//            "add_items":[
+//                {
+//                    "item_type_id": 1,
+//                    "first_feature": "Honda Dream",
+//                    "second_feature": "Black",
+//                    "third_feature": "2AH-1035",
+//                    "fourth_feature": "Skull Sticker"
+//                },
+//                {
+//                    "item_type_id": 1,
+//                    "first_feature": "Honda Dream",
+//                    "second_feature": "Black",
+//                    "third_feature": "2AH-1035",
+//                    "fourth_feature": "Skull Sticker"
+//                }
+//
+//            ],
+//            "depreciate_items":[
+//                14,15,16
+//            ]
+//        };
         $.ajax({
             type:"PUT",
-            url:"api/invoice/took/8",
-            //data: obj,
+            url:"api/invoice/11",
+            data: obj,
             success:function (response) {
                 console.log(response);
             }

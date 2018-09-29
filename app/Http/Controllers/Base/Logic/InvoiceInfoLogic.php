@@ -19,6 +19,7 @@ use App\Http\Controllers\Base\Model\InvoiceInfoModel;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class InvoiceInfoLogic
 {
@@ -329,6 +330,44 @@ class InvoiceInfoLogic
             ->UserInvoiceAction($id, UserActionEnum::MARK_TOOK_INVOICE, $getObj->display_id, $changeLogArray);
 
         return true;
+    }
+
+    //Invoice and Item Transaction
+    public function InvoiceAndItemTransaction($from_date, $to_date, $action, $group, $invoice_id, $page_size){
+        $dateInstance = DateTimeLogic::Instance();
+        $from_date = (empty($from_date)) ?
+            $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT) :
+            $dateInstance->FormatDatTime($from_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        $to_date = (empty($to_date)) ?
+            $dateInstance->AddDaysToCurrentDateDBFormat(90, DateTimeLogic::DB_DATE_TIME_FORMAT) :
+            $dateInstance->FormatDatTime($to_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        $allowGroup = array(AuditGroup::ITEM, AuditGroup::INVOICE);
+        //
+        $getResult = DB::table('user_record')
+            ->select(
+                'user_record.id','user_record.parent_id','user_record.display_audit','user_record.description',
+                'user_record.change_log','user_record.date_time','users.name'
+            )
+            ->join('users','user_record.user_id','=','users.id')
+            ->where('user_record.parent_id','=', intval($invoice_id))
+            //->whereBetween('user_record.date_time', array($from_date, $to_date))
+            ->whereIn('user_record.audit_group', $allowGroup)
+            //When user want to filter by group and action
+            ->when(!empty($group), function ($query) use ($action, $group, $allowGroup){
+                if (!in_array($group, $allowGroup)) return $query;
+                //When group is in allow group
+                if (empty($action)){
+                    return $query->where('user_record.audit_group','=',$group);
+                }elseif (!empty($action)){
+                    return $query->where('user_record.action','=',$action)
+                        ->where('user_record.audit_group','=',$group);
+                }
+            })
+            ->paginate($page_size);
+        //Append
+        $getResult->appends(Input::except('page'));
+        //TODO: Finish this
+        return $getResult;
     }
 
 }
