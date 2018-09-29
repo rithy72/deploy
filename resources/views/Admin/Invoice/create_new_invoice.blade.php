@@ -208,7 +208,7 @@
             </div>
         </div>
     </div>
-    {{--====================== add more item to invoice ====================--}}
+    {{--====================== update item to invoice ====================--}}
     <form role="form" action="" method="">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div id="update_item_in_invoice" class="modal fade">
@@ -651,7 +651,7 @@
            // }
         });
     // close update and insert item type in table
-        $(document).on("click","#close_update_rate", function () {
+        $(document).on("click","#close_update_rate1", function () {
             // clear insert item type
             $('#selectTomNanh').val('').trigger('change');
             $('#selectTomNanh').text('').trigger('change');

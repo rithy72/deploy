@@ -79,7 +79,7 @@
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" id="close_create_new">&times;</button>
                         <h5 class="modal-title">@lang('string.createNewItem')</h5>
                     </div>
 
@@ -102,9 +102,9 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        <button type="button" class="btn btn-link" id="close_create_new" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        <button type="button" class="close_dialog_createNew" id="close_dialog_createNew" data-dismiss="modal" style="display: none">close dialog</button>
                         {{ csrf_field() }}
-                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
                         <button type="button" class="btn btn-primary btn_create_new_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
@@ -197,32 +197,35 @@
             }
         });
         //create new item type, and ,close dialog clear input
-        $(document).on("click","#close_update_rate",function () {
-            $('#new_item_type').val('');
+        var storeArrayItemType = new Array();
+        $(document).on("click","#close_create_new",function () {
+            if (storeArrayItemType.length > 0){
+                for (var i = 0; i < storeArrayItemType.length; i++){
+                    $.ajax({
+                        type: "POST",
+                        url: 'api/item_group',
+                        data: {"item_type_name": storeArrayItemType[i]},
+                        success: function (response) {}
+                    });
+                }
+                $('#new_item_type').val('');
+                $('.close_dialog_createNew').click();
+                window.location.href = '{{('/admin/item_type')}}';
+            } else {
+                $('#new_item_type').val('');
+                $('.close_dialog_createNew').click();
+            }
         });
         $(document).on("click",".btn_create_new_item_type",function () {
             var storeInput = $('#new_item_type').val();
             if (storeInput === ""){
                 alert('បំពេញសិន មុនពេលធ្វើការបង្កើត');
             } else {
-                $.ajax({
-                    type: "POST",
-                    url: 'api/item_group',
-                    data: {"item_type_name": storeInput},
-                    success: function (response) {
-                        var convert = JSON.parse(response);
-                        if (convert.status === "200") {
-                            alert('ធ្វើការបង្កើតរួចរាល់');
-                            $('#new_item_type').val('');
-                            window.location.href = '{{('/admin/item_type')}}';
-                        } else if (convert.status === "301") {
-                            alert('ឈ្មោះមានរួចហើយ សូមធ្វើការបញ្ចូលម្តងទៀត');
-                        }
-                    }
-                });
+                storeArrayItemType.push(storeInput);
+                $('#new_item_type').val('');
             }
         });
-        // show item type
+        // ========== show item type ============
         // ------------ store model of table -------------------
         var stringStatus , stringDeletable , storeValue , stringShowDeActiveOrActive;
         function ModelShowInTable(getJsonValue) {
@@ -402,8 +405,6 @@
                 clickNext.reads();
             }
         });
-
-
         //======================= Click button Search Item ========================================
         var timeout1 = null;
         $('.btn-Search').click(function () {

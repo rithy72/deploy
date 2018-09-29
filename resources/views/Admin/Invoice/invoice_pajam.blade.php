@@ -173,8 +173,8 @@
                     '<td>' + storeValue.data.data[i].display_id + '</td>' +
                     '<td>' + storeValue.data.data[i].customer_name + '</td>' +
                     '<td>' + storeValue.data.data[i].customer_phone + '</td>' +
-                    '<td>' + storeValue.data.data[i].grand_total + '</td>' +
-                    '<td>' + storeValue.data.data[i].interests_rate + '</td>' +
+                    '<td>' + storeValue.data.data[i].grand_total+ "$" + '</td>' +
+                    '<td>' + storeValue.data.data[i].interests_rate+ "%" + '</td>' +
                     '<td>' + storeValue.data.data[i].items + '</td>' +
                     '<td>' + storeValue.data.data[i].created_date_time + '</td>' +
                     '<td>' + storeValue.data.data[i].expired_date + '</td>' +
@@ -261,6 +261,13 @@
             var _idUnique = $(_tredite).find('td:eq(0)').text();
             $.cookie("KeyInvoice", btoa(_idUnique));// atob = decode from base64,  btoa = encode to base 64
             window.location.href = '{{('/admin/invoice/invoice_detail')}}';
+        });
+        // ---------------- update one invoice --------------------------
+        $(document).on("click", "#updates_invoice", function () {
+            var _tredite = $(this).closest('tr');
+            var _idUnique = $(_tredite).find('td:eq(0)').text();
+            $.cookie("KeyInvoice", btoa(_idUnique));// atob = decode from base64,  btoa = encode to base 64
+            window.location.href = '{{('/admin/invoice/update_invoice')}}';
         });
     </script>
 @endsection
