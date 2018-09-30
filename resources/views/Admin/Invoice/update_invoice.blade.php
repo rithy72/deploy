@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.phoneNumber')</label>
                     <div class="col-md-9">
-                        <input type="number" placeholder="@lang('string.writePhoneNumberHere...')" name="" id="customer_phone_number" class="form-control" style="border: 1px solid grey;">
+                        <input type="text" placeholder="@lang('string.writePhoneNumberHere...')" name="" id="customer_phone_number" class="form-control" style="border: 1px solid grey;">
                         <br>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.paymentTerm')</label>
                     <div class="col-md-9">
                         <select class="form-control" id="percent_rate" name="">
-                            <option selected="selected"></option>
+                            <option selected="selected" value=""></option>
                             <option value="2">2 %</option>
                             <option value="3">3 %</option>
                             <option value="4">4 %</option>
@@ -791,8 +791,8 @@
                 for (var i = 0; i < updateItemType.length; i++){
                     if (updateItemType[i].id !== ""){
                         storeUpdateItemType.push({
-                            "id":updateItemType[i].id,
-                            "item_type_id": updateItemType[i].item_type_id,
+                            "id":Number(updateItemType[i].id),
+                            "item_type_id": Number(updateItemType[i].item_type_id),
                             "first_feature": updateItemType[i].first_feature,
                             "second_feature": updateItemType[i].second_feature,
                             "third_feature": updateItemType[i].third_feature,
@@ -811,15 +811,14 @@
                 };
                 var ConvertToJson1 = JSON.stringify(JsonSentToServer);
                 console.log(ConvertToJson1);
+
                 var idInvoice = atob($.cookie("KeyInvoice"));
-                //var storeIdUniquew = ConvertJson.data.display_id;
 
                 $.ajax({
                    type: "PUT",
-                    url: '../api/invoice/'+idInvoice+'',
-                    data: ConvertToJson1,
+                    url: '../api/invoice/'+Number(idInvoice)+'',
+                    data: JsonSentToServer,
                     success: function (ResponseRequest) {
-                       console.log(ResponseRequest);
                         var convert = JSON.parse(ResponseRequest);
                         if (convert.status === "200"){
                             alert('ធ្វើការកែប្រែជោគជ័យ');

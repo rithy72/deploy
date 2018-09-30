@@ -62,7 +62,7 @@
                     <label class="control-label col-md-3" style="font-size: 15px">អត្រាការប្រាក់ ៖</label>
                     <div class="col-md-9">
                         <select class="form-control" id="kar_brak" name="">
-                            <option selected="selected"></option>
+                            <option selected="selected" value=""></option>
                             <option value="2">2 %</option>
                             <option value="3">3 %</option>
                             <option value="4">4 %</option>

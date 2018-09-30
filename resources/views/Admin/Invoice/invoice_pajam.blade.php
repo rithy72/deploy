@@ -269,5 +269,12 @@
             $.cookie("KeyInvoice", btoa(_idUnique));// atob = decode from base64,  btoa = encode to base 64
             window.location.href = '{{('/admin/invoice/update_invoice')}}';
         });
+        // ---------------- payment one invoice --------------------------
+        $(document).on("click", "#payment_invoice", function () {
+            var _tredite = $(this).closest('tr');
+            var _idUnique = $(_tredite).find('td:eq(0)').text();
+            $.cookie("KeyInvoice", btoa(_idUnique));// atob = decode from base64,  btoa = encode to base 64
+            window.location.href = '{{('/admin/invoice/invoice_payment')}}';
+        });
     </script>
 @endsection
