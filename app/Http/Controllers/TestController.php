@@ -37,7 +37,8 @@ class TestController extends Controller
     public function API(){
 
 
-        $result = InvoiceInfoLogic::Instance()->TookInvoice(10);
-        return $result;
+        $result = InvoiceInfoLogic::Instance()
+            ->InvoiceAndItemTransaction("","","","4",1,10);
+        return json_encode($result);
     }
 }

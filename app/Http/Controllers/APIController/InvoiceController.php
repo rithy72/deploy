@@ -134,6 +134,7 @@ class InvoiceController extends Controller
         return json_encode($returnModel);
     }
 
+    //Took Invoice
     public function TookInvoice($invoice_id){
         $returnModel = ReturnModel::Instance();
 
@@ -147,6 +148,22 @@ class InvoiceController extends Controller
             $returnModel->data = "Can not took Invoice";
         }
 
+        return json_encode($returnModel);
+    }
+
+    public function OneInvoiceTransactionHistory(Request $request, $invoice_id){
+        $returnModel = ReturnModel::Instance();
+        $fromDate = $request->input('from_date',"");
+        $toDate = $request->input('to_date',"");
+        $action = $request->input('action', "");
+        $group = $request->input('group',"");
+        $pageSize = $request->input('page_size',10);
+
+        $result = InvoiceInfoLogic::Instance()
+            ->InvoiceAndItemTransactionHistory($fromDate, $toDate, $action, $group, $invoice_id, $pageSize);
+
+        $returnModel->status = "200";
+        $returnModel->data = $result;
         return json_encode($returnModel);
     }
 

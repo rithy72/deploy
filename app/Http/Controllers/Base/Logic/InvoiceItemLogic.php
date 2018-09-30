@@ -155,6 +155,7 @@ class InvoiceItemLogic
         //Modify Invoice Items
         $insertResult = DB::table('invoice_item')
             ->where('invoice_id','=', $invoice_id)
+            ->where('id','=', $invoice_item_model['id'])
             ->update([
                 'item_type_id' => $invoice_item_model['item_type_id'],
                 'first_feature' => $invoice_item_model['first_feature'],

@@ -83,6 +83,8 @@ Route::middleware('auth')->group(function (){
                 Route::put('/payment/{invoice_id}',
                     'APIController\InvoiceController@InvoicePaymentAndItemsTransaction');
                 Route::put('/took/{invoice_id}', 'APIController\InvoiceController@TookInvoice');
+                Route::get('/transaction_history/{invoice_id}',
+                    'APIController\InvoiceController@OneInvoiceTransactionHistory');
             });
             /* *
              * Invoice Item

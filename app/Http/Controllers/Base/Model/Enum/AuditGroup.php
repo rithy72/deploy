@@ -23,6 +23,7 @@ class AuditGroup
     public const ITEM_TYPE_NAME = 8;
     public const INVOICE_ITEM = 9;
     public const GRAND_COST = 10;
+    public const REMAIN_COST = 11;
 
     public const AUDIT_GROUP_STRING = array(
         1 => "វិក្ក័យប័ត្រ",
@@ -34,7 +35,8 @@ class AuditGroup
         7 => "ការប្រាក់",
         8 => "ឈ្មោះប្រភេទទំនិញ",
         9 => "ទំនិញ",
-        10 => "ប្រាក់ដើម"
+        10 => "ប្រាក់ដើម",
+        11 => "ប្រាក់ដើមសល់"
     );
 
 }

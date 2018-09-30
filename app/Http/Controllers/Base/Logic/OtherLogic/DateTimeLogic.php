@@ -15,10 +15,18 @@ class DateTimeLogic
     private const TIME_ZONE = "Asia/Bangkok";
     public const DB_DATE_TIME_FORMAT = "Y-m-d H:i:s";
     public const SHOW_DATE_TIME_FORMAT = "d/m/Y H:i:s";
+    public const DB_DATE_FORMAT = "Y-m-d";
+    public const SHOW_DATE_FORMAT = "d/m/Y";
 
     //Instance Method
     public static function Instance(){
         return new DateTimeLogic();
+    }
+
+    //Format Date String
+    public function FormatDatTime($date_string, $format){
+        $finalDate = date($format, strtotime($date_string));
+        return $finalDate;
     }
 
     //Get Current Date Method

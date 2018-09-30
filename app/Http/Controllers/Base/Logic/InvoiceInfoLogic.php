@@ -19,6 +19,7 @@ use App\Http\Controllers\Base\Model\InvoiceInfoModel;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class InvoiceInfoLogic
 {
@@ -69,65 +70,25 @@ class InvoiceInfoLogic
     public function FilterSearch($search, $search_option, $status, $page_size){
         $searchColumn = $this->FinalizeSearchOption($search_option);
         //
-        if (empty($status)){
-            //When user don't care about status
-            if (empty($search)){
-                //When user don't search
-                $getResult = DB::table('invoice_info')
-                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
-                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
-                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
-                        'invoice_info.expired_date','invoice_info.status')
-                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
-                    ->groupBy('invoice_info.id')
-                    ->paginate($page_size);
+        $getResult = DB::table('invoice_info')
+            ->select(
+                'invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                'invoice_info.expired_date','invoice_info.status'
+            )
+            ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+            ->when(!empty($search), function ($query) use ($searchColumn, $search){
+                return $query->where($searchColumn, 'like', '%'.$search.'%');
+            })
+            ->when(!empty($status), function ($query) use ($status){
+                return $query->where('invoice_info.status','=', $status);
+            })
+            ->groupBy('invoice_info.id')
+            ->orderBy('invoice_info.created_date_time','desc')
+            ->paginate($page_size);
 
-                return $getResult;
-            }elseif (!empty($search)){
-                //When user search
-                $getResult = DB::table('invoice_info')
-                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
-                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
-                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
-                        'invoice_info.expired_date','invoice_info.status')
-                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
-                    ->where($searchColumn, 'like', '%'.$search.'%')
-                    ->groupBy('invoice_info.id')
-                    ->paginate($page_size);
-
-                return $getResult;
-            }
-        }elseif (!empty($status)){
-            //When user care about status
-            if (empty($search)){
-                //When user don't search
-                $getResult = DB::table('invoice_info')
-                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
-                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
-                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
-                        'invoice_info.expired_date','invoice_info.status')
-                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
-                    ->where('invoice_info.status','=', $status)
-                    ->groupBy('invoice_info.id')
-                    ->paginate($page_size);
-
-                return $getResult;
-            }elseif (!empty($search)){
-                //When user search
-                $getResult = DB::table('invoice_info')
-                    ->select('invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
-                        'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
-                        DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
-                        'invoice_info.expired_date','invoice_info.status')
-                    ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
-                    ->where($searchColumn, 'like', '%'.$search.'%')
-                    ->where('invoice_info.status','=', $status)
-                    ->groupBy('invoice_info.id')
-                    ->paginate($page_size);
-
-                return $getResult;
-            }
-        }
+        return $getResult;
     }
 
     //Get One Invoice
@@ -138,7 +99,7 @@ class InvoiceInfoLogic
                 'invoice_info.id','invoice_info.customer_name','invoice_info.customer_phone',
                 'invoice_info.created_date_time','invoice_info.expired_date','invoice_info.user_id',
                 'users.name','invoice_info.status','invoice_info.grand_total','invoice_info.paid',
-                'invoice_info.interests_rate','invoice_info.final_date_time'
+                'invoice_info.interests_rate','invoice_info.final_date_time','invoice_info.remain'
             )
             ->join('users','invoice_info.user_id','=','users.id')
             ->where('invoice_info.id','=', $id)->first();
@@ -158,6 +119,7 @@ class InvoiceInfoLogic
         $invoiceModel->display_status = InvoiceStatusEnum::STATUS_ARRAY[intval($invoiceModel->status)];
         $invoiceModel->grand_total = $invoiceResult->grand_total;
         $invoiceModel->paid = $invoiceResult->paid;
+        $invoiceModel->remain = $invoiceResult->remain;
         $invoiceModel->interests_rate = intval($invoiceResult->interests_rate);
         $invoiceModel->interests_value = ($invoiceResult->grand_total * $invoiceResult->interests_rate) / 100;
         $invoiceModel->final_date_time = $invoiceResult->final_date_time;
@@ -186,6 +148,7 @@ class InvoiceInfoLogic
                     'user_id' => Auth::id(),
                     'status' => InvoiceStatusEnum::OPEN,
                     'grand_total' => $invoice_info_model->grand_total,
+                    'remain' => $invoice_info_model->grand_total,
                     'interests_rate' => intval($invoice_info_model->interests_rate),
                 ]);
             //Change Log
@@ -329,6 +292,47 @@ class InvoiceInfoLogic
             ->UserInvoiceAction($id, UserActionEnum::MARK_TOOK_INVOICE, $getObj->display_id, $changeLogArray);
 
         return true;
+    }
+
+    //Invoice and Item Transaction
+    public function InvoiceAndItemTransactionHistory($from_date, $to_date, $action, $group, $invoice_id, $page_size){
+        $dateInstance = DateTimeLogic::Instance();
+        //
+        $oldInvoiceObj = $this->Find($invoice_id);
+        //
+        $from_date = (empty($from_date)) ?
+            $dateInstance->FormatDatTime($oldInvoiceObj->created_date, DateTimeLogic::DB_DATE_TIME_FORMAT) :
+            $dateInstance->FormatDatTime($from_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        $to_date = (empty($to_date)) ?
+            $dateInstance->AddDaysToCurrentDateDBFormat(90, DateTimeLogic::DB_DATE_TIME_FORMAT) :
+            $dateInstance->FormatDatTime($to_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        $allowGroup = array(AuditGroup::ITEM, AuditGroup::INVOICE);
+        //
+        $getResult = DB::table('user_record')
+            ->select(
+                'user_record.id','user_record.parent_id','user_record.display_audit','user_record.description',
+                'user_record.change_log','user_record.date_time','users.name'
+            )
+            ->join('users','user_record.user_id','=','users.id')
+            ->where('user_record.parent_id','=', intval($invoice_id))
+            //->whereBetween('user_record.date_time', array($from_date, $to_date))
+            ->whereIn('user_record.audit_group', $allowGroup)
+            //When user want to filter by group and action
+            ->when(!empty($group), function ($query) use ($action, $group, $allowGroup){
+                if (!in_array($group, $allowGroup)) return $query;
+                //When group is in allow group
+                if (empty($action)){
+                    return $query->where('user_record.audit_group','=',$group);
+                }elseif (!empty($action)){
+                    return $query->where('user_record.action','=',$action)
+                        ->where('user_record.audit_group','=',$group);
+                }
+            })
+            ->paginate($page_size);
+        //Append
+        $getResult->appends(Input::except('page'));
+
+        return $getResult;
     }
 
 }
