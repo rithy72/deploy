@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Base\Logic\OtherLogic;
 
 
+use DateTime;
+
 class DateTimeLogic
 {
 
@@ -41,5 +43,24 @@ class DateTimeLogic
         $date = $this->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT);
         $newDate = date($date_time_format, strtotime('+'.intval($date_amount).' days',strtotime($date))) ;
         return $newDate;
+    }
+
+    //Check Late
+    public function CheckLate($date_param){
+        $class = new \stdClass();
+        $today = new DateTime(DateTimeLogic::GetCurrentDateTime(DateTimeLogic::DB_DATE_FORMAT));
+        $dateParam = new DateTime($this->FormatDatTime($date_param, DateTimeLogic::DB_DATE_FORMAT));
+        //
+        $result = $today->diff($dateParam)->days;
+        //
+        if ($dateParam < $today){
+            $class->is_late = true;
+            $class->late_days = $result;
+        }elseif ($dateParam > $today){
+            $class->is_late = false;
+            $class->late_days = 0;
+        }
+        //
+        return $class;
     }
 }

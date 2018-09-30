@@ -254,9 +254,9 @@
 //            ]
 //        };
         $.ajax({
-            type:"PUT",
-            url:"api/invoice/payment/2",
-            data: obj,
+            type:"GET",
+            url:"api/invoice/2",
+            //data: obj,
             success:function (response) {
                 console.log(response);
             }

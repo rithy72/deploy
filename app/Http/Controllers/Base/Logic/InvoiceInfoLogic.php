@@ -103,6 +103,8 @@ class InvoiceInfoLogic
             )
             ->join('users','invoice_info.user_id','=','users.id')
             ->where('invoice_info.id','=', $id)->first();
+        //Calculate Late Days
+        $lateObj = DateTimeLogic::Instance()->CheckLate($invoiceResult->expired_date);
 
         //Manage Info Model
         $invoiceModel = InvoiceInfoModel::Instance();
@@ -113,6 +115,8 @@ class InvoiceInfoLogic
         $invoiceModel->customer_phone = $invoiceResult->customer_phone;
         $invoiceModel->created_date = $invoiceResult->created_date_time;
         $invoiceModel->expire_date = $invoiceResult->expired_date;
+        $invoiceModel->is_late = $lateObj->is_late;
+        $invoiceModel->late_days = $lateObj->late_days;
         $invoiceModel->user_id = $invoiceResult->user_id;
         $invoiceModel->user_full_name = $invoiceResult->name;
         $invoiceModel->status = $invoiceResult->status;
@@ -320,13 +324,13 @@ class InvoiceInfoLogic
             //When user want to filter by group and action
             ->when(!empty($group), function ($query) use ($action, $group, $allowGroup){
                 if (!in_array($group, $allowGroup)) return $query;
-                //When group is in allow group
-                if (empty($action)){
-                    return $query->where('user_record.audit_group','=',$group);
-                }elseif (!empty($action)){
-                    return $query->where('user_record.action','=',$action)
-                        ->where('user_record.audit_group','=',$group);
+                //
+                if (!empty($action)){
+                    return $query->where('user_record.audit_group', '=', $group)
+                                 ->where('user_record.action', '=', $action);
                 }
+                //
+                return $query->where('user_record.audit_group', '=', $group);
             })
             ->paginate($page_size);
         //Append
