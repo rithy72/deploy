@@ -205,13 +205,13 @@ class InvoicePaymentLogic
         $this->InterestsPayment($interests_payment, $invoice_id);
         $income += $interests_payment;
 
-        //Cost Payment
-        $this->GrandCostPayment($cost_payment, $invoice_id);
-        $income += $cost_payment;
-
         //Add more cost
         $this->AddMoreCost($add_cost, $invoice_id);
         $expense += $add_cost;
+
+        //Cost Payment
+        $this->GrandCostPayment($cost_payment, $invoice_id);
+        $income += $cost_payment;
 
         //Add more Items
         $this->AddItemsWhenPayment($add_items, $invoice_id);

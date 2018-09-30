@@ -36,7 +36,6 @@ class InvoiceController extends Controller
 
         //
         $getResult = InvoiceInfoLogic::Instance()->FilterSearch($search, $searchOption, $status, $pageSize);
-        $getResult->appends(Input::except('page'));
 
         $class = ReturnModel::Instance();
         $class->status = "200";

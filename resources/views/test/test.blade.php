@@ -189,7 +189,7 @@
     var obj = {
         "interests_payment": 0,
         "cost_payment": 0,
-        "add_cost": 100,
+        "add_cost": 0,
         "add_items": [
             {
                 "item_type_id": 1,
@@ -200,7 +200,7 @@
             }
 
         ],
-        "depreciate_items": []
+        "depreciate_items": [9,10]
     };
 
 //        var obj = {
@@ -254,9 +254,9 @@
 //            ]
 //        };
         $.ajax({
-            type:"GET",
-            url:"api/invoices/over_due?page_size=5",
-            //data: obj,
+            type:"PUT",
+            url:"api/invoice/payment/9",
+            data: obj,
             success:function (response) {
                 console.log(response);
             }
