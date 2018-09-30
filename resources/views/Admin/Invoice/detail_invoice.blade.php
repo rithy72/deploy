@@ -35,7 +35,7 @@
                 <div class="col-md-4">
                     <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;margin-bottom: 0;">
                         <a href="{{('/admin/invoice/create_new_invoice')}}" class="btn btn-success" id="" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
-                        <a class="btn btn-primary" id="updates_invoice" style="margin-bottom: 4px;"><i class="icon-pencil7 position-left"></i>@lang('string.update')</a> ||
+                        <a href="{{('/admin/invoice/update_invoice')}}" class="btn btn-primary" id="updates_invoice" style="margin-bottom: 4px;"><i class="icon-pencil7 position-left"></i>@lang('string.update')</a> ||
                         <a href="{{('/admin/invoice/invoice_payment')}}" class="btn createNewCountry" id="add_item" style="background: #ff840d;color: white;margin-bottom: 4px;"><i class="icon-price-tag position-left"></i>@lang('string.payment')</a>
                     </div>
                 </div>
@@ -381,10 +381,10 @@
             });
         })();
         // ---------------- update one invoice --------------------------
-        $(document).on("click", "#updates_invoice", function () {
-           // var dd = $.cookie("KeyInvoice", _ID);// atob = decode from base64,  btoa = encode to base 64
-            $.cookie("KeyInvoice", btoa(getResponse.data.id));
-            window.location.href = '{{('/admin/invoice/update_invoice')}}';
-        });
+        {{--$(document).on("click", "#updates_invoice", function () {--}}
+           {{--// var dd = $.cookie("KeyInvoice", _ID);// atob = decode from base64,  btoa = encode to base 64--}}
+            {{--$.cookie("KeyInvoice", btoa(getResponse.data.id));--}}
+            {{--window.location.href = '{{('/admin/invoice/update_invoice')}}';--}}
+        {{--});--}}
     </script>
 @endsection
