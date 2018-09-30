@@ -151,6 +151,7 @@ class InvoiceController extends Controller
         return json_encode($returnModel);
     }
 
+    //Get Invoice Transaction History
     public function OneInvoiceTransactionHistory(Request $request, $invoice_id){
         $returnModel = ReturnModel::Instance();
         $fromDate = $request->input('from_date',"");
@@ -167,4 +168,15 @@ class InvoiceController extends Controller
         return json_encode($returnModel);
     }
 
+    //Get Over 60days Due Invoices
+    public function GetOverDueInvoices(Request $request){
+        $returnModel = ReturnModel::Instance();
+        $pageSize = $request->input('page_size',10);
+        //
+        $getResult = InvoiceInfoLogic::Instance()->GetOverDueInvoices($pageSize);
+
+        $returnModel->status = "200";
+        $returnModel->data = $getResult;
+        return json_encode($returnModel);
+    }
 }

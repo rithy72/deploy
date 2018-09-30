@@ -255,7 +255,7 @@
 //        };
         $.ajax({
             type:"GET",
-            url:"api/invoice/2",
+            url:"api/invoices/over_due?page_size=5",
             //data: obj,
             success:function (response) {
                 console.log(response);

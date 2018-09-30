@@ -29,7 +29,7 @@ class InvoiceInfoModel
     public $interests_rate;
     public $interests_value;
     public $final_date_time;
-    public $final_action_userId;
+    public $final_action_user;
 
     public static function Instance(){
         return new InvoiceInfoModel();

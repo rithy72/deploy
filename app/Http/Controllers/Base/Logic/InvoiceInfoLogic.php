@@ -91,6 +91,29 @@ class InvoiceInfoLogic
         return $getResult;
     }
 
+    public function GetOverDueInvoices($page_size){
+        $lateDate = DateTimeLogic::Instance()
+            ->AddDaysToCurrentDateDBFormat(-60, DateTimeLogic::DB_DATE_FORMAT);
+        //
+        $getResult = DB::table('invoice_info')
+            ->select(
+                'invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
+                'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
+                DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
+                'invoice_info.expired_date','invoice_info.status'
+            )
+            ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
+            ->where('invoice_info.expired_date', '=', $lateDate)
+            ->where('invoice_info.status','=', InvoiceStatusEnum::OPEN)
+            ->groupBy('invoice_info.id')
+            ->orderBy('invoice_info.expired_date','asc')
+            ->paginate($page_size);
+        //
+        $getResult->appends(Input::except("page"));
+
+        return $getResult;
+    }
+
     //Get One Invoice
     public function Find($id){
         //Invoice Info Query
@@ -99,9 +122,11 @@ class InvoiceInfoLogic
                 'invoice_info.id','invoice_info.customer_name','invoice_info.customer_phone',
                 'invoice_info.created_date_time','invoice_info.expired_date','invoice_info.user_id',
                 'users.name','invoice_info.status','invoice_info.grand_total','invoice_info.paid',
-                'invoice_info.interests_rate','invoice_info.final_date_time','invoice_info.remain'
+                'invoice_info.interests_rate','invoice_info.final_date_time','invoice_info.remain',
+                'final_user.name as final_user'
             )
             ->join('users','invoice_info.user_id','=','users.id')
+            ->leftJoin('users as final_user','invoice_info.final_action_user','=','final_user.id')
             ->where('invoice_info.id','=', $id)->first();
         //Calculate Late Days
         $lateObj = DateTimeLogic::Instance()->CheckLate($invoiceResult->expired_date);
@@ -126,7 +151,8 @@ class InvoiceInfoLogic
         $invoiceModel->remain = $invoiceResult->remain;
         $invoiceModel->interests_rate = intval($invoiceResult->interests_rate);
         $invoiceModel->interests_value = ($invoiceResult->grand_total * $invoiceResult->interests_rate) / 100;
-        $invoiceModel->final_date_time = $invoiceResult->final_date_time;
+        $invoiceModel->final_date_time = $invoiceResult->final_date_time??"";
+        $invoiceModel->final_action_user = $invoiceResult->final_user??"";
 
         return $invoiceModel;
     }

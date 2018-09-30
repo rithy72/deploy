@@ -86,6 +86,9 @@ Route::middleware('auth')->group(function (){
                 Route::get('/transaction_history/{invoice_id}',
                     'APIController\InvoiceController@OneInvoiceTransactionHistory');
             });
+            Route::prefix('invoices')->group(function (){
+                Route::get('/over_due','APIController\InvoiceController@GetOverDueInvoices');
+            });
             /* *
              * Invoice Item
              * */

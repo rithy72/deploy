@@ -37,7 +37,7 @@ class TestController extends Controller
     public function API(){
 
 
-        $result = DateTimeLogic::Instance()->CheckLate("2018-5-29");
+        $result = InvoiceInfoLogic::Instance()->GetOverDueInvoices(10);
         return json_encode($result);
     }
 }
