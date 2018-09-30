@@ -71,10 +71,11 @@ class InvoiceItemLogic
     //Filter Search Items
     public function FilterSearch($search, $status, $item_type, $page_size){
         $splitSearch = explode(',', $search);
-        $firstFeature = (array_key_exists(0, $splitSearch)) ? $splitSearch[0] : "";
-        $secondFeature = (array_key_exists(1, $splitSearch)) ? $splitSearch[1] : "";
-        $thirdFeature = (array_key_exists(2, $splitSearch)) ? $splitSearch[2] : "";
-        $fourthFeature = (array_key_exists(3, $splitSearch)) ? $splitSearch[3] : "";
+        $invoiceId = (array_key_exists(0, $splitSearch)) ? $splitSearch[0] : "";
+        $firstFeature = (array_key_exists(0, $splitSearch)) ? $splitSearch[1] : "";
+        $secondFeature = (array_key_exists(1, $splitSearch)) ? $splitSearch[2] : "";
+        $thirdFeature = (array_key_exists(2, $splitSearch)) ? $splitSearch[3] : "";
+        $fourthFeature = (array_key_exists(3, $splitSearch)) ? $splitSearch[4] : "";
         //Querying
         $getResult = DB::table('invoice_item')
             ->select(
@@ -94,6 +95,10 @@ class InvoiceItemLogic
             //When user want item type
             ->when(!empty($item_type), function ($query) use ($item_type){
                 return $query->where('invoice_item.item_type_id','=',$item_type);
+            })
+            //When user want to filter search by invoice id
+            ->when(!empty($invoiceId), function ($query) use ($invoiceId){
+                return $query->where('invoice_item.invoice_id','=',$invoiceId);
             })
             //When user search only have 1st feature
             ->when(!empty($firstFeature) && $firstFeature != "", function ($query) use ($firstFeature){

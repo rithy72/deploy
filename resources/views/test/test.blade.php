@@ -190,17 +190,8 @@
         "interests_payment": 0,
         "cost_payment": 0,
         "add_cost": 0,
-        "add_items": [
-            {
-                "item_type_id": 1,
-                "first_feature": "HondaDream",
-                "second_feature": "Black",
-                "third_feature": "2AH-1035",
-                "fourth_feature": "SkullSticker"
-            }
-
-        ],
-        "depreciate_items": [9,10]
+        "add_items": [],
+        "depreciate_items": [18]
     };
 
 //        var obj = {
