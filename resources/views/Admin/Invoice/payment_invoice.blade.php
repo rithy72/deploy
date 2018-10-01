@@ -562,7 +562,7 @@
                     "add_items": [],
                     "depreciate_items": deleteItemType
                 };
-                console.log(JSON.stringify(storeValue1));
+                //console.log(JSON.stringify(storeValue1));
                 $.ajax({
                     type:"PUT",
                     url : '../api/invoice/payment/'+Number(ConvertJson.data.display_id)+'',
@@ -585,7 +585,7 @@
                     "add_items": NewArrayItemType,
                     "depreciate_items": deleteItemType
                 };
-                console.log(JSON.stringify(storeValue2));
+                //console.log(JSON.stringify(storeValue2));
                 $.ajax({
                     type:"PUT",
                     url : '../api/invoice/payment/'+Number(ConvertJson.data.display_id)+'',
