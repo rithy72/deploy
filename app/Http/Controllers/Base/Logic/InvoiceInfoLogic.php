@@ -17,6 +17,7 @@ use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\InvoiceInfoModel;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
+use App\Http\Controllers\Base\Model\Other\PaginateModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -38,6 +39,37 @@ class InvoiceInfoLogic
         }elseif ($searchOption == InvoiceSearchOptionEnum::INVOICE_NUMBER){
             return "invoice_info.id";
         }
+    }
+
+    //Finalize Invoice Object
+    private function FinalizeInvoiceObject($invoiceResult){
+        $lateObj = DateTimeLogic::Instance()->CheckLate($invoiceResult->expired_date);
+        $status = $invoiceResult->status;
+        //Manage Info Model
+        $invoiceModel = InvoiceInfoModel::Instance();
+        $invoiceModel->id = $invoiceResult->id;
+        $invoiceModel->display_id = str_pad(intval($invoiceModel->id),
+            7,"0", STR_PAD_LEFT);
+        $invoiceModel->customer_name = $invoiceResult->customer_name;
+        $invoiceModel->customer_phone = $invoiceResult->customer_phone;
+        $invoiceModel->created_date = $invoiceResult->created_date_time;
+        $invoiceModel->items = (isset($invoiceResult->items)) ? $invoiceResult->items:0;
+        $invoiceModel->expire_date = ($status == InvoiceStatusEnum::OPEN) ? $invoiceResult->expired_date:"-";
+        $invoiceModel->is_late = ($status == InvoiceStatusEnum::OPEN) ? $lateObj->is_late:false;
+        $invoiceModel->late_days = ($status == InvoiceStatusEnum::OPEN) ? $lateObj->late_days:"-";
+        $invoiceModel->user_id = (isset($invoiceResult->user_id)) ? $invoiceResult->user_id:"";
+        $invoiceModel->user_full_name = (isset($invoiceResult->name)) ? $invoiceResult->name:"";
+        $invoiceModel->status = $invoiceResult->status;
+        $invoiceModel->display_status = InvoiceStatusEnum::STATUS_ARRAY[intval($invoiceModel->status)];
+        $invoiceModel->grand_total = $invoiceResult->grand_total;
+        $invoiceModel->paid = (isset($invoiceResult->paid)) ? $invoiceResult->paid:0;
+        $invoiceModel->remain = (isset($invoiceResult->remain)) ? $invoiceResult->remain:0;
+        $invoiceModel->interests_rate = (isset($invoiceResult->interests_rate)) ? intval($invoiceResult->interests_rate):0;
+        $invoiceModel->interests_value = ($invoiceResult->remain * $invoiceResult->interests_rate) / 100;
+        $invoiceModel->final_date_time = (isset($invoiceResult->final_date_time)) ? $invoiceResult->final_date_time:"";
+        $invoiceModel->final_action_user = (isset($invoiceResult->final_user))?$invoiceResult->final_user:"";
+
+        return $invoiceModel;
     }
 
     //Change Log Edit Invoice Info
@@ -75,10 +107,14 @@ class InvoiceInfoLogic
                 'invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
                 'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
                 DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
-                'invoice_info.expired_date','invoice_info.status'
+                'invoice_info.expired_date','invoice_info.status','invoice_info.remain'
             )
             ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
-            ->when(!empty($search), function ($query) use ($searchColumn, $search){
+            ->when(!empty($search), function ($query) use ($searchColumn, $search, $search_option){
+                if ($search_option == InvoiceSearchOptionEnum::INVOICE_NUMBER){
+                    return $query->where($searchColumn, '=', $search);
+                }
+                //
                 return $query->where($searchColumn, 'like', '%'.$search.'%');
             })
             ->when(!empty($status), function ($query) use ($status){
@@ -87,10 +123,21 @@ class InvoiceInfoLogic
             ->groupBy('invoice_info.id')
             ->orderBy('invoice_info.created_date_time','desc')
             ->paginate($page_size);
+        //Append
+        $getResult->appends(Input::except("page"));
+        //
+        $returnArray = array();
+        foreach ($getResult as $invoice){
+            $model = $this->FinalizeInvoiceObject((object)$invoice);
+            array_push($returnArray, $model);
+        }
+        //Generate New Paginate Model
+        $newModel = PaginateModel::Instance()->FinalizePaginateModel($returnArray, $getResult);
 
-        return $getResult;
+        return $newModel;
     }
 
+    //Get Over Due Invoices
     public function GetOverDueInvoices($page_size){
         $lateDate = DateTimeLogic::Instance()
             ->AddDaysToCurrentDateDBFormat(-60, DateTimeLogic::DB_DATE_FORMAT);
@@ -108,10 +155,18 @@ class InvoiceInfoLogic
             ->groupBy('invoice_info.id')
             ->orderBy('invoice_info.expired_date','asc')
             ->paginate($page_size);
-        //
+        //Append
         $getResult->appends(Input::except("page"));
+        //
+        $returnArray = array();
+        foreach ($getResult as $invoice){
+            $model = $this->FinalizeInvoiceObject((object)$invoice);
+            array_push($returnArray, $model);
+        }
+        //Generate New Paginate Model
+        $newModel = PaginateModel::Instance()->FinalizePaginateModel($returnArray, $getResult);
 
-        return $getResult;
+        return $newModel;
     }
 
     //Get One Invoice
@@ -123,36 +178,16 @@ class InvoiceInfoLogic
                 'invoice_info.created_date_time','invoice_info.expired_date','invoice_info.user_id',
                 'users.name','invoice_info.status','invoice_info.grand_total','invoice_info.paid',
                 'invoice_info.interests_rate','invoice_info.final_date_time','invoice_info.remain',
-                'final_user.name as final_user'
+                'final_user.name as final_user',DB::raw("count(invoice_item.id) as items")
             )
             ->join('users','invoice_info.user_id','=','users.id')
+            ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
             ->leftJoin('users as final_user','invoice_info.final_action_user','=','final_user.id')
-            ->where('invoice_info.id','=', $id)->first();
-        //Calculate Late Days
-        $lateObj = DateTimeLogic::Instance()->CheckLate($invoiceResult->expired_date);
+            ->where('invoice_info.id','=', $id)
+            ->groupBy('invoice_info.id')
+            ->first();
 
-        //Manage Info Model
-        $invoiceModel = InvoiceInfoModel::Instance();
-        $invoiceModel->id = $invoiceResult->id;
-        $invoiceModel->display_id = str_pad(intval($invoiceModel->id),
-            7,"0", STR_PAD_LEFT);
-        $invoiceModel->customer_name = $invoiceResult->customer_name;
-        $invoiceModel->customer_phone = $invoiceResult->customer_phone;
-        $invoiceModel->created_date = $invoiceResult->created_date_time;
-        $invoiceModel->expire_date = $invoiceResult->expired_date;
-        $invoiceModel->is_late = $lateObj->is_late;
-        $invoiceModel->late_days = $lateObj->late_days;
-        $invoiceModel->user_id = $invoiceResult->user_id;
-        $invoiceModel->user_full_name = $invoiceResult->name;
-        $invoiceModel->status = $invoiceResult->status;
-        $invoiceModel->display_status = InvoiceStatusEnum::STATUS_ARRAY[intval($invoiceModel->status)];
-        $invoiceModel->grand_total = $invoiceResult->grand_total;
-        $invoiceModel->paid = $invoiceResult->paid;
-        $invoiceModel->remain = $invoiceResult->remain;
-        $invoiceModel->interests_rate = intval($invoiceResult->interests_rate);
-        $invoiceModel->interests_value = ($invoiceResult->grand_total * $invoiceResult->interests_rate) / 100;
-        $invoiceModel->final_date_time = $invoiceResult->final_date_time??"";
-        $invoiceModel->final_action_user = $invoiceResult->final_user??"";
+        $invoiceModel = $this->FinalizeInvoiceObject($invoiceResult);
 
         return $invoiceModel;
     }
@@ -298,6 +333,7 @@ class InvoiceInfoLogic
         }
     }
 
+    //Took Invoice
     public function TookInvoice($id){
         $getObj = $this->Find($id);
         $changeLogArray = array();

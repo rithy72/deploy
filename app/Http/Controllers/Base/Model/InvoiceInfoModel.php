@@ -16,6 +16,7 @@ class InvoiceInfoModel
     public $customer_name;
     public $customer_phone;
     public $created_date;
+    public $items;
     public $expire_date;
     public $is_late;
     public $late_days;

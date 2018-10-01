@@ -20,7 +20,7 @@ class InvoiceInfo extends Migration
             $table->text('customer_name')->nullable(true);
             $table->text('customer_phone')->nullable(true);
             $table->dateTime('created_date_time');
-            $table->date('expired_date');
+            $table->date('expired_date')->nullable(true);
             $table->integer('user_id');
             $table->string('status');
             $table->boolean('delete_able')->default(false);
