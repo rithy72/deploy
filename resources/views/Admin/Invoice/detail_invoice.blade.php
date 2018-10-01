@@ -329,7 +329,7 @@
                type: "GET",
                 url: '../api/invoice/'+_ID+'',
                 success: function (response) {
-                    //console.log(response);
+                    console.log(response);
                     getResponse = JSON.parse(response);
                     document.getElementById("id_invoice").innerHTML = getResponse.data.display_id;
                     document.getElementById("employee_name").innerHTML = getResponse.data.user_full_name;

@@ -319,17 +319,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        // if check can take more price out of that invoice
-        var checker = document.getElementById('checkme');
-        var sendbtn = document.getElementById('takeOutPriceMore');
-        // when unchecked or checked, run the function
-        checker.onchange = function(){
-            if(this.checked){
-                sendbtn.disabled = false;
-            } else {
-                sendbtn.disabled = true;
-            }
-        };
+
         // select group of item
         $("#selectTomNanh").select2({
             ajax: {
@@ -622,5 +612,27 @@
                 });
             }
         });
+
+        // ---- ready function if moneyPay > luy nov sol ----
+        $("#payMoney").keyup(function() {
+            var storeValuePayMoney = $('#payMoney').val();
+            const storeString = $('#remain').val();
+            const splitString = storeString.split(" ");
+            var storePrakDermNovSol = splitString[0];
+            if(Number(storeValuePayMoney) > Number(storePrakDermNovSol)){
+                document.getElementById('payMoney').value = storePrakDermNovSol;
+            }
+        });
+        // if check can take more price out of that invoice
+        var checker = document.getElementById('checkme');
+        var sendbtn = document.getElementById('takeOutPriceMore');
+        // when unchecked or checked, run the function
+        checker.onchange = function(){
+            if(this.checked){
+                sendbtn.disabled = false;
+            } else {
+                sendbtn.disabled = true;
+            }
+        };
     </script>
 @endsection

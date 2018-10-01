@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.phoneNumber')</label>
                     <div class="col-md-9">
-                        <input type="number" placeholder="@lang('string.writePhoneNumberHere...')" name="" id="customer_phone_number" class="form-control" style="border: 1px solid grey;">
+                        <input type="text" placeholder="@lang('string.writePhoneNumberHere...')" name="" id="customer_phone_number" class="form-control" style="border: 1px solid grey;">
                         <br>
                     </div>
                 </div>
