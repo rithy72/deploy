@@ -125,4 +125,20 @@ class DailyReportLogic
         }
     }
 
+    public function FilterSearch($from_date, $to_date, $page_size){
+        $dateInstance = DateTimeLogic::Instance();
+        $fromDate = (empty($from_date)) ?
+            $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_FORMAT) :
+            $dateInstance->FormatDatTime($from_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        $toDate = (empty($to_date)) ?
+            $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_FORMAT) :
+            $dateInstance->FormatDatTime($to_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        //
+        $getResult = DB::table('daily_report')
+            ->whereIn('date', array($fromDate, $toDate))
+            ->paginate($page_size);
+
+        return $getResult;
+    }
+
 }
