@@ -24,6 +24,9 @@ class InvoiceItemModel
     public $delete_able;
     public $out_date;
     public $user_id;
+    public $in_date;
+    public $in_user;
+    public $sale_price;
 
     public static function Instance(){
         return new InvoiceItemModel();

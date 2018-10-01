@@ -24,8 +24,11 @@ class InvoiceItem extends Migration
             $table->text('fourth_feature')->nullable(true);
             $table->integer('status');
             $table->boolean('delete_able')->default(true);
+            $table->dateTime('in_date');
+            $table->integer('in_user_id');
             $table->dateTime('out_date')->nullable(true);
             $table->integer('user_id')->nullable(true);
+            $table->float('sale_price')->nullable(true);
         });
     }
 
