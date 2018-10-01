@@ -176,8 +176,8 @@
                     '<td>' + storeValue.data.data[i].grand_total+ "$" + '</td>' +
                     '<td>' + storeValue.data.data[i].interests_rate+ "%" + '</td>' +
                     '<td>' + storeValue.data.data[i].items + '</td>' +
-                    '<td>' + storeValue.data.data[i].created_date_time + '</td>' +
-                    '<td>' + storeValue.data.data[i].expired_date + '</td>' +
+                    '<td>' + storeValue.data.data[i].created_date + '</td>' +
+                    '<td>' + storeValue.data.data[i].expire_date + '</td>' +
                     stringStatus  +
                     '<td class="text-center"> ' +
                     '<ul class="icons-list">'+
