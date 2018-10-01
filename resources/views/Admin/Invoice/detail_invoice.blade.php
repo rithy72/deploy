@@ -154,7 +154,7 @@
                                 <div style="text-align: right;clear: both;">
                                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>តម្លៃដើមនៅសល់</b></label>
                                     <div class="col-md-6">
-                                        <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                        <input type="text" placeholder="...." name="" id="luynovsol" class="form-control" style="border: 1px solid grey;" disabled="disabled">
                                         <br>
                                     </div>
                                 </div>
@@ -329,7 +329,7 @@
                type: "GET",
                 url: '../api/invoice/'+_ID+'',
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     getResponse = JSON.parse(response);
                     document.getElementById("id_invoice").innerHTML = getResponse.data.display_id;
                     document.getElementById("employee_name").innerHTML = getResponse.data.user_full_name;
@@ -349,6 +349,7 @@
 
                     document.getElementById("grand_total").value = getResponse.data.grand_total+" $";
                     document.getElementById("paid").value = getResponse.data.paid+" $";
+                    document.getElementById("luynovsol").value = getResponse.data.remain+" $";
 
                     $.ajax({
                        type: "GET",

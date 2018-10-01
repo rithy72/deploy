@@ -525,7 +525,7 @@
 
                     $('#percent_rate').val(a.interests_rate);
                     $('#interests_value').text(a.interests_value+" $");
-                    $('#amount_price').val(a.grand_total);
+                    $('#amount_price').val(a.grand_total+" $");
 
                     // make array updateItemType have value
                     updateItemType.push({ "id": "", "item_type_id": "", "first_feature": "", "second_feature": "", "third_feature": "", "fourth_feature": "" });
@@ -534,18 +534,19 @@
                         type: "GET",
                         url: '../api/item/invoice/'+_id+'',
                         success: function (response) {
-                            //console.log(response);
+                            console.log(response);
                             ConvertJsonArray = JSON.parse(response);
                             for (var i = 0; i < ConvertJsonArray.data.length; i++){
-                                storeAutoEncretment = i+1; // store auto increment
                                 var short = ConvertJsonArray.data[i], notice1, notice2, notice3, notice4;
+                                if (short.status === 1) {
+                                storeAutoEncretment +=1; // store auto increment
                                 // condition if null convert to empty
                                 if (short.first_feature === null){notice1 = "";}else{notice1 = short.first_feature}
                                 if (short.second_feature === null){notice2 = "";}else{notice2 = short.second_feature}
                                 if (short.third_feature === null){notice3 = "";}else{notice3 = short.third_feature}
                                 if (short.fourth_feature === null){notice4 = "";}else{notice4 = short.fourth_feature}
                                 show_data_in_table(short.id,short.item_type_id,storeAutoEncretment,short.item_type_name,notice1,notice2,notice3,notice4,1,"");
-
+                            }
                                 // push to array make coditoin delete
                                 storeOldArrayForDelete.push({"id":short.id});
                             }
@@ -715,8 +716,8 @@
 
                             storeDataIntoTable();
                             $('.close_update_rate1').click();
-                            console.log(JSON.stringify(updateItemType));
-                            console.log(JSON.stringify(addMoreItemType));
+                            //console.log(JSON.stringify(updateItemType));
+                            //console.log(JSON.stringify(addMoreItemType));
                             return false;
                         }
                     }
@@ -800,7 +801,7 @@
                         });
                     }
                 }
-                // josn sent to server
+                // json sent to server
                 var JsonSentToServer = {
                     "customer_name":customerName,
                     "customer_phone":customerPhoneNumber,
@@ -809,8 +810,6 @@
                     "modify_items":storeUpdateItemType,
                     "delete_items":deleteItemType,
                 };
-                var ConvertToJson1 = JSON.stringify(JsonSentToServer);
-                console.log(ConvertToJson1);
 
                 var idInvoice = atob($.cookie("KeyInvoice"));
 
