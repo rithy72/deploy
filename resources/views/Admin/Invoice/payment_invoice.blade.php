@@ -319,17 +319,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        // if check can take more price out of that invoice
-        var checker = document.getElementById('checkme');
-        var sendbtn = document.getElementById('takeOutPriceMore');
-        // when unchecked or checked, run the function
-        checker.onchange = function(){
-            if(this.checked){
-                sendbtn.disabled = false;
-            } else {
-                sendbtn.disabled = true;
-            }
-        };
+
         // select group of item
         $("#selectTomNanh").select2({
             ajax: {
@@ -562,7 +552,7 @@
                     "add_items": [],
                     "depreciate_items": deleteItemType
                 };
-                //console.log(JSON.stringify(storeValue1));
+                console.log(JSON.stringify(storeValue1));
                 $.ajax({
                     type:"PUT",
                     url : '../api/invoice/payment/'+Number(ConvertJson.data.display_id)+'',
@@ -585,7 +575,7 @@
                     "add_items": NewArrayItemType,
                     "depreciate_items": deleteItemType
                 };
-                //console.log(JSON.stringify(storeValue2));
+                console.log(JSON.stringify(storeValue2));
                 $.ajax({
                     type:"PUT",
                     url : '../api/invoice/payment/'+Number(ConvertJson.data.display_id)+'',
@@ -622,5 +612,27 @@
                 });
             }
         });
+
+        // ---- ready function if moneyPay > luy nov sol ----
+        $("#payMoney").keyup(function() {
+            var storeValuePayMoney = $('#payMoney').val();
+            const storeString = $('#remain').val();
+            const splitString = storeString.split(" ");
+            var storePrakDermNovSol = splitString[0];
+            if(Number(storeValuePayMoney) > Number(storePrakDermNovSol)){
+                document.getElementById('payMoney').value = storePrakDermNovSol;
+            }
+        });
+        // if check can take more price out of that invoice
+        var checker = document.getElementById('checkme');
+        var sendbtn = document.getElementById('takeOutPriceMore');
+        // when unchecked or checked, run the function
+        checker.onchange = function(){
+            if(this.checked){
+                sendbtn.disabled = false;
+            } else {
+                sendbtn.disabled = true;
+            }
+        };
     </script>
 @endsection
