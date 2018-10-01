@@ -30,12 +30,12 @@
                     <div class="col-md-4">
                         <h4><b>@lang('string.createBy') ៖ </b><b id="user_create"></b></h4>
                     </div>
-                    <div class="col-md-4" style="color: red;">
-                        <h4><b>@lang('string.late')៖ </b><b>.......</b></h4>
+                    <div class="col-md-4" style="color: red;display: none;" id="show_hide">
+                        <h4><b>@lang('string.late')៖ </b><b id="late_day_invoice"></b></h4>
                     </div>
                 </div>
                 <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -13px;">
-                    <a class="btn createNewCountry" style="background: red;border-radius: 7px;color: white;border: 1px solid black;">យកដាច់</a>
+                    <button type="button" class="btn yok_duch" id="show_hide1" style="background: red;border-radius: 7px;color: white;border: 1px solid black;display: none;">យកដាច់</button>
                 </div>
             </div>
             {{-- End --}}
@@ -145,28 +145,29 @@
                 <div style="text-align: right;clear: both;">
                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ប្រាក់ដើមនៅសល់</b></label>
                     <div class="col-md-6">
-                        <input type="text" placeholder="...." id="paid" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                        <input type="text" placeholder="...." id="remain" class="form-control" style="border: 1px solid grey;" disabled="disabled">
                         <br>
                     </div>
                 </div>
                 <div style="text-align: right;clear: both;">
                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បង់ប្រាក់ដើម</b></label>
                     <div class="col-md-6">
-                        <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                        {{--<input type="text" placeholder="...." id="payMoney" class="form-control" style="border: 1px solid grey;">--}}
+                        <input type="number" placeholder=".... $" id="payMoney" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">
                         <br>
                     </div>
                 </div>
                 <div style="text-align: right;clear: both;">
                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ដក់ប្រាក់បន្ថែម  </b><input type="checkbox" id="checkme"></label>
                     <div class="col-md-6">
-                        <input type="text" placeholder="...." name="" id="takeOutPriceMore" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                        <input type="number" placeholder=".... $" id="takeOutPriceMore" disabled="disabled" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">
                         <br>
                     </div>
                 </div>
                 <div style="text-align: right;clear: both;">
                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បង់ការប្រាក់</b></label>
                     <div class="col-md-6">
-                        <input type="text" placeholder="...." name="" id="" class="form-control" style="border: 1px solid grey;">
+                        <input type="number" placeholder=".... $" id="bong_kar" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">
                         <br>
                     </div>
                 </div>
@@ -174,10 +175,10 @@
             <div class="col-md-12">
                 <hr>
                 <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
-                    <a href="" class="btn btn-primary createNewCountry" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></a>
+                    <button type="button" class="btn btn-primary payment_Money_of_one_invoice" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                 </div>
                 <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
-                    <a href="" class="btn createNewCountry" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
+                    <a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
                 </div>
             </div>
         </div>
@@ -190,7 +191,7 @@
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" id="close_clear_dialog_itemType" data-dismiss="modal">&times;</button>
                         <h5 class="modal-title">@lang('string.addMoreItemsToInvoice')</h5>
                     </div>
 
@@ -213,25 +214,25 @@
                                             {{--Number som Kol--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.notice')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.itemNotice1')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.itemNotice1')" name="" id="_notice1" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--full name--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px"></label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.itemNotice2')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.itemNotice2')" name="" id="_notice2" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--phone number--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px"></label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.itemNotice3')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.itemNotice3')" name="" id="_notice3" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Cost--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px"></label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.itemNotice4')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.itemNotice4')" name="" id="_notice4" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -242,10 +243,10 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        <button type="button" class="btn btn-link" id="close_clear_dialog_itemType" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
                         {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_add_more_itemType" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -400,7 +401,7 @@
             }
         });
         // --- show data in invoice ---
-        function show_data_in_table(id,invoice_id,id_itemType,increment,name,notice1,notice2,notice3,notice4,status) {
+        function show_data_in_table(id,invoice_id,id_itemType,increment,name,notice1,notice2,notice3,notice4,status,checkBox) {
             var _tr = '<tr>' +
                 '<td style="display:none;">' + id + '</td>' +
                 '<td style="display:none;">' + invoice_id + '</td>' +
@@ -412,23 +413,33 @@
                 '<td>' + notice3 + '</td>' +
                 '<td>' + notice4 + '</td>' +
                 '<td>' + status + '</td>' +
-                '<td><input type="checkbox"></td>' +
+                checkBox +
                 '</tr>';
             $('#Show_All_Data_One_Invoice tbody').append(_tr);
         }
-        var ConvertJson, ConvertJsonArray, storeAutoEncretment;
+        var ConvertJson, ConvertJsonArray, storeAutoEncretment = 0;
         (function () {
             var _id = atob($.cookie("KeyInvoice")); // atob = decode from base64,  btoa = encode to base 64
             $.ajax({
                 type: "GET",
                 url: '../api/invoice/'+_id+'',
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     ConvertJson = JSON.parse(response);
                     var a = ConvertJson.data;
 
                     $('#invoice_id').text(a.display_id);
                     $('#user_create').text(a.user_full_name);
+                    $('#late_day_invoice').text(a.late_days);
+                    // -- condition pel yok invoice duch or not --
+                    if (a.is_late === false){
+                        $('#show_hide').hide();
+                        $('#show_hide1').hide();
+                    } else if (a.is_late === true){
+                        $('#show_hide').show();
+                        $('#show_hide1').show();
+                    }
+
 
                     $('#customer_name').val(a.customer_name);
                     $('#customer_phone_number').val(a.customer_phone);
@@ -442,30 +453,174 @@
                     $('#percent_rate').val(a.interests_rate);
 
                     $('#interests_value').text(a.interests_value+" $");
-                    $('#amount_price').val(a.grand_total);
-                    $('#paid').val(a.paid);
+                    $('#amount_price').val(a.grand_total+" $");
+                    $('#remain').val(a.remain+" $");
 
                     // ajax request to get data show in table invoiceUpdate
                     $.ajax({
                         type: "GET",
                         url: '../api/item/invoice/'+_id+'',
                         success: function (response) {
-                            console.log(response);
+                            //console.log(response);
                             ConvertJsonArray = JSON.parse(response);
                             for (var i = 0; i < ConvertJsonArray.data.length; i++){
-                                storeAutoEncretment = i+1; // store auto increment
-                                var short = ConvertJsonArray.data[i], notice1, notice2, notice3, notice4;
-                                // condition if notice null convert to empty
-                                if (short.first_feature === null){notice1 = "";}else{notice1 = short.first_feature}
-                                if (short.second_feature === null){notice2 = "";}else{notice2 = short.second_feature}
-                                if (short.third_feature === null){notice3 = "";}else{notice3 = short.third_feature}
-                                if (short.fourth_feature === null){notice4 = "";}else{notice4 = short.fourth_feature}
-                                show_data_in_table(short.id,short.invoice_id,short.item_type_id,storeAutoEncretment,short.item_type_name,notice1,notice2,notice3,notice4,short.display_status);
+                                if (ConvertJsonArray.data[i].status === 1){
+                                    storeAutoEncretment += 1; // store auto increment
+                                    var short = ConvertJsonArray.data[i], notice1, notice2, notice3, notice4;
+                                    // condition if notice null convert to empty
+                                    if (short.first_feature === null){notice1 = "";}else{notice1 = short.first_feature}
+                                    if (short.second_feature === null){notice2 = "";}else{notice2 = short.second_feature}
+                                    if (short.third_feature === null){notice3 = "";}else{notice3 = short.third_feature}
+                                    if (short.fourth_feature === null){notice4 = "";}else{notice4 = short.fourth_feature}
+                                    show_data_in_table(short.id,short.invoice_id,short.item_type_id,storeAutoEncretment,short.item_type_name,notice1,notice2,notice3,notice4,short.display_status,'<td><input type="checkbox"></td>');
+                                }
                             }
                         }
                     });
                 }
             });
         })();
+        // --- add more item type to table ---
+        var NewArrayItemType = new Array();
+        $('.btn_add_more_itemType').on("click", function () {
+            var storePaymentMoney = $('#payMoney').val();
+            const storeString = $('#remain').val();
+            const splitString = storeString.split(" ");
+            var storePrakDermNovSol = splitString[0];
+            var storeSelect2_Value_id = $('#selectTomNanh').val();               // store value id from select2
+            var storeSelect2_Text = $("#selectTomNanh option:selected").text();  // store text from select2
+            var storeNotice1 = $('#_notice1').val();
+            var storeNotice2 = $('#_notice2').val();
+            var storeNotice3 = $('#_notice3').val();
+            var storeNotice4 = $('#_notice4').val();
+            if (storePaymentMoney === storePrakDermNovSol || storePaymentMoney > storePrakDermNovSol){
+                alert('មិនអាចបញ្ជូលទំនិញថ្មីបានទេ ពីព្រោះអតិថិជនធ្វើការបង់ប្រាក់គ្រប់ចំនួន');
+            } else {
+                if (storeSelect2_Value_id === null){
+                    alert('ត្រូវជ្រើសរើសទំនិញជាមុនសិន');
+                } else {
+                    if (storeNotice1 === "") {
+                        alert('សូមមេត្តាបញ្ជូលកំណត់សំគាល់យ៉ាងហោចណាស់ ១ នៅក្នុងកំណត់សំគាល់ទី១');
+                    } else {
+                        show_data_in_table("","",storeSelect2_Value_id,storeAutoEncretment+=1,storeSelect2_Text,storeNotice1,storeNotice2,storeNotice3,storeNotice4,"",'<td></td>');
+                        // -- clear input function --
+                        clear();
+                        // -- insert itemType to array --
+                        NewArrayItemType.push({
+                            "item_type_id": Number(storeSelect2_Value_id),
+                            "first_feature": storeNotice1,
+                            "second_feature": storeNotice2,
+                            "third_feature": storeNotice3,
+                            "fourth_feature": storeNotice4
+                        });
+                    }
+                }
+            }
+        });
+        // --- close and clear input in dialog insert new item type ---
+        function clear() {
+            $('#selectTomNanh').val('').trigger('change');
+            $('#selectTomNanh').text('').trigger('change');
+            $('#_notice1').val('');
+            $('#_notice2').val('');
+            $('#_notice3').val('');
+            $('#_notice4').val('');
+        }
+        $(document).on("click","#close_clear_dialog_itemType", function () {
+            clear(); // clear input function
+        });
+
+        // --- Sent Data to server ---
+        var NewArrayTakeOutItemType = new Array(), deleteItemType = new Array();
+        $(document).on("click",".payment_Money_of_one_invoice",function () {
+            var bung_kar = $('#bong_kar').val();
+            var takeOutPriceMore = $('#takeOutPriceMore').val();
+            var bung_tlay_derm = $('#payMoney').val();
+
+            const storeString = $('#remain').val();
+            const splitString = storeString.split(" ");
+            var storePrakDermNovSol = splitString[0];
+            // -- loop find row is check or not --
+            $('#Show_All_Data_One_Invoice tbody tr').each(function (row, tr) {
+                NewArrayTakeOutItemType[row] = {
+                    "check": $(tr).find('input[type="checkbox"]').is(':checked'),
+                    "id": $(tr).find('td:eq(2)').text()
+                };
+            });
+            // -- loop array above is check box check or not --
+            for (var i = 0; i < NewArrayTakeOutItemType.length; i++){
+                if (NewArrayTakeOutItemType[i].check === true){
+                    deleteItemType.push(Number(NewArrayTakeOutItemType[i].id));
+                }
+            }
+            // -- condition when price is bigger or smaller than grand price --
+            if (bung_tlay_derm === storePrakDermNovSol || bung_tlay_derm > storePrakDermNovSol){
+                var storeValue1 = {
+                    "interests_payment": Number(bung_kar),
+                    "cost_payment": Number(bung_tlay_derm),
+                    "add_cost": Number(takeOutPriceMore),
+                    "add_items": [],
+                    "depreciate_items": deleteItemType
+                };
+                console.log(JSON.stringify(storeValue1));
+                $.ajax({
+                    type:"PUT",
+                    url : '../api/invoice/payment/'+Number(ConvertJson.data.display_id)+'',
+                    data: storeValue1,
+                    success: function (ResponseJson) {
+                        var convert = JSON.parse(ResponseJson);
+                        if (convert.status === "200"){
+                            alert('ធ្វើការបង់ប្រាក់ជោគជ័យ');
+                            window.location.href = '{{('/admin/invoice')}}';
+                        } else if (convert.status === "300"){
+                            alert('ធ្វើការបង់ប្រាក់ ទៅលើវិក្ក័យបត្រនេះ មិនបាននោះទេ');
+                        }
+                    }
+                });
+            } else {
+                var storeValue2 = {
+                    "interests_payment": Number(bung_kar),
+                    "cost_payment": Number(bung_tlay_derm),
+                    "add_cost": Number(takeOutPriceMore),
+                    "add_items": NewArrayItemType,
+                    "depreciate_items": deleteItemType
+                };
+                console.log(JSON.stringify(storeValue2));
+                $.ajax({
+                    type:"PUT",
+                    url : '../api/invoice/payment/'+Number(ConvertJson.data.display_id)+'',
+                    data: storeValue2,
+                    success: function (ResponseJson) {
+                        var convert = JSON.parse(ResponseJson);
+                        if (convert.status === "200"){
+                            alert('ធ្វើការបង់ប្រាក់ជោគជ័យ');
+                            window.location.href = '{{('/admin/invoice')}}';
+                        } else if (convert.status === "300"){
+                            alert('ធ្វើការបង់ប្រាក់ ទៅលើវិក្ក័យបត្រនេះ មិនបាននោះទេ');
+                        }
+                    }
+                });
+            }
+        });
+
+        // --- yok invoice duch ---
+        $(document).on("click",".yok_duch",function () {
+            if(confirm('តើអ្នកច្បាស់ដែរឬទេក្នុងការយកវិក្ក័យបត្រនេះដាច់')) {
+                $.ajax({
+                    type: "PUT",
+                    url: '../api/invoice/took/' + Number(ConvertJson.data.display_id) + '',
+                    success: function (GetResponseJson) {
+                        //console.log(GetResponseJson);
+                        var convert = JSON.parse(GetResponseJson);
+                        if (convert.status === "200") {
+                            alert('វិក្ក័យបត្រនេះត្រូវបានយកជោគជ័យ');
+                            window.location.href = '{{('/admin/invoice')}}';
+                        } else if (convert.status === "300") {
+                            alert('វិក្ក័យបត្រនេះ គឺមិនអាចយកបានទេ');
+                        }
+                    }
+                });
+            }
+        });
     </script>
 @endsection
