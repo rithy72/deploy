@@ -191,7 +191,7 @@
         "cost_payment": 0,
         "add_cost": 0,
         "add_items": [],
-        "depreciate_items": [18]
+        "depreciate_items": [1,2,3]
     };
 
 //        var obj = {
@@ -246,7 +246,7 @@
 //        };
         $.ajax({
             type:"PUT",
-            url:"api/invoice/payment/9",
+            url:"api/invoice/payment/1",
             data: obj,
             success:function (response) {
                 console.log(response);
