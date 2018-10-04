@@ -26,27 +26,27 @@ class CreateUsersTable extends Migration
             $table->boolean('status')->default(true);
             $table->boolean('delete_able')->default(true);
             $table->dateTime('created_date');
-            $table->integer('created_by')->default("");
+            $table->integer('created_by')->nullable(true);
             $table->dateTime('last_update_date')->nullable(true);
             $table->integer('last_update_by')->nullable(true);
             $table->rememberToken();
             $table->timestamps();
         });
         //Create Super User
-        DB::table('users')->insert(array(
-            [
-               'name' => 'Super User',
-               'email' => 'admin@admin',
-               'password' => bcrypt("admin@admin123456"),
-               'role' => 'admin'
-            ],
-            [
-                'name' => 'Normal User',
-                'email' => 'user@user',
-                'password' => bcrypt("user@user123456"),
-                'role' => 'user'
-            ]
-        ));
+//        DB::table('users')->insert(array(
+//            [
+//               'name' => 'Super User',
+//               'email' => 'admin@admin',
+//               'password' => bcrypt("admin@admin123456"),
+//               'role' => 'admin'
+//            ],
+//            [
+//                'name' => 'Normal User',
+//                'email' => 'user@user',
+//                'password' => bcrypt("user@user123456"),
+//                'role' => 'user'
+//            ]
+//        ));
     }
 
     /**

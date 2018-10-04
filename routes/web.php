@@ -14,6 +14,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    \App\Http\Controllers\Base\Logic\OtherLogic\InitLogic::InitSuperUser();
     return view('welcome');
 });
 //

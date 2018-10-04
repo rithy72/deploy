@@ -54,7 +54,7 @@ class UserModel
         $userModel->password = (isset($user_object->password) && !empty($user_object->phone_number)) ? $user_object->password:"";
         $userModel->status = $user_object->status;
         $userModel->display_status = GeneralStatus::DisplayStatus[$user_object->status];
-        $userModel->delete_able = $user_object->delete_able;
+        $userModel->delete_able = UserLogic::Instance()->checkIfUserCanbeDelete($user_object->id);
         $userModel->created_date = (!empty($user_object->created_date)) ?
             DateTimeLogic::Instance()->FormatDatTime($user_object->created_date, DateTimeLogic::SHOW_DATE_TIME_FORMAT)
             :"-";

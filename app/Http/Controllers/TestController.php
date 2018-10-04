@@ -38,7 +38,7 @@ class TestController extends Controller
     public function API(){
 
 
-        $result = UserLogic::Instance()->Find(2);
+        $result = UserLogic::Instance()->Find(1);
         return json_encode($result);
     }
 }
