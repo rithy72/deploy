@@ -136,5 +136,4 @@ return[
     'com_name' => 'ហាងបញ្ចាំ ហ៊ីទូច',
     'createSuccess' => 'ធ្វើការបង្កើតជោកជ័យ',
     'This_Is_Invoice_Numbers' => 'នេះគឺជាលេខវិក័្កយបត្រ',
-
 ];

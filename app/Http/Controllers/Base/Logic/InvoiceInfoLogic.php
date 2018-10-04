@@ -147,10 +147,10 @@ class InvoiceInfoLogic
                 'invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
                 'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
                 DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
-                'invoice_info.expired_date','invoice_info.status'
+                'invoice_info.expired_date','invoice_info.status','invoice_info.remain'
             )
             ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
-            ->where('invoice_info.expired_date', '=', $lateDate)
+            ->where('invoice_info.expired_date', '<', $lateDate)
             ->where('invoice_info.status','=', InvoiceStatusEnum::OPEN)
             ->groupBy('invoice_info.id')
             ->orderBy('invoice_info.expired_date','asc')

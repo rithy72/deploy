@@ -245,9 +245,9 @@
 //            ]
 //        };
         $.ajax({
-            type:"PUT",
-            url:"api/invoice/payment/1",
-            data: obj,
+            type:"GET",
+            url:"api/invoices/over_due",
+            //data: obj,
             success:function (response) {
                 console.log(response);
             }
