@@ -17,15 +17,14 @@ class InitLogic extends Controller
 {
     public function InitSuperUser(){
         $userModel = UserModel::Instance();
-        $userModel->user_number = "ADMIN-0001";
-        $userModel->full_name = "Admin";
+        $userModel->user_no = "ADMIN-0001";
+        $userModel->name = "Admin";
         $userModel->phone_number = "-";
         $userModel->note = "";
         $userModel->role = UserRoleEnum::ADMIN;
-        $userModel->username = "admin@admin";
+        $userModel->email = "admin@admin";
         $userModel->password = "admin@admin123456";
         $userModel->status = true;
         $userModel->delete_able = false;
-
     }
 }

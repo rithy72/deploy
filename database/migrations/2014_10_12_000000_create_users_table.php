@@ -25,6 +25,10 @@ class CreateUsersTable extends Migration
             $table->text('note')->nullable(true);
             $table->boolean('status')->default(true);
             $table->boolean('delete_able')->default(true);
+            $table->dateTime('created_date');
+            $table->integer('created_by')->default("");
+            $table->dateTime('last_update_date')->nullable(true);
+            $table->integer('last_update_by')->nullable(true);
             $table->rememberToken();
             $table->timestamps();
         });
