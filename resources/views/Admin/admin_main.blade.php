@@ -63,22 +63,12 @@
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.nameCustomer')</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.phoneNumber')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.dayExpired')</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.expiredTime')</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>85555</td>
-                                <td>កកងងសស</td>
-                                <td>55996633666</td>
-                                <td>12/5/2018</td>
-                            </tr>
-                            <tr>
-                                <td>80000</td>
-                                <td>ឋឋឋឋឋឋឋ</td>
-                                <td>0000005555</td>
-                                <td>25/6/2018</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -135,8 +125,19 @@
             document.getElementById("all1").innerHTML = ConvertJson.data.total;
             document.getElementById("Num_Page1").innerHTML = ConvertJson.data.current_page;
 
-            if (storeValue.data.last_page === 1){ $('.previous_show_invoice').hide(); $('.next_show_invoice').hide();
+            if (ConvertJson.data.last_page === 1){ $('.previous_show_invoice').hide(); $('.next_show_invoice').hide();
             } else { $('.previous_show_invoice').show(); $('.next_show_invoice').show(); }
+
+            for (var i = 0; i < ConvertJson.data.data.length; i++){
+                var _tr = '<tr>' +
+                    '<td>' + ConvertJson.data.data[i].display_id + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].customer_name + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].customer_phone + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].expire_date + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].late_days+" @lang('string.day')" + '</td>' +
+                    '</tr>';
+                $('#Show_All_Invoice_Expired tbody').append(_tr);
+            }
         }
         // ------------ define class constructor ---------------
         function ShowInvoiceExpired(methods, linkUrl) {
@@ -149,8 +150,8 @@
                 type: this.method,
                 url: this.urls,
                 success: function (ResponseJson) {
-                    console.log(ResponseJson);
-                   // ModelShowInvoiceExpired(ResponseJson);
+                    //console.log(ResponseJson);
+                    ModelShowInvoiceExpired(ResponseJson);
                 }
             });
         };
@@ -181,9 +182,9 @@
             // ---- request to get price or money income and out come and more ----
             $.ajax({
                 type: "GET",
-                url: 'api/daily_report',
+                url: 'api/daily_report/today',
                 success: function (ResponseJson) {
-                    console.log(ResponseJson);
+                    //console.log(ResponseJson);
                     var ConvertJson = JSON.parse(ResponseJson);
                     $('#item_in_inventory').text(ConvertJson.data.items_in_warehouse);
                     $('#item_in').text(ConvertJson.data.in_item);

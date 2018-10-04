@@ -12,8 +12,6 @@
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
-                    {{--<li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>--}}
                 </ul>
             </div>
             <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
@@ -22,10 +20,10 @@
         <div class="panel-body">
 
             <div class="col-md-2">
-                <span>@lang('string.startDate')</span><input type="date" class="form-control" placeholder="">
+                <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date">
             </div>
             <div class="col-md-2">
-                <span>@lang('string.startDateTo')</span><input type="date" class="form-control" placeholder="">
+                <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
             </div>
             <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
             <br/><br/>
@@ -34,7 +32,7 @@
                 <div class="dataTables_scroll">
                     <!--============ scroll body oy trov 1 header table ===============-->
                     <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
-                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Daily_Report" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.date')</th>
@@ -45,35 +43,133 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>4/9/2018</td>
-                                <td>ម៉ូតូ</td>
-                                <td>ឡាន</td>
-                                <td>500$</td>
-                                <td>200$</td>
-                            </tr>
-                            <tr>
-                                <td>2/9/2018</td>
-                                <td>ម៉ូតូ</td>
-                                <td>ឡាន</td>
-                                <td>450$</td>
-                                <td>250$</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             {{--========================= footer of pagination ====================--}}
-            <div class="datatable-footer"><div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="DataTables_Table_3_previous">←</a><span><a class="paginate_button current" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_3" data-dt-idx="2" tabindex="0">2</a></span><a class="paginate_button next" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="DataTables_Table_3_next">→</a></div></div>
+            <div class="datatable-footer">
+                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page1"></b> មាន <b id="first1"></b> វិក្ក័យបត្រទៅដល់ <b id="last1"></b> នៃចំនួនវិក្ក័យបត្រទាំងអស់គឺ <b id="all1"></b> </div>
+                <div class="dataTables_paginate paging_simple_numbers" id="">
+                    <a class="paginate_button previous_show_invoice" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="Item_click_Back" style="display:none;">←</a>
+                    <span><a class="paginate_button current" id="Num_Page1" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0"></a></span>
+                    <a class="paginate_button next_show_invoice" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="Item_click_Next" style="display:none;">→</a>
+                </div>
+            </div>
             {{--====================== End footer of pagination ====================--}}
-            {{--==========================================================================================================--}}
         </div>
+    </div>
+
+    <div id="loading" style="display: none;
+    width:100px;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    text-align:center;
+    margin-left: -50px;
+    margin-top: -100px;
+    z-index:2;
+    overflow: auto;">
+        <img src="/assets/images/ajax_loader.gif" alt=""/>
     </div>
 @endsection
 
 @section('script')
     <script>
+        $( document ).ajaxStart(function() {
+            $( "#loading" ).show();
+        });
+        $( document ).ajaxStop(function() {
+            $( "#loading" ).hide();
+        });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        // ------------ model show in table --------------------
+        var ConvertJson;
+        function ModelShowDailyReport(ResponseFromAjax) {
+            ConvertJson = JSON.parse(ResponseFromAjax);
+            document.getElementById("page1").innerHTML = ConvertJson.data.current_page;
+            document.getElementById("first1").innerHTML = ConvertJson.data.from;
+            document.getElementById("last1").innerHTML = ConvertJson.data.to;
+            document.getElementById("all1").innerHTML = ConvertJson.data.total;
+            document.getElementById("Num_Page1").innerHTML = ConvertJson.data.current_page;
 
+            if (ConvertJson.data.last_page === 1){ $('.previous_show_invoice').hide(); $('.next_show_invoice').hide();
+            } else { $('.previous_show_invoice').show(); $('.next_show_invoice').show(); }
+
+            for (var i = 0; i < ConvertJson.data.data.length; i++){
+                var _tr = '<tr>' +
+                    '<td>' + ConvertJson.data.data[i].date + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].in_item + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].out_item + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].outcome+" $" + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].income+" $" + '</td>' +
+                    '</tr>';
+                $('#Show_All_Daily_Report tbody').append(_tr);
+            }
+        }
+        // ------------ define class constructor ---------------
+        function DailyReport(methods, linkUrl) {
+            this.method = methods;
+            this.urls = linkUrl;
+        }
+        // ------------ ajax request to server -----------------
+        DailyReport.prototype.reads =  function() {
+            $.ajax({
+                type: this.method,
+                url: this.urls,
+                success: function (ResponseJson) {
+                    //console.log(ResponseJson);
+                    ModelShowDailyReport(ResponseJson);
+                }
+            });
+        };
+        // ---------------------  show daily Report per day --------------------
+        (function () {
+            var showDailyReport = new DailyReport("GET",'api/daily_report?from_date=&to_date=&page_size=15');
+            showDailyReport.reads();
+        })();
+        // ---------------------  Search daily report --------------------
+        var timeout1 = null;
+        $(document).on("click",".btn-Search", function () {
+           var startDate = $('#start_date').val();
+           var toDate = $('#to_date').val();
+           var url = 'api/daily_report?from_date='+startDate+'&to_date='+toDate+'&page_size=15';
+
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_Daily_Report td').remove();
+                var searchInvoiceInTable = new DailyReport("GET" , url);
+                searchInvoiceInTable.reads();
+            }, 1000);
+        });
+        // --------------- click back -----------------------------------
+        $(".previous_show_invoice").click(function () {
+            var url = ConvertJson.data.prev_page_url;
+            if (ConvertJson.data.prev_page_url === null){
+                alert('មិនអាចខ្លីកត្រលប់បានទេ ពីព្រោះគឺជាទំព័រដំបូង');
+            }else {
+                $('#Show_All_Daily_Report td').remove();
+                var clickBack = new DailyReport("GET" , url);
+                clickBack.reads();
+            }
+        });
+        // --------------- click next -----------------------------------
+        $(".next_show_invoice").click(function () {
+            var url = ConvertJson.data.next_page_url;
+            if (ConvertJson.data.next_page_url === null){
+                alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
+            }else {
+                $('#Show_All_Daily_Report td').remove();
+                var clickNext = new DailyReport("GET" , url);
+                clickNext.reads();
+            }
+        });
     </script>
 @endsection
