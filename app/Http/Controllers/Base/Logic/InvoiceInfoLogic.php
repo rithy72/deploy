@@ -50,9 +50,9 @@ class InvoiceInfoLogic
         $invoiceModel->id = $invoiceResult->id;
         $invoiceModel->display_id = str_pad(intval($invoiceModel->id),
             7,"0", STR_PAD_LEFT);
-        $invoiceModel->customer_name = $invoiceResult->customer_name;
-        $invoiceModel->customer_phone = $invoiceResult->customer_phone;
-        $invoiceModel->created_date = $invoiceResult->created_date_time;
+        $invoiceModel->customer_name = $invoiceResult->customer_name??"";
+        $invoiceModel->customer_phone = $invoiceResult->customer_phone??"";
+        $invoiceModel->created_date = $invoiceResult->created_date_time??"";
         $invoiceModel->items = (isset($invoiceResult->items)) ? $invoiceResult->items:0;
         $invoiceModel->expire_date = ($status == InvoiceStatusEnum::OPEN) ? $invoiceResult->expired_date:"-";
         $invoiceModel->is_late = ($status == InvoiceStatusEnum::OPEN) ? $lateObj->is_late:false;
@@ -67,7 +67,7 @@ class InvoiceInfoLogic
         $invoiceModel->interests_rate = (isset($invoiceResult->interests_rate)) ? intval($invoiceResult->interests_rate):0;
         $invoiceModel->interests_value = ($invoiceResult->remain * $invoiceResult->interests_rate) / 100;
         $invoiceModel->final_date_time = (isset($invoiceResult->final_date_time)) ? $invoiceResult->final_date_time:"";
-        $invoiceModel->final_action_user = (isset($invoiceResult->final_user))?$invoiceResult->final_user:"";
+        $invoiceModel->final_action_user = (isset($invoiceResult->final_user)) ? $invoiceResult->final_user : "";
 
         return $invoiceModel;
     }
@@ -147,10 +147,10 @@ class InvoiceInfoLogic
                 'invoice_info.id','invoice_info.display_id','invoice_info.customer_name',
                 'invoice_info.customer_phone','invoice_info.grand_total','invoice_info.interests_rate',
                 DB::raw("count(invoice_item.id) as items"),'invoice_info.created_date_time',
-                'invoice_info.expired_date','invoice_info.status'
+                'invoice_info.expired_date','invoice_info.status','invoice_info.remain'
             )
             ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
-            ->where('invoice_info.expired_date', '=', $lateDate)
+            ->where('invoice_info.expired_date', '<', $lateDate)
             ->where('invoice_info.status','=', InvoiceStatusEnum::OPEN)
             ->groupBy('invoice_info.id')
             ->orderBy('invoice_info.expired_date','asc')

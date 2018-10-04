@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Base\Logic;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
+use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
 use App\Http\Controllers\Base\Model\Other\PaginateModel;
