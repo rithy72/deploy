@@ -483,26 +483,45 @@
             var storeNotice2 = $('#_notice2').val();
             var storeNotice3 = $('#_notice3').val();
             var storeNotice4 = $('#_notice4').val();
-            if (storePaymentMoney === storePrakDermNovSol || storePaymentMoney > storePrakDermNovSol){
-                alert('មិនអាចបញ្ជូលទំនិញថ្មីបានទេ ពីព្រោះអតិថិជនធ្វើការបង់ប្រាក់គ្រប់ចំនួន');
-            } else {
-                if (storeSelect2_Value_id === null){
+            function PushArray() {
+                NewArrayItemType.push({
+                    "item_type_id": Number(storeSelect2_Value_id),
+                    "first_feature": storeNotice1,
+                    "second_feature": storeNotice2,
+                    "third_feature": storeNotice3,
+                    "fourth_feature": storeNotice4
+                });
+            }
+            if($('#takeOutPriceMore').val()){
+                if (storeSelect2_Value_id === null) {
                     alert('ត្រូវជ្រើសរើសទំនិញជាមុនសិន');
                 } else {
                     if (storeNotice1 === "") {
                         alert('សូមមេត្តាបញ្ជូលកំណត់សំគាល់យ៉ាងហោចណាស់ ១ នៅក្នុងកំណត់សំគាល់ទី១');
                     } else {
-                        show_data_in_table("","",storeSelect2_Value_id,storeAutoEncretment+=1,storeSelect2_Text,storeNotice1,storeNotice2,storeNotice3,storeNotice4,"",'<td></td>');
+                        show_data_in_table("", "", storeSelect2_Value_id, storeAutoEncretment += 1, storeSelect2_Text, storeNotice1, storeNotice2, storeNotice3, storeNotice4, "", '<td></td>');
                         // -- clear input function --
                         clear();
-                        // -- insert itemType to array --
-                        NewArrayItemType.push({
-                            "item_type_id": Number(storeSelect2_Value_id),
-                            "first_feature": storeNotice1,
-                            "second_feature": storeNotice2,
-                            "third_feature": storeNotice3,
-                            "fourth_feature": storeNotice4
-                        });
+                        // -- push new itemType to array --
+                        PushArray();
+                    }
+                }
+            } else {
+                if (Number(storePaymentMoney) === Number(storePrakDermNovSol) || Number(storePaymentMoney) > Number(storePrakDermNovSol)) {
+                    alert('មិនអាចបញ្ជូលទំនិញថ្មីបានទេ ពីព្រោះអតិថិជនធ្វើការបង់ប្រាក់គ្រប់ចំនួន');
+                } else {
+                    if (storeSelect2_Value_id === null) {
+                        alert('ត្រូវជ្រើសរើសទំនិញជាមុនសិន');
+                    } else {
+                        if (storeNotice1 === "") {
+                            alert('សូមមេត្តាបញ្ជូលកំណត់សំគាល់យ៉ាងហោចណាស់ ១ នៅក្នុងកំណត់សំគាល់ទី១');
+                        } else {
+                            show_data_in_table("", "", storeSelect2_Value_id, storeAutoEncretment += 1, storeSelect2_Text, storeNotice1, storeNotice2, storeNotice3, storeNotice4, "", '<td></td>');
+                            // -- clear input function --
+                            clear();
+                            // -- push new itemType to array --
+                            PushArray();
+                        }
                     }
                 }
             }
@@ -521,75 +540,62 @@
         });
 
         // --- Sent Data to server ---
-        var NewArrayTakeOutItemType = new Array(), deleteItemType = new Array();
+        var deleteItemType = new Array(),takeOutPriceMore,bung_kar,storePrakDermNovSol1;
         $(document).on("click",".payment_Money_of_one_invoice",function () {
-            var bung_kar = $('#bong_kar').val();
-            var takeOutPriceMore = $('#takeOutPriceMore').val();
+            bung_kar = $('#bong_kar').val();
+            takeOutPriceMore = $('#takeOutPriceMore').val();
             var bung_tlay_derm = $('#payMoney').val();
-
+            // split string have space
             const storeString = $('#remain').val();
             const splitString = storeString.split(" ");
-            var storePrakDermNovSol = splitString[0];
-            // -- loop find row is check or not --
+            storePrakDermNovSol1 = splitString[0];
+
             $('#Show_All_Data_One_Invoice tbody tr').each(function (row, tr) {
-                NewArrayTakeOutItemType[row] = {
-                    "check": $(tr).find('input[type="checkbox"]').is(':checked'),
-                    "id": $(tr).find('td:eq(2)').text()
-                };
-            });
-            // -- loop array above is check box check or not --
-            for (var i = 0; i < NewArrayTakeOutItemType.length; i++){
-                if (NewArrayTakeOutItemType[i].check === true){
-                    deleteItemType.push(Number(NewArrayTakeOutItemType[i].id));
+                if ($(tr).find('input[type="checkbox"]').is(':checked') === true){
+                    deleteItemType.push(Number($(tr).find('td:eq(2)').text()));
                 }
-            }
-            // -- condition when price is bigger or smaller than grand price --
-            if (bung_tlay_derm === storePrakDermNovSol || bung_tlay_derm > storePrakDermNovSol){
+            });
+            // function model request to server
+            function requestToServer(payMoneyRate,payGrandTotal,addMoreCost,ArrayNewItemType,ArrayDeleteItemType,InvoiceID) {
                 var storeValue1 = {
-                    "interests_payment": Number(bung_kar),
-                    "cost_payment": Number(bung_tlay_derm),
-                    "add_cost": Number(takeOutPriceMore),
-                    "add_items": [],
-                    "depreciate_items": deleteItemType
+                    "interests_payment": payMoneyRate,
+                    "cost_payment": payGrandTotal,
+                    "add_cost": addMoreCost,
+                    "add_items": ArrayNewItemType,
+                    "depreciate_items": ArrayDeleteItemType
                 };
                 console.log(JSON.stringify(storeValue1));
                 $.ajax({
-                    type:"PUT",
-                    url : '../api/invoice/payment/'+Number(ConvertJson.data.display_id)+'',
+                    type: "PUT",
+                    url: '../api/invoice/payment/' + InvoiceID + '',
                     data: storeValue1,
                     success: function (ResponseJson) {
                         var convert = JSON.parse(ResponseJson);
-                        if (convert.status === "200"){
+                        if (convert.status === "200") {
                             alert('ធ្វើការបង់ប្រាក់ជោគជ័យ');
                             window.location.href = '{{('/admin/invoice')}}';
-                        } else if (convert.status === "300"){
+                        } else if (convert.status === "300") {
                             alert('ធ្វើការបង់ប្រាក់ ទៅលើវិក្ក័យបត្រនេះ មិនបាននោះទេ');
                         }
                     }
                 });
-            } else {
-                var storeValue2 = {
-                    "interests_payment": Number(bung_kar),
-                    "cost_payment": Number(bung_tlay_derm),
-                    "add_cost": Number(takeOutPriceMore),
-                    "add_items": NewArrayItemType,
-                    "depreciate_items": deleteItemType
-                };
-                console.log(JSON.stringify(storeValue2));
-                $.ajax({
-                    type:"PUT",
-                    url : '../api/invoice/payment/'+Number(ConvertJson.data.display_id)+'',
-                    data: storeValue2,
-                    success: function (ResponseJson) {
-                        var convert = JSON.parse(ResponseJson);
-                        if (convert.status === "200"){
-                            alert('ធ្វើការបង់ប្រាក់ជោគជ័យ');
-                            window.location.href = '{{('/admin/invoice')}}';
-                        } else if (convert.status === "300"){
-                            alert('ធ្វើការបង់ប្រាក់ ទៅលើវិក្ក័យបត្រនេះ មិនបាននោះទេ');
-                        }
-                    }
-                });
+            }
+            // -- condition when price is bigger or smaller than grand price --
+            if (!takeOutPriceMore){ // value add more money is empty
+                if (Number(bung_tlay_derm) === Number(storePrakDermNovSol1) || Number(bung_tlay_derm) > Number(storePrakDermNovSol1)){
+                    // do not have item type
+                    requestToServer(Number(bung_kar),Number(bung_tlay_derm),Number(takeOutPriceMore),[],deleteItemType,Number(ConvertJson.data.display_id));
+                } else {
+                    // have item type
+                    requestToServer(Number(bung_kar),Number(bung_tlay_derm),Number(takeOutPriceMore),NewArrayItemType,deleteItemType,Number(ConvertJson.data.display_id));
+                }
+            } else {                               // value add money more not empty
+                if (takeOutPriceMore > 0){         // money must bigger than 0
+                    // have item type
+                    requestToServer(Number(bung_kar),Number(bung_tlay_derm),Number(takeOutPriceMore),NewArrayItemType,deleteItemType,Number(ConvertJson.data.display_id));
+                } else {
+                    alert('បញ្ចូលចំនួន ប្រាក់បន្ថែម អោយធំជាង 0');
+                }
             }
         });
 

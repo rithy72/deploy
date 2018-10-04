@@ -145,7 +145,7 @@
             $( "#loading" ).hide();
         });
         // ------------ store model of table -------------------
-        var stringStatus , storeValue;
+        var stringStatus_Update , stringStatus_Payment , storeValue;
         function ModelShowInTable(getJsonValue) {
             storeValue = JSON.parse(getJsonValue);
             document.getElementById("page1").innerHTML = storeValue.data.current_page;
@@ -160,15 +160,14 @@
             for (var i = 0; i < storeValue.data.data.length; i++){
 
                 if (storeValue.data.data[i].status === "1"){
-                    stringStatus = '<td>មិនទាន់លស់</td>';
-                } else if (storeValue.data.data[i].status === "2"){
-                    stringStatus = '<td>ទូទាត់ហើយ</td>';
-                } else if (storeValue.data.data[i].status === "3"){
-                    stringStatus = '<td>យកដាច់</td>';
+                    stringStatus_Payment = '<li id="payment_invoice"><a href="{{('/admin/invoice/invoice_payment')}}"><i class="icon-price-tag"></i>@lang('string.payment')</a></li>';
+                    stringStatus_Update = '<li id="updates_invoice"><a href="{{('/admin/invoice/update_invoice')}}"><i class="icon-pencil7"></i>@lang('string.update')</a></li>';
+                } else {
+                    stringStatus_Payment = "";
+                    stringStatus_Update = "";
                 }
-
                 // ============= End Parse Json ===========================
-                var _tr = '<tr role="row" class="odd">' +
+                var _tr = '<tr>' +
                     '<td style="display:none;">' + storeValue.data.data[i].id + '</td>' +
                     '<td>' + storeValue.data.data[i].display_id + '</td>' +
                     '<td>' + storeValue.data.data[i].customer_name + '</td>' +
@@ -178,7 +177,7 @@
                     '<td>' + storeValue.data.data[i].items + '</td>' +
                     '<td>' + storeValue.data.data[i].created_date + '</td>' +
                     '<td>' + storeValue.data.data[i].expire_date + '</td>' +
-                    stringStatus  +
+                    '<td>' + storeValue.data.data[i].display_status + '</td>' +
                     '<td class="text-center"> ' +
                     '<ul class="icons-list">'+
                     '<li class="dropdown">'+
@@ -186,8 +185,8 @@
                     '<i class="icon-menu9"></i>'+
                     '</a>'+
                     '<ul class="dropdown-menu dropdown-menu-right">'+
-                    '<li id="updates_invoice"><a href="{{('/admin/invoice/update_invoice')}}"><i class="icon-pencil7"></i>@lang('string.update')</a></li>' +
-                    '<li id="payment_invoice"><a href="{{('/admin/invoice/invoice_payment')}}"><i class="icon-price-tag"></i>@lang('string.payment')</a></li>' +
+                    stringStatus_Update +
+                    stringStatus_Payment +
                     '<li id="detail_invoice"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
                     '</ul>'+
                     '</li>'+

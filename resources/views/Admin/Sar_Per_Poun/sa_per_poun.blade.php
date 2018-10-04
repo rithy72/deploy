@@ -1,9 +1,4 @@
 @extends('layouts.app')
-@section('style')
-    <style>
-
-    </style>
-@endsection
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -17,8 +12,6 @@
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
-                    {{--<li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>--}}
                 </ul>
             </div>
             <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
@@ -35,21 +28,19 @@
                     {{----- Merl Item min ton lus -----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-md-4" >
+                            <div class="col-md-2" >
                                 <div class="form-group">
                                     <span>@lang('string.type')</span>
-                                    <div style="display: flex;">
-                                        <select class="form-control" id="selectTomNanh">
+                                    {{--<div style="display: flex;"></div>--}}
+                                    <select class="form-control" id="selectTomNanh">
 
-                                        </select>
-                                        <a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>
-                                    </div>
+                                    </select>
                                 </div>
                             </div>
-                            {{--<div class="col-md-2" style="display: flex;margin-top: 21px;">--}}
-                                {{--<input type="text" class="form-control" placeholder="@lang('string.searchItems')" id="store_search" disabled="disabled">--}}
-                                {{--<a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>--}}
-                            {{--</div>--}}
+                            <div class="col-md-5" style="display: flex;margin-top: 21px;">
+                                <input type="text" class="form-control" placeholder="@lang('string.searchItems')" id="store_search" disabled="disabled">
+                                <a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>
+                            </div>
 
 
                             <div class="dataTables_length">
@@ -68,8 +59,6 @@
                                             <thead style="background: #e3e3ea99;">
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
-                                                {{--<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.nameCustomer')</th>--}}
-                                                {{--<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.phoneNumber')</th>--}}
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.typeItems')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice1')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice2')</th>
@@ -86,7 +75,7 @@
                             </div>
                             {{--========================= footer of pagination ====================--}}
                             <div class="datatable-footer">
-                                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page1"></b> មាន <b id="first1"></b> វិក្ក័យបត្រទៅដល់ <b id="last1"></b> នៃចំនួនវិក្ក័យបត្រទាំងអស់គឺ <b id="all1"></b> </div>
+                                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page1"></b> មាន <b id="first1"></b> ទំនិញទៅដល់ <b id="last1"></b> នៃចំនួនទំនិញទាំងអស់គឺ <b id="all1"></b> </div>
                                 <div class="dataTables_paginate paging_simple_numbers" id="">
                                     <a class="paginate_button previous_show_invoice" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="Item_click_Back" style="display:none;">←</a>
                                     <span><a class="paginate_button current" id="Num_Page1" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0"></a></span>
@@ -103,31 +92,25 @@
                             <div class="col-md-2">
                                 <span>@lang('string.typeItems')</span>
                                 <div class="form-group">
-                                    <select class="form-control" id="selectTomNanh1" name="">
-                                        <option selected="selected"></option>
-                                        <option selected="selected">ម៉ូតូ</option>
-                                        <option selected="selected">ឡាន</option>
-                                        <option selected="selected">នាឡិការ</option>
-                                        <option selected="selected">ផ្សេងៗ</option>
+                                    <select class="form-control" id="selectTomNanh1">
+
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
-                                    <select class="form-control" id="" name="">
-                                        <option selected="selected"></option>
-                                        <option selected="">@lang('string.all')</option>
-                                        <option selected="">@lang('string.notYetSaleOut')</option>
-                                        <option selected="">@lang('string.saleOut')</option>
+                                    <select class="form-control" id="select_status">
+                                        <option selected="selected" value="2,3,4">@lang('string.all')</option>
+                                        <option value="3">@lang('string.notYetSaleOut')</option>
+                                        <option value="4">@lang('string.saleOut')</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2" style="display: flex;margin-top: 21px;">
-                                <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchItems')">
-                                <a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>
+                            <div class="col-md-4" style="display: flex;margin-top: 21px;">
+                                <span>.</span><input type="text" id="show_search_notice" class="form-control" placeholder="@lang('string.searchItems')" disabled="disabled">
+                                <a class="btn btn-primary searchItemTakeOut"><i class="icon-filter3"></i></a>
                             </div>
-
 
                             <div class="dataTables_length">
                                 <div class="btn-group" style="margin-top: 20px;">
@@ -140,12 +123,10 @@
                                 <div class="dataTables_scroll">
                                     <!--============ scroll body oy trov 1 header table ===============-->
                                     <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
-                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_ItemOut" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                                             <thead style="background: #e3e3ea99;">
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
-                                                {{--<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.nameCustomer')</th>--}}
-                                                {{--<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.phoneNumber')</th>--}}
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.typeItems')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice1')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice2')</th>
@@ -156,51 +137,21 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>000005</td>
-                                                <td>ឡាន</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>មិនទានលស់</td>
-                                                <td class="text-center">
-                                                    <ul class="icons-list">
-                                                        <li class="dropdown">
-                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-uxpanded="false"><i class="icon-menu9"></i></a>
-                                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                                <li id="ItemExpired"><a><i class="icon-cart-remove"></i>@lang('string.saleOut')</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>000003</td>
-                                                <td>សង់ការ៉េ</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>មិនទានលស់</td>
-                                                <td class="text-center">
-                                                    <ul class="icons-list">
-                                                        <li class="dropdown">
-                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-uxpanded="false"><i class="icon-menu9"></i></a>
-                                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                                <li id="ItemExpired"><a><i class="icon-cart-remove"></i>@lang('string.saleOut')</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                             {{--========================= footer of pagination ====================--}}
-                            <div class="datatable-footer"><div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="DataTables_Table_3_previous">←</a><span><a class="paginate_button current" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_3" data-dt-idx="2" tabindex="0">2</a></span><a class="paginate_button next" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="DataTables_Table_3_next">→</a></div></div>
+                            <div class="datatable-footer">
+                                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page2"></b> មាន <b id="first2"></b> ទំនិញទៅដល់ <b id="last2"></b> នៃចំនួនទំនិញទាំងអស់គឺ <b id="all2"></b> </div>
+                                <div class="dataTables_paginate paging_simple_numbers" id="">
+                                    <a class="paginate_button previous_show_invoice2" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" style="display:none;">←</a>
+                                    <span><a class="paginate_button current" id="Num_Page2" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0"></a></span>
+                                    <a class="paginate_button next_show_invoice2" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" style="display:none;">→</a>
+                                </div>
+                            </div>
                             {{--====================== End footer of pagination ====================--}}
 
                         </div>
@@ -211,32 +162,26 @@
                             <div class="col-md-2">
                                 <span>@lang('string.typeItems')</span>
                                 <div class="form-group">
-                                    <select class="form-control" id="selectTomNanh2" name="">
-                                        <option selected="selected"></option>
-                                        <option selected="selected">ម៉ូតូ</option>
-                                        <option selected="selected">ឡាន</option>
-                                        <option selected="selected">នាឡិការ</option>
-                                        <option selected="selected">ផ្សេងៗ</option>
+                                    <select class="form-control" id="selectTomNanh2">
+
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
-                                    <select class="form-control" id="" name="">
-                                        <option selected="selected"></option>
-                                        <option selected="">@lang('string.all')</option>
-                                        <option selected="">មិនទាន់លស់</option>
-                                        <option selected="">@lang('string.saleAlready')</option>
-                                        <option selected="">ដាច់</option>
-                                        <option selected="">@lang('string.notYetSaleOut')</option>
-                                        <option selected="">@lang('string.saleOut')</option>
+                                    <select class="form-control" id="select_status_all">
+                                        <option selected="selected" value="">@lang('string.all')</option>
+                                        <option value="1">@lang('string.payYet')</option>
+                                        <option value="2">@lang('string.saleAlready')</option>
+                                        <option value="3">@lang('string.took')</option>
+                                        <option value="4">@lang('string.saleOut')</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2" style="display: flex;margin-top: 21px;">
-                                <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchItems')">
-                                <a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>
+                            <div class="col-md-4" style="display: flex;margin-top: 21px;">
+                                <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchItems')" id="all_notice_show" disabled="disabled">
+                                <a class="btn btn-primary btn_search_all_items"><i class="icon-filter3"></i></a>
                             </div>
 
 
@@ -251,12 +196,10 @@
                                 <div class="dataTables_scroll">
                                     <!--============ scroll body oy trov 1 header table ===============-->
                                     <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
-                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Items_Status" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                                             <thead style="background: #e3e3ea99;">
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
-                                                {{--<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.nameCustomer')</th>--}}
-                                                {{--<th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.phoneNumber')</th>--}}
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.typeItems')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice1')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice2')</th>
@@ -266,31 +209,21 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>000005</td>
-                                                <td>ឡាន</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>មិនទានលស់</td>
-                                            </tr>
-                                            <tr>
-                                                <td>000003</td>
-                                                <td>សង់ការ៉េ</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>...</td>
-                                                <td>មិនទានលស់</td>
-                                            </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                             {{--========================= footer of pagination ====================--}}
-                            <div class="datatable-footer"><div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="DataTables_Table_3_previous">←</a><span><a class="paginate_button current" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_3" data-dt-idx="2" tabindex="0">2</a></span><a class="paginate_button next" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="DataTables_Table_3_next">→</a></div></div>
+                            <div class="datatable-footer">
+                                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page3"></b> មាន <b id="first3"></b> ទំនិញទៅដល់ <b id="last3"></b> នៃចំនួនទំនិញទាំងអស់គឺ <b id="all3"></b> </div>
+                                <div class="dataTables_paginate paging_simple_numbers" id="">
+                                    <a class="paginate_button previous_show_invoice3" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" style="display:none;">←</a>
+                                    <span><a class="paginate_button current" id="Num_Page3" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0"></a></span>
+                                    <a class="paginate_button next_show_invoice3" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" style="display:none;">→</a>
+                                </div>
+                            </div>
                             {{--====================== End footer of pagination ====================--}}
 
                         </div>
@@ -319,41 +252,41 @@
                                             {{-- number invoice --}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.invoiceID')</label>
                                             <div class="col-lg-9" style="margin-bottom: 13px;">
-                                                <input type="text" class="form-control" disabled="disabled" placeholder="....." style="border: 1px solid grey;">
+                                                <input type="text" class="form-control" disabled="disabled" placeholder="....." style="border: 1px solid grey;" id="setInvoiceId">
                                             </div>
                                             {{-- type of item --}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.groupItem')</label>
                                             <div class="col-lg-9" style="margin-bottom: 13px;">
-                                                <input type="text" class="form-control" disabled="disabled" placeholder="....." style="border: 1px solid grey;">
+                                                <input type="text" class="form-control" disabled="disabled" placeholder="....." style="border: 1px solid grey;" id="setNameItemType">
                                             </div>
                                             {{-- som kol 1 --}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.notice')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="....." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                                <input type="text" placeholder="....." class="form-control" style="border: 1px solid grey;" disabled="disabled" id="setFirstNotice">
                                                 <br>
                                             </div>
                                             {{-- som kol 2 --}}
                                             <label class="control-label col-lg-3" style="font-size: 15px"></label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="....." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                                <input type="text" placeholder="....." class="form-control" style="border: 1px solid grey;" disabled="disabled" id="setSecondNotice">
                                                 <br>
                                             </div>
                                             {{-- som kol 3 --}}
                                             <label class="control-label col-lg-3" style="font-size: 15px"></label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="....." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                                <input type="text" placeholder="....." class="form-control" style="border: 1px solid grey;" disabled="disabled" id="setThirdNotice">
                                                 <br>
                                             </div>
                                             {{-- som kol 4 --}}
                                             <label class="control-label col-lg-3" style="font-size: 15px"></label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="....." name="" id="" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                                                <input type="text" placeholder="....." class="form-control" style="border: 1px solid grey;" disabled="disabled" id="setFourthNotice">
                                                 <br>
                                             </div>
                                             {{-- som kol 4 --}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.priceSaleOut')</label>
                                             <div class="col-lg-9">
-                                                <input type="number" placeholder="@lang('string.addPriceHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                                <input type="number" placeholder="@lang('string.addPriceHere...')" id="price_sale_out" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -366,8 +299,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
-                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>??????</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_Sale_Out_ItemType" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -411,15 +343,16 @@
             </div>
         </div>
     </form>
-    {{------------ dialog tver ka serch notice ------------}}
-    <form role="form" action="" method="">
+
+    {{------------ dialog search Item not Pay yet ------------}}
+    <form>
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div id="dialogSearchNotice" class="modal fade">
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">@lang('string.fineByNotice')</h5>
+                        <button type="button" class="close" id="close_search_notice" data-dismiss="modal">&times;</button>
+                        <h5 class="modal-title">@lang('string.ItemPayYet')</h5>
                     </div>
 
                     <div class="modal-body">
@@ -430,10 +363,10 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.notice')</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
-                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice1')" style="border: 1px solid grey;"><br>
-                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice2')" style="border: 1px solid grey;"><br>
-                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice3')" style="border: 1px solid grey;"><br>
-                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice4')" style="border: 1px solid grey;"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice1')" style="border: 1px solid grey;" id="notice1"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice2')" style="border: 1px solid grey;" id="notice2"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice3')" style="border: 1px solid grey;" id="notice3"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice4')" style="border: 1px solid grey;" id="notice4"><br>
                                             </div>
                                         </div>
                                     </div>
@@ -443,14 +376,95 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        <button type="button" class="btn btn-link" id="close_search_notice" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
-                        <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.search')</b><i class="icon-search4 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_search_Item_notYetPay" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.search')</b><i class="icon-search4 position-right"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+    {{------------ dialog search Item Take out ---------------}}
+    <form>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div id="dialogSearchItemTakeOut" class="modal fade">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" id="close_itemTakeOut" data-dismiss="modal">&times;</button>
+                        <h5 class="modal-title">@lang('string.ItemTookOut')</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="datatable-header">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.notice')</label>
+                                            <div class="col-lg-8" style="margin-bottom: 13px;">
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice1')" style="border: 1px solid grey;" id="notice1_takeOut"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice2')" style="border: 1px solid grey;" id="notice2_takeOut"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice3')" style="border: 1px solid grey;" id="notice3_takeOut"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice4')" style="border: 1px solid grey;" id="notice4_takeOut"><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" id="close_itemTakeOut" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        {{ csrf_field() }}
+                        <button type="button" class="btn btn-primary btn_Search_item_takeOut" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.search')</b><i class="icon-search4 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {{------------ dialog search Item All status -------------}}
+    <form>
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div id="dialogSearchAllStatus" class="modal fade">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" id="close_item_all_status" data-dismiss="modal">&times;</button>
+                        <h5 class="modal-title">@lang('string.SearchItemAllStatus')</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="datatable-header">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.notice')</label>
+                                            <div class="col-lg-8" style="margin-bottom: 13px;">
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice1')" style="border: 1px solid grey;" id="notice1_all"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice2')" style="border: 1px solid grey;" id="notice2_all"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice3')" style="border: 1px solid grey;" id="notice3_all"><br>
+                                                <input type="text" class="form-control" placeholder="@lang('string.itemNotice4')" style="border: 1px solid grey;" id="notice4_all"><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" id="close_item_all_status" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        {{ csrf_field() }}
+                        <button type="button" class="btn btn-primary btn_Search_item_All_Status" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.search')</b><i class="icon-search4 position-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
 
     <div id="loading" style="display: none;
     width:100px;
@@ -498,6 +512,18 @@
                 backdrop: 'static'
             });
         });
+        // filter search ITem Take Out
+        $(document).on("click",".searchItemTakeOut",function(){
+            $('#dialogSearchItemTakeOut').modal({
+                backdrop: 'static'
+            });
+        });
+        // filter search ITem All status
+        $(document).on("click",".btn_search_all_items",function(){
+            $('#dialogSearchAllStatus').modal({
+                backdrop: 'static'
+            });
+        });
         // ---- select 2 ----
         $("#selectTomNanh").select2({
             ajax: {
@@ -532,10 +558,68 @@
             }
         });
         $("#selectTomNanh1").select2({
-
+            ajax: {
+                method: "GET",
+                url: "api/item_group?page_size=15",
+                delay: 1000,
+                data: function (params) {
+                    if (params.term){ // if have user input key in input text it work the statement
+                        query = {
+                            search: params.term
+                        };
+                    } else {
+                        query = {
+                            search: ""
+                        };
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    //console.log(data);
+                    var GG = JSON.parse(data);
+                    const result = $.map(GG.data.data, function (value) {
+                        return {id: value.id, text: value.type_name}
+                    });
+                    return {
+                        results: result,
+                        "pagination": {
+                            "more": false
+                        }
+                    }
+                }
+            }
         });
         $("#selectTomNanh2").select2({
-
+            ajax: {
+                method: "GET",
+                url: "api/item_group?page_size=15",
+                delay: 1000,
+                data: function (params) {
+                    if (params.term){ // if have user input key in input text it work the statement
+                        query = {
+                            search: params.term
+                        };
+                    } else {
+                        query = {
+                            search: ""
+                        };
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    //console.log(data);
+                    var GG = JSON.parse(data);
+                    const result = $.map(GG.data.data, function (value) {
+                        return {id: value.id, text: value.type_name}
+                    });
+                    return {
+                        results: result,
+                        "pagination": {
+                            "more": false
+                        }
+                    }
+                }
+            }
         });
         // ---- end select 2 ----
         //create new item type, and ,close dialog clear input
@@ -563,7 +647,7 @@
                 });
             }
         });
-        // ------------ store model of table -------------------
+    // ===================== All Function do ton nenh min ton lus only ===============================
         var storeValue;
         function ModelShowInTable(getJsonValue) {
             storeValue = JSON.parse(getJsonValue);
@@ -577,34 +661,346 @@
             } else { $('.previous_show_invoice').show(); $('.next_show_invoice').show(); }
 
             for (var i = 0; i < storeValue.data.data.length; i++){
-                // ============= End Parse Json ===========================
-                var _tr =
-                    '<tr>' +
-                    '<td>' + storeValue.data.data[i].display_id + '</td>' +
+                var _tr = '<tr>' +
+                    '<td>' + storeValue.data.data[i].invoice_id + '</td>' +
+                    '<td>' + storeValue.data.data[i].item_type_name + '</td>' +
+                    '<td>' + storeValue.data.data[i].first_feature + '</td>' +
+                    '<td>' + storeValue.data.data[i].second_feature + '</td>' +
+                    '<td>' + storeValue.data.data[i].third_feature + '</td>' +
+                    '<td>' + storeValue.data.data[i].fourth_feature + '</td>' +
                     '</tr>';
                 $('#Show_All_Item_Pay_Yet tbody').append(_tr);
             }
         }
         // ------------ define class constructor ---------------
-        function Invoice(methods, linkUrl) {
+        function ItemPayYet(methods, linkUrl) {
             this.method = methods;
             this.urls = linkUrl;
         }
         // ------------ ajax request to server -----------------
-        Invoice.prototype.reads =  function() {
+        ItemPayYet.prototype.reads =  function() {
             $.ajax({
                 type: this.method,
                 url: this.urls,
                 success: function (ResponseJson) {
-                    console.log(ResponseJson);
-                    //ModelShowInTable(ResponseJson);
+                    //console.log(ResponseJson);
+                    ModelShowInTable(ResponseJson);
                 }
             });
         };
-        // -------------- function show invoice ------------------------
+        // -------------- function show item pay yet ------------------------
         (function () {
-            var showInvoiceInTable = new Invoice("GET" , 'api/item?search=&item_type=&status=&page_size=15');
-            showInvoiceInTable.reads(); // invoke method show data in table
+            var showItemNotYetPay = new ItemPayYet("GET" , 'api/item?search=&item_type=&status=1&page_size=15');
+            showItemNotYetPay.reads();
         })();
+        // -------------- button search notice all itemType ------------
+        var timeout1 = null , storeID_ItemType ;
+        $(document).on("click",".btn_search_Item_notYetPay",function () {
+            var storeItemType = $('#selectTomNanh').val();
+            if (storeItemType === null){ storeID_ItemType = "" } else { storeID_ItemType = storeItemType }
+            var storeNotice1 = $('#notice1').val();
+            var storeNotice2 = $('#notice2').val();
+            var storeNotice3 = $('#notice3').val();
+            var storeNotice4 = $('#notice4').val();
+            var plusNoticeAll = ','+storeNotice1+','+storeNotice2+','+storeNotice3+','+storeNotice4+'';
+            $('#store_search').val(plusNoticeAll);
+
+            var url = 'api/item?search='+plusNoticeAll+'&item_type='+storeID_ItemType+'&status=1&page_size=15';
+            clearSearchNotice();
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_Item_Pay_Yet td').remove();
+                var searchItemPayYet = new ItemPayYet("GET" , url);
+                searchItemPayYet.reads();
+            }, 1000);
+        });
+        // --------------- click back -----------------------------------
+        $(".previous_show_invoice").click(function () {
+            var url = storeValue.data.prev_page_url;
+            if (storeValue.data.prev_page_url === null){
+                alert('មិនអាចខ្លីកត្រលប់បានទេ ពីព្រោះគឺជាទំព័រដំបូង');
+            }else {
+                $('#Show_All_Item_Pay_Yet td').remove();
+                var clickBack = new ItemPayYet("GET" , url);
+                clickBack.reads();
+            }
+        });
+        // --------------- click next -----------------------------------
+        $(".next_show_invoice").click(function () {
+            var url = storeValue.data.next_page_url;
+            if (storeValue.data.next_page_url === null){
+                alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
+            }else {
+                $('#Show_All_Item_Pay_Yet td').remove();
+                var clickNext = new ItemPayYet("GET" , url);
+                clickNext.reads();
+            }
+        });
+        // --------------- clear input text notice ---------------------
+        function clearSearchNotice() {
+            $('#close_search_notice').click();
+            $('#notice1').val('');
+            $('#notice2').val('');
+            $('#notice3').val('');
+            $('#notice4').val('');
+            $('#close_itemTakeOut').click();
+            $('#notice1_takeOut').val('');
+            $('#notice2_takeOut').val('');
+            $('#notice3_takeOut').val('');
+            $('#notice4_takeOut').val('');
+            $('#close_item_all_status').click();
+            $('#notice1_all').val('');
+            $('#notice2_all').val('');
+            $('#notice3_all').val('');
+            $('#notice4_all').val('');
+        }
+
+
+    // ===================== All Function do ton nenh duch only ==========================================
+        // ------------ show in table --------------------------
+        var ConvertJson , StoreElement;
+        function ModelShowItemExpired(getJsonValue) {
+            ConvertJson = JSON.parse(getJsonValue);
+            document.getElementById("page2").innerHTML = ConvertJson.data.current_page;
+            document.getElementById("first2").innerHTML = ConvertJson.data.from;
+            document.getElementById("last2").innerHTML = ConvertJson.data.to;
+            document.getElementById("all2").innerHTML = ConvertJson.data.total;
+            document.getElementById("Num_Page2").innerHTML = ConvertJson.data.current_page;
+
+            if (ConvertJson.data.last_page === 1){ $('.previous_show_invoice2').hide(); $('.next_show_invoice2').hide();
+            } else { $('.previous_show_invoice2').show(); $('.next_show_invoice2').show(); }
+
+            for (var i = 0; i < ConvertJson.data.data.length; i++){
+                // ---- condition if item not yet sel out or not ----
+                if (ConvertJson.data.data[i].status === 2 || ConvertJson.data.data[i].status === 4){
+                    StoreElement = "";
+                } else {
+                    StoreElement = '<li id="ItemExpired"><a><i class="icon-cart-remove"></i>@lang('string.saleOut')</a></li>';
+                }
+                var _tr = '<tr>' +
+                    '<td style="display:none;">' + ConvertJson.data.data[i].id + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].invoice_id + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].item_type_name + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].first_feature + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].second_feature + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].third_feature + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].fourth_feature + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].display_status + '</td>' +
+                    '<td class="text-center"> ' +
+                    '<ul class="icons-list">'+
+                    '<li class="dropdown">'+
+                    '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+                    '<i class="icon-menu9"></i>'+
+                    '</a>'+
+                    '<ul class="dropdown-menu dropdown-menu-right">'+
+                    StoreElement +
+                    '</ul>'+
+                    '</li>'+
+                    '</ul>'+
+                    '</td>' +
+                    '</tr>';
+                $('#Show_All_ItemOut tbody').append(_tr);
+            }
+        }
+        // ------------ define class constructor ---------------
+        function ItemExpired(methods, linkUrl) {
+            this.method = methods;
+            this.urls = linkUrl;
+        }
+        // ------------ ajax request to server -----------------
+        ItemExpired.prototype.reads =  function() {
+            $.ajax({
+                type: this.method,
+                url: this.urls,
+                success: function (ResponseJson) {
+                    //console.log(ResponseJson);
+                    ModelShowItemExpired(ResponseJson);
+                }
+            });
+        };
+        // ------------- function show item out ----------------
+        (function () {
+            var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=2,3,4&page_size=15');
+            showItemExpired.reads();
+        })();
+        // ------------- search item take out ------------------
+        var ItemType_ID;
+        $(document).on("click",".btn_Search_item_takeOut",function () {
+            var storeSelectItemType_Id = $('#selectTomNanh1').val();
+            if (storeSelectItemType_Id === null){ ItemType_ID = "" } else { ItemType_ID = storeSelectItemType_Id }
+            var storeStatus = $('#select_status').val();
+            var storeNotice_1 = $('#notice1_takeOut').val();
+            var storeNotice_2 = $('#notice2_takeOut').val();
+            var storeNotice_3 = $('#notice3_takeOut').val();
+            var storeNotice_4 = $('#notice4_takeOut').val();
+            var NoticeAll = ','+storeNotice_1+','+storeNotice_2+','+storeNotice_3+','+storeNotice_4+'';
+            $('#show_search_notice').val(NoticeAll);
+
+            var url = 'api/item?search='+NoticeAll+'&item_type='+ItemType_ID+'&status='+storeStatus+'&page_size=15';
+            clearSearchNotice(); // clear input when search already in dialog
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_ItemOut td').remove();
+                var searchItemTookOut = new ItemExpired("GET" , url);
+                searchItemTookOut.reads();
+            }, 1000);
+        });
+        // --------------- click back -----------------------------------
+        $(".previous_show_invoice2").click(function () {
+            var url = ConvertJson.data.prev_page_url;
+            if (ConvertJson.data.prev_page_url === null){
+                alert('មិនអាចខ្លីកត្រលប់បានទេ ពីព្រោះគឺជាទំព័រដំបូង');
+            }else {
+                $('#Show_All_ItemOut td').remove();
+                var clickBack = new ItemExpired("GET" , url);
+                clickBack.reads();
+            }
+        });
+        // --------------- click next -----------------------------------
+        $(".next_show_invoice2").click(function () {
+            var url = ConvertJson.data.next_page_url;
+            if (ConvertJson.data.next_page_url === null){
+                alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
+            }else {
+                $('#Show_All_ItemOut td').remove();
+                var clickNext = new ItemExpired("GET" , url);
+                clickNext.reads();
+            }
+        });
+        // --------------- button sale item out -------------------------
+        var _selectRow = null;
+        $(document).on("click","#ItemExpired",function () {
+            _selectRow = $(this).closest('tr');
+            var _storeIDInvoice = $(_selectRow).find('td:eq(1)').text();
+            var _storeNameItemType = $(_selectRow).find('td:eq(2)').text();
+            var _storeNotice1 = $(_selectRow).find('td:eq(3)').text();
+            var _storeNotice2 = $(_selectRow).find('td:eq(4)').text();
+            var _storeNotice3 = $(_selectRow).find('td:eq(5)').text();
+            var _storeNotice4 = $(_selectRow).find('td:eq(6)').text();
+            (function(){
+                $('#setInvoiceId').val(_storeIDInvoice);
+                $('#setNameItemType').val(_storeNameItemType);
+                $('#setFirstNotice').val(_storeNotice1);
+                $('#setSecondNotice').val(_storeNotice2);
+                $('#setThirdNotice').val(_storeNotice3);
+                $('#setFourthNotice').val(_storeNotice4);
+            })();
+        });
+        $(document).on("click",".btn_Sale_Out_ItemType",function () {
+            var storePrice = $('#price_sale_out').val();
+            var storeIdItemType = $(_selectRow).find('td:eq(0)').text();
+            if (storePrice > 0){
+                var storeJson = { "sale_price": storePrice };
+                $.ajax({
+                   type: "PUT",
+                    url: 'api/item/sale/'+storeIdItemType+'',
+                    data: storeJson,
+                    success: function (Response) {
+                        var Json = JSON.parse(Response);
+                        if (Json.status === "200"){
+                            alert('ធ្វើការលក់ចេញជោគជ័យ');
+                            window.location.href = '{{('/admin/inventory')}}';
+                        } else if (Json.status === "300"){
+                            alert('ទំនិញនេះមិនអាចលក់ចេញបានទេ');
+                        }
+                    }
+                });
+            } else { alert('បញ្ចូលតំលៃ អោយធំជាង 0'); }
+        });
+
+
+    // ===================== All Function notice all item  =============================================
+        // ------------ show in table --------------------------
+        var ConvertJsons;
+        function ModelShowItemAllStatus(getJsonValue) {
+            ConvertJsons = JSON.parse(getJsonValue);
+            document.getElementById("page3").innerHTML = ConvertJsons.data.current_page;
+            document.getElementById("first3").innerHTML = ConvertJsons.data.from;
+            document.getElementById("last3").innerHTML = ConvertJsons.data.to;
+            document.getElementById("all3").innerHTML = ConvertJsons.data.total;
+            document.getElementById("Num_Page3").innerHTML = ConvertJsons.data.current_page;
+
+            if (ConvertJsons.data.last_page === 1){ $('.previous_show_invoice3').hide(); $('.next_show_invoice3').hide();
+            } else { $('.previous_show_invoice3').show(); $('.next_show_invoice3').show(); }
+
+            for (var i = 0; i < ConvertJsons.data.data.length; i++){
+                var _tr = '<tr>' +
+                    '<td style="display:none;">' + ConvertJsons.data.data[i].id + '</td>' +
+                    '<td>' + ConvertJsons.data.data[i].invoice_id + '</td>' +
+                    '<td>' + ConvertJsons.data.data[i].item_type_name + '</td>' +
+                    '<td>' + ConvertJsons.data.data[i].first_feature + '</td>' +
+                    '<td>' + ConvertJsons.data.data[i].second_feature + '</td>' +
+                    '<td>' + ConvertJsons.data.data[i].third_feature + '</td>' +
+                    '<td>' + ConvertJsons.data.data[i].fourth_feature + '</td>' +
+                    '<td>' + ConvertJsons.data.data[i].display_status + '</td>' +
+                    '</tr>';
+                $('#Show_All_Items_Status tbody').append(_tr);
+            }
+        }
+        // ------------ define class constructor ---------------
+        function ItemAllStatus(methods, linkUrl) {
+            this.method = methods;
+            this.urls = linkUrl;
+        }
+        // ------------ ajax request to server -----------------
+        ItemAllStatus.prototype.reads =  function() {
+            $.ajax({
+                type: this.method,
+                url: this.urls,
+                success: function (ResponseJson) {
+                    //console.log(ResponseJson);
+                    ModelShowItemAllStatus(ResponseJson);
+                }
+            });
+        };
+        // ------------- function show item out ----------------
+        (function () {
+            var showItemStatus = new ItemAllStatus("GET" , 'api/item?search=&item_type=&status=&page_size=15');
+            showItemStatus.reads();
+        })();
+        // ------------- search all status ---------------------
+        var ItemType_ID_all;
+        $(document).on("click",".btn_Search_item_All_Status",function () {
+            var storeSelectItemType_Id_all = $('#selectTomNanh2').val();
+            if (storeSelectItemType_Id_all === null){ ItemType_ID_all = "" } else { ItemType_ID_all = storeSelectItemType_Id_all }
+            var storeStatus_all = $('#select_status_all').val();
+            var storeNotice_1_all = $('#notice1_all').val();
+            var storeNotice_2_all = $('#notice2_all').val();
+            var storeNotice_3_all = $('#notice3_all').val();
+            var storeNotice_4_all = $('#notice4_all').val();
+            var Notice_all = ','+storeNotice_1_all+','+storeNotice_2_all+','+storeNotice_3_all+','+storeNotice_4_all+'';
+            $('#all_notice_show').val(Notice_all);
+
+            var url = 'api/item?search='+Notice_all+'&item_type='+ItemType_ID_all+'&status='+storeStatus_all+'&page_size=15';
+            clearSearchNotice(); // clear input when search already in dialog
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_Items_Status td').remove();
+                var searchItemAllStatus = new ItemAllStatus("GET" , url);
+                searchItemAllStatus.reads();
+            }, 1000);
+        });
+        // --------------- click back -----------------------------------
+        $(".previous_show_invoice3").click(function () {
+            var url = ConvertJsons.data.prev_page_url;
+            if (ConvertJsons.data.prev_page_url === null){
+                alert('មិនអាចខ្លីកត្រលប់បានទេ ពីព្រោះគឺជាទំព័រដំបូង');
+            }else {
+                $('#Show_All_Items_Status td').remove();
+                var clickBack = new ItemAllStatus("GET" , url);
+                clickBack.reads();
+            }
+        });
+        // --------------- click next -----------------------------------
+        $(".next_show_invoice3").click(function () {
+            var url = ConvertJsons.data.next_page_url;
+            if (ConvertJsons.data.next_page_url === null){
+                alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
+            }else {
+                $('#Show_All_Items_Status td').remove();
+                var clickNext = new ItemAllStatus("GET" , url);
+                clickNext.reads();
+            }
+        });
     </script>
 @endsection

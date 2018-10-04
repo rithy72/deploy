@@ -690,25 +690,28 @@
             var customerPhoneNumber = $('#customer_phone_number').val();
             var kar_brak = $('#kar_brak').val();
             var price_amount = $('#priceAmount').val();
-            var StoreJson = { "customer_name": customerName,"customer_phone": customerPhoneNumber,"grand_total": price_amount,"interests_rate": kar_brak,"invoice_items":TableData };
-            //console.log(JSON.stringify(StoreJson));
-            $.ajax({
-               type:"POST",
-               url:"../api/invoice",
-               data: StoreJson,
-               success: function (Response) {
-                   //console.log(Response);
-                   var ConvertJson = JSON.parse(Response);
-                   if (ConvertJson.status === "200"){
-                       document.getElementById("btn_show_invoice_numbers").click();
-                       (function () {
-                           document.getElementById("numberInvoice").innerHTML = ConvertJson.data;
-                       })();
-                   } else if (ConvertJson.status === "400"){
-                       alert('ព័ណមានមិនគ្រប់គ្រាន់ទេ សូមពិនិត្រឡើងវិញ');
-                   }
-               }
-            });
+            if (!customerName){
+                alert('ត្រួបំពេញឈ្មោះ អតិថិជន ជាមុនសិន');
+            } else {
+                var StoreJson = { "customer_name": customerName,"customer_phone": customerPhoneNumber,"grand_total": price_amount,"interests_rate": kar_brak,"invoice_items":TableData };
+                $.ajax({
+                    type:"POST",
+                    url:"../api/invoice",
+                    data: StoreJson,
+                    success: function (Response) {
+                        //console.log(Response);
+                        var ConvertJson = JSON.parse(Response);
+                        if (ConvertJson.status === "200"){
+                            document.getElementById("btn_show_invoice_numbers").click();
+                            (function () {
+                                document.getElementById("numberInvoice").innerHTML = ConvertJson.data;
+                            })();
+                        } else if (ConvertJson.status === "400"){
+                            alert('ព័ណមានមិនគ្រប់គ្រាន់ទេ សូមពិនិត្រឡើងវិញ');
+                        }
+                    }
+                });
+            }
         });
     // close dialog show invoice ID
         $(document).on("click","#close_redirect",function () {
