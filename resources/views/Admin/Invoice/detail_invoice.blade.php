@@ -35,8 +35,8 @@
                 <div class="col-md-4">
                     <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;margin-bottom: 0;">
                         <a href="{{('/admin/invoice/create_new_invoice')}}" class="btn btn-success" id="" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
-                        <a href="{{('/admin/invoice/update_invoice')}}" class="btn btn-primary" id="updates_invoice" style="margin-bottom: 4px;"><i class="icon-pencil7 position-left"></i>@lang('string.update')</a> ||
-                        <a href="{{('/admin/invoice/invoice_payment')}}" class="btn createNewCountry" id="add_item" style="background: #ff840d;color: white;margin-bottom: 4px;"><i class="icon-price-tag position-left"></i>@lang('string.payment')</a>
+                        <button type="button" class="btn btn-primary" id="update_invoice" style="margin-bottom: 4px;" disabled="disabled"><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
+                        <button type="button" class="btn" id="payment_invoice" style="background: #ff840d;color: white;margin-bottom: 4px;" disabled="disabled"><i class="icon-price-tag position-left"></i>@lang('string.payment')</button>
                     </div>
                 </div>
             </div>
@@ -45,9 +45,8 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs nav-tabs-highlight">
                     <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">@lang('string.generalInformation')</a></li>
-                    <li><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">@lang('string.operation')</a></li>
-                    <li><a href="#highlighted-tab3" data-toggle="tab" aria-expanded="true">រំលស់ទំនិញចេញ</a></li>
-                    <li><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.updateInvoices')</a></li>
+                    <li><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">ទំនិញបញ្ចាំ</a></li>
+                    <li><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.history')</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -104,37 +103,42 @@
                                     <p style="margin-top: 6px;margin-left: 30px;" id="interests_value"></p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="datatable-header" style="margin-top: -25px;">
-                            <legend style="font-size: 17px;margin-top: -25px;"><b style="margin-left: 16px;">ទំនិញបញ្ចាំ</b></legend>
-                        </div>
-                        <div class="datatable-scroll" style="overflow-x: hidden;">
-                            <div class="dataTables_scroll">
-                                <!--============ scroll body oy trov 1 header table ===============-->
-                                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 250px; width: 100%;">
-                                    <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Invoice_Items" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
-                                        <thead style="background: #e3e3ea99;">
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.groupItem')</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice1')</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice2')</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice3')</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice4')</th>
-                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
+                            <div class="col-xs-12 .col-sm-6 col-md-6">
+                                <div class="form-group col-md-12" style="display: inline-flex;">
+                                    <p style="margin-top: 7px;">តម្លៃដើមសរុប</p>
+                                    <p style="margin-top: 6px;margin-left: 30px;" id="grand_total"></p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 .col-sm-6 col-md-6">
+                                <div class="form-group col-md-12" style="display: inline-flex;">
+                                    <p style="margin-top: 7px;">@lang('string.situation')</p>
+                                    <p style="margin-top: 6px;margin-left: 30px;" id="status"></p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 .col-sm-6 col-md-6">
+                                <div class="form-group col-md-12" style="display: inline-flex;">
+                                    <p style="margin-top: 7px;">តម្លៃដើមបង់រួច</p>
+                                    <p style="margin-top: 6px;margin-left: 30px;" id="paid"></p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 .col-sm-6 col-md-6">
+                                <div class="form-group col-md-12" style="display: inline-flex;">
+                                    <p style="margin-top: 7px;">@lang('string.createBy')</p>
+                                    <p style="margin-top: 6px;margin-left: 30px;" id="createByUser"></p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 .col-sm-6 col-md-6">
+                                <div class="form-group col-md-12" style="display: inline-flex;">
+                                    <p style="margin-top: 7px;">តម្លៃដើមនៅសល់</p>
+                                    <p style="margin-top: 6px;margin-left: 30px;" id="luynovsol"></p>
                                 </div>
                             </div>
                         </div>
+
                         {{--========================= footer of pagination ====================--}}
-                        <div class="datatable-footer">
+                        {{--<div class="datatable-footer">
                             <div class="col-xs-12 .col-sm-12 col-md-12">
-                                {{-- Price sa rob --}}
+                                --}}{{-- Price sa rob --}}{{--
                                 <div style="text-align: right;clear: both;">
                                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>តម្លៃដើមសរុប</b></label>
                                     <div class="col-md-6">
@@ -142,7 +146,7 @@
                                         <br>
                                     </div>
                                 </div>
-                                {{-- Price bung ruch --}}
+                                --}}{{-- Price bung ruch --}}{{--
                                 <div style="text-align: right;clear: both;">
                                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>តម្លៃដើមបង់រួច</b></label>
                                     <div class="col-md-6">
@@ -150,7 +154,7 @@
                                         <br>
                                     </div>
                                 </div>
-                                {{-- Price nov sol --}}
+                                --}}{{-- Price nov sol --}}{{--
                                 <div style="text-align: right;clear: both;">
                                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>តម្លៃដើមនៅសល់</b></label>
                                     <div class="col-md-6">
@@ -159,75 +163,23 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                 {{----- Merl ka bong brak bos Customer -----}}
                     <div class="tab-pane" id="highlighted-tab2">
                         <div class="panel-body">
                             <div class="col-md-3">
-                                <span>@lang('string.actions')</span>
-                                <select class="form-control" id="selectTomNanh1" name="">
-                                    <option selected="selected"></option>
-                                    <option selected="selected">បង់ប្រាក់ដើម</option>
-                                    <option selected="selected">ថែមការប្រាក់</option>
-                                    <option selected="selected">បង់ការប្រាក់</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <span>@lang('string.startDate')</span><input type="date" class="form-control" placeholder="">
-                            </div>
-                            <div class="col-md-3">
-                                <span>@lang('string.startDateTo')</span><input type="date" class="form-control" placeholder="">
-                            </div>
-                            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
-                            <br/><br/>
-
-                            <div class="datatable-header" style="margin-top: -30px;"></div>
-                            <div class="datatable-scroll" style="overflow-x: hidden;">
-                                <div class="dataTables_scroll">
-                                    <!--============ scroll body oy trov 1 header table ===============-->
-                                    <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
-                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
-                                            <thead style="background: #e3e3ea99;">
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">កាលបរិច្ឆេត</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.actions')</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.money')</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.userGetMoney')</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>4/9/2018</td>
-                                                <td>បង់ការប្រាក់</td>
-                                                <td>10$</td>
-                                                <td>Employee</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2/9/2018</td>
-                                                <td>បង់ការប្រាក់</td>
-                                                <td>5$</td>
-                                                <td>Employee</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <span>@lang('string.situation')</span>
+                                <div class="form-group">
+                                    <select class="form-control" id="search_status">
+                                        <option value="">@lang('string.all')</option>
+                                        <option value="1">@lang('string.payYet')</option>
+                                        <option value="3">@lang('string.took')</option>
+                                        <option value="2">@lang('string.saleAlready')</option>
+                                        <option value="4">@lang('string.saleOut')</option>
+                                    </select>
                                 </div>
                             </div>
-                            {{--========================= footer of pagination ====================--}}
-                            <div class="datatable-footer"><div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="DataTables_Table_3_previous">←</a><span><a class="paginate_button current" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_3" data-dt-idx="2" tabindex="0">2</a></span><a class="paginate_button next" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="DataTables_Table_3_next">→</a></div></div>
-                            {{--====================== End footer of pagination ====================--}}
-                        </div>
-                    </div>
-                {{----- Merl ka rom lus item janh bos Customer -----}}
-                    <div class="tab-pane" id="highlighted-tab3">
-                        <div class="panel-body">
-                            <div class="col-md-3">
-                                <span>@lang('string.startDate')</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
-                            </div>
-                            <div class="col-md-3">
-                                <span>@lang('string.startDateTo')</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
-                            </div>
                             <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             <br/><br/>
 
@@ -236,12 +188,16 @@
                                 <div class="dataTables_scroll">
                                     <!--============ scroll body oy trov 1 header table ===============-->
                                     <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
-                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_itemType_OneInvoice" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                                             <thead style="background: #e3e3ea99;">
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">កាលបរិច្ឆេត</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">រំលស់ទំនិញ</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.userTakeOutItem')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.groupItem')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice1')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice2')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice3')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice4')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -252,20 +208,54 @@
                                 </div>
                             </div>
                             {{--========================= footer of pagination ====================--}}
-                            <div class="datatable-footer"><div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="DataTables_Table_3_previous">←</a><span><a class="paginate_button current" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_3" data-dt-idx="2" tabindex="0">2</a></span><a class="paginate_button next" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="DataTables_Table_3_next">→</a></div></div>
+                            <div class="datatable-footer">
+
+                            </div>
                             {{--====================== End footer of pagination ====================--}}
                         </div>
                     </div>
                 {{----- Merl ka update invoice bos Customer 1 -----}}
                     <div class="tab-pane" id="highlighted-tab4">
                         <div class="panel-body">
-                            <div class="col-md-3">
-                                <span>@lang('string.startDate')</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
+                            <div class="col-md-2">
+                                <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date">
                             </div>
-                            <div class="col-md-3">
-                                <span>@lang('string.startDateTo')</span><input type="date" class="form-control" placeholder="ជ្រើសរើសថ្ងៃ">
+                            <div class="col-md-2">
+                                <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
                             </div>
-                            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            <div class="col-md-2">
+                                <span>@lang('string.chooseOption')</span>
+                                <div class="form-group">
+                                    <select class="form-control" id="chooseInvoiceOrItemType">
+                                        <option selected="selected" value=""></option>
+                                        <option value="1">@lang('string.invoice')</option>
+                                        <option value="4">@lang('string.itemOfInvoice')</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="display: none;" id="show_situation_invoice">
+                                <span>@lang('string.situation')</span>
+                                <div class="form-group">
+                                    <select class="form-control" id="history_invoice">
+                                        <option value="1">@lang('string.create')</option>
+                                        <option value="2">@lang('string.update')</option>
+                                        <option value="6">@lang('string.paymentRate')</option>
+                                        <option value="7">@lang('string.paymentGrand-Total')</option>
+                                        <option value="8">@lang('string.addMoreCost')</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="display: none;" id="show_situation_itemType">
+                                <span>@lang('string.situation')</span>
+                                <div class="form-group">
+                                    <select class="form-control" id="history_itemType">
+                                        <option value="11">@lang('string.add')</option>
+                                        <option value="10">@lang('string.sale')</option>
+                                        <option value="12">@lang('string.lus_janh')</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <a class="btn btn-primary btn_Search1" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             <br/><br/>
 
                             <div class="datatable-header" style="margin-top: -30px;"></div>
@@ -273,12 +263,13 @@
                                 <div class="dataTables_scroll">
                                     <!--============ scroll body oy trov 1 header table ===============-->
                                     <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
-                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Country" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_History" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                                             <thead style="background: #e3e3ea99;">
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">កាលបរិច្ឆេត</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.actions')</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.userDo')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.actionUsers')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.on')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.newValue')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.oldValue')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -289,7 +280,14 @@
                                 </div>
                             </div>
                             {{--========================= footer of pagination ====================--}}
-                            <div class="datatable-footer"><div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">Showing 1 to 10 of 15 entries</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate"><a class="paginate_button previous disabled" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="DataTables_Table_3_previous">←</a><span><a class="paginate_button current" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0">1</a><a class="paginate_button " aria-controls="DataTables_Table_3" data-dt-idx="2" tabindex="0">2</a></span><a class="paginate_button next" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="DataTables_Table_3_next">→</a></div></div>
+                            <div class="datatable-footer">
+                                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page1"></b> មាន <b id="first1"></b> ប្រវត្តិទៅដល់ <b id="last1"></b> នៃចំនួនប្រវត្តិទាំងអស់គឺ <b id="all1"></b> </div>
+                                <div class="dataTables_paginate paging_simple_numbers" id="">
+                                    <a class="paginate_button previous_show_invoice" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="Item_click_Back" style="display:none;">←</a>
+                                    <span><a class="paginate_button current" id="Num_Page1" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0"></a></span>
+                                    <a class="paginate_button next_show_invoice" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="Item_click_Next" style="display:none;">→</a>
+                                </div>
+                            </div>
                             {{--====================== End footer of pagination ====================--}}
                         </div>
                     </div>
@@ -329,8 +327,17 @@
                type: "GET",
                 url: '../api/invoice/'+_ID+'',
                 success: function (response) {
-                    console.log(response);
+                    //console.log(response);
                     getResponse = JSON.parse(response);
+
+                    if (getResponse.data.status === "1"){
+                        document.getElementById('update_invoice').disabled = false;
+                        document.getElementById('payment_invoice').disabled = false;
+                    } else {
+                        document.getElementById('update_invoice').disabled = true;
+                        document.getElementById('payment_invoice').disabled = true;
+                    }
+
                     document.getElementById("id_invoice").innerHTML = getResponse.data.display_id;
                     document.getElementById("employee_name").innerHTML = getResponse.data.user_full_name;
 
@@ -346,46 +353,186 @@
                     document.getElementById("date_out").innerHTML = getResponse.data.expire_date;
                     document.getElementById("payment_term").innerHTML = getResponse.data.interests_rate+" %";
                     document.getElementById("interests_value").innerHTML = getResponse.data.interests_value+" $";
+                    document.getElementById("status").innerHTML = getResponse.data.display_status;
+                    document.getElementById("createByUser").innerHTML = getResponse.data.user_full_name;
 
-                    document.getElementById("grand_total").value = getResponse.data.grand_total+" $";
-                    document.getElementById("paid").value = getResponse.data.paid+" $";
-                    document.getElementById("luynovsol").value = getResponse.data.remain+" $";
-
-                    $.ajax({
-                       type: "GET",
-                        url: '../api/item/invoice/'+ _ID +'',
-                        success: function (response) {
-                            //console.log(response);
-                            var ConvertJson = JSON.parse(response);
-                            for (var i = 0; i < ConvertJson.data.length; i++){
-                                var short = ConvertJson.data[i], notice1, notice2, notice3, notice4;
-                                if (short.first_feature === null){notice1 = "";}else{notice1 = short.first_feature}
-                                if (short.second_feature === null){notice2 = "";}else{notice2 = short.second_feature}
-                                if (short.third_feature === null){notice3 = "";}else{notice3 = short.third_feature}
-                                if (short.fourth_feature === null){notice4 = "";}else{notice4 = short.fourth_feature}
-
-                                var _tr = '<tr>' +
-                                    '<td style="display:none;">' + ConvertJson.data[i].id + '</td>' +
-                                    '<td>' + [i+1] + '</td>' +
-                                    '<td>' + ConvertJson.data[i].item_type_name + '</td>' +
-                                    '<td>' + notice1 + '</td>' +
-                                    '<td>' + notice2 + '</td>' +
-                                    '<td>' + notice3 + '</td>' +
-                                    '<td>' + notice4 + '</td>' +
-                                    '<td>' + ConvertJson.data[i].display_status + '</td>' +
-                                    '</tr>';
-                                $('#Show_All_Invoice_Items tbody').append(_tr);
-                            }
-                        }
-                    });
+                    document.getElementById("grand_total").innerHTML = getResponse.data.grand_total+" $";
+                    document.getElementById("paid").innerHTML = getResponse.data.paid+" $";
+                    document.getElementById("luynovsol").innerHTML = getResponse.data.remain+" $";
+                    // ---------- show itemType of one invoice ---------
+                    var showInvoiceInTable = new ItemTypeForOneInvoice("GET" , '../api/item/invoice/'+ _ID +'');
+                    showInvoiceInTable.reads();
                 }
             });
         })();
-        // ---------------- update one invoice --------------------------
-        {{--$(document).on("click", "#updates_invoice", function () {--}}
-           {{--// var dd = $.cookie("KeyInvoice", _ID);// atob = decode from base64,  btoa = encode to base 64--}}
-            {{--$.cookie("KeyInvoice", btoa(getResponse.data.id));--}}
-            {{--window.location.href = '{{('/admin/invoice/update_invoice')}}';--}}
-        {{--});--}}
+        // ------------ show table itemType of one invoice -----
+        var ConvertJson;
+        function ModelShowInTable(getJsonValue) {
+            ConvertJson = JSON.parse(getJsonValue);
+            for (var i = 0; i < ConvertJson.data.length; i++){
+                var short = ConvertJson.data[i];
+                var _tr = '<tr>' +
+                    '<td>' + [i+1] + '</td>' +
+                    '<td>' + ConvertJson.data[i].item_type_name + '</td>' +
+                    '<td>' + short.first_feature + '</td>' +
+                    '<td>' + short.second_feature + '</td>' +
+                    '<td>' + short.third_feature + '</td>' +
+                    '<td>' + short.fourth_feature + '</td>' +
+                    '<td>' + ConvertJson.data[i].display_status + '</td>' +
+                    '</tr>';
+                $('#Show_All_itemType_OneInvoice tbody').append(_tr);
+            }
+        }
+        // ------------ define class constructor ---------------
+        function ItemTypeForOneInvoice(methods, linkUrl) {
+            this.method = methods;
+            this.urls = linkUrl;
+        }
+        // ------------ ajax request to server -----------------
+        ItemTypeForOneInvoice.prototype.reads =  function() {
+            $.ajax({
+                type: this.method, // "GET"
+                url: this.urls, // 'GetAllListCurrency'
+                success: function (ResponseJson) {
+                    //console.log(ResponseJson);
+                    ModelShowInTable(ResponseJson);
+                }
+            });
+        };
+        // ------------ click button search in detail ----------
+        var timeout1 = null;
+        $('.btn-Search').on("click",function () {
+            var _searchStatus = $('#search_status').val();
+            var url = '../api/item/invoice/'+ getResponse.data.id +'?status='+_searchStatus;
+
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_itemType_OneInvoice td').remove();
+                var searchInvoiceInTable = new ItemTypeForOneInvoice("GET" , url);
+                searchInvoiceInTable.reads();
+            }, 1000);
+        });
+        // ------------ onchange select history ----------------
+        var select = document.getElementById('chooseInvoiceOrItemType');
+        var chooseInvoice = 1, chooseItemTypeInvoice = 4; // declare var make condition
+        select.onchange = function(){
+            var storeInvoiceStatus = $('#chooseInvoiceOrItemType').val();
+            if (Number(storeInvoiceStatus) === Number(chooseInvoice)){
+                $('#show_situation_invoice').show();
+                $('#show_situation_itemType').hide();
+            } else if (Number(storeInvoiceStatus) === Number(chooseItemTypeInvoice)){
+                $('#show_situation_itemType').show();
+                $('#show_situation_invoice').hide();
+            } else if (!storeInvoiceStatus){
+                $('#show_situation_itemType').hide();
+                $('#show_situation_invoice').hide();
+            }
+        };
+
+        // ------------ define class constructor ---------------
+        function History(methods, linkUrl) {
+            this.method = methods;
+            this.urls = linkUrl;
+        }
+        // ------------ ajax request to server -----------------
+        History.prototype.reads =  function() {
+            $.ajax({
+                type: this.method,
+                url: this.urls,
+                success: function (ResponseJson) {
+                    //console.log(ResponseJson);
+                    ShowDataInTable(ResponseJson);
+                }
+            });
+        };
+        // ------------ function search history ----------------
+        var url,_chooseSearch,_historyInvoice,_historyItemType;
+        $('.btn_Search1').on("click", function () {
+            var _startDate = $('#start_date').val();
+            var _toDate = $('#to_date').val();
+            _chooseSearch = $('#chooseInvoiceOrItemType').val();
+            _historyInvoice = $('#history_invoice').val();
+            _historyItemType = $('#history_itemType').val();
+            // ---- condition have value search or not ----
+            if (!_chooseSearch){
+                alert('ត្រូវជ្រើសរើសការធ្វើជាមុនសិន');
+            } else {
+                if (Number(_chooseSearch) === Number(chooseInvoice)){
+                    url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action='+_chooseSearch+'&group='+_historyInvoice+'&page_size=15';
+                    setToAjax();
+                } else if (Number(_chooseSearch) === Number(chooseItemTypeInvoice)){
+                    url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action='+_chooseSearch+'&group='+_historyItemType+'&page_size=15';
+                    setToAjax()
+                }
+            }
+            function setToAjax() {
+                clearTimeout(timeout1);
+                timeout1 = setTimeout(function () {
+                    $('#Show_All_History td').remove();
+                    var searchHistoryInvoice = new History("GET" , url);
+                    searchHistoryInvoice.reads();
+                }, 1000);
+            }
+        });
+        // ---- model table ----
+        var ConvertAndStore;
+        function ShowDataInTable(getJsonValue) {
+            ConvertAndStore = JSON.parse(getJsonValue);
+            document.getElementById("page1").innerHTML = ConvertAndStore.data.current_page;
+            document.getElementById("first1").innerHTML = ConvertAndStore.data.from;
+            document.getElementById("last1").innerHTML = ConvertAndStore.data.to;
+            document.getElementById("all1").innerHTML = ConvertAndStore.data.total;
+            document.getElementById("Num_Page1").innerHTML = ConvertAndStore.data.current_page;
+
+            if (ConvertAndStore.data.last_page === 1) {
+                $('.previous_show_invoice').hide();
+                $('.next_show_invoice').hide();
+            } else {
+                $('.previous_show_invoice').show();
+                $('.next_show_invoice').show();
+            }
+            for (var i = 0; i < ConvertAndStore.data.data.length; i++){
+                var short = JSON.parse(ConvertAndStore.data.data[i].change_log);
+                for(var j = 0; j < short.length; j++){
+                    var _tr = '<tr>' +
+                        '<td>' + short[j].action + '</td>' +
+                        '<td>' + short[j].showName + '</td>' +
+                        '<td>' + short[j].newValue + '</td>' +
+                        '<td>' + short[j].oldValue + '</td>' +
+                        '</tr>';
+                    $('#Show_All_History tbody').append(_tr);
+                }
+            }
+        }
+        // ---- click back ---------------------
+        $(".previous_show_invoice").click(function () {
+            var url = ConvertAndStore.data.prev_page_url;
+            if (ConvertAndStore.data.prev_page_url === null){
+                alert('មិនអាចខ្លីកត្រលប់បានទេ ពីព្រោះគឺជាទំព័រដំបូង');
+            }else {
+                $('#Show_All_History td').remove();
+                var clickBack = new History("GET" , url);
+                clickBack.reads();
+            }
+        });
+        // ---- click next --------------------
+        $(".next_show_invoice").click(function () {
+            var url = ConvertAndStore.data.next_page_url;
+            if (ConvertAndStore.data.next_page_url === null){
+                alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
+            }else {
+                $('#Show_All_History td').remove();
+                var clickNext = new History("GET" , url);
+                clickNext.reads();
+            }
+        });
+        // ---- button update on invoice -----
+        $(document).on("click","#update_invoice",function () {
+            window.location.href = '{{('/admin/invoice/update_invoice')}}';
+        });
+        // ---- button payment on invoice ----
+        $(document).on("click","#payment_invoice",function () {
+            window.location.href = '{{('/admin/invoice/invoice_payment')}}';
+        });
     </script>
 @endsection

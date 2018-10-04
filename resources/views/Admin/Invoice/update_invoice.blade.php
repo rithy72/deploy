@@ -775,8 +775,8 @@
             var customerPhoneNumber = $('#customer_phone_number').val();
             var invoiceRate = $('#percent_rate').val();
 
-            if (customerName === "" || customerPhoneNumber === ""){
-                alert("សូមមេត្តាបំពេញ ឈ្មោះអតិថិជន និង លេខទូរស័ព្ទ មិនត្រូវមានអក្សរដាច់ខាត");
+            if (!customerName){
+                alert("សូមមេត្តាបំពេញ ឈ្មោះអតិថិជន ជាមុនសិន");
             } else {
                 // array create new item type
                 for (var i = 0; i < addMoreItemType.length; i++){
@@ -785,7 +785,7 @@
                         "first_feature": addMoreItemType[i].first_feature,
                         "second_feature": addMoreItemType[i].second_feature,
                         "third_feature": addMoreItemType[i].third_feature,
-                        "fourth_feature": addMoreItemType[i].fourth_feature,
+                        "fourth_feature": addMoreItemType[i].fourth_feature
                     });
                 }
                 // array update item type
@@ -797,7 +797,7 @@
                             "first_feature": updateItemType[i].first_feature,
                             "second_feature": updateItemType[i].second_feature,
                             "third_feature": updateItemType[i].third_feature,
-                            "fourth_feature": updateItemType[i].fourth_feature,
+                            "fourth_feature": updateItemType[i].fourth_feature
                         });
                     }
                 }
@@ -808,7 +808,7 @@
                     "interests_rate":Number(invoiceRate),
                     "new_items":storeNewItemType,
                     "modify_items":storeUpdateItemType,
-                    "delete_items":deleteItemType,
+                    "delete_items":deleteItemType
                 };
 
                 var idInvoice = atob($.cookie("KeyInvoice"));
