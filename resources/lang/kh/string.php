@@ -77,7 +77,7 @@ return[
     //part of update invoice
     'writeCustomerNameHere...' => 'សរសេរឈ្មោះអតិថិជន....',
     'writePhoneNumberHere...' => 'សរសេរលេខទូរស័ព្ទ....',
-    'id' => 'លរ',
+    'id' => 'ល.រ',
     'itemNotice1' => 'កំណត់សម្កាល់ ១',
     'itemNotice2' => 'កំណត់សម្កាល់ ២',
     'itemNotice3' => 'កំណត់សម្កាល់ ៣',
@@ -114,8 +114,7 @@ return[
     'nameItem' => 'ឈ្មោះប្រភេទទំនិញ ៖',
     'active' => 'ដំណើរការ ',
     'deActive' => 'ផ្អាកដំណើរការ ',
-
-'updateItemType' => 'ធ្វើការកែប្រែប្រភេទទំនិញ ៖',
+    'updateItemType' => 'ធ្វើការកែប្រែប្រភេទទំនិញ ៖',
     'addOldItemForUpdate' => 'បញ្ខូលប្រភេទទំនិញចាស់ដើម្បីធ្វើការកែប្រែ.... ៖',
     // part of user using system
     'fine' => 'ស្វែងរកតាមរយៈ',
@@ -141,7 +140,7 @@ return[
     // new
     'payYet' => 'មិនទាន់លស់',
     'took' => 'យកដាច់',
-    'history' => 'ប្រវត្តិលើវិក្ក័យបត្រ',
+    'history' => 'ប្រវត្តិលើការប្រតិបត្តិការណ៍',
     'itemOfInvoice' => 'ទំនិញក្នុងវិក្ក័យបត្រ',
     'create' => 'បង្កើត',
     'paymentRate' => 'បង់ការប្រាក់',
@@ -151,6 +150,18 @@ return[
     'sale' => 'លក់ចេញ',
     'lus_janh' => 'លស់ចេញ',
     'on' => 'ទៅលើ',
-    'newValue' => 'តំលៃថ្មី',
-    'oldValue' => 'តំលៃចាស់',
+    'newValue' => 'តំម្លៃថ្មី',
+    'oldValue' => 'តំម្លៃចាស់',
+    'dayExpired' => 'ថ្ងៃវិក្ក័យបត្រផុតកំណត់',
+    'day' => 'ថ្ងៃ',
+    'to' => 'ដល់',
+    'ItemPayYet' => 'ស្វែងរកទំនិញមិនទានលស់',
+    'ItemTookOut' => 'ស្វែងរកទំនិញដែលដាច់ថ្ងៃ',
+    'SearchItemAllStatus' => 'ស្វែងរកទំនិញគ្រប់ស្ថានភាពទាំងអស់',
+    'SearchInvoiceID' => 'ស្វែងរកតាមរយះលេខវិក្ក័យបត្រ',
+    'describe' => 'ពិព៌ណនា',
+    'showDetailOneHistory' => 'ប្រវត្តិលំអិតរបស់ប្រតិបត្តិការណ៌',
+    'UserAction' => 'ឈ្មោះអ្នកធ្វើ',
+    'do' => 'ធ្វើមុខងារ',
+
 ];

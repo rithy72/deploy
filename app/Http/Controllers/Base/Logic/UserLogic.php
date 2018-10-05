@@ -254,6 +254,19 @@ class UserLogic extends SecureLogic
     }
 
     //Filter Search
+    //Search Option: User Number, Name, Phone
+    public function FilterSearch($searchOption, $search, $status, $page_size){
 
+    }
+
+    //User Change History
+    public function UserHistory(){
+
+    }
+
+    //User Audit Trail
+    public function UserAuditTral(){
+
+    }
 
 }

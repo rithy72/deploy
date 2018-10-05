@@ -38,7 +38,7 @@ class TestController extends Controller
     public function API(){
 
 
-        $result = InvoiceInfoLogic::Instance()->GetOverDueInvoices(10);
-        return json_encode($result);
+        $result = InvoiceInfoLogic::Instance()->InvoiceAndItemTransactionHistory("","","","",1,10);
+        return $result;
     }
 }
