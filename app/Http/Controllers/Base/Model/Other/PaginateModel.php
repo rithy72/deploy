@@ -17,6 +17,7 @@ class PaginateModel
     public $from;
     public $last_page;
     public $last_page_url;
+    public $url;
     public $next_page_url;
     public $path;
     public $per_page;
@@ -36,8 +37,9 @@ class PaginateModel
         $newModel->from = $getResult->firstItem();
         $newModel->last_page = $getResult->lastPage();
         $newModel->last_page_url = "";
+        $newModel->url = $getResult->url(0);
         $newModel->next_page_url = $getResult->nextPageUrl();
-        $newModel->path = "";
+        $newModel->path = $getResult->url(1);
         $newModel->per_page = $getResult->perPage();
         $newModel->prev_page_url = $getResult->previousPageUrl();
         $newModel->to = $getResult->lastItem();

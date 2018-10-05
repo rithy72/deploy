@@ -38,7 +38,7 @@ class TestController extends Controller
     public function API(){
 
 
-        $result = UserLogic::Instance()->Find(1);
+        $result = InvoiceInfoLogic::Instance()->GetOverDueInvoices(10);
         return json_encode($result);
     }
 }

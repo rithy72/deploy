@@ -14,9 +14,7 @@ use App\Http\Controllers\Base\Logic\OtherLogic\SecureLogic;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
-use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use App\Http\Controllers\Base\Model\UserModel;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -182,5 +180,80 @@ class UserLogic extends SecureLogic
 
         return $newUserObj;
     }
+
+    //Delete
+    public function Delete($id){
+        $userObj = $this->Find($id);
+        //Check if can delete
+        if ($userObj->delete_able == false) return false;
+        //Delete
+        DB::table('users')->where('id','=', $id)->delete();
+        //User Audit
+        $description = $userObj->user_no."-".$userObj->name;
+        UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::DELETE, $description, []);
+        //
+        return true;
+    }
+
+    //Deactivate
+    public function Deactivate($id){
+        $userObj = $this->Find($id);
+        //
+        DB::table('users')
+            ->where('id','=', $id)
+            ->update([
+               'status' => false,
+               'password' => null,
+               'last_update_date' => DateTimeLogic::Instance()
+                   ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+                'last_update_by' => Auth::id()
+            ]);
+        //User Audit
+        $description = $userObj->user_no."-".$userObj->name;
+        UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::DEACTIVATE, $description, []);
+    }
+
+    //Activate
+    public function Activate($new_password, $id){
+        $userObj = $this->Find($id);
+        //
+        DB::table('users')
+            ->where('id','=', $id)
+            ->update([
+                'status' => true,
+                'password' => bcrypt($new_password),
+                'last_update_date' => DateTimeLogic::Instance()
+                    ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+                'last_update_by' => Auth::id()
+            ]);
+        //User Audit
+        $description = $userObj->user_no."-".$userObj->name;
+        UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::ACTIVATE, $description, []);
+        UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::CHANGE_PASSWORD, $description, []);
+    }
+
+    //Reset Password()
+    public function ResetPassword($username, $old_password, $new_password, $id){
+        $userObj = $this->Find($id);
+        //Check, can not reset
+        if ($username != $userObj->email || bcrypt($old_password) != $userObj->password) return false;
+        //Reset Password, if can
+        DB::table('users')
+            ->where('id','=', $id)
+            ->update([
+                'password' => bcrypt($new_password),
+                'last_update_date' => DateTimeLogic::Instance()
+                    ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+                'last_update_by' => Auth::id()
+            ]);
+        //User Audit
+        $description = $userObj->user_no."-".$userObj->name;
+        UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::CHANGE_PASSWORD, $description, []);
+
+        return true;
+    }
+
+    //Filter Search
+
 
 }
