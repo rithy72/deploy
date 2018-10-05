@@ -365,7 +365,7 @@ class InvoiceInfoLogic
         $dateInstance = DateTimeLogic::Instance();
         //
         $oldInvoiceObj = $this->Find($invoice_id);
-        //TODO: Fixed Date Time
+        //
         $fromDate = (empty($from_date)) ?
             $dateInstance->FormatDatTime($oldInvoiceObj->created_date, 'Y-m-d 00:00:00') :
             $dateInstance->FormatDatTime($from_date, 'Y-m-d 00:00:00');
