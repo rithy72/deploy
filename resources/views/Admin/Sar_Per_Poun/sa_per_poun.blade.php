@@ -305,7 +305,7 @@
             </div>
         </div>
     </form>
-    {{------------ dialog tver ka create new Type of item ------------}}
+    {{------------ dialog tver ka create new itemType ------------}}
     <form role="form" action="" method="">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div id="NewTypeDialog" class="modal fade">
@@ -361,6 +361,12 @@
                                 <div class="datatable-header">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')</label>
+                                            <div class="col-lg-8" style="margin-bottom: 13px;">
+                                                <input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.notice')</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
                                                 <input type="text" class="form-control" placeholder="@lang('string.itemNotice1')" style="border: 1px solid grey;" id="notice1"><br>
@@ -401,6 +407,12 @@
                                 <div class="datatable-header">
                                     <div class="col-md-12">
                                         <div class="form-group">
+                                            <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')</label>
+                                            <div class="col-lg-8" style="margin-bottom: 13px;">
+                                                <input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice1" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.notice')</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
                                                 <input type="text" class="form-control" placeholder="@lang('string.itemNotice1')" style="border: 1px solid grey;" id="notice1_takeOut"><br>
@@ -440,6 +452,12 @@
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header">
                                     <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')</label>
+                                            <div class="col-lg-8" style="margin-bottom: 13px;">
+                                                <input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice2" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.notice')</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
@@ -698,11 +716,12 @@
         $(document).on("click",".btn_search_Item_notYetPay",function () {
             var storeItemType = $('#selectTomNanh').val();
             if (storeItemType === null){ storeID_ItemType = "" } else { storeID_ItemType = storeItemType }
+            var storeInvoiceId = $('#search_invoice').val();
             var storeNotice1 = $('#notice1').val();
             var storeNotice2 = $('#notice2').val();
             var storeNotice3 = $('#notice3').val();
             var storeNotice4 = $('#notice4').val();
-            var plusNoticeAll = ','+storeNotice1+','+storeNotice2+','+storeNotice3+','+storeNotice4+'';
+            var plusNoticeAll = ''+storeInvoiceId+','+storeNotice1+','+storeNotice2+','+storeNotice3+','+storeNotice4+'';
             $('#store_search').val(plusNoticeAll);
 
             var url = 'api/item?search='+plusNoticeAll+'&item_type='+storeID_ItemType+'&status=1&page_size=15';
@@ -739,16 +758,19 @@
         // --------------- clear input text notice ---------------------
         function clearSearchNotice() {
             $('#close_search_notice').click();
+            $('#search_invoice').val('');
             $('#notice1').val('');
             $('#notice2').val('');
             $('#notice3').val('');
             $('#notice4').val('');
             $('#close_itemTakeOut').click();
+            $('#search_invoice1').val('');
             $('#notice1_takeOut').val('');
             $('#notice2_takeOut').val('');
             $('#notice3_takeOut').val('');
             $('#notice4_takeOut').val('');
             $('#close_item_all_status').click();
+            $('#search_invoice2').val('');
             $('#notice1_all').val('');
             $('#notice2_all').val('');
             $('#notice3_all').val('');
@@ -829,11 +851,12 @@
             var storeSelectItemType_Id = $('#selectTomNanh1').val();
             if (storeSelectItemType_Id === null){ ItemType_ID = "" } else { ItemType_ID = storeSelectItemType_Id }
             var storeStatus = $('#select_status').val();
+            var storeInvoiceID = $('#search_invoice1').val();
             var storeNotice_1 = $('#notice1_takeOut').val();
             var storeNotice_2 = $('#notice2_takeOut').val();
             var storeNotice_3 = $('#notice3_takeOut').val();
             var storeNotice_4 = $('#notice4_takeOut').val();
-            var NoticeAll = ','+storeNotice_1+','+storeNotice_2+','+storeNotice_3+','+storeNotice_4+'';
+            var NoticeAll = ''+storeInvoiceID+','+storeNotice_1+','+storeNotice_2+','+storeNotice_3+','+storeNotice_4+'';
             $('#show_search_notice').val(NoticeAll);
 
             var url = 'api/item?search='+NoticeAll+'&item_type='+ItemType_ID+'&status='+storeStatus+'&page_size=15';
@@ -964,11 +987,12 @@
             var storeSelectItemType_Id_all = $('#selectTomNanh2').val();
             if (storeSelectItemType_Id_all === null){ ItemType_ID_all = "" } else { ItemType_ID_all = storeSelectItemType_Id_all }
             var storeStatus_all = $('#select_status_all').val();
+            var storeInvoice_ID = $('#search_invoice2').val();
             var storeNotice_1_all = $('#notice1_all').val();
             var storeNotice_2_all = $('#notice2_all').val();
             var storeNotice_3_all = $('#notice3_all').val();
             var storeNotice_4_all = $('#notice4_all').val();
-            var Notice_all = ','+storeNotice_1_all+','+storeNotice_2_all+','+storeNotice_3_all+','+storeNotice_4_all+'';
+            var Notice_all = ''+storeInvoice_ID+','+storeNotice_1_all+','+storeNotice_2_all+','+storeNotice_3_all+','+storeNotice_4_all+'';
             $('#all_notice_show').val(Notice_all);
 
             var url = 'api/item?search='+Notice_all+'&item_type='+ItemType_ID_all+'&status='+storeStatus_all+'&page_size=15';

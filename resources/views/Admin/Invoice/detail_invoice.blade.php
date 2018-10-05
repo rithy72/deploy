@@ -266,10 +266,12 @@
                                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_History" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                                             <thead style="background: #e3e3ea99;">
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.actionUsers')</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.on')</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.newValue')</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.oldValue')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.UserAction')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.describe')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.date')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending" style="text-align: center;">@lang('string.actions')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -295,6 +297,57 @@
             </div>
         </div>
     </div>
+
+    {{-----  Dialog show detail history detail  -----}}
+    <div id="show_detail_one_history_change_log" class="modal fade">
+        <div class="modal-dialog modal-full" style="margin-left: auto;margin-right: auto;width: 79%;">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h5 class="modal-title">@lang('string.showDetailOneHistory')</h5>
+                </div>
+
+                <div class="modal-body">
+                    <div class="datatable-header" style="margin-top: -30px;">
+                        <div class="col-md-8" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.UserAction') ៖</p><p id="name" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.do') ៖</p><p id="do_action" style="margin-left: 5px;"></p></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="datatable-scroll" style="overflow-x: hidden;">
+                        <div class="dataTables_scroll">
+                            <!--============ scroll body oy trov 1 header table ===============-->
+                            <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
+                                <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_One_Detail" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                                    <thead style="background: #e3e3ea99;">
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.actionUsers')</th>
+                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.on')</th>
+                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.newValue')</th>
+                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.oldValue')</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {{--========================= footer of pagination ====================--}}
+                    <div class="datatable-footer"></div>
+                    {{--====================== End footer of pagination ====================--}}
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+
 
     <div id="loading" style="display: none;
     width:100px;
@@ -362,6 +415,9 @@
                     // ---------- show itemType of one invoice ---------
                     var showInvoiceInTable = new ItemTypeForOneInvoice("GET" , '../api/item/invoice/'+ _ID +'');
                     showInvoiceInTable.reads();
+                    // ---------- show history of invoice --------------
+                    var showHistoryInvoice = new History("GET" , '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date=&to_date=&action=&group=&page_size=15');
+                    showHistoryInvoice.reads();
                 }
             });
         })();
@@ -448,6 +504,7 @@
         // ------------ function search history ----------------
         var url,_chooseSearch,_historyInvoice,_historyItemType;
         $('.btn_Search1').on("click", function () {
+            autoIncrement = 0;
             var _startDate = $('#start_date').val();
             var _toDate = $('#to_date').val();
             _chooseSearch = $('#chooseInvoiceOrItemType').val();
@@ -455,7 +512,8 @@
             _historyItemType = $('#history_itemType').val();
             // ---- condition have value search or not ----
             if (!_chooseSearch){
-                alert('ត្រូវជ្រើសរើសការធ្វើជាមុនសិន');
+                url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action=&group=&page_size=15';
+                setToAjax();
             } else {
                 if (Number(_chooseSearch) === Number(chooseInvoice)){
                     url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action='+_chooseSearch+'&group='+_historyInvoice+'&page_size=15';
@@ -475,7 +533,7 @@
             }
         });
         // ---- model table ----
-        var ConvertAndStore;
+        var ConvertAndStore , autoIncrement = 0;
         function ShowDataInTable(getJsonValue) {
             ConvertAndStore = JSON.parse(getJsonValue);
             document.getElementById("page1").innerHTML = ConvertAndStore.data.current_page;
@@ -492,16 +550,28 @@
                 $('.next_show_invoice').show();
             }
             for (var i = 0; i < ConvertAndStore.data.data.length; i++){
-                var short = JSON.parse(ConvertAndStore.data.data[i].change_log);
-                for(var j = 0; j < short.length; j++){
-                    var _tr = '<tr>' +
-                        '<td>' + short[j].action + '</td>' +
-                        '<td>' + short[j].showName + '</td>' +
-                        '<td>' + short[j].newValue + '</td>' +
-                        '<td>' + short[j].oldValue + '</td>' +
-                        '</tr>';
-                    $('#Show_All_History tbody').append(_tr);
-                }
+                var short = ConvertAndStore.data.data[i];
+                var _tr = '<tr>' +
+                    '<td>' + [autoIncrement+=1] + '</td>' +
+                    '<td>' + short.description + '</td>' +
+                    '<td>' + short.name + '</td>' +
+                    '<td>' + short.display_audit + '</td>' +
+                    '<td>' + short.date_time + '</td>' +
+                    '<td class="text-center"> ' +
+                    '<ul class="icons-list">'+
+                    '<li class="dropdown">'+
+                    '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+                    '<i class="icon-menu9"></i>'+
+                    '</a>'+
+                    '<ul class="dropdown-menu dropdown-menu-right">'+
+                    '<li id="detail_invoice"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
+                    '</ul>'+
+                    '</li>'+
+                    '</ul>'+
+                    '</td>'+
+                    '<td style="display:none;">' + short.change_log + '</td>' +
+                    '</tr>';
+                $('#Show_All_History tbody').append(_tr);
             }
         }
         // ---- click back ---------------------
@@ -510,9 +580,13 @@
             if (ConvertAndStore.data.prev_page_url === null){
                 alert('មិនអាចខ្លីកត្រលប់បានទេ ពីព្រោះគឺជាទំព័រដំបូង');
             }else {
-                $('#Show_All_History td').remove();
-                var clickBack = new History("GET" , url);
-                clickBack.reads();
+                clearTimeout(timeout1);
+                timeout1 = setTimeout(function () {
+                    autoIncrement -= 2; // minus number auto increment
+                    $('#Show_All_History td').remove();
+                    var clickBack = new History("GET" , url);
+                    clickBack.reads();
+                }, 500);
             }
         });
         // ---- click next --------------------
@@ -521,10 +595,36 @@
             if (ConvertAndStore.data.next_page_url === null){
                 alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
             }else {
-                $('#Show_All_History td').remove();
-                var clickNext = new History("GET" , url);
-                clickNext.reads();
+                clearTimeout(timeout1);
+                timeout1 = setTimeout(function () {
+                    $('#Show_All_History td').remove();
+                    var clickNext = new History("GET" , url);
+                    clickNext.reads();
+                }, 500);
             }
+        });
+        // ---- click show dialog detail history ----
+        $(document).on("click","#detail_invoice",function () {
+            $('#show_detail_one_history_change_log').modal({ backdrop: 'static' }); // show dialog
+            var _selectRow = $(this).closest('tr'); // close set tr
+            $('#Show_One_Detail td').remove();      // clear data in table detail dailog
+            var storeDescribe = $(_selectRow).find('td:eq(3)').text();
+            const splitString = storeDescribe.split("-");
+            (function(){
+                $('#name').text($(_selectRow).find('td:eq(2)').text());
+                $('#do_action').text(splitString[0]);
+                var short = JSON.parse($(_selectRow).find('td:eq(6)').text());
+                 for(var j = 0; j < short.length; j++){
+                 var _tr = '<tr>' +
+                 '<td>' + [j+1] + '</td>' +
+                 '<td>' + short[j].action + '</td>' +
+                 '<td>' + short[j].showName + '</td>' +
+                 '<td>' + short[j].newValue + '</td>' +
+                 '<td>' + short[j].oldValue + '</td>' +
+                 '</tr>';
+                 $('#Show_One_Detail tbody').append(_tr);
+                 }
+            })();
         });
         // ---- button update on invoice -----
         $(document).on("click","#update_invoice",function () {
