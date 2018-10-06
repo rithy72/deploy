@@ -394,6 +394,7 @@ class InvoiceInfoLogic
                 //
                 return $query->where('user_record.audit_group', '=', $group);
             })
+            //When user has date range
             ->whereBetween('user_record.date_time', array($fromDate, $toDate))
             ->paginate($page_size);
         //Append
