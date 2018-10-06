@@ -712,7 +712,7 @@
             showItemNotYetPay.reads();
         })();
         // -------------- button search notice all itemType ------------
-        var timeout1 = null , storeID_ItemType ;
+        var timeout1 = null , storeID_ItemType , ID,n1,n2,n3,n4;
         $(document).on("click",".btn_search_Item_notYetPay",function () {
             var storeItemType = $('#selectTomNanh').val();
             if (storeItemType === null){ storeID_ItemType = "" } else { storeID_ItemType = storeItemType }
@@ -722,7 +722,13 @@
             var storeNotice3 = $('#notice3').val();
             var storeNotice4 = $('#notice4').val();
             var plusNoticeAll = ''+storeInvoiceId+','+storeNotice1+','+storeNotice2+','+storeNotice3+','+storeNotice4+'';
-            $('#store_search').val(plusNoticeAll);
+
+            if(!storeInvoiceId){ID="";}else{ID=" "+storeInvoiceId+",";}
+            if(!storeNotice1){n1="";}else{n1=" "+storeNotice1+",";}
+            if(!storeNotice2){n2="";}else{n2=" "+storeNotice2+",";}
+            if(!storeNotice3){n3="";}else{n3=" "+storeNotice3+",";}
+            if(!storeNotice4){n4="";}else{n4=" "+storeNotice4+",";}
+            $('#store_search').val(ID+n1+n2+n3+n4);
 
             var url = 'api/item?search='+plusNoticeAll+'&item_type='+storeID_ItemType+'&status=1&page_size=15';
             clearSearchNotice();
@@ -846,7 +852,7 @@
             showItemExpired.reads();
         })();
         // ------------- search item take out ------------------
-        var ItemType_ID;
+        var ItemType_ID, _ID, _n1, _n2, _n3, _n4;
         $(document).on("click",".btn_Search_item_takeOut",function () {
             var storeSelectItemType_Id = $('#selectTomNanh1').val();
             if (storeSelectItemType_Id === null){ ItemType_ID = "" } else { ItemType_ID = storeSelectItemType_Id }
@@ -857,7 +863,13 @@
             var storeNotice_3 = $('#notice3_takeOut').val();
             var storeNotice_4 = $('#notice4_takeOut').val();
             var NoticeAll = ''+storeInvoiceID+','+storeNotice_1+','+storeNotice_2+','+storeNotice_3+','+storeNotice_4+'';
-            $('#show_search_notice').val(NoticeAll);
+
+            if(!storeInvoiceID){_ID="";}else{_ID=" "+storeInvoiceID+",";}
+            if(!storeNotice_1){_n1="";}else{_n1=" "+storeNotice_1+",";}
+            if(!storeNotice_2){_n2="";}else{_n2=" "+storeNotice_2+",";}
+            if(!storeNotice_3){_n3="";}else{_n3=" "+storeNotice_3+",";}
+            if(!storeNotice_4){_n4="";}else{_n4=" "+storeNotice_4+",";}
+            $('#show_search_notice').val(_ID+_n1+_n2+_n3+_n4);
 
             var url = 'api/item?search='+NoticeAll+'&item_type='+ItemType_ID+'&status='+storeStatus+'&page_size=15';
             clearSearchNotice(); // clear input when search already in dialog
@@ -982,7 +994,7 @@
             showItemStatus.reads();
         })();
         // ------------- search all status ---------------------
-        var ItemType_ID_all;
+        var ItemType_ID_all, _ID_,_n1_,_n2_,_n3_,_n4_;
         $(document).on("click",".btn_Search_item_All_Status",function () {
             var storeSelectItemType_Id_all = $('#selectTomNanh2').val();
             if (storeSelectItemType_Id_all === null){ ItemType_ID_all = "" } else { ItemType_ID_all = storeSelectItemType_Id_all }
@@ -993,7 +1005,13 @@
             var storeNotice_3_all = $('#notice3_all').val();
             var storeNotice_4_all = $('#notice4_all').val();
             var Notice_all = ''+storeInvoice_ID+','+storeNotice_1_all+','+storeNotice_2_all+','+storeNotice_3_all+','+storeNotice_4_all+'';
-            $('#all_notice_show').val(Notice_all);
+
+            if(!storeInvoice_ID){_ID_="";}else{_ID_=" "+storeInvoice_ID+",";}
+            if(!storeNotice_1_all){_n1_="";}else{_n1_=" "+storeNotice_1_all+",";}
+            if(!storeNotice_2_all){_n2_="";}else{_n2_=" "+storeNotice_2_all+",";}
+            if(!storeNotice_3_all){_n3_="";}else{_n3_=" "+storeNotice_3_all+",";}
+            if(!storeNotice_4_all){_n4_="";}else{_n4_=" "+storeNotice_4_all+",";}
+            $('#all_notice_show').val(_ID_+_n1_+_n2_+_n3_+_n4_);
 
             var url = 'api/item?search='+Notice_all+'&item_type='+ItemType_ID_all+'&status='+storeStatus_all+'&page_size=15';
             clearSearchNotice(); // clear input when search already in dialog
