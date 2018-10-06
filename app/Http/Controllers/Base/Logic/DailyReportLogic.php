@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Base\Logic;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class DailyReportLogic
 {
@@ -34,7 +35,7 @@ class DailyReportLogic
         $itemsInWarehouse = 0;
         if ($getResult != null){
             $itemsInWarehouse = DB::table('invoice_item')
-                ->where('status','<>',[InvoiceItemStatusEnum::CLOSE, InvoiceItemStatusEnum::SOLD])
+                ->whereNotIn('status', [InvoiceItemStatusEnum::CLOSE, InvoiceItemStatusEnum::SOLD])
                 ->count();
         }
 
@@ -127,6 +128,13 @@ class DailyReportLogic
 
     public function FilterSearch($from_date, $to_date, $page_size){
         $dateInstance = DateTimeLogic::Instance();
+        //Check From Date
+        if (empty($from_date)){
+            $getDate = DB::table('daily_report')
+                ->select('date')->orderBy('date', 'asc')->first();
+            $from_date = $getDate->date;
+        }
+        //
         $fromDate = (empty($from_date)) ?
             $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_FORMAT) :
             $dateInstance->FormatDatTime($from_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
@@ -135,8 +143,10 @@ class DailyReportLogic
             $dateInstance->FormatDatTime($to_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
         //
         $getResult = DB::table('daily_report')
-            ->whereIn('date', array($fromDate, $toDate))
+            ->whereBetween('date', array($fromDate, $toDate))
             ->paginate($page_size);
+
+        $getResult->appends(Input::except("page"));
 
         return $getResult;
     }

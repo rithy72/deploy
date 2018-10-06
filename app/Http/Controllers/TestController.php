@@ -38,7 +38,8 @@ class TestController extends Controller
     public function API(){
 
 
-        $result = InvoiceInfoLogic::Instance()->InvoiceAndItemTransactionHistory("","","","",1,10);
-        return $result;
+        $from_date = DB::table('daily_report')
+            ->select('date')->orderBy('date', 'asc')->first();
+        return json_encode($from_date);
     }
 }

@@ -396,6 +396,7 @@ class InvoiceInfoLogic
             })
             //When user has date range
             ->whereBetween('user_record.date_time', array($fromDate, $toDate))
+            ->orderByRaw('user_record.date_time')
             ->paginate($page_size);
         //Append
         $getResult->appends(Input::except('page'));
