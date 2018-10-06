@@ -220,6 +220,7 @@ class InvoiceItemLogic
                     ->where('status','=', InvoiceItemStatusEnum::OPEN)
                     ->first();
                 array_push($items, $getItem);
+
                 //Mean depreciate only item with id
                 DB::table('invoice_item')
                     ->where('invoice_id','=', $invoice_id)
@@ -262,7 +263,8 @@ class InvoiceItemLogic
         $invoiceObj = InvoiceInfoLogic::Instance()->Find($invoice_id);
         UserAuditLogic::Instance()
             ->UserInvoiceItemAction($invoice_id, UserActionEnum::DEPRECIATE_ITEM,
-                $invoiceObj->display_id, $changeLogArray);
+                AuditGroup::AUDIT_GROUP_STRING[AuditGroup::INVOICE]." - ".$invoiceObj->display_id, $changeLogArray);
+
         //Update Daily Report
         DailyReportLogic::Instance()->UpdateCurrentReport(0, abs($outItem), 0,0);
 
@@ -290,7 +292,7 @@ class InvoiceItemLogic
 
         //User Audit
         $description = $item->item_type_name.', '.$item->first_feature.' ,'.$item->second_feature.', '.$item->third_feature
-            .', '.$item->fourth_feature.' -- តម្លៃ៖ '.$sale_price;
+            .', '.$item->fourth_feature.' -- តម្លៃ៖ '.$sale_price." $";
         UserAuditLogic::Instance()->UserInvoiceItemAction($item->invoice_id, UserActionEnum::SALE_ITEM, $description, []);
 
         return true;

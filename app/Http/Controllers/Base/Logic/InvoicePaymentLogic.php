@@ -60,7 +60,7 @@ class InvoicePaymentLogic
 
         //Save User Audit Record
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::INTERESTS_PAYMENT,
-            $oldObj->display_id.'-'.$amount."$",[]);
+            $oldObj->display_id.'-- ចំនួន៖ '.$amount." $",[]);
     }
 
     //Grand Cost Payment
@@ -107,7 +107,7 @@ class InvoicePaymentLogic
         $changeLogArray = UserAuditLogic::Instance()
             ->CompareField(AuditGroup::REMAIN_COST, $oldObj->remain, $remain, UserActionEnum::UPDATE, $changeLogArray);
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::GRAND_TOTAL_PAYMENT,
-            $oldObj->display_id.'-'.$amount."$", $changeLogArray);
+            $oldObj->display_id.'-- ចំនួន៖ '.$amount." $", $changeLogArray);
     }
 
     //Add More Cost
@@ -142,7 +142,7 @@ class InvoicePaymentLogic
             ->CompareField(AuditGroup::REMAIN_COST, $oldRemain, $newRemain, UserActionEnum::UPDATE, $changeLogArray);
         //Save User Audit Record
         UserAuditLogic::Instance()->UserInvoiceAction($invoice_id, UserActionEnum::ADD_ON_GRAND_TOTAL,
-            $oldObj->display_id.'-'.$amount."$", $changeLogArray);
+            $oldObj->display_id.'-- ចំនួន៖'.$amount."​ $", $changeLogArray);
     }
 
     //Item Depreciation
