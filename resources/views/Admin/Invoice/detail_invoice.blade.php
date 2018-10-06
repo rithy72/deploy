@@ -267,11 +267,11 @@
                                             <thead style="background: #e3e3ea99;">
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.UserAction')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.actions')</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.describe')</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.date')</th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending" style="text-align: center;">@lang('string.actions')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending" style="text-align: center;">@lang('string.detail')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -502,24 +502,24 @@
             });
         };
         // ------------ function search history ----------------
-        var url,_chooseSearch,_historyInvoice,_historyItemType;
+        var url; //,_chooseSearch,_historyInvoice,_historyItemType
         $('.btn_Search1').on("click", function () {
             autoIncrement = 0;
             var _startDate = $('#start_date').val();
             var _toDate = $('#to_date').val();
-            _chooseSearch = $('#chooseInvoiceOrItemType').val();
-            _historyInvoice = $('#history_invoice').val();
-            _historyItemType = $('#history_itemType').val();
+            var _chooseSearch = $('#chooseInvoiceOrItemType').val();
+            var _historyInvoice = $('#history_invoice').val();
+            var _historyItemType = $('#history_itemType').val();
             // ---- condition have value search or not ----
             if (!_chooseSearch){
                 url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action=&group=&page_size=15';
                 setToAjax();
             } else {
-                if (Number(_chooseSearch) === Number(chooseInvoice)){
-                    url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action='+_chooseSearch+'&group='+_historyInvoice+'&page_size=15';
+                if (Number(_chooseSearch) === chooseInvoice){
+                    url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action='+_historyInvoice+'&group='+_chooseSearch+'&page_size=15';
                     setToAjax();
-                } else if (Number(_chooseSearch) === Number(chooseItemTypeInvoice)){
-                    url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action='+_chooseSearch+'&group='+_historyItemType+'&page_size=15';
+                } else if (Number(_chooseSearch) === chooseItemTypeInvoice){
+                    url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action='+_historyItemType+'&group='+_chooseSearch+'&page_size=15';
                     setToAjax()
                 }
             }
@@ -553,9 +553,9 @@
                 var short = ConvertAndStore.data.data[i];
                 var _tr = '<tr>' +
                     '<td>' + [autoIncrement+=1] + '</td>' +
-                    '<td>' + short.description + '</td>' +
                     '<td>' + short.name + '</td>' +
                     '<td>' + short.display_audit + '</td>' +
+                    '<td>' + short.description + '</td>' +
                     '<td>' + short.date_time + '</td>' +
                     '<td class="text-center"> ' +
                     '<ul class="icons-list">'+
@@ -608,10 +608,10 @@
             $('#show_detail_one_history_change_log').modal({ backdrop: 'static' }); // show dialog
             var _selectRow = $(this).closest('tr'); // close set tr
             $('#Show_One_Detail td').remove();      // clear data in table detail dailog
-            var storeDescribe = $(_selectRow).find('td:eq(3)').text();
+            var storeDescribe = $(_selectRow).find('td:eq(2)').text();
             const splitString = storeDescribe.split("-");
             (function(){
-                $('#name').text($(_selectRow).find('td:eq(2)').text());
+                $('#name').text($(_selectRow).find('td:eq(1)').text());
                 $('#do_action').text(splitString[0]);
                 var short = JSON.parse($(_selectRow).find('td:eq(6)').text());
                  for(var j = 0; j < short.length; j++){
