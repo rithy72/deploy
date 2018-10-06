@@ -101,7 +101,7 @@
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="select_status">
-                                        <option selected="selected" value="2,3,4">@lang('string.all')</option>
+                                        <option selected="selected" value="3,4">@lang('string.all')</option>
                                         <option value="3">@lang('string.notYetSaleOut')</option>
                                         <option value="4">@lang('string.saleOut')</option>
                                     </select>
@@ -848,7 +848,7 @@
         };
         // ------------- function show item out ----------------
         (function () {
-            var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=2,3,4&page_size=15');
+            var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=3,4&page_size=15');
             showItemExpired.reads();
         })();
         // ------------- search item take out ------------------
