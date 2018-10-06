@@ -552,7 +552,7 @@
 
             $('#Show_All_Data_One_Invoice tbody tr').each(function (row, tr) {
                 if ($(tr).find('input[type="checkbox"]').is(':checked') === true){
-                    deleteItemType.push(Number($(tr).find('td:eq(2)').text()));
+                    deleteItemType.push(Number($(tr).find('td:eq(0)').text()));
                 }
             });
             // function model request to server
