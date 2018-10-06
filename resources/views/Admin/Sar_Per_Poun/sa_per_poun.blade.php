@@ -297,7 +297,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        <button type="button" class="btn btn-link" id="close_update_price" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
                         <button type="button" class="btn btn-primary btn_Sale_Out_ItemType" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
@@ -430,7 +430,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" id="close_itemTakeOut" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
-                        <button type="button" class="btn btn-primary btn_Search_item_takeOut" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.search')</b><i class="icon-search4 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_Search_item_takeOut" id="btn_Search_item_takeOut" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.search')</b><i class="icon-search4 position-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -680,7 +680,7 @@
 
             for (var i = 0; i < storeValue.data.data.length; i++){
                 var _tr = '<tr>' +
-                    '<td>' + storeValue.data.data[i].invoice_id + '</td>' +
+                    '<td>' + storeValue.data.data[i].display_invoice_id + '</td>' +
                     '<td>' + storeValue.data.data[i].item_type_name + '</td>' +
                     '<td>' + storeValue.data.data[i].first_feature + '</td>' +
                     '<td>' + storeValue.data.data[i].second_feature + '</td>' +
@@ -807,7 +807,7 @@
                 }
                 var _tr = '<tr>' +
                     '<td style="display:none;">' + ConvertJson.data.data[i].id + '</td>' +
-                    '<td>' + ConvertJson.data.data[i].invoice_id + '</td>' +
+                    '<td>' + ConvertJson.data.data[i].display_invoice_id + '</td>' +
                     '<td>' + ConvertJson.data.data[i].item_type_name + '</td>' +
                     '<td>' + ConvertJson.data.data[i].first_feature + '</td>' +
                     '<td>' + ConvertJson.data.data[i].second_feature + '</td>' +
@@ -934,7 +934,8 @@
                         var Json = JSON.parse(Response);
                         if (Json.status === "200"){
                             alert('ធ្វើការលក់ចេញជោគជ័យ');
-                            window.location.href = '{{('/admin/inventory')}}';
+                            $('#btn_Search_item_takeOut').click();
+                            $('#close_update_price').click();
                         } else if (Json.status === "300"){
                             alert('ទំនិញនេះមិនអាចលក់ចេញបានទេ');
                         }
@@ -942,7 +943,16 @@
                 });
             } else { alert('បញ្ចូលតំលៃ អោយធំជាង 0'); }
         });
-
+        // ---- clear all input text when sell item out ----
+        $(document).on("click","#close_update_price",function () {
+            $('#setInvoiceId').val('');
+            $('#setNameItemType').val('');
+            $('#setFirstNotice').val('');
+            $('#setSecondNotice').val('');
+            $('#setThirdNotice').val('');
+            $('#setFourthNotice').val('');
+            $('#price_sale_out').val(''); // clear input price sale out
+        });
 
     // ===================== All Function notice all item  =============================================
         // ------------ show in table --------------------------
@@ -961,7 +971,7 @@
             for (var i = 0; i < ConvertJsons.data.data.length; i++){
                 var _tr = '<tr>' +
                     '<td style="display:none;">' + ConvertJsons.data.data[i].id + '</td>' +
-                    '<td>' + ConvertJsons.data.data[i].invoice_id + '</td>' +
+                    '<td>' + ConvertJsons.data.data[i].display_invoice_id + '</td>' +
                     '<td>' + ConvertJsons.data.data[i].item_type_name + '</td>' +
                     '<td>' + ConvertJsons.data.data[i].first_feature + '</td>' +
                     '<td>' + ConvertJsons.data.data[i].second_feature + '</td>' +
