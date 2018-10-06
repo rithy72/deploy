@@ -24,6 +24,13 @@ class AuditGroup
     public const INVOICE_ITEM = 9;
     public const GRAND_COST = 10;
     public const REMAIN_COST = 11;
+    //
+    public const USER_NUMBER = 12;
+    public const USER_FULLNAME = 13;
+    public const NOTE = 14;
+    public const USERNAME = 15;
+    public const PASSWORD = 16;
+    public const USER_ROLE = 17;
 
     public const AUDIT_GROUP_STRING = array(
         1 => "វិក្ក័យប័ត្រ",
@@ -36,7 +43,13 @@ class AuditGroup
         8 => "ឈ្មោះប្រភេទទំនិញ",
         9 => "ទំនិញ",
         10 => "ប្រាក់ដើម",
-        11 => "ប្រាក់ដើមសល់"
+        11 => "ប្រាក់ដើមសល់",
+        12 => "លេខសម្គាល់",
+        13 => "ឈ្មោះអ្នកប្រើប្រាស់",
+        14 => "កំណត់ចំនាំ",
+        15 => "គណនីចូលប្រព័ន្ឋ",
+        16 => "លេខសម្ងាត់",
+        17 => "តួនាទី"
     );
 
 }

@@ -297,9 +297,9 @@ class InvoiceInfoLogic
             //Modify Items
             if (!empty($modify_items)){
                 foreach ($modify_items as $item){
+                    $oldObj = InvoiceItemLogic::Instance()->Find($item['id']);
                     InvoiceItemLogic::Instance()->Update($item, InvoiceItemStatusEnum::OPEN, $invoice_id);
                     //
-                    $oldObj = InvoiceItemLogic::Instance()->Find($item['id']);
                     $changeLogArray = UserAuditLogic::Instance()
                         ->CompareEditItem($oldObj, (object)$item, $changeLogArray, UserActionEnum::UPDATE);
                 }
@@ -366,12 +366,12 @@ class InvoiceInfoLogic
         //
         $oldInvoiceObj = $this->Find($invoice_id);
         //
-        $from_date = (empty($from_date)) ?
-            $dateInstance->FormatDatTime($oldInvoiceObj->created_date, DateTimeLogic::DB_DATE_TIME_FORMAT) :
-            $dateInstance->FormatDatTime($from_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
-        $to_date = (empty($to_date)) ?
-            $dateInstance->AddDaysToCurrentDateDBFormat(90, DateTimeLogic::DB_DATE_TIME_FORMAT) :
-            $dateInstance->FormatDatTime($to_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        $fromDate = (empty($from_date)) ?
+            $dateInstance->FormatDatTime($oldInvoiceObj->created_date, 'Y-m-d 00:00:00') :
+            $dateInstance->FormatDatTime($from_date, 'Y-m-d 00:00:00');
+        $toDate = (empty($to_date)) ?
+            $dateInstance->AddDaysToCurrentDateDBFormat(90, 'Y-m-d 00:00:00') :
+            $dateInstance->FormatDatTime($to_date, 'Y-m-d 00:00:00');
         $allowGroup = array(AuditGroup::ITEM, AuditGroup::INVOICE);
         //
         $getResult = DB::table('user_record')
@@ -394,10 +394,12 @@ class InvoiceInfoLogic
                 //
                 return $query->where('user_record.audit_group', '=', $group);
             })
+            ->whereBetween('user_record.date_time', array($fromDate, $toDate))
             ->paginate($page_size);
         //Append
         $getResult->appends(Input::except('page'));
 
+        //return $fromDate."-".$toDate;
         return $getResult;
     }
 

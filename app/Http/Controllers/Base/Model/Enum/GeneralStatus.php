@@ -12,4 +12,9 @@ class GeneralStatus
 {
     const ACTIVE = "active";
     const INACTIVE = "inactive";
+
+    public const DisplayStatus = array(
+      0 => "ផ្អាកដំណើរការ",
+      1 => "ដំណើរការ"
+    );
 }

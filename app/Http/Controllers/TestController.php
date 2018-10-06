@@ -9,6 +9,7 @@ use App\Http\Controllers\Base\Logic\ItemTypeLogic;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Logic\OtherLogic\InvoicePaymentLogic;
 use App\Http\Controllers\Base\Logic\UserAuditLogic;
+use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Base\Model\BaseModel;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
@@ -37,7 +38,7 @@ class TestController extends Controller
     public function API(){
 
 
-        $result = InvoiceItemLogic::Instance()->FilterSearch("","3,2","",10);
-        return json_encode($result);
+        $result = InvoiceInfoLogic::Instance()->InvoiceAndItemTransactionHistory("","","","",1,10);
+        return $result;
     }
 }

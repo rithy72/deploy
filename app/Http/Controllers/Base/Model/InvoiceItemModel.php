@@ -13,6 +13,7 @@ class InvoiceItemModel
 {
     public $id;
     public $invoice_id;
+    public $display_invoice_id;
     public $item_type_id;
     public $item_type_name;
     public $first_feature;

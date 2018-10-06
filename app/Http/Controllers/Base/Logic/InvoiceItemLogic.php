@@ -37,6 +37,8 @@ class InvoiceItemLogic
         $itemModel = InvoiceItemModel::Instance();
         $itemModel->id = $item->id;
         $itemModel->invoice_id = $item->invoice_id;
+        $itemModel->display_invoice_id = str_pad(intval($item->invoice_id),
+            7,"0", STR_PAD_LEFT);
         $itemModel->item_type_id = $item->item_type_id;
         $itemModel->item_type_name = $item->type_name;
         $itemModel->first_feature = $item->first_feature??"-";

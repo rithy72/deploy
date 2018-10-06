@@ -83,6 +83,25 @@ class UserAuditLogic
         return $insertResult;
     }
 
+    //Record User Action On User and Security, create, edit, delete
+    public function UserOnUserAction($type_id, $action_enum, $description, $change_log){
+        $insertResult = DB::table('user_record')
+            ->insertGetId([
+                'user_id' => Auth::id()??1,
+                'parent_id' => $type_id,
+                'action' => $action_enum,
+                'audit_group' => AuditGroup::USER,
+                'display_audit' => UserActionEnum::ActionArray[$action_enum]." - ".
+                    AuditGroup::AUDIT_GROUP_STRING[AuditGroup::USER],
+                'description' => $description,
+                'change_log' => json_encode($change_log),
+                'date_time' => DateTimeLogic::Instance()
+                    ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
+            ]);
+
+        return $insertResult;
+    }
+
     //Compare Old and New Item Value, create, edit , delete, deprecation, took
     public function CompareEditItem($old_val, $new_val, $change_log_array, $flag){
         $changeLogModel = ChangeLogModel::Instance();
