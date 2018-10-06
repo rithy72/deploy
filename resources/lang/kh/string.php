@@ -1,11 +1,10 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Sothea
- * Date: 8/31/2018
- * Time: 10:30 PM
+ * User: Phorn
+ * Date: 10/6/2018
+ * Time: 10:06 PM
  */
-
 return[
     'mainForm' => 'ទំព័រដើម',
     'search' => 'ធ្វើការស្វែងរក',
@@ -77,7 +76,7 @@ return[
     //part of update invoice
     'writeCustomerNameHere...' => 'សរសេរឈ្មោះអតិថិជន....',
     'writePhoneNumberHere...' => 'សរសេរលេខទូរស័ព្ទ....',
-    'id' => 'ល.រ',
+    'id' => 'លរ',
     'itemNotice1' => 'កំណត់សម្កាល់ ១',
     'itemNotice2' => 'កំណត់សម្កាល់ ២',
     'itemNotice3' => 'កំណត់សម្កាល់ ៣',
@@ -163,5 +162,4 @@ return[
     'showDetailOneHistory' => 'ប្រវត្តិលំអិតរបស់ប្រតិបត្តិការណ៌',
     'UserAction' => 'ឈ្មោះអ្នកធ្វើ',
     'do' => 'ធ្វើមុខងារ',
-
 ];
