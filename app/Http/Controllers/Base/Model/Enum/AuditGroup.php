@@ -16,6 +16,7 @@ class AuditGroup
     public const ITEM_TYPE = 2;
     public const USER = 3;
     public const ITEM = 4;
+    public const SECURITY = 18;
     //Field
     public const CUSTOMER_NAME = 5;
     public const PHONE = 6;
@@ -31,6 +32,9 @@ class AuditGroup
     public const USERNAME = 15;
     public const PASSWORD = 16;
     public const USER_ROLE = 17;
+    //
+    public const LOGIN = 19;
+    public const LOGOUT = 20;
 
     public const AUDIT_GROUP_STRING = array(
         1 => "វិក្ក័យប័ត្រ",
@@ -49,7 +53,10 @@ class AuditGroup
         14 => "កំណត់ចំនាំ",
         15 => "គណនីចូលប្រព័ន្ឋ",
         16 => "លេខសម្ងាត់",
-        17 => "តួនាទី"
+        17 => "តួនាទី",
+        18 => "សុវត្ថិភាពប្រព័ន្ឋ",
+        19 => "ចូលប្រើប្រាស់",
+        20 => "ចាកចេញ"
     );
 
 }
