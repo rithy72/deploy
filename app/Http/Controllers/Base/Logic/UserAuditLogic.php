@@ -108,8 +108,7 @@ class UserAuditLogic
                 'parent_id' => $type_id,
                 'action' => $action_enum,
                 'audit_group' => AuditGroup::SECURITY,
-                'display_audit' => UserActionEnum::ActionArray[$action_enum]." - ".
-                    AuditGroup::AUDIT_GROUP_STRING[AuditGroup::USER],
+                'display_audit' => UserActionEnum::ActionArray[$action_enum],
                 'description' => $description,
                 'change_log' => json_encode($change_log),
                 'date_time' => DateTimeLogic::Instance()
