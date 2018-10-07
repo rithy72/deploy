@@ -48,6 +48,7 @@ class LoginController extends Controller
         }elseif ($role == "user"){
             return '/admin/invoice';
         }
+        return '/';
     }
 
 }
