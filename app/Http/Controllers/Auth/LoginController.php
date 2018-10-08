@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -38,6 +39,16 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-
+    protected function redirectTo()
+    {
+        $userObj = UserLogic::Instance()->Find(Auth::id());
+        $role = strtolower($userObj->role);
+        if ($role == "admin"){
+            return '/admin/mainform';
+        }elseif ($role == "user"){
+            return '/admin/invoice';
+        }
+        return '/';
+    }
 
 }

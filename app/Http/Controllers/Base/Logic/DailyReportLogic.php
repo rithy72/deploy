@@ -126,13 +126,20 @@ class DailyReportLogic
         }
     }
 
+    //Get Start Day of using system
+    public function GetStartDayOfUsing(){
+        $getDate = DB::table('daily_report')
+            ->select('date')->orderBy('date', 'asc')->first();
+        $from_date = $getDate->date;
+        return $from_date;
+    }
+
+    //Filter Search Daily Report
     public function FilterSearch($from_date, $to_date, $page_size){
         $dateInstance = DateTimeLogic::Instance();
         //Check From Date
         if (empty($from_date)){
-            $getDate = DB::table('daily_report')
-                ->select('date')->orderBy('date', 'asc')->first();
-            $from_date = $getDate->date;
+            $from_date = $this->GetStartDayOfUsing();
         }
         //
         $fromDate = (empty($from_date)) ?

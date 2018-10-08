@@ -9,17 +9,27 @@
 namespace App\Http\Controllers\Base\Logic\OtherLogic;
 
 
+use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use Illuminate\Support\Facades\Auth;
 
 class SecureLogic
 {
-    protected function CheckAdminPassword($password){
+    //Instance
+    public static function Instance(){
+        return new SecureLogic();
+    }
+
+    //Check Admin Password
+    public function CheckAdminPassword($password){
         $encryptPassword = bcrypt($password);
+        $userObj = UserLogic::Instance()->Find(Auth::id());
         //Check
-        if (Auth::user()->role != UserRoleEnum::ADMIN || Auth::user()->getAuthPassword() != $encryptPassword){
+        if ($userObj->role != UserRoleEnum::ADMIN || $userObj->password != $encryptPassword){
             return false;
         }
         return true;
     }
+
+
 }

@@ -13,8 +13,6 @@ use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\ChangeLogModel;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
-use App\Http\Controllers\Base\Model\InvoiceItemModel;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -93,6 +91,24 @@ class UserAuditLogic
                 'audit_group' => AuditGroup::USER,
                 'display_audit' => UserActionEnum::ActionArray[$action_enum]." - ".
                     AuditGroup::AUDIT_GROUP_STRING[AuditGroup::USER],
+                'description' => $description,
+                'change_log' => json_encode($change_log),
+                'date_time' => DateTimeLogic::Instance()
+                    ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
+            ]);
+
+        return $insertResult;
+    }
+
+    //Record User Action On Security Login, Logout
+    public function UserSecurityAction($type_id, $action_enum, $description, $change_log){
+        $insertResult = DB::table('user_record')
+            ->insertGetId([
+                'user_id' => Auth::id()??1,
+                'parent_id' => $type_id,
+                'action' => $action_enum,
+                'audit_group' => AuditGroup::SECURITY,
+                'display_audit' => UserActionEnum::ActionArray[$action_enum],
                 'description' => $description,
                 'change_log' => json_encode($change_log),
                 'date_time' => DateTimeLogic::Instance()

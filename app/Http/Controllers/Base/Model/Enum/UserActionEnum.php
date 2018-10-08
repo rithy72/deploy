@@ -27,6 +27,8 @@ class UserActionEnum
     public const DEPRECIATE_ITEM = 12;
     //
     public const CHANGE_PASSWORD = 13;
+    public const LOGIN = 14;
+    public const LOGOUT = 15;
 
     public const ActionArray = array(
         1 => "បង្កើត",
@@ -41,6 +43,8 @@ class UserActionEnum
         10 => "លក់",
         11 => "បន្ថែម",
         12 => "លស់",
-        13 => "ប្តូរលេខសម្ងាត់"
+        13 => "ប្តូរលេខសម្ងាត់",
+        14 => "ចូលប្រើប្រាស់",
+        15 => "ចាកចេញ"
     );
 }
