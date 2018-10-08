@@ -150,7 +150,7 @@ class InvoiceInfoLogic
                 'invoice_info.expired_date','invoice_info.status','invoice_info.remain'
             )
             ->leftJoin('invoice_item','invoice_info.id','=','invoice_item.invoice_id')
-            ->where('invoice_info.expired_date', '<', $lateDate)
+            ->where('invoice_info.expired_date', '<=', $lateDate)
             ->where('invoice_info.status','=', InvoiceStatusEnum::OPEN)
             ->groupBy('invoice_info.id')
             ->orderBy('invoice_info.expired_date','asc')
