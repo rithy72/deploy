@@ -194,59 +194,10 @@
         "depreciate_items": [1,2,3]
     };
 
-//        var obj = {
-//            "item_type_name" : "Motor Edited"
-//        };
-//        var obj = {
-//            "customer_name": "Johnny",
-//            "customer_phone": "023221121",
-//            "grand_total": 3000,
-//            "interests_rate": 5,
-//            "invoice_items": [
-//                {
-//                    "item_type_id": 1,
-//                    "first_feature": "Honda Dream",
-//                    "second_feature": "Black",
-//                    "third_feature": "2AH-1035",
-//                    "fourth_feature": "Skull Sticker"
-//                },
-//                {
-//                    "item_type_id": 1,
-//                    "first_feature": "Honda Dream",
-//                    "second_feature": "Black",
-//                    "third_feature": "2AH-1035",
-//                    "fourth_feature": "Skull Sticker"
-//                }
-//            ]
-//        };
-//        var obj = {
-//            "interests_payment":30,
-//            "cost_payment":1000,
-//            "add_cost":0,
-//            "add_items":[
-//                {
-//                    "item_type_id": 1,
-//                    "first_feature": "Honda Dream",
-//                    "second_feature": "Black",
-//                    "third_feature": "2AH-1035",
-//                    "fourth_feature": "Skull Sticker"
-//                },
-//                {
-//                    "item_type_id": 1,
-//                    "first_feature": "Honda Dream",
-//                    "second_feature": "Black",
-//                    "third_feature": "2AH-1035",
-//                    "fourth_feature": "Skull Sticker"
-//                }
-//
-//            ],
-//            "depreciate_items":[
-//                14,15,16
-//            ]
-//        };
+
         $.ajax({
             type:"GET",
-            url:"api/invoices/over_due",
+            url:"api/daily_report/sum?from_date=&&to_date=",
             //data: obj,
             success:function (response) {
                 console.log(response);

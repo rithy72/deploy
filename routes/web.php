@@ -104,6 +104,13 @@ Route::middleware('auth')->group(function (){
             Route::prefix('daily_report')->group(function (){
                 Route::get('today', 'APIController\DailyReport@getCurrentReport');
                 Route::get('/', 'APIController\DailyReport@Filter');
+                Route::get('/sum','APIController\DailyReport@Calculate');
+            });
+            /* *
+             * User
+             * */
+            Route::prefix('user')->group(function (){
+                Route::get('/{id}', 'APIController\UserController@find');
             });
         });
 //================================================================================================================

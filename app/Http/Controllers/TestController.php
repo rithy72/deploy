@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Base\Logic\DailyReportLogic;
 use App\Http\Controllers\Base\Logic\OtherLogic\InvoicePaymentLogic;
-use App\Http\Controllers\Base\Logic\UserLogic;
 use Illuminate\Http\Request;
 
 //This controller make for testing Class
@@ -24,7 +24,7 @@ class TestController extends Controller
     public function API(){
 
 
-        $from_date = UserLogic::Instance()->FilterSearch("","","", 10);
-        return json_encode($from_date);
+        $getResult = DailyReportLogic::Instance()->Calculate("","");
+        return json_encode($getResult);
     }
 }

@@ -158,4 +158,33 @@ class DailyReportLogic
         return $getResult;
     }
 
+    //Calculate Expense and Income
+    public function Calculate($from_date, $to_date){
+        $dateInstance = DateTimeLogic::Instance();
+        //Check From Date
+        if (empty($from_date)){
+            $from_date = $this->GetStartDayOfUsing();
+        }
+        //
+        $fromDate = (empty($from_date)) ?
+            $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_FORMAT) :
+            $dateInstance->FormatDatTime($from_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        $toDate = (empty($to_date)) ?
+            $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_FORMAT) :
+            $dateInstance->FormatDatTime($to_date, DateTimeLogic::DB_DATE_TIME_FORMAT);
+        //
+
+        $returnModel = new \stdClass();
+        $returnModel->sum_expense = DB::table('daily_report')
+            ->whereBetween('date', array($fromDate, $toDate))->sum('outcome');
+        $returnModel->sum_income = DB::table('daily_report')
+            ->whereBetween('date', array($fromDate, $toDate))->sum('income');
+        $returnModel->sum_in_items = DB::table('daily_report')
+            ->whereBetween('date', array($fromDate, $toDate))->sum('in_item');
+        $returnModel->sum_out_items = DB::table('daily_report')
+            ->whereBetween('date', array($fromDate, $toDate))->sum('out_item');
+
+        return $returnModel;
+    }
+
 }
