@@ -31,6 +31,10 @@ class DailyReportLogic
             ->where('date','=', $finDate)
             ->first();
 
+        if ($getResult == null || empty($getResult)){
+            $this->UpdateCurrentReport(0,0,0,0);
+        }
+
         //Get All Item In warehouse
         $itemsInWarehouse = 0;
         if ($getResult != null){

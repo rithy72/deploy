@@ -14,6 +14,7 @@ use App\Http\Controllers\Base\Logic\OtherLogic\SecureLogic;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
+use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use App\Http\Controllers\Base\Model\Enum\UserSearchOptionEnum;
 use App\Http\Controllers\Base\Model\Other\PaginateModel;
 use App\Http\Controllers\Base\Model\UserModel;
@@ -32,14 +33,18 @@ class UserLogic extends SecureLogic
     //Check Username Before Insert
     private function checkUsernameInsert($user_name){
         $count = DB::table('users')
-            ->where('email','=', $user_name)->count();
+            ->where('email','=', $user_name)
+            ->where('deleted','=', false)
+            ->count();
         if ($count > 0) return false;
         return true;
     }
     //Check User Number Before Insert
     private function checkUserNumberInsert($user_number){
         $count = DB::table('users')
-            ->where('user_no','=', $user_number)->count();
+            ->where('user_no','=', $user_number)
+            ->where('deleted','=', false)
+            ->count();
         if ($count > 0) return false;
         return true;
     }
@@ -49,6 +54,7 @@ class UserLogic extends SecureLogic
         $count = DB::table('users')
             ->where('email','=', $user_name)
             ->where('id', '<>', $id)
+            ->where('deleted','=', false)
             ->count();
         if ($count > 0) return false;
         return true;
@@ -58,6 +64,7 @@ class UserLogic extends SecureLogic
         $count = DB::table('users')
             ->where('user_no','=', $user_number)
             ->where('id', '<>', $id)
+            ->where('deleted','=', false)
             ->count();
         if ($count > 0) return false;
         return true;
@@ -80,7 +87,10 @@ class UserLogic extends SecureLogic
 
     //Find User
     public function Find($user_id){
-        $userObj = DB::table('users')->where('id','=', $user_id)->first();
+        $userObj = DB::table('users')
+            ->where('id','=', $user_id)
+            ->where('deleted','=', false)
+            ->first();
         //
         $returnModel = UserModel::FinalizeObject($userObj);
         //
@@ -88,7 +98,7 @@ class UserLogic extends SecureLogic
     }
 
     //Insert ChangeLog
-    public function InsertChangeLog(UserModel $user_model,UserModel $old_model, $chang_log_array){
+    public function ChangeLogRecord(UserModel $user_model, UserModel $old_model, $chang_log_array){
         $userAudit = UserAuditLogic::Instance();
         //User Number
         $chang_log_array = $userAudit->CompareField(
@@ -131,7 +141,7 @@ class UserLogic extends SecureLogic
                 'phone_number' => $user->phone_number,
                 'email' => $user->email,
                 'password' => bcrypt($user->password),
-                'role' => strtolower($user->role),
+                'role' => strtolower(UserRoleEnum::USER),
                 'note' => $user->note,
                 'status' => true,
                 'delete_able' => true,
@@ -142,11 +152,12 @@ class UserLogic extends SecureLogic
         //Get User Object
         $userObj = $this->Find($userId);
         //Change Log
-        $changeLogArray = $this->InsertChangeLog($userObj, $userObj, $changeLogArray);
+        $changeLogArray = $this->ChangeLogRecord($userObj, $userObj, $changeLogArray);
         //User Audit Trail
         UserAuditLogic::Instance()->UserOnUserAction(
             $userId, UserActionEnum::INSERT, $userObj->user_no."-".$userObj->name, $changeLogArray);
 
+        $userObj->password = "-";
         return $userObj;
     }
 
@@ -170,7 +181,7 @@ class UserLogic extends SecureLogic
                 'name' => $user->name,
                 'phone_number' => $user->phone_number,
                 'email' => $user->email,
-                'role' => strtolower($user->role),
+                'role' => strtolower(UserRoleEnum::USER),
                 'note' => $user->note,
                 'status' => GeneralStatus::ACTIVE,
                 'delete_able' => true,
@@ -181,11 +192,12 @@ class UserLogic extends SecureLogic
         //New Object
         $newUserObj = $this->Find($id);
         //Change Log
-        $changeLogArray = $this->InsertChangeLog($newUserObj, $userOldObj, $changeLogArray);
+        $changeLogArray = $this->ChangeLogRecord($newUserObj, $userOldObj, $changeLogArray);
         //User Audit Trail
         UserAuditLogic::Instance()->UserOnUserAction(
             $id, UserActionEnum::UPDATE, $newUserObj->user_no."-".$newUserObj->name, $changeLogArray);
 
+        $newUserObj->password = "-";
         return $newUserObj;
     }
 
@@ -195,7 +207,7 @@ class UserLogic extends SecureLogic
         //Check if can delete
         if ($userObj->delete_able == false) return false;
         //Delete
-        DB::table('users')->where('id','=', $id)->delete();
+        DB::table('users')->where('id','=', $id)->update(['deleted' => true]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
         UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::DELETE, $description, []);
@@ -292,6 +304,7 @@ class UserLogic extends SecureLogic
                 return $query->where('status', '=', $status);
             })
             ->where('id', '<>', Auth::id())
+            ->where('deleted','=', false)
             ->paginate($page_size);
         //
         $returnArray = array();
@@ -387,7 +400,7 @@ class UserLogic extends SecureLogic
             })
             //When user has date range
             ->whereBetween('user_record.date_time', array($fromDate, $toDate))
-            ->orderByRaw('user_record.date_time')
+            //->orderBy('user_record.date_time','asc')
             ->paginate($page_size);
         //Append
         $getResult->appends(Input::except('page'));

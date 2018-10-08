@@ -110,8 +110,15 @@ Route::middleware('auth')->group(function (){
              * User
              * */
             Route::prefix('user')->group(function (){
-                Route::get('/{id}', 'APIController\UserController@find');
+                Route::get('/search','APIController\UserController@search');
+                Route::get('/user_history/{user_id}','APIController\UserController@user_history');
+                Route::get('/action_history/{user_id}','APIController\UserController@user_action');
+                Route::get('/find/{id}', 'APIController\UserController@find');
+                Route::post('/create','APIController\UserController@create');
             });
+//            Route::prefix('users')->group(function (){
+//
+//            });
         });
 //================================================================================================================
 //================================ Test ==========================================================================

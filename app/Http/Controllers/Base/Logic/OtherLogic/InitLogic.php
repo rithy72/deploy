@@ -53,7 +53,7 @@ class InitLogic extends Controller
             ]);
         $userObj = UserLogic::Instance()->Find($userId);
         //Change Log Array
-        $changeLogArray = UserLogic::Instance()->InsertChangeLog($userObj, $userObj, $changeLogArray);
+        $changeLogArray = UserLogic::Instance()->ChangeLogRecord($userObj, $userObj, $changeLogArray);
         //Audit
         UserAuditLogic::Instance()->UserOnUserAction(
             $userId, UserActionEnum::INSERT, $userObj->user_no."-".$userObj->name, $changeLogArray);

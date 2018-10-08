@@ -54,6 +54,22 @@ class UserController extends Controller
         return json_encode($returnModel);
     }
 
+    //User Action
+    public function user_action(Request $request, $id){
+        $fromDate = $request->input('from_date','');
+        $toDate = $request->input('to_date','');
+        $group = $request->input('group','');
+        $action = $request->input('action','');
+        $pageSize = $request->input('page_size',10);
+        //
+        $result = UserLogic::Instance()->UserAuditTrial($fromDate, $toDate, $group, $action, $id, $pageSize);
+        //
+        $returnModel = ReturnModel::Instance();
+        $returnModel->status = "200";
+        $returnModel->data = $result;
+        return json_encode($returnModel);
+    }
+
     //Create User
     public function create(Request $request){
         $returnModel = ReturnModel::Instance();
@@ -63,12 +79,12 @@ class UserController extends Controller
         if ($checkAdmin){
             //When user is actually admin, and the password is right
             $userModel = UserModel::Instance();
-            $userInfo = $request->user_info;
+            $userInfo = (object)$request->user_info;
             $userModel->user_no = $userInfo->user_no;
             $userModel->name = $userInfo->name;
             $userModel->phone_number = $userInfo->phone_number;
             $userModel->note = $userInfo->note;
-            $userModel->role = $userInfo->role;
+            //$userModel->role = $userInfo->role;
             $userModel->email = trim($userInfo->email);
             $userModel->password = trim($userInfo->password);
             //
@@ -109,7 +125,7 @@ class UserController extends Controller
         if ($checkAdmin){
             //When user is actually admin, and the password is right
             $userModel = UserModel::Instance();
-            $userInfo = $request->user_info;
+            $userInfo = (object)$request->user_info;
             $userModel->user_no = $userInfo->user_no;
             $userModel->name = $userInfo->name;
             $userModel->phone_number = $userInfo->phone_number;

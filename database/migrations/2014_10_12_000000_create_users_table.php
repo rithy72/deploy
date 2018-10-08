@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->integer('last_update_by')->nullable(true);
             $table->rememberToken();
             $table->timestamps();
+            $table->boolean('deleted')->default(false);
         });
         //Create Super User
 //        DB::table('users')->insert(array(

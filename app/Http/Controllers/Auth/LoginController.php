@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Base\Logic\UserLogic;
+use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -43,9 +44,9 @@ class LoginController extends Controller
     {
         $userObj = UserLogic::Instance()->Find(Auth::id());
         $role = strtolower($userObj->role);
-        if ($role == "admin"){
+        if ($role == UserRoleEnum::ADMIN){
             return '/admin/mainform';
-        }elseif ($role == "user"){
+        }elseif ($role == UserRoleEnum::USER){
             return '/admin/invoice';
         }
         return '/';

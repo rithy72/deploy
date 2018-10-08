@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Base\Logic\DailyReportLogic;
 use App\Http\Controllers\Base\Logic\OtherLogic\InvoicePaymentLogic;
+use App\Http\Controllers\Base\Logic\OtherLogic\SecureLogic;
+use App\Http\Controllers\Base\Logic\UserLogic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 //This controller make for testing Class
 class TestController extends Controller
@@ -24,7 +26,9 @@ class TestController extends Controller
     public function API(){
 
 
-        $getResult = DailyReportLogic::Instance()->Calculate("","");
-        return json_encode($getResult);
+        $userObj = UserLogic::Instance()->Find(Auth::id());
+        //$getResult = Hash::check("admin@admin123456", $userObj->password);
+        $getResult = SecureLogic::Instance()->CheckAdminPassword("admin@admin123456");
+        return dd($getResult);
     }
 }

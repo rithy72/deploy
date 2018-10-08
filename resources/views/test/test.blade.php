@@ -186,19 +186,24 @@
         }
     });
     $('#getData').on('click',function () {
-    var obj = {
-        "interests_payment": 0,
-        "cost_payment": 0,
-        "add_cost": 0,
-        "add_items": [],
-        "depreciate_items": [1,2,3]
-    };
+    var obj =
+        {
+            "admin_password":"admin@admin123456",
+            "user_info":{
+                "user_no":"USER-001",
+                "name":"Johny",
+                "phone_number":"089256412",
+                "note":"New User",
+                "email":"newuser@newuser",
+                "password":"newuser@newuser123"
+            }
+        };
 
 
         $.ajax({
-            type:"GET",
-            url:"api/daily_report/sum?from_date=&&to_date=",
-            //data: obj,
+            type:"POST",
+            url:"api/user/create/",
+            data: obj,
             success:function (response) {
                 console.log(response);
             }
