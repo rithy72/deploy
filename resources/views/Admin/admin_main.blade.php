@@ -188,9 +188,9 @@
                     var ConvertJson = JSON.parse(ResponseJson);
                     $('#item_in_inventory').text(ConvertJson.data.items_in_warehouse);
                     $('#item_in').text(ConvertJson.data.in_item);
-                    $('#pay').text(ConvertJson.data.outcome+"$");
+                    $('#pay').text(ConvertJson.data.outcome+" $");
                     $('#item_out').text(ConvertJson.data.out_item);
-                    $('#income').text(ConvertJson.data.income+"$");
+                    $('#income').text(ConvertJson.data.income+" $");
                 }
             });
             // ---- request to get all invoice expired bigger than 60 day up -------
