@@ -190,24 +190,24 @@
         {
             "admin_password":"sothea@admin123456",
             "user_info":{
-//                "user_no":"USER-001",
-//                "name":"Johny",
+//                "user_no":"USER-003",
+//                "name":"Johny002",
 //                "phone_number":"089256412",
 //                "note":"New User",
-//                "email":"newuser@newuser",
-//                "password":"newuser@newuser123",
+//                "email":"newuser2@newuser",
+//                "password":"newuser2@newuser123"
                 "new_password":"123456"
             }
 
-//            "email":"sothea@admin",
-//            "old_password":"sothea@admin123456",
-//            "new_password":"123456"
+//            "email":"newuser@newuser",
+//            "old_password":"123456",
+//            "new_password":"1234567"
         };
 
 
         $.ajax({
             type:"PUT",
-            url:"api/user/admin_reset_user_password/4",
+            url:"api/user/activate/6",
             data: obj,
             success:function (response) {
                 console.log(response);

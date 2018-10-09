@@ -262,7 +262,7 @@ class UserLogic extends SecureLogic
     }
 
     //Reset Password
-    public function ResetPassword($username, $old_password, $new_password){
+    public function UserResetOwnPassword($username, $old_password, $new_password){
         $userObj = $this->Find(Auth::id());
         //Check, can not reset
         if (!Hash::check($old_password, $userObj->password)) return false;
@@ -295,6 +295,9 @@ class UserLogic extends SecureLogic
             ->where('id','=', $user_id)
             ->update([
                 'password' => Hash::make(trim($new_password)),
+                'last_update_date' => DateTimeLogic::Instance()
+                    ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+                'last_update_by' => Auth::id()
             ]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;

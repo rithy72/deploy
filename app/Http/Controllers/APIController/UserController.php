@@ -254,14 +254,14 @@ class UserController extends Controller
     }
 
     //Reset Password
-    public function resetPassword(Request $request){
+    public function resetOwnPassword(Request $request){
         $returnModel = ReturnModel::Instance();
         //
         $username = $request->email;
         $oldPassword = $request->old_password;
         $newPassword = $request->new_password;
         //
-        $changeResult = UserLogic::Instance()->ResetPassword($username, $oldPassword, $newPassword);
+        $changeResult = UserLogic::Instance()->UserResetOwnPassword($username, $oldPassword, $newPassword);
         //
         if ($changeResult == true){
             //Insert Success
@@ -302,7 +302,7 @@ class UserController extends Controller
             $returnModel->data = "User not Admin or invalid password";
         }
         //
-        if ($returnModel->status == "201") Auth::logout();
+        //if ($returnModel->status == "201") Auth::logout();
         return json_encode($returnModel);
     }
 
