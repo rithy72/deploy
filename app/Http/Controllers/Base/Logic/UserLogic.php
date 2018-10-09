@@ -250,7 +250,7 @@ class UserLogic extends SecureLogic
             ->where('id','=', $id)
             ->update([
                 'status' => true,
-                'password' => bcrypt($new_password),
+                'password' => Hash::make(trim($new_password)),
                 'last_update_date' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
                 'last_update_by' => Auth::id()
@@ -273,16 +273,12 @@ class UserLogic extends SecureLogic
         DB::table('users')
             ->where('id','=', $userObj->id)
             ->update([
+                'status' => true,
                 'password' => $new_password,
                 'last_update_date' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
                 'last_update_by' => Auth::id(),
-                'remember_token' => null
             ]);
-        //Update remember token to null
-        DB::table('users')
-            ->where('id','=', $userObj->id)
-            ->update(['remember_token' => null]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
         UserAuditLogic::Instance()
@@ -298,7 +294,7 @@ class UserLogic extends SecureLogic
         DB::table('users')
             ->where('id','=', $user_id)
             ->update([
-                'password' => bcrypt($new_password),
+                'password' => Hash::make(trim($new_password)),
             ]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;

@@ -284,7 +284,8 @@ class UserController extends Controller
         $checkAdmin = SecureLogic::Instance()->CheckAdminPassword($adminPassword);
         //
         if ($checkAdmin){
-            $newPassword = trim($request->user_info->new_password);
+            $userInfo = (object)$request->user_info;
+            $newPassword = trim($userInfo->new_password);
             UserLogic::Instance()->ResetUserPassword($newPassword, $id);
             //
             //Success
