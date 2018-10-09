@@ -32,6 +32,7 @@ class UserModel
     public $last_update_date;
     public $last_update_by;
     public $deleted;
+    public $just_update;
 
     public static function Instance(){
         return new UserModel();
@@ -68,6 +69,7 @@ class UserModel
             UserLogic::Instance()->Find($user_object->last_update_by)->name:"-";
         //
         $userModel->deleted = $user_object->deleted;
+        $userModel->just_update = $user_object->just_updated;
         return $userModel;
     }
 }

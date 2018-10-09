@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Http\Controllers\Base\Logic\UserLogic;
-use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +37,7 @@ class UserMiddleware
     {
 
         $userObj = UserLogic::Instance()->Find(Auth::id());
-        if ($userObj->role !== UserRoleEnum::USER){
+        if ($userObj->just_update == 1 || $userObj->just_update == true){
             return redirect('/login');
         }
 

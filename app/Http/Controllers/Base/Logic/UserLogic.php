@@ -190,7 +190,8 @@ class UserLogic extends SecureLogic
                 'delete_able' => true,
                 'last_update_date' =>
                     DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-                'last_update_by' => Auth::id()
+                'last_update_by' => Auth::id(),
+                'just_updated' => true
             ]);
         //New Object
         $newUserObj = $this->Find($id);
@@ -215,7 +216,8 @@ class UserLogic extends SecureLogic
             ->update([
                 'deleted' => true,
                 'email' => null,
-                'password' => null
+                'password' => null,
+                'just_updated' => true
             ]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
@@ -235,7 +237,8 @@ class UserLogic extends SecureLogic
                'password' => null,
                'last_update_date' => DateTimeLogic::Instance()
                    ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-                'last_update_by' => Auth::id()
+                'last_update_by' => Auth::id(),
+                'just_updated' => true
             ]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
