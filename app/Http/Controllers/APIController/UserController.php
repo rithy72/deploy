@@ -263,11 +263,11 @@ class UserController extends Controller
         //
         $changeResult = UserLogic::Instance()->UserResetOwnPassword($username, $oldPassword, $newPassword);
         //
-        if ($changeResult == true){
+        if ($changeResult){
             //Insert Success
             $returnModel->status = "201";
             $returnModel->data = "Action on logged in user, must login again";
-        }elseif ($changeResult == false){
+        }else{
             //Invalid Username or Password
             $returnModel->status = "400";
             $returnModel->data = "Invalid Username or Password";

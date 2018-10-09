@@ -206,9 +206,9 @@
 
 
         $.ajax({
-            type:"PUT",
-            url:"api/user/activate/6",
-            data: obj,
+            type:"GET",
+            url:"api/audit_trail/search",
+            //data: obj,
             success:function (response) {
                 console.log(response);
             }
