@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Base\Logic\UserLogic;
+use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
@@ -34,8 +37,9 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $userObj = UserLogic::Instance()->Find(Auth::id());
 
-        if ($this->auth->user()->role !== "admin"){
+        if ($userObj->role !== UserRoleEnum::ADMIN){
             return redirect('/login');
         }
 

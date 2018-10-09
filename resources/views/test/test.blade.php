@@ -188,21 +188,26 @@
     $('#getData').on('click',function () {
     var obj =
         {
-            "admin_password":"admin@admin123456",
-            "user_info":{
-                "user_no":"USER-001",
-                "name":"Johny",
-                "phone_number":"089256412",
-                "note":"New User",
-                "email":"newuser@newuser",
-                "password":"newuser@newuser123"
-            }
+//            "admin_password":"sothea@admin123456",
+//            "user_info":{
+//                "user_no":"USER-001",
+//                "name":"Johny",
+//                "phone_number":"089256412",
+//                "note":"New User",
+//                "email":"newuser@newuser",
+//                "password":"newuser@newuser123"
+//                "new_password":"12345"
+//            }
+
+            "email":"sothea@admin",
+            "old_password":"sothea@admin123456",
+            "new_password":"123456"
         };
 
 
         $.ajax({
-            type:"POST",
-            url:"api/user/create/",
+            type:"PUT",
+            url:"api/user/reset_own_password/1",
             data: obj,
             success:function (response) {
                 console.log(response);

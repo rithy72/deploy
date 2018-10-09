@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -115,10 +116,12 @@ Route::middleware('auth')->group(function (){
                 Route::get('/action_history/{user_id}','APIController\UserController@user_action');
                 Route::get('/find/{id}', 'APIController\UserController@find');
                 Route::post('/create','APIController\UserController@create');
+                Route::put('/edit/{user_id}','APIController\UserController@edit');
+                Route::delete('/delete/{user_id}','APIController\UserController@delete');
+                Route::put('/deactivate/{user_id}','APIController\UserController@deactivateUser');
+                Route::put('/activate/{user_id}','APIController\UserController@activateUser');
+                Route::put('/reset_own_password/{user_id}','APIController\UserController@resetPassword');
             });
-//            Route::prefix('users')->group(function (){
-//
-//            });
         });
 //================================================================================================================
 //================================ Test ==========================================================================

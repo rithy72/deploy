@@ -12,7 +12,6 @@ namespace App\Http\Controllers\Base\Logic;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Logic\OtherLogic\SecureLogic;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
-use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use App\Http\Controllers\Base\Model\Enum\UserSearchOptionEnum;
@@ -20,6 +19,7 @@ use App\Http\Controllers\Base\Model\Other\PaginateModel;
 use App\Http\Controllers\Base\Model\UserModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 
 class UserLogic extends SecureLogic
@@ -98,23 +98,23 @@ class UserLogic extends SecureLogic
     }
 
     //Insert ChangeLog
-    public function ChangeLogRecord(UserModel $user_model, UserModel $old_model, $chang_log_array){
+    public function ChangeLogRecord(UserModel $user_model, UserModel $old_model, $chang_log_array, $flag){
         $userAudit = UserAuditLogic::Instance();
         //User Number
         $chang_log_array = $userAudit->CompareField(
-            AuditGroup::USER_NUMBER, $old_model->user_no, $user_model->user_no, UserActionEnum::INSERT, $chang_log_array);
+            AuditGroup::USER_NUMBER, $old_model->user_no, $user_model->user_no, $flag, $chang_log_array);
         //Name
         $chang_log_array = $userAudit->CompareField(
-            AuditGroup::USER_FULLNAME, $old_model->name, $user_model->name, UserActionEnum::INSERT, $chang_log_array);
+            AuditGroup::USER_FULLNAME, $old_model->name, $user_model->name, $flag, $chang_log_array);
         //Phone
         $chang_log_array = $userAudit->CompareField(
-            AuditGroup::PHONE, $old_model->phone_number, $user_model->phone_number, UserActionEnum::INSERT, $chang_log_array);
+            AuditGroup::PHONE, $old_model->phone_number, $user_model->phone_number, $flag, $chang_log_array);
         //Username
         $chang_log_array = $userAudit->CompareField(
-            AuditGroup::USERNAME, $old_model->email, $user_model->email, UserActionEnum::INSERT, $chang_log_array);
+            AuditGroup::USERNAME, $old_model->email, $user_model->email, $flag, $chang_log_array);
         //Note
         $chang_log_array = $userAudit->CompareField(
-            AuditGroup::NOTE, $old_model->note, $user_model->note, UserActionEnum::INSERT, $chang_log_array);
+            AuditGroup::NOTE, $old_model->note, $user_model->note, $flag, $chang_log_array);
         //Role
         $chang_log_array = $userAudit->CompareField(
             AuditGroup::USER_ROLE, $old_model->display_role, $user_model->display_role, UserActionEnum::INSERT, $chang_log_array);
@@ -152,7 +152,7 @@ class UserLogic extends SecureLogic
         //Get User Object
         $userObj = $this->Find($userId);
         //Change Log
-        $changeLogArray = $this->ChangeLogRecord($userObj, $userObj, $changeLogArray);
+        $changeLogArray = $this->ChangeLogRecord($userObj, $userObj, $changeLogArray, UserActionEnum::INSERT);
         //User Audit Trail
         UserAuditLogic::Instance()->UserOnUserAction(
             $userId, UserActionEnum::INSERT, $userObj->user_no."-".$userObj->name, $changeLogArray);
@@ -164,6 +164,9 @@ class UserLogic extends SecureLogic
     //Update User Info
     public function UpdateUser($user, $id){
         $userOldObj = $this->Find($id);
+        $userRole = UserRoleEnum::USER;
+        if ($userOldObj->role == UserRoleEnum::ADMIN) $userRole = UserRoleEnum::ADMIN;
+
         $validateUsername = $this->checkUsernameUpdate($user->email, $id);
         $validateUserNumber = $this->checkUserNumberUpdate($user->user_no, $id);
         $changeLogArray = array();
@@ -176,14 +179,14 @@ class UserLogic extends SecureLogic
         $user->role = (!empty($user->role)) ? $user->role : $userOldObj->role;
         //
         DB::table('users')
+            ->where('id','=', $id)
             ->update([
                 'user_no' => $user->user_no,
                 'name' => $user->name,
                 'phone_number' => $user->phone_number,
                 'email' => $user->email,
-                'role' => strtolower(UserRoleEnum::USER),
+                'role' => strtolower($userRole),
                 'note' => $user->note,
-                'status' => GeneralStatus::ACTIVE,
                 'delete_able' => true,
                 'last_update_date' =>
                     DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
@@ -192,7 +195,7 @@ class UserLogic extends SecureLogic
         //New Object
         $newUserObj = $this->Find($id);
         //Change Log
-        $changeLogArray = $this->ChangeLogRecord($newUserObj, $userOldObj, $changeLogArray);
+        $changeLogArray = $this->ChangeLogRecord($newUserObj, $userOldObj, $changeLogArray, UserActionEnum::UPDATE);
         //User Audit Trail
         UserAuditLogic::Instance()->UserOnUserAction(
             $id, UserActionEnum::UPDATE, $newUserObj->user_no."-".$newUserObj->name, $changeLogArray);
@@ -207,7 +210,13 @@ class UserLogic extends SecureLogic
         //Check if can delete
         if ($userObj->delete_able == false) return false;
         //Delete
-        DB::table('users')->where('id','=', $id)->update(['deleted' => true]);
+        DB::table('users')
+            ->where('id','=', $id)
+            ->update([
+                'deleted' => true,
+                'email' => null,
+                'password' => null
+            ]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
         UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::DELETE, $description, []);
@@ -253,22 +262,31 @@ class UserLogic extends SecureLogic
     }
 
     //Reset Password
-    public function ResetPassword($username, $old_password, $new_password, $id){
-        $userObj = $this->Find($id);
+    public function ResetPassword($username, $old_password, $new_password){
+        $userObj = $this->Find(Auth::id());
         //Check, can not reset
-        if ($username != $userObj->email || bcrypt($old_password) != $userObj->password) return false;
+        if (!Hash::check($old_password, $userObj->password)) return false;
+        if ($username != $userObj->email) return false;
+        //
+        $new_password = Hash::make(trim($new_password));
         //Reset Password, if can
         DB::table('users')
-            ->where('id','=', $id)
+            ->where('id','=', $userObj->id)
             ->update([
-                'password' => bcrypt($new_password),
+                'password' => $new_password,
                 'last_update_date' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-                'last_update_by' => Auth::id()
+                'last_update_by' => Auth::id(),
+                'remember_token' => null
             ]);
+        //Update remember token to null
+        DB::table('users')
+            ->where('id','=', $userObj->id)
+            ->update(['remember_token' => null]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
-        UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::CHANGE_PASSWORD, $description, []);
+        UserAuditLogic::Instance()
+            ->UserOnUserAction($userObj->id, UserActionEnum::CHANGE_PASSWORD, $description, []);
 
         return true;
     }
