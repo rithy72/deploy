@@ -9,14 +9,12 @@
 namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
-use App\Http\Controllers\Base\Model\ChangeLogModel;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\InvoiceSearchOptionEnum;
 use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\InvoiceInfoModel;
-use App\Http\Controllers\Base\Model\InvoiceItemModel;
 use App\Http\Controllers\Base\Model\Other\PaginateModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -362,46 +360,10 @@ class InvoiceInfoLogic
 
     //Invoice and Item Transaction
     public function InvoiceAndItemTransactionHistory($from_date, $to_date, $action, $group, $invoice_id, $page_size){
-        $dateInstance = DateTimeLogic::Instance();
-        //
-        $oldInvoiceObj = $this->Find($invoice_id);
-        //
-        $fromDate = (empty($from_date)) ?
-            $dateInstance->FormatDatTime($oldInvoiceObj->created_date, 'Y-m-d 00:00:00') :
-            $dateInstance->FormatDatTime($from_date, 'Y-m-d 00:00:00');
-        $toDate = (empty($to_date)) ?
-            $dateInstance->AddDaysToCurrentDateDBFormat(90, 'Y-m-d 00:00:00') :
-            $dateInstance->FormatDatTime($to_date, 'Y-m-d 00:00:00');
-        $allowGroup = array(AuditGroup::ITEM, AuditGroup::INVOICE);
-        //
-        $getResult = DB::table('user_record')
-            ->select(
-                'user_record.id','user_record.parent_id','user_record.display_audit','user_record.description',
-                'user_record.change_log','user_record.date_time','users.name'
-            )
-            ->join('users','user_record.user_id','=','users.id')
-            ->where('user_record.parent_id','=', intval($invoice_id))
-            //->whereBetween('user_record.date_time', array($from_date, $to_date))
-            ->whereIn('user_record.audit_group', $allowGroup)
-            //When user want to filter by group and action
-            ->when(!empty($group), function ($query) use ($action, $group, $allowGroup){
-                if (!in_array($group, $allowGroup)) return $query;
-                //
-                if (!empty($action)){
-                    return $query->where('user_record.audit_group', '=', $group)
-                                 ->where('user_record.action', '=', $action);
-                }
-                //
-                return $query->where('user_record.audit_group', '=', $group);
-            })
-            //When user has date range
-            ->whereBetween('user_record.date_time', array($fromDate, $toDate))
-            ->orderByRaw('user_record.date_time')
-            ->paginate($page_size);
-        //Append
-        $getResult->appends(Input::except('page'));
 
-        //return $fromDate."-".$toDate;
+        $allowGroup = array(AuditGroup::ITEM, AuditGroup::INVOICE);
+        $getResult = UserAuditLogic::Instance()
+            ->search($from_date, $to_date, $allowGroup, $group, $action, "", $invoice_id, $page_size);
         return $getResult;
     }
 

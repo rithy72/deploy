@@ -20,6 +20,14 @@ use Illuminate\Support\Facades\Input;
 class UserAuditLogic
 {
 
+    private $DefaultAllowGroup = array(
+        AuditGroup::ITEM,
+        AuditGroup::INVOICE,
+        AuditGroup::USER,
+        AuditGroup::SECURITY,
+        AuditGroup::ITEM_TYPE
+    );
+
     //Instance Method
     public static function Instance(){
         return new UserAuditLogic();
@@ -193,7 +201,7 @@ class UserAuditLogic
     }
 
     //Filter Search
-    public function search($from_date, $to_date, $group, $action, $page_size){
+    public function search($from_date, $to_date, $allow_group, $group, $action, $user_id, $parent_id, $page_size){
         $dateInstance = DateTimeLogic::Instance();
         $startOfUsing = DailyReportLogic::Instance()->GetStartDayOfUsing();
         //
@@ -203,7 +211,7 @@ class UserAuditLogic
         $toDate = (empty($to_date)) ?
             $dateInstance->AddDaysToCurrentDateDBFormat(90, 'Y-m-d 00:00:00') :
             $dateInstance->FormatDatTime($to_date, 'Y-m-d 00:00:00');
-        $allowGroup = array(AuditGroup::ITEM, AuditGroup::INVOICE, AuditGroup::USER, AuditGroup::SECURITY, AuditGroup::ITEM_TYPE);
+        $allowGroup = (empty($allow_group)) ? $this->DefaultAllowGroup : $allow_group;
         //
         $getResult = DB::table('user_record')
             ->select(
@@ -211,8 +219,15 @@ class UserAuditLogic
                 'user_record.change_log','user_record.date_time','users.name'
             )
             ->join('users','user_record.user_id','=','users.id')
-            //->whereBetween('user_record.date_time', array($from_date, $to_date))
-            //->where('user_record.user_id','=', $user_id)
+            ->whereIn('user_record.audit_group', $allowGroup)
+            //When user want specific user
+            ->when(!empty($user_id), function ($query) use ($user_id){
+                return $query->where('user_record.user_id','=', $user_id);
+            })
+            //When user want specific parent
+            ->when(!empty($parent_id), function ($query) use ($parent_id){
+                return $query->where('user_record.parent_id','=', intval($parent_id));
+            })
             //When user want to filter by group and action
             ->when(!empty($group), function ($query) use ($action, $group, $allowGroup){
                 if (!in_array($group, $allowGroup)) return $query;

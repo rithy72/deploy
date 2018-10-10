@@ -17,7 +17,8 @@ class UserAuditController extends Controller
         $action = $request->input('action','');
         $pageSize = $request->input('page_size',10);
         //
-        $result = UserAuditLogic::Instance()->search($fromDate, $toDate, $group, $action, $pageSize);
+        $result = UserAuditLogic::Instance()
+            ->search($fromDate, $toDate, "", $group, $action, "", "", $pageSize);
         //
         $returnModel = ReturnModel::Instance();
         $returnModel->status = "200";
