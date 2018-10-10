@@ -10,9 +10,11 @@ namespace App\Http\Controllers\Base\Logic;
 
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Model\AuditTrailModel;
 use App\Http\Controllers\Base\Model\ChangeLogModel;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
+use App\Http\Controllers\Base\Model\Other\PaginateModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -216,7 +218,7 @@ class UserAuditLogic
         $getResult = DB::table('user_record')
             ->select(
                 'user_record.id','user_record.parent_id','user_record.display_audit','user_record.description',
-                'user_record.change_log','user_record.date_time','users.name'
+                'user_record.change_log','user_record.date_time','users.name', 'users.user_no'
             )
             ->join('users','user_record.user_id','=','users.id')
             ->whereIn('user_record.audit_group', $allowGroup)
@@ -246,7 +248,15 @@ class UserAuditLogic
         //Append
         $getResult->appends(Input::except('page'));
 
-        return $getResult;
+        $returnArray = array();
+        foreach ($getResult as $result){
+            $model = AuditTrailModel::FinalizeModel((object)$result);
+            array_push($returnArray, $model);
+        }
+
+        $returnModel = PaginateModel::Instance()->FinalizePaginateModel($returnArray, $getResult);
+
+        return $returnModel;
     }
 
 }
