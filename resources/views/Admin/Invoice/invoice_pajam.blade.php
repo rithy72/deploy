@@ -161,10 +161,10 @@
 
                 if (storeValue.data.data[i].status === "1"){
                     stringStatus_Payment = '<li id="payment_invoice"><a href="{{('/admin/invoice/invoice_payment')}}"><i class="icon-price-tag"></i>@lang('string.payment')</a></li>';
-                    {{--stringStatus_Update = '<li id="updates_invoice"><a href="{{('/admin/invoice/update_invoice')}}"><i class="icon-pencil7"></i>@lang('string.update')</a></li>';--}}
+                    stringStatus_Update = '<li id="updates_invoice"><a href="{{('/admin/invoice/update_invoice')}}"><i class="icon-pencil7"></i>@lang('string.update')</a></li>';
                 } else {
                     stringStatus_Payment = "";
-                    /*stringStatus_Update = "";*/
+                    stringStatus_Update = "";
                 }
                 var displayExpireColor = (storeValue.data.data[i].is_late === true) ? "#ff0000":"#000000";
                 // ============= End Parse Json ===========================
