@@ -12,7 +12,6 @@ namespace App\Http\Controllers\Base\Model;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
-use Illuminate\Foundation\Auth\User;
 
 class UserModel
 {
@@ -32,6 +31,8 @@ class UserModel
     public $created_by;
     public $last_update_date;
     public $last_update_by;
+    public $deleted;
+    public $just_update;
 
     public static function Instance(){
         return new UserModel();
@@ -59,14 +60,16 @@ class UserModel
             DateTimeLogic::Instance()->FormatDatTime($user_object->created_date, DateTimeLogic::SHOW_DATE_TIME_FORMAT)
             :"-";
         $userModel->created_by = (!empty($user_object->created_by)) ?
-            UserLogic::Instance()->Find($user_object->created_by):"System";
+            UserLogic::Instance()->Find($user_object->created_by)->name:"System";
         //
         $userModel->last_update_date = (!empty($user_object->last_update_date)) ?
             DateTimeLogic::Instance()->FormatDatTime($user_object->last_update_date, DateTimeLogic::SHOW_DATE_TIME_FORMAT)
             :"-";
         $userModel->last_update_by = (!empty($user_object->last_update_by)) ?
-            UserLogic::Instance()->Find($user_object->last_update_by):"-";
+            UserLogic::Instance()->Find($user_object->last_update_by)->name:"-";
         //
+        $userModel->deleted = $user_object->deleted;
+        $userModel->just_update = $user_object->just_updated;
         return $userModel;
     }
 }

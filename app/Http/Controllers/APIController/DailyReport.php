@@ -4,8 +4,8 @@ namespace App\Http\Controllers\APIController;
 
 use App\Http\Controllers\Base\Logic\DailyReportLogic;
 use App\Http\Controllers\Base\Model\Other\ReturnModel;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class DailyReport extends Controller
 {
@@ -26,6 +26,20 @@ class DailyReport extends Controller
         $pageSize = $request->input('',10);
         //
         $getResult = DailyReportLogic::Instance()->FilterSearch($fromDate, $toDate,$pageSize);
+
+        $returnModel = ReturnModel::Instance();
+        $returnModel->status = "200";
+        $returnModel->data = $getResult;
+        return json_encode($returnModel);
+    }
+
+    //Calculate Expense and
+    public function Calculate(Request $request){
+        $fromDate = $request->input('from_date','');
+        $toDate = $request->input('to_date','');
+        //
+        //
+        $getResult = DailyReportLogic::Instance()->Calculate($fromDate, $toDate);
 
         $returnModel = ReturnModel::Instance();
         $returnModel->status = "200";

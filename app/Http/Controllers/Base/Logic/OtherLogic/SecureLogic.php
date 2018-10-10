@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Base\Logic\OtherLogic;
 use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SecureLogic
 {
@@ -25,10 +26,11 @@ class SecureLogic
         $encryptPassword = bcrypt($password);
         $userObj = UserLogic::Instance()->Find(Auth::id());
         //Check
-        if ($userObj->role != UserRoleEnum::ADMIN || $userObj->password != $encryptPassword){
-            return false;
+        if (Hash::check($password, $userObj->password)){
+            if ($userObj->role != UserRoleEnum::ADMIN) return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 

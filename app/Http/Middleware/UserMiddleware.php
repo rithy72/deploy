@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Base\Logic\UserLogic;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 
 class UserMiddleware
 {
@@ -34,7 +36,8 @@ class UserMiddleware
     public function handle($request, Closure $next)
     {
 
-        if ($this->auth->user()->role !== "user"){
+        $userObj = UserLogic::Instance()->Find(Auth::id());
+        if ($userObj->just_update == true || $userObj->status == false || $userObj->deleted == true){
             return redirect('/login');
         }
 

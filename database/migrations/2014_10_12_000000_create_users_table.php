@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('user_no')->nullable(true);
             $table->string('name');
             $table->string('phone_number')->nullable(true);
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable(true);
             $table->string('password')->nullable(true);
             $table->string('role');
             $table->text('note')->nullable(true);
@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration
             $table->integer('last_update_by')->nullable(true);
             $table->rememberToken();
             $table->timestamps();
+            $table->boolean('deleted')->default(false);
+            $table->boolean('just_updated')->default(false);
         });
         //Create Super User
 //        DB::table('users')->insert(array(

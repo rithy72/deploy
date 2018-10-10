@@ -10,14 +10,25 @@ namespace App\Http\Controllers\Base\Logic;
 
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Model\AuditTrailModel;
 use App\Http\Controllers\Base\Model\ChangeLogModel;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
+use App\Http\Controllers\Base\Model\Other\PaginateModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class UserAuditLogic
 {
+
+    private $DefaultAllowGroup = array(
+        AuditGroup::ITEM,
+        AuditGroup::INVOICE,
+        AuditGroup::USER,
+        AuditGroup::SECURITY,
+        AuditGroup::ITEM_TYPE
+    );
 
     //Instance Method
     public static function Instance(){
@@ -189,6 +200,63 @@ class UserAuditLogic
 
         array_push($change_log_array, $changeLogModel);
         return $change_log_array;
+    }
+
+    //Filter Search
+    public function search($from_date, $to_date, $allow_group, $group, $action, $user_id, $parent_id, $page_size){
+        $dateInstance = DateTimeLogic::Instance();
+        $startOfUsing = DailyReportLogic::Instance()->GetStartDayOfUsing();
+        //
+        $fromDate = (empty($from_date)) ?
+            $dateInstance->FormatDatTime($startOfUsing, 'Y-m-d 00:00:00') :
+            $dateInstance->FormatDatTime($from_date, 'Y-m-d 00:00:00');
+        $toDate = (empty($to_date)) ?
+            $dateInstance->AddDaysToCurrentDateDBFormat(90, 'Y-m-d 00:00:00') :
+            $dateInstance->FormatDatTime($to_date, 'Y-m-d 00:00:00');
+        $allowGroup = (empty($allow_group)) ? $this->DefaultAllowGroup : $allow_group;
+        //
+        $getResult = DB::table('user_record')
+            ->select(
+                'user_record.id','user_record.parent_id','user_record.display_audit','user_record.description',
+                'user_record.change_log','user_record.date_time','users.name', 'users.user_no'
+            )
+            ->join('users','user_record.user_id','=','users.id')
+            ->whereIn('user_record.audit_group', $allowGroup)
+            //When user want specific user
+            ->when(!empty($user_id), function ($query) use ($user_id){
+                return $query->where('user_record.user_id','=', $user_id);
+            })
+            //When user want specific parent
+            ->when(!empty($parent_id), function ($query) use ($parent_id){
+                return $query->where('user_record.parent_id','=', intval($parent_id));
+            })
+            //When user want to filter by group and action
+            ->when(!empty($group), function ($query) use ($action, $group, $allowGroup){
+                if (!in_array($group, $allowGroup)) return $query;
+                //
+                if (!empty($action)){
+                    return $query->where('user_record.audit_group', '=', $group)
+                        ->where('user_record.action', '=', $action);
+                }
+                //
+                return $query->where('user_record.audit_group', '=', $group);
+            })
+            //When user has date range
+            ->whereBetween('user_record.date_time', array($fromDate, $toDate))
+            //->orderBy('user_record.date_time','asc')
+            ->paginate($page_size);
+        //Append
+        $getResult->appends(Input::except('page'));
+
+        $returnArray = array();
+        foreach ($getResult as $result){
+            $model = AuditTrailModel::FinalizeModel((object)$result);
+            array_push($returnArray, $model);
+        }
+
+        $returnModel = PaginateModel::Instance()->FinalizePaginateModel($returnArray, $getResult);
+
+        return $returnModel;
     }
 
 }

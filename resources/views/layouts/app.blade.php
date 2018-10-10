@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>@lang('string.Pawn_Shop')</title>
+    <title>@lang('string.com_name')</title>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -100,7 +100,9 @@
                         <ul class="navigation navigation-main navigation-accordion">
 
                             <!-- Main -->
+                            @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;"><a href="{{('/admin/mainform')}}"><i class="icon-home4"></i> <span> @lang('string.desboard') </span></a></li>
+                            @endif
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="{{('/admin/invoice')}}"><i class="icon-copy"></i> <span>@lang('string.invoice')</span></a>
                                 {{--<ul>--}}
@@ -114,6 +116,7 @@
                                     <li><a href="{{('/admin/item_type')}}" id="layout3">@lang('string.typeItems')</a></li>
                                 </ul>
                             </li>
+                            @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="{{('/admin/user')}}"><i class="icon-user"></i> <span>@lang('string.users')</span></a>
                                 {{--<ul>
@@ -128,6 +131,7 @@
                                     <li><a href="#">Ding dak ey te!!!</a></li>
                                 </ul>--}}
                             </li>
+
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="{{('/admin/history_user')}}"><i class="icon-clipboard3"></i> <span>@lang('string.actionUsers')</span></a>
                                 {{--<ul>
@@ -140,7 +144,7 @@
                                 <a href="{{('/admin/report')}}"><i class="icon-stack-text"></i> <span>@lang('string.reportHistory')</span></a>
                             </li>
                             <!-- /main -->
-
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -176,6 +180,7 @@
                     <h5 class="modal-title">@lang('string.changePassword')</h5>
                 </div>
 
+                {{--Change Password Modal--}}
                 <div class="modal-body">
                     <div class="col-md-12">
                         <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer" style="margin-top: -14px;">

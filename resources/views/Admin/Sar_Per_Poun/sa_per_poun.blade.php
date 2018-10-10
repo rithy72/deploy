@@ -898,7 +898,9 @@
                     '<i class="icon-menu9"></i>'+
                     '</a>'+
                     '<ul class="dropdown-menu dropdown-menu-right">'+
+                        @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                     StoreElement +
+                        @endif
                     '</ul>'+
                     '</li>'+
                     '</ul>'+

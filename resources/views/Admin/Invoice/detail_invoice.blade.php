@@ -35,8 +35,8 @@
                 <div class="col-md-4">
                     <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;margin-bottom: 0;">
                         <a href="{{('/admin/invoice/create_new_invoice')}}" class="btn btn-success" id="" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
-                        <button type="button" class="btn btn-primary" id="update_invoice" style="margin-bottom: 4px;" ><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
-                        <button type="button" class="btn" id="payment_invoice" style="background: #ff840d;color: white;margin-bottom: 4px;" ><i class="icon-price-tag position-left"></i>@lang('string.payment')</button>
+                        <button type="button" class="btn btn-primary" id="update_invoice" style="margin-bottom: 4px;" disabled="disabled"><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
+                        <button type="button" class="btn" id="payment_invoice" style="background: #ff840d;color: white;margin-bottom: 4px;" disabled="disabled"><i class="icon-price-tag position-left"></i>@lang('string.payment')</button>
                     </div>
                 </div>
             </div>
@@ -45,8 +45,8 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs nav-tabs-highlight">
                     <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">@lang('string.generalInformation')</a></li>
-                    <li id="item_in_one_invoice"><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">ទំនិញបញ្ចាំ</a></li>
-                    <li id="history_of_one_invoice"><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.history')</a></li>
+                    <li><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">ទំនិញបញ្ចាំ</a></li>
+                    <li><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.history')</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -350,17 +350,17 @@
 
 
     <div id="loading" style="display: none;
-    max-width:350px;
-    max-height: 100px;
+    width:100px;
+    height: 100px;
     position: fixed;
     top: 50%;
     left: 50%;
     text-align:center;
-    margin-left: -150px;
+    margin-left: -50px;
     margin-top: -100px;
     z-index:2;
     overflow: auto;">
-        <img src="/assets/images/LOADINGgif.gif"/>
+        <img src="/assets/images/ajax_loader.gif" alt=""/>
     </div>
 @endsection
 
@@ -373,9 +373,9 @@
             $( "#loading" ).hide();
         });
         // ------------------ show data for detail ----------------------
-        var getResponse , _ID;
+        var getResponse;
         (function () {
-            _ID = atob($.cookie("KeyInvoice")); // convert id unique from base64
+            var _ID = atob($.cookie("KeyInvoice")); // convert id unique from base64
             $.ajax({
                type: "GET",
                 url: '../api/invoice/'+_ID+'',
@@ -412,6 +412,12 @@
                     document.getElementById("grand_total").innerHTML = getResponse.data.grand_total+" $";
                     document.getElementById("paid").innerHTML = getResponse.data.paid+" $";
                     document.getElementById("luynovsol").innerHTML = getResponse.data.remain+" $";
+                    // ---------- show itemType of one invoice ---------
+                    var showInvoiceInTable = new ItemTypeForOneInvoice("GET" , '../api/item/invoice/'+ _ID +'');
+                    showInvoiceInTable.reads();
+                    // ---------- show history of invoice --------------
+                    var showHistoryInvoice = new History("GET" , '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date=&to_date=&action=&group=&page_size=15');
+                    showHistoryInvoice.reads();
                 }
             });
         })();
@@ -449,15 +455,6 @@
                 }
             });
         };
-        // ------------ click tap show item on invoice ---------
-        $(document).on("click","#item_in_one_invoice",function () {
-            clearTimeout(timeout1);
-            timeout1 = setTimeout(function () {
-                $('#Show_All_itemType_OneInvoice td').remove();
-                var showInvoiceInTable = new ItemTypeForOneInvoice("GET" , '../api/item/invoice/'+ _ID +'');
-                showInvoiceInTable.reads();
-            }, 500);
-        });
         // ------------ click button search in detail ----------
         var timeout1 = null;
         $('.btn-Search').on("click",function () {
@@ -504,24 +501,10 @@
                 }
             });
         };
-        // ---- click tap show item history for one invoice ----
-        $(document).on("click","#history_of_one_invoice",function () {
-            clearTimeout(timeout1);
-            timeout1 = setTimeout(function () {
-                $('#Show_All_History td').remove();
-                oldAutoIncrement = 0;
-                storeValueTheLastPage = 0;
-                // ---------- show history of invoice --------------
-                var showHistoryInvoice = new History("GET" , '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date=&to_date=&action=&group=&page_size=15');
-                showHistoryInvoice.reads();
-            }, 500);
-        });
         // ------------ function search history ----------------
-        var url;
+        var url; //,_chooseSearch,_historyInvoice,_historyItemType
         $('.btn_Search1').on("click", function () {
-            oldAutoIncrement = 0;      // set auto increment to 0
-            storeValueTheLastPage = 0; // set store value the last page of auto increment to 0 too
-
+            autoIncrement = 0;
             var _startDate = $('#start_date').val();
             var _toDate = $('#to_date').val();
             var _chooseSearch = $('#chooseInvoiceOrItemType').val();
@@ -550,7 +533,7 @@
             }
         });
         // ---- model table ----
-        var ConvertAndStore , oldAutoIncrement = 0;
+        var ConvertAndStore , autoIncrement = 0;
         function ShowDataInTable(getJsonValue) {
             ConvertAndStore = JSON.parse(getJsonValue);
             document.getElementById("page1").innerHTML = ConvertAndStore.data.current_page;
@@ -569,7 +552,7 @@
             for (var i = 0; i < ConvertAndStore.data.data.length; i++){
                 var short = ConvertAndStore.data.data[i];
                 var _tr = '<tr>' +
-                    '<td>' + [oldAutoIncrement+=1] + '</td>' +
+                    '<td>' + [autoIncrement+=1] + '</td>' +
                     '<td>' + short.name + '</td>' +
                     '<td>' + short.display_audit + '</td>' +
                     '<td>' + short.description + '</td>' +
@@ -592,7 +575,6 @@
             }
         }
         // ---- click back ---------------------
-        var storeValueTheLastPage = 0, valueDefaultAuto = 15; //the page that have row full or not(count row per page)
         $(".previous_show_invoice").click(function () {
             var url = ConvertAndStore.data.prev_page_url;
             if (ConvertAndStore.data.prev_page_url === null){
@@ -600,12 +582,7 @@
             }else {
                 clearTimeout(timeout1);
                 timeout1 = setTimeout(function () {
-                    //  number auto from table make ល.រ
-                    storeValueTheLastPage = oldAutoIncrement - Number(newAutoIncrement); //find row per page
-                    storeValueTheLastPage += valueDefaultAuto; //make value per page + 15.
-                    oldAutoIncrement = oldAutoIncrement - storeValueTheLastPage; //than we saw the value auto show back page again
-                    newAutoIncrement = oldAutoIncrement; // set it to old value amount auto form table row again
-                    storeValueTheLastPage = 0; // set it to 0 for use again
+                    autoIncrement -= 2; // minus number auto increment
                     $('#Show_All_History td').remove();
                     var clickBack = new History("GET" , url);
                     clickBack.reads();
@@ -613,7 +590,6 @@
             }
         });
         // ---- click next --------------------
-        var newAutoIncrement;
         $(".next_show_invoice").click(function () {
             var url = ConvertAndStore.data.next_page_url;
             if (ConvertAndStore.data.next_page_url === null){
@@ -621,7 +597,6 @@
             }else {
                 clearTimeout(timeout1);
                 timeout1 = setTimeout(function () {
-                    newAutoIncrement = oldAutoIncrement; // store old pagination number per page to new value
                     $('#Show_All_History td').remove();
                     var clickNext = new History("GET" , url);
                     clickNext.reads();

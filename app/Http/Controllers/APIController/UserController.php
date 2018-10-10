@@ -54,6 +54,22 @@ class UserController extends Controller
         return json_encode($returnModel);
     }
 
+    //User Action
+    public function user_action(Request $request, $id){
+        $fromDate = $request->input('from_date','');
+        $toDate = $request->input('to_date','');
+        $group = $request->input('group','');
+        $action = $request->input('action','');
+        $pageSize = $request->input('page_size',10);
+        //
+        $result = UserLogic::Instance()->UserAuditTrial($fromDate, $toDate, $group, $action, $id, $pageSize);
+        //
+        $returnModel = ReturnModel::Instance();
+        $returnModel->status = "200";
+        $returnModel->data = $result;
+        return json_encode($returnModel);
+    }
+
     //Create User
     public function create(Request $request){
         $returnModel = ReturnModel::Instance();
@@ -63,12 +79,12 @@ class UserController extends Controller
         if ($checkAdmin){
             //When user is actually admin, and the password is right
             $userModel = UserModel::Instance();
-            $userInfo = $request->user_info;
+            $userInfo = (object)$request->user_info;
             $userModel->user_no = $userInfo->user_no;
             $userModel->name = $userInfo->name;
             $userModel->phone_number = $userInfo->phone_number;
             $userModel->note = $userInfo->note;
-            $userModel->role = $userInfo->role;
+            //$userModel->role = $userInfo->role;
             $userModel->email = trim($userInfo->email);
             $userModel->password = trim($userInfo->password);
             //
@@ -101,7 +117,7 @@ class UserController extends Controller
     }
 
     //Edit User
-    public function edit(Request $request, $id){
+    public function edit(Request $request, $user_id){
         $returnModel = ReturnModel::Instance();
         $adminPassword = $request->admin_password;
         $checkAdmin = SecureLogic::Instance()->CheckAdminPassword($adminPassword);
@@ -109,19 +125,18 @@ class UserController extends Controller
         if ($checkAdmin){
             //When user is actually admin, and the password is right
             $userModel = UserModel::Instance();
-            $userInfo = $request->user_info;
+            $userInfo = (object)$request->user_info;
             $userModel->user_no = $userInfo->user_no;
             $userModel->name = $userInfo->name;
             $userModel->phone_number = $userInfo->phone_number;
             $userModel->note = $userInfo->note;
-            $userModel->role = $userInfo->role;
             $userModel->email = trim($userInfo->email);
             //
-            $updateResult = UserLogic::Instance()->UpdateUser($userModel, $id);
+            $updateResult = UserLogic::Instance()->UpdateUser($userModel, $user_id);
             //
             if (is_object($updateResult)){
                 //Insert Success
-                if ($id == Auth::id()){
+                if ($user_id == Auth::id()){
                     $returnModel->status = "201";
                     $returnModel->data = "Action on logged in user, must login again";
                 }else{
@@ -167,7 +182,7 @@ class UserController extends Controller
                 }
             }else{
                 //Can not delete
-                $returnModel->status = "401";
+                $returnModel->status = "400";
                 $returnModel->data = "Can not delete this user";
             }
         }else{
@@ -216,7 +231,8 @@ class UserController extends Controller
         $checkAdmin = SecureLogic::Instance()->CheckAdminPassword($adminPassword);
         //
         if ($checkAdmin){
-            $newPassword = trim($request->user_info->new_password);
+            $userInfo = (object)$request->user_info;
+            $newPassword = trim($userInfo->new_password);
             UserLogic::Instance()->Activate($newPassword, $id);
             //
             //Success
@@ -238,26 +254,26 @@ class UserController extends Controller
     }
 
     //Reset Password
-    public function resetPassword(Request $request, $id){
+    public function resetOwnPassword(Request $request){
         $returnModel = ReturnModel::Instance();
         //
         $username = $request->email;
         $oldPassword = $request->old_password;
         $newPassword = $request->new_password;
         //
-        $changeResult = UserLogic::Instance()->ResetPassword($username, $oldPassword, $newPassword, $id);
+        $changeResult = UserLogic::Instance()->UserResetOwnPassword($username, $oldPassword, $newPassword);
         //
-        if ($changeResult == true){
+        if ($changeResult){
             //Insert Success
             $returnModel->status = "201";
             $returnModel->data = "Action on logged in user, must login again";
-        }elseif ($changeResult == false){
+        }else{
             //Invalid Username or Password
             $returnModel->status = "400";
             $returnModel->data = "Invalid Username or Password";
         }
 
-        if ($returnModel->status == "201") Auth::logout();
+        //if ($returnModel->status == "201") Auth::logout();
         return json_encode($returnModel);
     }
 
@@ -268,7 +284,8 @@ class UserController extends Controller
         $checkAdmin = SecureLogic::Instance()->CheckAdminPassword($adminPassword);
         //
         if ($checkAdmin){
-            $newPassword = trim($request->user_info->new_password);
+            $userInfo = (object)$request->user_info;
+            $newPassword = trim($userInfo->new_password);
             UserLogic::Instance()->ResetUserPassword($newPassword, $id);
             //
             //Success
@@ -285,7 +302,7 @@ class UserController extends Controller
             $returnModel->data = "User not Admin or invalid password";
         }
         //
-        if ($returnModel->status == "201") Auth::logout();
+        //if ($returnModel->status == "201") Auth::logout();
         return json_encode($returnModel);
     }
 

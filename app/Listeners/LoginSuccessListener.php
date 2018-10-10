@@ -14,6 +14,7 @@ use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 
 class LoginSuccessListener
@@ -36,6 +37,7 @@ class LoginSuccessListener
      */
     public function handle(Login $event)
     {
+        DB::table('users')->where('id','=', Auth::id())->update(["just_updated" => false]);
         //
         UserAuditLogic::Instance()->UserSecurityAction(Auth::id(), UserActionEnum::LOGIN, "", []);
     }
