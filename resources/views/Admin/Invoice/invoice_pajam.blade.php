@@ -122,17 +122,17 @@
     </div>
 
     <div id="loading" style="display: none;
-    width:100px;
-    height: 100px;
+    max-width:350px;
+    max-height: 100px;
     position: fixed;
     top: 50%;
     left: 50%;
     text-align:center;
-    margin-left: -50px;
+    margin-left: -150px;
     margin-top: -100px;
     z-index:2;
     overflow: auto;">
-        <img src="/assets/images/ajax_loader.gif" alt=""/>
+        <img src="/assets/images/LOADINGgif.gif"/>
     </div>
 @endsection
 
@@ -161,10 +161,10 @@
 
                 if (storeValue.data.data[i].status === "1"){
                     stringStatus_Payment = '<li id="payment_invoice"><a href="{{('/admin/invoice/invoice_payment')}}"><i class="icon-price-tag"></i>@lang('string.payment')</a></li>';
-                    stringStatus_Update = '<li id="updates_invoice"><a href="{{('/admin/invoice/update_invoice')}}"><i class="icon-pencil7"></i>@lang('string.update')</a></li>';
+                    {{--stringStatus_Update = '<li id="updates_invoice"><a href="{{('/admin/invoice/update_invoice')}}"><i class="icon-pencil7"></i>@lang('string.update')</a></li>';--}}
                 } else {
                     stringStatus_Payment = "";
-                    stringStatus_Update = "";
+                    /*stringStatus_Update = "";*/
                 }
                 // ============= End Parse Json ===========================
                 var _tr = '<tr>' +
@@ -185,7 +185,7 @@
                     '<i class="icon-menu9"></i>'+
                     '</a>'+
                     '<ul class="dropdown-menu dropdown-menu-right">'+
-                    stringStatus_Update +
+                    /*stringStatus_Update +*/
                     stringStatus_Payment +
                     '<li id="detail_invoice"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
                     '</ul>'+

@@ -154,19 +154,18 @@
     </form>
 
     <div id="loading" style="display: none;
-    width:100px;
-    height: 100px;
+    max-width:350px;
+    max-height: 100px;
     position: fixed;
     top: 50%;
     left: 50%;
     text-align:center;
-    margin-left: -50px;
+    margin-left: -150px;
     margin-top: -100px;
     z-index:2;
     overflow: auto;">
-        <img src="/assets/images/ajax_loader.gif" alt=""/>
+        <img src="/assets/images/LOADINGgif.gif"/>
     </div>
-
 @endsection
 
 @section('script')

@@ -59,7 +59,7 @@ return[
     'writeOldPasswordHere...' => 'សរសេរលេខសំងាត់ចាស់....',
     'writeNewPasswordHere...' => 'សរសេរលេខសំងាត់ថ្មី....',
     // part of desboard
-    'invoiceExpired' => 'វិក្ក័យបត្រផុតកំណត់',
+    'invoiceExpired' => 'វិក្ក័យបត្រផុតកំណត់ចាប់ពី 60ថ្ងៃឡើងទៅ៖',
     'invoiceID' => 'លេខវិក្ក័យបត្រ',
     'nameCustomer' => 'ឈ្មោះអតិថិជន',
     'phoneNumber' => 'លេខទូរស័ព្ឌ',
@@ -67,6 +67,7 @@ return[
     // part of invoice
     'searchBy' => 'ស្វែងរកតាម ៖',
     'situation' => 'ស្ថានភាព  ',
+    'situationItemTypeOfOneInvoice' => 'ស្ថានភាពទំនិញក្នុងវិក្ក័យបត្រ',
     'money' => 'ទឹកប្រាក់',
     'item' => 'ទំនិញ',
     'groupItem' => 'ក្រុមទំនិញ',
@@ -162,4 +163,9 @@ return[
     'showDetailOneHistory' => 'ប្រវត្តិលំអិតរបស់ប្រតិបត្តិការណ៌',
     'UserAction' => 'ឈ្មោះអ្នកធ្វើ',
     'do' => 'ធ្វើមុខងារ',
+    'showDetailItemTypeInOneInvoice' => 'ប្រវត្តិលំអិតរបស់ទំនិញក្នុងវិក្ក័យបត្រមួយ',
+    'takeOutWithPrice' => 'យកចេញក្នុងតំលៃ',
+    'dayTakeIn' => 'ថ្ងៃយកចូល',
+    'dayTakeOut' => 'ថ្ងៃយកចេញ',
+    'by' => 'ដោយ',
 ];

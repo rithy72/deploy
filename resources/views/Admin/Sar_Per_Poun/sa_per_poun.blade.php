@@ -20,9 +20,9 @@
         <div class="panel-body" style="padding: 19px 0;">
             <div class="tabbable">
                 <ul class="nav nav-tabs nav-tabs-highlight">
-                    <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">ទំនិញមិនទាន់លស់</a></li>
-                    <li><a href="#highlighted_tab2" data-toggle="tab" aria-expanded="true">ទំនិញដាច់</a></li>
-                    <li><a href="#highlighted_tab3" data-toggle="tab" aria-expanded="true">@lang('string.reportItems')</a></li>
+                    <li class="active" id="tab_show_itemType_notYetPay"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">ទំនិញមិនទាន់លស់</a></li>
+                    <li id="tab_show_took_itemType"><a href="#highlighted_tab2" data-toggle="tab" aria-expanded="true">ទំនិញដាច់</a></li>
+                    <li id="tab_show_reportItemType"><a href="#highlighted_tab3" data-toggle="tab" aria-expanded="true">@lang('string.reportItems')</a></li>
                 </ul>
                 <div class="tab-content">
                     {{----- Merl Item min ton lus -----}}
@@ -41,13 +41,14 @@
                                 <input type="text" class="form-control" placeholder="@lang('string.searchItems')" id="store_search" disabled="disabled">
                                 <a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>
                             </div>
-
-
-                            <div class="dataTables_length">
-                                <div class="btn-group" style="margin-top: 20px;">
-                                    <button type="button" class="btn btn-success" id="createNewType">@lang('string.createNewItems')</button>
-                                </div>
+                            <div class="col-md-2" style="display: flex;margin-top: 1px;">
+                            <a class="btn btn-primary search_item_notYetPay" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             </div>
+                            {{--<div class="dataTables_length">--}}
+                                {{--<div class="btn-group" style="margin-top: 20px;">--}}
+                                    {{--<button type="button" class="btn btn-success" id="createNewType">@lang('string.createNewItems')</button>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
 {{--==========================================================================================================--}}
                             <div class="datatable-header" style="margin-top: -19px;"></div>
@@ -110,13 +111,16 @@
                             <div class="col-md-4" style="display: flex;margin-top: 21px;">
                                 <span>.</span><input type="text" id="show_search_notice" class="form-control" placeholder="@lang('string.searchItems')" disabled="disabled">
                                 <a class="btn btn-primary searchItemTakeOut"><i class="icon-filter3"></i></a>
+                                {{--<a class="btn btn-primary search_item_notYetPay" style="margin-left: 15px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>--}}
                             </div>
-
-                            <div class="dataTables_length">
-                                <div class="btn-group" style="margin-top: 20px;">
-                                    <button type="button" class="btn btn-success" id="createNewType">@lang('string.createNewItems')</button>
-                                </div>
+                            <div class="col-md-2" style="display: flex;margin-top: 1px;">
+                                <a class="btn btn-primary search_item_took" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             </div>
+                            {{--<div class="dataTables_length">--}}
+                                {{--<div class="btn-group" style="margin-top: 20px;">--}}
+                                    {{--<button type="button" class="btn btn-success" id="createNewType">@lang('string.createNewItems')</button>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                             <div class="datatable-header" style="margin-top: -19px;"></div>
                             <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -183,13 +187,15 @@
                                 <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchItems')" id="all_notice_show" disabled="disabled">
                                 <a class="btn btn-primary btn_search_all_items"><i class="icon-filter3"></i></a>
                             </div>
-
-
-                            <div class="dataTables_length">
-                                <div class="btn-group" style="margin-top: 20px;">
-                                    <button type="button" class="btn btn-success" id="createNewType">@lang('string.createNewItems')</button>
-                                </div>
+                            <div class="col-md-2" style="display: flex;margin-top: 1px;">
+                                <a class="btn btn-primary search_item_history_oneInvoice" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             </div>
+
+                            {{--<div class="dataTables_length">--}}
+                                {{--<div class="btn-group" style="margin-top: 20px;">--}}
+                                    {{--<button type="button" class="btn btn-success" id="createNewType">@lang('string.createNewItems')</button>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                             <div class="datatable-header" style="margin-top: -19px;"></div>
                             <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -206,6 +212,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice3')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice4')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.actions')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -306,43 +313,43 @@
         </div>
     </form>
     {{------------ dialog tver ka create new itemType ------------}}
-    <form role="form" action="" method="">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div id="NewTypeDialog" class="modal fade">
-            <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_createNewItem" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title">@lang('string.createNewItem')</h5>
-                    </div>
+    {{--<form role="form" action="" method="">--}}
+        {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+        {{--<div id="NewTypeDialog" class="modal fade">--}}
+            {{--<div class="modal-dialog ">--}}
+                {{--<div class="modal-content">--}}
+                    {{--<div class="modal-header bg-primary">--}}
+                        {{--<button type="button" class="close" id="close_createNewItem" data-dismiss="modal">&times;</button>--}}
+                        {{--<h5 class="modal-title">@lang('string.createNewItem')</h5>--}}
+                    {{--</div>--}}
 
-                    <div class="modal-body">
-                        <div class="col-md-12">
-                            <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
-                                <div class="datatable-header">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.createItem')</label>
-                                            <div class="col-lg-8" style="margin-bottom: 13px;">
-                                                <input type="text" class="form-control" placeholder="@lang('string.writeNameOfItemHere...')" style="border: 1px solid grey;" id="itemType">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="modal-body">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--<div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">--}}
+                                {{--<div class="datatable-header">--}}
+                                    {{--<div class="col-md-12">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.createItem')</label>--}}
+                                            {{--<div class="col-lg-8" style="margin-bottom: 13px;">--}}
+                                                {{--<input type="text" class="form-control" placeholder="@lang('string.writeNameOfItemHere...')" style="border: 1px solid grey;" id="itemType">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_createNewItem" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
-                        {{ csrf_field() }}
+                    {{--<div class="modal-footer">--}}
+                        {{--<button type="button" class="btn btn-link" id="close_createNewItem" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>--}}
+                        {{--{{ csrf_field() }}--}}
                         {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>??????</b></button>--}}
-                        <button type="button" class="btn btn-primary btn_create_new_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+                        {{--<button type="button" class="btn btn-primary btn_create_new_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</form>--}}
 
     {{------------ dialog search Item not Pay yet ------------}}
     <form>
@@ -363,7 +370,8 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
-                                                <input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">
+                                                {{--<input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">--}}
+                                                <input type="text" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice" class="form-control" style="border: 1px solid grey;">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -409,7 +417,8 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
-                                                <input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice1" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">
+                                                {{--<input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice1" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">--}}
+                                                <input type="text" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice1" class="form-control" style="border: 1px solid grey;">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -455,7 +464,8 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-4" style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
-                                                <input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice2" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">
+                                                {{--<input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice2" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">--}}
+                                                <input type="text" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice2" class="form-control" style="border: 1px solid grey;">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -482,20 +492,66 @@
             </div>
         </div>
     </form>
+    {{-----  Dialog show detail history detail  -----}}
+    <div id="show_detail_one_history_change_log" class="modal fade">
+        <div class="modal-dialog modal-full" style="margin-left: auto;margin-right: auto;width: 79%;">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h5 class="modal-title">@lang('string.showDetailItemTypeInOneInvoice')</h5>
+                </div>
 
+                <div class="modal-body">
+                    <div>
+                        <div class="col-md-10 col-md-offset-1" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.invoiceID') ៖</p><p id="invoiceID_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.type') ៖</p><p id="type_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-12">
+                                <h5 style="display: inline-flex;"><p>@lang('string.notice') </p><p id="notice_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.situationItemTypeOfOneInvoice') ៖</p><p id="situationItemType_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.takeOutWithPrice') ៖</p><p id="price_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.dayTakeIn') ៖</p><p id="day_in_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by1_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.dayTakeOut') ៖</p><p id="day_out_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by2_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
 
     <div id="loading" style="display: none;
-    width:100px;
-    height: 100px;
+    max-width:350px;
+    max-height: 100px;
     position: fixed;
     top: 50%;
     left: 50%;
     text-align:center;
-    margin-left: -50px;
+    margin-left: -150px;
     margin-top: -100px;
     z-index:2;
     overflow: auto;">
-        <img src="/assets/images/ajax_loader.gif" alt=""/>
+        <img src="/assets/images/LOADINGgif.gif"/>
     </div>
 @endsection
 
@@ -519,11 +575,11 @@
             });
         });
         // create new item type
-        $(document).on("click","#createNewType",function(){
-            $('#NewTypeDialog').modal({
-                backdrop: 'static'
-            });
-        });
+//        $(document).on("click","#createNewType",function(){
+//            $('#NewTypeDialog').modal({
+//                backdrop: 'static'
+//            });
+//        });
         // filter search by notice
         $(document).on("click",".btn-Search",function(){
             $('#dialogSearchNotice').modal({
@@ -641,7 +697,7 @@
         });
         // ---- end select 2 ----
         //create new item type, and ,close dialog clear input
-        $(document).on("click","#close_createNewItem",function () {
+        /*$(document).on("click","#close_createNewItem",function () {
             $('#itemType').val('');
         });
         $(document).on("click",".btn_create_new_item_type",function () {
@@ -664,7 +720,7 @@
                     }
                 });
             }
-        });
+        });*/
     // ===================== All Function do ton nenh min ton lus only ===============================
         var storeValue;
         function ModelShowInTable(getJsonValue) {
@@ -706,12 +762,33 @@
                 }
             });
         };
-        // -------------- function show item pay yet ------------------------
+        // -------------- function show item pay yet ------------------
         (function () {
             var showItemNotYetPay = new ItemPayYet("GET" , 'api/item?search=&item_type=&status=1&page_size=15');
             showItemNotYetPay.reads();
         })();
-        // -------------- button search notice all itemType ------------
+        // -------------- click tap ti 1 ----------------------
+        $(document).on("click","#tab_show_itemType_notYetPay",function () {
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_Item_Pay_Yet td').remove();
+                var showItemNotYetPay = new ItemPayYet("GET" , 'api/item?search=&item_type=&status=1&page_size=15');
+                showItemNotYetPay.reads();
+            }, 500);
+        });
+        // -------------- search bnt when select2 choose --------------
+        $(document).on("click",".search_item_notYetPay",function () {
+            var storeItemType = $('#selectTomNanh').val();
+            if (storeItemType === null){ storeID_ItemType = "" } else { storeID_ItemType = storeItemType }
+            var url = 'api/item?search=&item_type='+storeID_ItemType+'&status=1&page_size=15';
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_Item_Pay_Yet td').remove();
+                var searchItemPayYet = new ItemPayYet("GET" , url);
+                searchItemPayYet.reads();
+            }, 1000);
+        });
+        // -------------- button search notice all itemType -----------
         var timeout1 = null , storeID_ItemType , ID,n1,n2,n3,n4;
         $(document).on("click",".btn_search_Item_notYetPay",function () {
             var storeItemType = $('#selectTomNanh').val();
@@ -764,23 +841,23 @@
         // --------------- clear input text notice ---------------------
         function clearSearchNotice() {
             $('#close_search_notice').click();
-            $('#search_invoice').val('');
+            /*$('#search_invoice').val('');
             $('#notice1').val('');
             $('#notice2').val('');
             $('#notice3').val('');
-            $('#notice4').val('');
+            $('#notice4').val('');*/
             $('#close_itemTakeOut').click();
-            $('#search_invoice1').val('');
+            /*$('#search_invoice1').val('');
             $('#notice1_takeOut').val('');
             $('#notice2_takeOut').val('');
             $('#notice3_takeOut').val('');
-            $('#notice4_takeOut').val('');
+            $('#notice4_takeOut').val('');*/
             $('#close_item_all_status').click();
-            $('#search_invoice2').val('');
+            /*$('#search_invoice2').val('');
             $('#notice1_all').val('');
             $('#notice2_all').val('');
             $('#notice3_all').val('');
-            $('#notice4_all').val('');
+            $('#notice4_all').val('');*/
         }
 
 
@@ -846,11 +923,28 @@
                 }
             });
         };
-        // ------------- function show item out ----------------
-        (function () {
-            var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=3,4&page_size=15');
-            showItemExpired.reads();
-        })();
+        // ------- function show item out click tap ti 2 -------
+        $(document).on("click","#tab_show_took_itemType",function () {
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_ItemOut td').remove();
+                var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=3,4&page_size=15');
+                showItemExpired.reads();
+            }, 500);
+        });
+        // ------------- search btn took -----------------------
+        $(document).on("click",".search_item_took",function () {
+            var storeSelectItemType_Id = $('#selectTomNanh1').val();
+            var storeStatus = $('#select_status').val();
+            if (storeSelectItemType_Id === null){ ItemType_ID = "" } else { ItemType_ID = storeSelectItemType_Id }
+            var url = 'api/item?search=&item_type='+ItemType_ID+'&status='+storeStatus+'&page_size=15';
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_ItemOut td').remove();
+                var searchItemTookOut = new ItemExpired("GET" , url);
+                searchItemTookOut.reads();
+            }, 1000);
+        });
         // ------------- search item take out ------------------
         var ItemType_ID, _ID, _n1, _n2, _n3, _n4;
         $(document).on("click",".btn_Search_item_takeOut",function () {
@@ -955,7 +1049,7 @@
         });
 
     // ===================== All Function notice all item  =============================================
-        // ------------ show in table --------------------------
+        // ------------ show in table -----------------------------------
         var ConvertJsons;
         function ModelShowItemAllStatus(getJsonValue) {
             ConvertJsons = JSON.parse(getJsonValue);
@@ -970,7 +1064,11 @@
 
             for (var i = 0; i < ConvertJsons.data.data.length; i++){
                 var _tr = '<tr>' +
-                    '<td style="display:none;">' + ConvertJsons.data.data[i].id + '</td>' +
+                    '<td style="display:none;">' + ConvertJsons.data.data[i].in_date + '</td>' +
+                    '<td style="display:none;">' + ConvertJsons.data.data[i].in_user + '</td>' +
+                    '<td style="display:none;">' + ConvertJsons.data.data[i].out_date + '</td>' +
+                    '<td style="display:none;">' + ConvertJsons.data.data[i].user_id + '</td>' +
+                    '<td style="display:none;">' + ConvertJsons.data.data[i].sale_price + '</td>' +
                     '<td>' + ConvertJsons.data.data[i].display_invoice_id + '</td>' +
                     '<td>' + ConvertJsons.data.data[i].item_type_name + '</td>' +
                     '<td>' + ConvertJsons.data.data[i].first_feature + '</td>' +
@@ -978,6 +1076,18 @@
                     '<td>' + ConvertJsons.data.data[i].third_feature + '</td>' +
                     '<td>' + ConvertJsons.data.data[i].fourth_feature + '</td>' +
                     '<td>' + ConvertJsons.data.data[i].display_status + '</td>' +
+                    '<td class="text-center"> ' +
+                    '<ul class="icons-list">'+
+                    '<li class="dropdown">'+
+                    '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+                    '<i class="icon-menu9"></i>'+
+                    '</a>'+
+                    '<ul class="dropdown-menu dropdown-menu-right">'+
+                    '<li id="detail_invoice"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
+                    '</ul>'+
+                    '</li>'+
+                    '</ul>'+
+                    '</td>' +
                     '</tr>';
                 $('#Show_All_Items_Status tbody').append(_tr);
             }
@@ -998,11 +1108,28 @@
                 }
             });
         };
-        // ------------- function show item out ----------------
-        (function () {
-            var showItemStatus = new ItemAllStatus("GET" , 'api/item?search=&item_type=&status=&page_size=15');
-            showItemStatus.reads();
-        })();
+        // ------- function show item all click tap ti 3 --------
+        $(document).on("click","#tab_show_reportItemType",function () {
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_Items_Status td').remove();
+                var showItemStatus = new ItemAllStatus("GET" , 'api/item?search=&item_type=&status=&page_size=15');
+                showItemStatus.reads();
+            }, 500);
+        });
+        // ------- search btn search history -------------------
+        $(document).on("click",".search_item_history_oneInvoice",function () {
+            var storeSelectItemType_Id_all = $('#selectTomNanh2').val();
+            if (storeSelectItemType_Id_all === null){ ItemType_ID_all = "" } else { ItemType_ID_all = storeSelectItemType_Id_all }
+            var storeStatus_all = $('#select_status_all').val();
+            var url = 'api/item?search=&item_type='+ItemType_ID_all+'&status='+storeStatus_all+'&page_size=15';
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_Items_Status td').remove();
+                var searchItemAllStatus = new ItemAllStatus("GET" , url);
+                searchItemAllStatus.reads();
+            }, 1000);
+        });
         // ------------- search all status ---------------------
         var ItemType_ID_all, _ID_,_n1_,_n2_,_n3_,_n4_;
         $(document).on("click",".btn_Search_item_All_Status",function () {
@@ -1053,6 +1180,23 @@
                 var clickNext = new ItemAllStatus("GET" , url);
                 clickNext.reads();
             }
+        });
+        // ---- click show dialog detail history for item in one invoice ----
+        $(document).on("click","#detail_invoice",function () {
+            $('#show_detail_one_history_change_log').modal({ backdrop: 'static' }); // show dialog
+            var _selectRow = $(this).closest('tr');
+            var storeValueNoticeAll = ''+$(_selectRow).find('td:eq(7)').text()+' , '+$(_selectRow).find('td:eq(8)').text()+' , '+$(_selectRow).find('td:eq(9)').text()+' , '+$(_selectRow).find('td:eq(10)').text()+'';
+            (function(){
+                $('#invoiceID_').text($(_selectRow).find('td:eq(5)').text());
+                $('#type_').text($(_selectRow).find('td:eq(6)').text());
+                $('#notice_').text(storeValueNoticeAll);
+                $('#situationItemType_').text($(_selectRow).find('td:eq(11)').text());
+                $('#price_').text($(_selectRow).find('td:eq(4)').text());
+                $('#day_in_').text($(_selectRow).find('td:eq(0)').text());
+                $('#by1_').text($(_selectRow).find('td:eq(1)').text());
+                $('#day_out_').text($(_selectRow).find('td:eq(2)').text());
+                $('#by2_').text($(_selectRow).find('td:eq(3)').text());
+            })();
         });
     </script>
 @endsection
