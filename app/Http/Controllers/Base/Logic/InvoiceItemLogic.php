@@ -12,7 +12,6 @@ namespace App\Http\Controllers\Base\Logic;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\InvoiceItemStatusEnum;
-use App\Http\Controllers\Base\Model\Enum\InvoiceStatusEnum;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\InvoiceItemModel;
 use App\Http\Controllers\Base\Model\Other\PaginateModel;
@@ -32,31 +31,6 @@ class InvoiceItemLogic
         return new InvoiceItemLogic();
     }
 
-    //Finalize Item Object
-    private function FinalizeItemObject($item){
-        $itemModel = InvoiceItemModel::Instance();
-        $itemModel->id = $item->id;
-        $itemModel->invoice_id = $item->invoice_id;
-        $itemModel->display_invoice_id = str_pad(intval($item->invoice_id),
-            7,"0", STR_PAD_LEFT);
-        $itemModel->item_type_id = $item->item_type_id;
-        $itemModel->item_type_name = $item->type_name;
-        $itemModel->first_feature = $item->first_feature??"-";
-        $itemModel->second_feature = $item->second_feature??"-";
-        $itemModel->third_feature = $item->third_feature??"-";
-        $itemModel->fourth_feature = $item->fourth_feature??"-";
-        $itemModel->status = $item->status;
-        $itemModel->display_status = InvoiceItemStatusEnum::$StatusArray[intval($itemModel->status)];
-        $itemModel->delete_able = $item->delete_able;
-        $itemModel->out_date = $item->out_date??"-";
-        $itemModel->user_id = $item->out_user??"-";
-        $itemModel->in_date = $item->in_date;
-        $itemModel->in_user = $item->in_user;
-        $itemModel->sale_price = $item->sale_price??"-";
-
-        return $itemModel;
-    }
-
     //Find Item
     public function Find($item_id){
         $item = DB::table('invoice_item')
@@ -72,7 +46,7 @@ class InvoiceItemLogic
             ->where('invoice_item.id','=', $item_id)
             ->first();
 
-        $itemModel = $this->FinalizeItemObject($item);
+        $itemModel = InvoiceItemModel::FinalizeItemObject((object)$item);
 
         return $itemModel;
     }
@@ -140,7 +114,7 @@ class InvoiceItemLogic
         //Modify Result
         $returnArray = array();
         foreach ($getResult as $item){
-            $itemModel = $this->FinalizeItemObject($item);
+            $itemModel = InvoiceItemModel::FinalizeItemObject((object)$item);
             array_push($returnArray, $itemModel);
         }
         //Generate New Paginate Model
@@ -346,7 +320,7 @@ class InvoiceItemLogic
 
         $returnArray = array();
         foreach ($getResult as $item){
-            $itemModel = $this->FinalizeItemObject($item);
+            $itemModel = InvoiceItemModel::FinalizeItemObject((object)$item);
             array_push($returnArray, $itemModel);
         }
 

@@ -12,7 +12,6 @@ use App\Http\Controllers\Base\Model\BaseModel;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
-use App\Http\Controllers\Base\Model\ItemTypeModel;
 use Illuminate\Support\Facades\DB;
 
 class ItemTypeLogic
@@ -47,6 +46,7 @@ class ItemTypeLogic
     public function CheckDuplicateBeforeUpdate($new_type_name, $id){
         $checkResult = DB::table('item_type')
             ->where('type_name','=', $new_type_name)
+            ->where('deleted', '=', false)
             ->where('id','<>', $id);
         if ($checkResult->count()){
             return true;
@@ -58,7 +58,8 @@ class ItemTypeLogic
     //Check for duplicate before insert
     public function CheckDuplicateBeforeInsert($type_name){
         $checkResult = DB::table('item_type')
-            ->where('type_name','=', $type_name);
+            ->where('type_name','=', $type_name)
+            ->where('deleted', '=', false);
         if ($checkResult->count()){
             return true;
         }else{
@@ -182,7 +183,9 @@ class ItemTypeLogic
         if ($model->delete_able){
             //Can Delete
             DB::table('item_type')->where('id','=', $id)
-                ->delete();
+                ->update([
+                    "deleted" => true
+                ]);
 
             //User AuditTrail
             UserAuditLogic::Instance()
@@ -201,34 +204,17 @@ class ItemTypeLogic
         //Condition Status
         $finalStatus = $this->FinalizeStatus($status);
 
-        if (empty($status)){
-            if (empty($search)){
-                $getResult = DB::table('item_type')->paginate($finalPageSize);
+        $getResult = DB::table('item_type')
+            ->where('deleted','=', false)
+            ->when(!empty($search), function ($query) use ($search){
+                return $query->where('type_name', '=', '%'.$search.'%');
+            })
+            ->when(!empty($status), function ($query) use ($finalStatus){
+                return $query->where('status', '=', $finalStatus);
+            })
+            ->paginate($page_size);
 
-                return $getResult;
-            }else{
-                $getResult = DB::table('item_type')
-                    ->where('type_name','like', '%'.$search.'%')
-                    ->paginate($finalPageSize);
-
-                return $getResult;
-            }
-        }elseif (!empty($status)){
-            if (empty($search)){
-                $getResult = DB::table('item_type')
-                    ->where('status','=', $finalStatus)
-                    ->paginate($finalPageSize);
-
-                return $getResult;
-            }else{
-                $getResult = DB::table('item_type')
-                    ->where('type_name','like', '%'.$search.'%')
-                    ->where('status','=', $finalStatus)
-                    ->paginate($finalPageSize);
-
-                return $getResult;
-            }
-        }
+        return $getResult;
     }
 
 }

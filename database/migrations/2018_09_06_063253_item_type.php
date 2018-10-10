@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class ItemType extends Migration
 {
@@ -19,6 +19,8 @@ class ItemType extends Migration
             $table->string('type_name');
             $table->boolean('status')->default(true);
             $table->boolean('delete_able')->default(true);
+            $table->text('notes')->nullable(true);
+            $table->boolean('deleted')->default(false);
         });
     }
 

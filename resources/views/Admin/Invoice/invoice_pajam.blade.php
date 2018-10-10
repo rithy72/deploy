@@ -102,7 +102,7 @@
                             </tr>
                             </thead>
                             <tbody>
-
+{{--<td style="color: black"></td>--}}
                             </tbody>
                         </table>
                     </div>
@@ -166,6 +166,7 @@
                     stringStatus_Payment = "";
                     stringStatus_Update = "";
                 }
+                var displayExpireColor = (storeValue.data.data[i].is_late === true) ? "#ff0000":"#000000";
                 // ============= End Parse Json ===========================
                 var _tr = '<tr>' +
                     '<td style="display:none;">' + storeValue.data.data[i].id + '</td>' +
@@ -176,7 +177,7 @@
                     '<td>' + storeValue.data.data[i].interests_rate+ "%" + '</td>' +
                     '<td>' + storeValue.data.data[i].items + '</td>' +
                     '<td>' + storeValue.data.data[i].created_date + '</td>' +
-                    '<td>' + storeValue.data.data[i].expire_date + '</td>' +
+                    '<td style = "color: '+displayExpireColor+'">' + storeValue.data.data[i].expire_date + '</td>' +
                     '<td>' + storeValue.data.data[i].display_status + '</td>' +
                     '<td class="text-center"> ' +
                     '<ul class="icons-list">'+

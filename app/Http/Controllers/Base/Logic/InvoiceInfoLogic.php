@@ -39,59 +39,16 @@ class InvoiceInfoLogic
         }
     }
 
-    //Finalize Invoice Object
-    private function FinalizeInvoiceObject($invoiceResult){
-        $lateObj = DateTimeLogic::Instance()->CheckLate($invoiceResult->expired_date);
-        $status = $invoiceResult->status;
-        //Manage Info Model
-        $invoiceModel = InvoiceInfoModel::Instance();
-        $invoiceModel->id = $invoiceResult->id;
-        $invoiceModel->display_id = str_pad(intval($invoiceModel->id),
-            7,"0", STR_PAD_LEFT);
-        $invoiceModel->customer_name = $invoiceResult->customer_name??"";
-        $invoiceModel->customer_phone = $invoiceResult->customer_phone??"";
-        $invoiceModel->created_date = $invoiceResult->created_date_time??"";
-        $invoiceModel->items = (isset($invoiceResult->items)) ? $invoiceResult->items:0;
-        $invoiceModel->expire_date = ($status == InvoiceStatusEnum::OPEN) ? $invoiceResult->expired_date:"-";
-        $invoiceModel->is_late = ($status == InvoiceStatusEnum::OPEN) ? $lateObj->is_late:false;
-        $invoiceModel->late_days = ($status == InvoiceStatusEnum::OPEN) ? $lateObj->late_days:"-";
-        $invoiceModel->user_id = (isset($invoiceResult->user_id)) ? $invoiceResult->user_id:"";
-        $invoiceModel->user_full_name = (isset($invoiceResult->name)) ? $invoiceResult->name:"";
-        $invoiceModel->status = $invoiceResult->status;
-        $invoiceModel->display_status = InvoiceStatusEnum::STATUS_ARRAY[intval($invoiceModel->status)];
-        $invoiceModel->grand_total = $invoiceResult->grand_total;
-        $invoiceModel->paid = (isset($invoiceResult->paid)) ? $invoiceResult->paid:0;
-        $invoiceModel->remain = (isset($invoiceResult->remain)) ? $invoiceResult->remain:0;
-        $invoiceModel->interests_rate = (isset($invoiceResult->interests_rate)) ? intval($invoiceResult->interests_rate):0;
-        $invoiceModel->interests_value = ($invoiceResult->remain * $invoiceResult->interests_rate) / 100;
-        $invoiceModel->final_date_time = (isset($invoiceResult->final_date_time)) ? $invoiceResult->final_date_time:"";
-        $invoiceModel->final_action_user = (isset($invoiceResult->final_user)) ? $invoiceResult->final_user : "";
-
-        return $invoiceModel;
-    }
-
-    //Change Log Edit Invoice Info
-    private function ChangeLogEditInvoiceInfo($old_name, $new_name, $old_phone, $new_phone, $old_rate, $new_rate, $array){
-        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::CUSTOMER_NAME, $old_name, $new_name,
-            UserActionEnum::UPDATE, $array);
-        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::PHONE, $old_phone, $new_phone,
-            UserActionEnum::UPDATE, $array);
-        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::INTEREST_RATE, $old_rate, $new_rate,
-            UserActionEnum::UPDATE, $array);
-
-        return $array;
-    }
-
-    //Change Log Insert New Invoice Info
-    private function ChangeLogInsertInvoiceInfo($name, $phone, $rate, $grand_total, $array){
-        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::CUSTOMER_NAME, $name, $name,
-            UserActionEnum::INSERT, $array);
-        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::PHONE, $phone, $phone,
-            UserActionEnum::INSERT, $array);
-        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::INTEREST_RATE, $rate, $rate,
-            UserActionEnum::INSERT, $array);
-        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::GRAND_COST, $grand_total, $grand_total,
-            UserActionEnum::INSERT, $array);
+    //Change Log Invoice Info
+    private function ChangeLog($new_object, $old_object, $array, $flag){
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::CUSTOMER_NAME, $old_object->customer_name,
+            $new_object->customer_name, $flag, $array);
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::PHONE, $old_object->customer_phone,
+            $new_object->customer_phone, $flag, $array);
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::INTEREST_RATE, $old_object->interests_rate,
+            $new_object->interests_rate, $flag, $array);
+        $array = UserAuditLogic::Instance()->CompareField(AuditGroup::GRAND_COST, $old_object->grand_total,
+            $new_object->grand_total, $flag, $array);
 
         return $array;
     }
@@ -126,7 +83,7 @@ class InvoiceInfoLogic
         //
         $returnArray = array();
         foreach ($getResult as $invoice){
-            $model = $this->FinalizeInvoiceObject((object)$invoice);
+            $model = InvoiceInfoModel::FinalizeInvoiceObject((object)$invoice);
             array_push($returnArray, $model);
         }
         //Generate New Paginate Model
@@ -158,7 +115,7 @@ class InvoiceInfoLogic
         //
         $returnArray = array();
         foreach ($getResult as $invoice){
-            $model = $this->FinalizeInvoiceObject((object)$invoice);
+            $model = InvoiceInfoModel::FinalizeInvoiceObject((object)$invoice);
             array_push($returnArray, $model);
         }
         //Generate New Paginate Model
@@ -185,7 +142,7 @@ class InvoiceInfoLogic
             ->groupBy('invoice_info.id')
             ->first();
 
-        $invoiceModel = $this->FinalizeInvoiceObject($invoiceResult);
+        $invoiceModel = InvoiceInfoModel::FinalizeInvoiceObject((object)$invoiceResult);
 
         return $invoiceModel;
     }
@@ -215,11 +172,8 @@ class InvoiceInfoLogic
                     'interests_rate' => intval($invoice_info_model->interests_rate),
                 ]);
             //Change Log
-            $changeLogArray = $this->ChangeLogInsertInvoiceInfo(
-                $invoice_info_model->customer_name, $invoice_info_model->customer_phone, $invoice_info_model->interests_rate,
-                $invoice_info_model->grand_total, $changeLogArray
-            );
-
+            $changeLogArray = $this->ChangeLog($invoice_info_model, $invoice_info_model, $changeLogArray,
+                UserActionEnum::INSERT);
             //Update Display ID
             $displayId = str_pad(intval($insertID),7,"0", STR_PAD_LEFT);
             DB::table('invoice_info')->where('id','=', $insertID)
@@ -274,12 +228,7 @@ class InvoiceInfoLogic
                     'interests_rate' => intval($invoice_info->interests_rate),
                 ]);
             //Change Log Invoice Info
-            $changeLogArray = $this->ChangeLogEditInvoiceInfo(
-                $oldInvoiceObj->customer_name, $invoice_info->customer_name,
-                $oldInvoiceObj->customer_phone, $invoice_info->customer_phone,
-                $oldInvoiceObj->interests_rate, $invoice_info->interests_rate,
-                $changeLogArray
-            );
+            $changeLogArray = $this->ChangeLog($invoice_info, $oldInvoiceObj, $changeLogArray, UserActionEnum::UPDATE);
 
             //Insert New Items
             $newItemsAmount = 0;
