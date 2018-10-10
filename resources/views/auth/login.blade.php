@@ -43,7 +43,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8" style="margin-top: 55px;">
             <div class="card" style="box-shadow: 0px 1px 7px 0px;">
-                <div class="card-header">{{ __('ចូលប្រើប្រាស់ប្រព័ន្ឋ') }}</div>
+                @if(!empty(\Illuminate\Support\Facades\Auth::user()))
+                    @if(\Illuminate\Support\Facades\Auth::user()->just_updated)
+                        <div class="alert alert-success alert-dismissible fade in">
+                            <a class="close" data-dismiss="alert" aria-label="close" style="margin-right: 24px">x</a>
+                            <p style="margin-top: 5px">@lang('string.profile_been_change_login_again')</p>
+                        </div>
+                    @endif
+                @endif
+                    <div class="card-header">{{ __('ចូលប្រើប្រាស់ប្រព័ន្ឋ') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('ចូលប្រើប្រាស់ប្រព័ន្ឋ') }}">

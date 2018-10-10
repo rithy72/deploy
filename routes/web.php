@@ -24,55 +24,59 @@ Auth::routes();
 //Admin
 Route::middleware('auth')->group(function (){
 
-    // Admin
-    Route::group(['prefix' => 'admin',  'middleware' => 'user'],function(){
-        //Dash board
-        Route::get('/mainform',function (){
-            return view('Admin.admin_main');
-        })->middleware('admin');
-        //Invoice
-        Route::get('/invoice',function (){
-            return view('Admin.Invoice.invoice_pajam');
-        });
-        //Inventory
-        Route::get('/inventory',function (){
-            return view('Admin.Sar_Per_Poun.sa_per_poun');
-        });
-        //User
-        Route::get('/user',function (){
-            return view('Admin.User_Use_System.user_use_system');
-        })->middleware('admin');
-        //Action History
-        Route::get('/history_user',function (){
-            return view('Admin.Action_History_User.history_user');
-        })->middleware('admin');
-        //Create new invoice
-        Route::get('/invoice/create_new_invoice',function (){
-            return view('Admin.Invoice.create_new_invoice');
-        });
-        //Invoice detail
-        Route::get('/invoice/invoice_detail',function (){
-            return view('Admin.Invoice.detail_invoice');
-        });
-        //Update Invoice
-        Route::get('/invoice/update_invoice',function (){
-            return view('Admin.Invoice.update_invoice');
-        })->middleware('admin');
-        //Invoice Payment
-        Route::get('/invoice/invoice_payment',function (){
-            return view('Admin.Invoice.payment_invoice');
-        });
-        //Daily Report
-        Route::get('/report',function (){
-            return view('Admin.Ror_Bay_kar.ror_bay_kar');
-        })->middleware('admin');
-        //Item Type
-        Route::get('/item_type',function (){
-            return view('Admin.TypeOfItems.typeItem');
+    Route::group(['prefix' => 'admin'],function(){
+//=================================== WEB Route ======================================================================
+
+        Route::group(['middleware' => 'user'], function (){
+            //Dash board
+            Route::get('/mainform',function (){
+                return view('Admin.admin_main');
+            })->middleware('admin');
+            //Invoice
+            Route::get('/invoice',function (){
+                return view('Admin.Invoice.invoice_pajam');
+            });
+            //Inventory
+            Route::get('/inventory',function (){
+                return view('Admin.Sar_Per_Poun.sa_per_poun');
+            });
+            //User
+            Route::get('/user',function (){
+                return view('Admin.User_Use_System.user_use_system');
+            })->middleware('admin');
+            //Action History
+            Route::get('/history_user',function (){
+                return view('Admin.Action_History_User.history_user');
+            })->middleware('admin');
+            //Create new invoice
+            Route::get('/invoice/create_new_invoice',function (){
+                return view('Admin.Invoice.create_new_invoice');
+            });
+            //Invoice detail
+            Route::get('/invoice/invoice_detail',function (){
+                return view('Admin.Invoice.detail_invoice');
+            });
+            //Update Invoice
+            Route::get('/invoice/update_invoice',function (){
+                return view('Admin.Invoice.update_invoice');
+            })->middleware('admin');
+            //Invoice Payment
+            Route::get('/invoice/invoice_payment',function (){
+                return view('Admin.Invoice.payment_invoice');
+            });
+            //Daily Report
+            Route::get('/report',function (){
+                return view('Admin.Ror_Bay_kar.ror_bay_kar');
+            })->middleware('admin');
+            //Item Type
+            Route::get('/item_type',function (){
+                return view('Admin.TypeOfItems.typeItem');
+            });
         });
 
-//============================= API ==============================================================================
-        Route::prefix('api')->group(function (){
+//============================= API Route ============================================================================
+
+        Route::group(['prefix' => 'api', 'middleware' => 'api_middleware'],function (){
             /* *
              * Item Type
              * */
@@ -140,12 +144,13 @@ Route::middleware('auth')->group(function (){
                 Route::get('/search','APIController\UserAuditController@search');
             });
         });
-//================================================================================================================
-//================================ Test ==========================================================================
+
+//====================================================================================================================
+//================================ Test ==============================================================================
         Route::get('/test', 'TestController@Test');
         Route::post('/test_post', 'TestController@Post');
         Route::get('/test_api','TestController@API');
-//================================================================================================================
+//===================================================================================================================
     });
 
 

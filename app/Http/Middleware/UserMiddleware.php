@@ -37,7 +37,7 @@ class UserMiddleware
     {
 
         $userObj = UserLogic::Instance()->Find(Auth::id());
-        if ($userObj->just_update == 1 || $userObj->just_update == true){
+        if ($userObj->just_update == true || $userObj->status == false || $userObj->deleted == true){
             return redirect('/login');
         }
 
