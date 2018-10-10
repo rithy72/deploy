@@ -185,7 +185,9 @@
                     '<i class="icon-menu9"></i>'+
                     '</a>'+
                     '<ul class="dropdown-menu dropdown-menu-right">'+
+                        @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                     stringStatus_Update +
+                        @endif
                     stringStatus_Payment +
                     '<li id="detail_invoice"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
                     '</ul>'+

@@ -35,7 +35,9 @@
                 <div class="col-md-4">
                     <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;margin-bottom: 0;">
                         <a href="{{('/admin/invoice/create_new_invoice')}}" class="btn btn-success" id="" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
+                        @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                         <button type="button" class="btn btn-primary" id="update_invoice" style="margin-bottom: 4px;" disabled="disabled"><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
+                        @endif
                         <button type="button" class="btn" id="payment_invoice" style="background: #ff840d;color: white;margin-bottom: 4px;" disabled="disabled"><i class="icon-price-tag position-left"></i>@lang('string.payment')</button>
                     </div>
                 </div>
@@ -382,12 +384,13 @@
                 success: function (response) {
                     //console.log(response);
                     getResponse = JSON.parse(response);
+                    var updateButton = document.getElementById('update_invoice');
 
                     if (getResponse.data.status === "1"){
-                        document.getElementById('update_invoice').disabled = false;
+                        if (updateButton !== null) document.getElementById('update_invoice').disabled = false;
                         document.getElementById('payment_invoice').disabled = false;
                     } else {
-                        document.getElementById('update_invoice').disabled = true;
+                        if (updateButton !== null) document.getElementById('update_invoice').disabled = true;
                         document.getElementById('payment_invoice').disabled = true;
                     }
 
