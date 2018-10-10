@@ -60,11 +60,13 @@
                         <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Invoice_Expired" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.invoiceID')</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.nameCustomer')</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.phoneNumber')</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.dayExpired')</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.expiredTime')</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending" style="text-align: center;">@lang('string.actions')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -88,17 +90,17 @@
     </div>
 
     <div id="loading" style="display: none;
-    width:100px;
-    height: 100px;
+    max-width:350px;
+    max-height: 100px;
     position: fixed;
     top: 50%;
     left: 50%;
     text-align:center;
-    margin-left: -50px;
+    margin-left: -150px;
     margin-top: -100px;
     z-index:2;
     overflow: auto;">
-        <img src="/assets/images/ajax_loader.gif" alt=""/>
+        <img src="/assets/images/LOADINGgif.gif"/>
     </div>
 @endsection
 
@@ -116,7 +118,7 @@
             }
         });
         // ------------ table show invoice Expired --------------
-        var ConvertJson;
+        var ConvertJson , oldAutoIncrement = 0;
         function ModelShowInvoiceExpired(getJson) {
             ConvertJson = JSON.parse(getJson);
             document.getElementById("page1").innerHTML = ConvertJson.data.current_page;
@@ -130,11 +132,25 @@
 
             for (var i = 0; i < ConvertJson.data.data.length; i++){
                 var _tr = '<tr>' +
+                    '<td style="display:none;">' + ConvertJson.data.data[i].id + '</td>' +
+                    '<td>' + [oldAutoIncrement += 1] + '</td>' +
                     '<td>' + ConvertJson.data.data[i].display_id + '</td>' +
                     '<td>' + ConvertJson.data.data[i].customer_name + '</td>' +
                     '<td>' + ConvertJson.data.data[i].customer_phone + '</td>' +
                     '<td>' + ConvertJson.data.data[i].expire_date + '</td>' +
                     '<td>' + ConvertJson.data.data[i].late_days+" @lang('string.day')" + '</td>' +
+                    '<td class="text-center"> ' +
+                    '<ul class="icons-list">'+
+                    '<li class="dropdown">'+
+                    '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+                    '<i class="icon-menu9"></i>'+
+                    '</a>'+
+                    '<ul class="dropdown-menu dropdown-menu-right">'+
+                    '<li id="payment_invoice"><a><i class="icon-price-tag"></i>@lang('string.payment')</a></li>' +
+                    '</ul>'+
+                    '</li>'+
+                    '</ul>'+
+                    '</td>' +
                     '</tr>';
                 $('#Show_All_Invoice_Expired tbody').append(_tr);
             }
@@ -156,22 +172,31 @@
             });
         };
         // --------------- click back -----------------------------------
+        var storeValueTheLastPage = 0, valueDefaultAuto = 15;
         $(".previous_show_invoice").click(function () {
             var url = ConvertJson.data.prev_page_url;
             if (ConvertJson.data.prev_page_url === null){
                 alert('មិនអាចខ្លីកត្រលប់បានទេ ពីព្រោះគឺជាទំព័រដំបូង');
             }else {
+                //  number auto from table make ល.រ
+                storeValueTheLastPage = oldAutoIncrement - Number(newAutoIncrement); //find row per page
+                storeValueTheLastPage += valueDefaultAuto; //make value per page + 15.
+                oldAutoIncrement = oldAutoIncrement - storeValueTheLastPage; //than we saw the value auto show back page again
+                newAutoIncrement = oldAutoIncrement; // set it to old value amount auto form table row again
+                storeValueTheLastPage = 0; // set it to 0 for use again
                 $('#Show_All_Invoice_Expired td').remove();
                 var clickBack = new ShowInvoiceExpired("GET" , url);
                 clickBack.reads();
             }
         });
         // --------------- click next -----------------------------------
+        var newAutoIncrement;
         $(".next_show_invoice").click(function () {
             var url = ConvertJson.data.next_page_url;
             if (ConvertJson.data.next_page_url === null){
                 alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
             }else {
+                newAutoIncrement = oldAutoIncrement;
                 $('#Show_All_Invoice_Expired td').remove();
                 var clickNext = new ShowInvoiceExpired("GET" , url);
                 clickNext.reads();
@@ -197,5 +222,12 @@
             var showItemExpired = new ShowInvoiceExpired("GET",'api/invoices/over_due?page_size=15');
             showItemExpired.reads();
         })();
+        // ---------------- payment one invoice --------------------------
+        $(document).on("click", "#payment_invoice", function () {
+            var _tredite = $(this).closest('tr');
+            var _idUnique = $(_tredite).find('td:eq(0)').text();
+            $.cookie("KeyInvoice", btoa(_idUnique));// atob = decode from base64,  btoa = encode to base 64
+            window.location.href = '{{('/admin/invoice/invoice_payment')}}';
+        });
     </script>
 @endsection
