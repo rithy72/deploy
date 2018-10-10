@@ -300,7 +300,8 @@ class UserLogic extends SecureLogic
                 'password' => Hash::make(trim($new_password)),
                 'last_update_date' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-                'last_update_by' => Auth::id()
+                'last_update_by' => Auth::id(),
+                'just_updated' => true
             ]);
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
