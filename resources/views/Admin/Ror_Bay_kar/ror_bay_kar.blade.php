@@ -21,11 +21,23 @@
 
             <div class="col-md-2">
                 <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date">
+                <br>
             </div>
             <div class="col-md-2">
                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
+                <br>
             </div>
+            <div class="col-md-2">
             <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                <br>
+            </div>
+            <div class="col-md-3">
+                <h5 style="display: inline-flex;margin-top: 21px;"><p>@lang('string.income') ៖</p><p id="in_come" style="margin-left: 5px;"></p></h5>
+            </div>
+            <div class="col-md-3">
+                <h5 style="display: inline-flex;margin-top: 21px;"><p>@lang('string.pay') ៖</p><p id="out_come" style="margin-left: 5px;"></p></h5>
+            </div>
+
             <br/><br/>
             <div class="datatable-header" style="margin-top: -19px;"></div>
             <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -125,17 +137,32 @@
                 type: this.method,
                 url: this.urls,
                 success: function (ResponseJson) {
-                    console.log(ResponseJson);
+                    //console.log(ResponseJson);
                     ModelShowDailyReport(ResponseJson);
                 }
             });
         };
+        // --------------------- function show income and out come -------------
+        function showInComeAndOutCome(startDate,toDate) {
+            $.ajax({
+                type: "GET",
+                url: 'api/daily_report/sum?from_date='+startDate+'&to_date='+toDate+'&page_size=15',
+                success: function (response) {
+                    var convertJson = JSON.parse(response);
+                    $('#in_come').text(convertJson.data.sum_income+" $");
+                    $('#out_come').text(convertJson.data.sum_expense+" $");
+                }
+            });
+        }
         // ---------------------  show daily Report per day --------------------
         (function () {
+            // ------------ show in come and out come --------------------------
+            showInComeAndOutCome("","");
+            // ------------ show in come and out come --------------------------
             var showDailyReport = new DailyReport("GET",'api/daily_report?from_date=&to_date=&page_size=15');
             showDailyReport.reads();
         })();
-        // ---------------------  Search daily report --------------------
+        // ---------------------  Search daily report ------------------
         var timeout1 = null;
         $(document).on("click",".btn-Search", function () {
            var startDate = $('#start_date').val();
@@ -144,6 +171,9 @@
 
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
+                // ------------ show in come and out come ---------------
+                showInComeAndOutCome(startDate,toDate);
+                // ------------ show ra bay kar in table ----------------
                 $('#Show_All_Daily_Report td').remove();
                 var searchInvoiceInTable = new DailyReport("GET" , url);
                 searchInvoiceInTable.reads();

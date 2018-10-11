@@ -47,8 +47,8 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs nav-tabs-highlight">
                     <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">@lang('string.generalInformation')</a></li>
-                    <li><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">ទំនិញបញ្ចាំ</a></li>
-                    <li><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.history')</a></li>
+                    <li id="show_click_tap2"><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">ទំនិញបញ្ចាំ</a></li>
+                    <li id="show_click_tap3"><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.history')</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -200,6 +200,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice3')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice4')</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending" style="text-align: center;">@lang('string.detail')</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -349,7 +350,53 @@
             </div>
         </div>
     </div>
+    {{-----  Dialog show detail history detail  -----}}
+    <div id="show_detail_one_history_Item_of_invoice" class="modal fade">
+        <div class="modal-dialog modal-full" style="margin-left: auto;margin-right: auto;width: 79%;">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h5 class="modal-title">@lang('string.showDetailItemTypeInOneInvoice')</h5>
+                </div>
 
+                <div class="modal-body">
+                    <div>
+                        <div class="col-md-10 col-md-offset-1" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.invoiceID') ៖</p><p id="invoiceID_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.type') ៖</p><p id="type_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-12">
+                                <h5 style="display: inline-flex;"><p>@lang('string.notice') </p><p id="notice_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.situationItemTypeOfOneInvoice') ៖</p><p id="situationItemType_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.takeOutWithPrice') ៖</p><p id="price_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.dayTakeIn') ៖</p><p id="day_in_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by1_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.dayTakeOut') ៖</p><p id="day_out_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by2_" style="margin-left: 5px;"></p></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
 
     <div id="loading" style="display: none;
     max-width:350px;
@@ -375,9 +422,9 @@
             $( "#loading" ).hide();
         });
         // ------------------ show data for detail ----------------------
-        var getResponse;
+        var getResponse , _ID ;
         (function () {
-            var _ID = atob($.cookie("KeyInvoice")); // convert id unique from base64
+            _ID = atob($.cookie("KeyInvoice")); // convert id unique from base64
             $.ajax({
                type: "GET",
                 url: '../api/invoice/'+_ID+'',
@@ -415,15 +462,31 @@
                     document.getElementById("grand_total").innerHTML = getResponse.data.grand_total+" $";
                     document.getElementById("paid").innerHTML = getResponse.data.paid+" $";
                     document.getElementById("luynovsol").innerHTML = getResponse.data.remain+" $";
-                    // ---------- show itemType of one invoice ---------
-                    var showInvoiceInTable = new ItemTypeForOneInvoice("GET" , '../api/item/invoice/'+ _ID +'');
-                    showInvoiceInTable.reads();
-                    // ---------- show history of invoice --------------
-                    var showHistoryInvoice = new History("GET" , '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date=&to_date=&action=&group=&page_size=15');
-                    showHistoryInvoice.reads();
                 }
             });
         })();
+        // ------------ click tap itemType in invoice ----------
+        $(document).on("click","#show_click_tap2",function () {
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                $('#Show_All_itemType_OneInvoice td').remove();
+                var showInvoiceInTable = new ItemTypeForOneInvoice("GET" , '../api/item/invoice/'+ _ID +'');
+                showInvoiceInTable.reads();
+            }, 500);
+        });
+        // --------- click tap show history of invoice ---------
+        $(document).on("click","#show_click_tap3",function () {
+            clearTimeout(timeout1);
+            timeout1 = setTimeout(function () {
+                oldAutoIncrement = 0;     // clear auto increment in table
+                storeValueTheLastPage = 0;
+
+                $('#Show_All_History td').remove();
+                var showHistoryInvoice = new History("GET" , '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date=&to_date=&action=&group=&page_size=15');
+                showHistoryInvoice.reads();
+            }, 500);
+        });
+
         // ------------ show table itemType of one invoice -----
         var ConvertJson;
         function ModelShowInTable(getJsonValue) {
@@ -431,6 +494,12 @@
             for (var i = 0; i < ConvertJson.data.length; i++){
                 var short = ConvertJson.data[i];
                 var _tr = '<tr>' +
+                    '<td style="display:none;">' + short.display_invoice_id + '</td>' +
+                    '<td style="display:none;">' + short.in_date + '</td>' +
+                    '<td style="display:none;">' + short.in_user + '</td>' +
+                    '<td style="display:none;">' + short.out_date + '</td>' +
+                    '<td style="display:none;">' + short.user_id + '</td>' +
+                    '<td style="display:none;">' + short.sale_price + '</td>' +
                     '<td>' + [i+1] + '</td>' +
                     '<td>' + ConvertJson.data[i].item_type_name + '</td>' +
                     '<td>' + short.first_feature + '</td>' +
@@ -438,6 +507,18 @@
                     '<td>' + short.third_feature + '</td>' +
                     '<td>' + short.fourth_feature + '</td>' +
                     '<td>' + ConvertJson.data[i].display_status + '</td>' +
+                    '<td class="text-center"> ' +
+                    '<ul class="icons-list">'+
+                    '<li class="dropdown">'+
+                    '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+                    '<i class="icon-menu9"></i>'+
+                    '</a>'+
+                    '<ul class="dropdown-menu dropdown-menu-right">'+
+                    '<li id="detail_one_invoice_of_itemTypes"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
+                    '</ul>'+
+                    '</li>'+
+                    '</ul>'+
+                    '</td>'+
                     '</tr>';
                 $('#Show_All_itemType_OneInvoice tbody').append(_tr);
             }
@@ -458,6 +539,23 @@
                 }
             });
         };
+        // ---- click show dialog detail history for item in one invoice ----
+        $(document).on("click","#detail_one_invoice_of_itemTypes",function () {
+            $('#show_detail_one_history_Item_of_invoice').modal({ backdrop: 'static' }); // show dialog
+            var _selectRow = $(this).closest('tr');
+            var storeValueNoticeAll = ''+$(_selectRow).find('td:eq(8)').text()+' , '+$(_selectRow).find('td:eq(9)').text()+' , '+$(_selectRow).find('td:eq(10)').text()+' , '+$(_selectRow).find('td:eq(11)').text()+'';
+            (function(){
+                $('#invoiceID_').text($(_selectRow).find('td:eq(0)').text());
+                $('#type_').text($(_selectRow).find('td:eq(7)').text());
+                $('#notice_').text(storeValueNoticeAll);
+                $('#situationItemType_').text($(_selectRow).find('td:eq(12)').text());
+                $('#price_').text($(_selectRow).find('td:eq(5)').text());
+                $('#day_in_').text($(_selectRow).find('td:eq(1)').text());
+                $('#by1_').text($(_selectRow).find('td:eq(2)').text());
+                $('#day_out_').text($(_selectRow).find('td:eq(3)').text());
+                $('#by2_').text($(_selectRow).find('td:eq(4)').text());
+            })();
+        });
         // ------------ click button search in detail ----------
         var timeout1 = null;
         $('.btn-Search').on("click",function () {
@@ -536,7 +634,7 @@
             }
         });
         // ---- model table ----
-        var ConvertAndStore , autoIncrement = 0;
+        var ConvertAndStore , oldAutoIncrement = 0;
         function ShowDataInTable(getJsonValue) {
             ConvertAndStore = JSON.parse(getJsonValue);
             document.getElementById("page1").innerHTML = ConvertAndStore.data.current_page;
@@ -555,7 +653,7 @@
             for (var i = 0; i < ConvertAndStore.data.data.length; i++){
                 var short = ConvertAndStore.data.data[i];
                 var _tr = '<tr>' +
-                    '<td>' + [autoIncrement+=1] + '</td>' +
+                    '<td>' + [oldAutoIncrement+=1] + '</td>' +
                     '<td>' + short.name + '</td>' +
                     '<td>' + short.display_audit + '</td>' +
                     '<td>' + short.description + '</td>' +
@@ -578,6 +676,7 @@
             }
         }
         // ---- click back ---------------------
+        var storeValueTheLastPage = 0, valueDefaultAuto = 15;
         $(".previous_show_invoice").click(function () {
             var url = ConvertAndStore.data.prev_page_url;
             if (ConvertAndStore.data.prev_page_url === null){
@@ -585,7 +684,12 @@
             }else {
                 clearTimeout(timeout1);
                 timeout1 = setTimeout(function () {
-                    autoIncrement -= 2; // minus number auto increment
+                    //  number auto from table make ល.រ
+                    storeValueTheLastPage = oldAutoIncrement - Number(newAutoIncrement); //find row per page
+                    storeValueTheLastPage += valueDefaultAuto; //make value per page + 15.
+                    oldAutoIncrement = oldAutoIncrement - storeValueTheLastPage; //than we saw the value auto show back page again
+                    newAutoIncrement = oldAutoIncrement; // set it to old value amount auto form table row again
+                    storeValueTheLastPage = 0; // set it to 0 for use again
                     $('#Show_All_History td').remove();
                     var clickBack = new History("GET" , url);
                     clickBack.reads();
@@ -593,6 +697,7 @@
             }
         });
         // ---- click next --------------------
+        var newAutoIncrement;
         $(".next_show_invoice").click(function () {
             var url = ConvertAndStore.data.next_page_url;
             if (ConvertAndStore.data.next_page_url === null){
@@ -600,6 +705,7 @@
             }else {
                 clearTimeout(timeout1);
                 timeout1 = setTimeout(function () {
+                    newAutoIncrement = oldAutoIncrement;
                     $('#Show_All_History td').remove();
                     var clickNext = new History("GET" , url);
                     clickNext.reads();
