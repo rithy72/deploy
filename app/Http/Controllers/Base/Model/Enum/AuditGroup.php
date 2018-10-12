@@ -35,6 +35,11 @@ class AuditGroup
     //
     public const LOGIN = 19;
     public const LOGOUT = 20;
+    //
+    public const ITEM_FIRST_NOTE = 21;
+    public const ITEM_SECOND_NOTE = 22;
+    public const ITEM_THIRD_NOTE = 23;
+    public const ITEM_FOURTH_NOTE = 24;
 
     public const AUDIT_GROUP_STRING = array(
         1 => "វិក្ក័យប័ត្រ",
@@ -56,7 +61,11 @@ class AuditGroup
         17 => "តួនាទី",
         18 => "សុវត្ថិភាពប្រព័ន្ឋ",
         19 => "ចូលប្រើប្រាស់",
-        20 => "ចាកចេញ"
+        20 => "ចាកចេញ",
+        21 => "ចំណាំទី 1",
+        22 => "ចំណាំទី 2",
+        23 => "ចំណាំទី 3",
+        24 => "ចំណាំទី 4",
     );
 
 }
