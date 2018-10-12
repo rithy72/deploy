@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
+use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\ItemTypeModel;
 use App\Http\Controllers\Base\Model\Other\PaginateModel;
@@ -232,7 +233,8 @@ class ItemTypeLogic
                 return $query->where('type_name', '=', '%'.$search.'%');
             })
             ->when(!empty($status), function ($query) use ($status){
-                return $query->where('status', '=', $status);
+                $finalStatus = GeneralStatus::FinalizeStatus(intval($status));
+                return $query->where('status', '=', $finalStatus);
             })
             ->paginate($page_size);
         //
