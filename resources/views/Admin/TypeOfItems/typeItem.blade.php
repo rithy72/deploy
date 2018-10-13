@@ -154,17 +154,20 @@
     </form>
 
     <div id="loading" style="display: none;
-    max-width:350px;
-    max-height: 100px;
+    width: 249px;
+    height: 120px;
     position: fixed;
     top: 50%;
     left: 50%;
     text-align:center;
-    margin-left: -150px;
+    margin-left: -123px;
     margin-top: -100px;
     z-index:2;
     overflow: auto;">
-        <img src="/assets/images/LOADINGgif.gif"/>
+        <div style="max-width: 255px;max-height: 120px;display: inline-flex;background: #fff;">
+            <img style="max-height: 100px;max-width: 100px;" src="/assets/images/newLoading.gif"/>
+            <p style="font-size: 30px;margin-top: 28px;">@lang('string.Loading...')</p>
+        </div>
     </div>
 @endsection
 
