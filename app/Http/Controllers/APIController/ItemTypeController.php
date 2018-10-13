@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\APIController;
 
 use App\Http\Controllers\Base\Logic\ItemTypeLogic;
+use App\Http\Controllers\Base\Model\ItemTypeModel;
 use App\Http\Controllers\Base\Model\Other\ReturnModel;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class ItemTypeController extends Controller
 {
@@ -23,8 +22,6 @@ class ItemTypeController extends Controller
 
         $getResult = ItemTypeLogic::Instance()->FilterSearch($search, $status, $pageSize);
 
-        $getResult->appends(Input::except('page'));
-
         $class->status = "200";
         $class->data = $getResult;
 
@@ -36,11 +33,21 @@ class ItemTypeController extends Controller
     {
         $class = ReturnModel::Instance();
 
-        $itemTypeName = $request->input('item_type_name');
+        $itemTypeModel = ItemTypeModel::Instance();
+        $itemTypeModel->item_type_name = $request->input('item_type_name','');
+        $itemTypeModel->first_note = $request->input('first_note', ItemTypeLogic::FEATURES[0]);
+        $itemTypeModel->second_note = $request->input('first_note', ItemTypeLogic::FEATURES[1]);
+        $itemTypeModel->third_note = $request->input('first_note', ItemTypeLogic::FEATURES[2]);
+        $itemTypeModel->fourth_note = $request->input('first_note', ItemTypeLogic::FEATURES[3]);
 
-        if (empty($itemTypeName)) $class->status = "400"; $class->data = "Bad Request";
 
-        $insertResult = ItemTypeLogic::Instance()->Create($itemTypeName);
+        if (empty($itemTypeModel->item_type_name)){
+            $class->status = "400";
+            $class->data = "Bad Request";
+            return json_encode($class);
+        }
+
+        $insertResult = ItemTypeLogic::Instance()->Create($itemTypeModel);
 
         if (is_object($insertResult)){
             $class->status = '200';
@@ -58,11 +65,20 @@ class ItemTypeController extends Controller
     {
         $class = ReturnModel::Instance();
 
-        $itemTypeName = $request->input('item_type_name');
+        $itemTypeModel = ItemTypeModel::Instance();
+        $itemTypeModel->item_type_name = $request->input('item_type_name','');
+        $itemTypeModel->first_note = $request->input('first_note', ItemTypeLogic::FEATURES[0]);
+        $itemTypeModel->second_note = $request->input('first_note', ItemTypeLogic::FEATURES[1]);
+        $itemTypeModel->third_note = $request->input('first_note', ItemTypeLogic::FEATURES[2]);
+        $itemTypeModel->fourth_note = $request->input('first_note', ItemTypeLogic::FEATURES[3]);
 
-        if (empty($itemTypeName)) $class->status = "400"; $class->data = "Bad Request";
+        if (empty($itemTypeModel->item_type_name)){
+            $class->status = "400";
+            $class->data = "Bad Request";
+            return json_encode($class);
+        };
 
-        $insertResult = ItemTypeLogic::Instance()->Update($itemTypeName, $id);
+        $insertResult = ItemTypeLogic::Instance()->Update($itemTypeModel, $id);
 
         if (is_object($insertResult)){
             $class->status = '200';

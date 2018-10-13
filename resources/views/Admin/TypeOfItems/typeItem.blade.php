@@ -199,17 +199,9 @@
             }
         });
         //create new item type, and ,close dialog clear input
-        var storeArrayItemType = new Array();
+        var storeArrayItemType = [];
         $(document).on("click","#close_create_new",function () {
             if (storeArrayItemType.length > 0){
-                for (var i = 0; i < storeArrayItemType.length; i++){
-                    $.ajax({
-                        type: "POST",
-                        url: 'api/item_group',
-                        data: {"item_type_name": storeArrayItemType[i]},
-                        success: function (response) {}
-                    });
-                }
                 $('#new_item_type').val('');
                 $('.close_dialog_createNew').click();
                 window.location.href = '{{('/admin/item_type')}}';
@@ -223,8 +215,18 @@
             if (storeInput === ""){
                 alert('បំពេញសិន មុនពេលធ្វើការបង្កើត');
             } else {
-                storeArrayItemType.push(storeInput);
                 $('#new_item_type').val('');
+                $.ajax({
+                    type: "POST",
+                    url: 'api/item_group',
+                    data: {"item_type_name": storeInput},
+                    success: function (response) {
+                        //TODO: Alert Success Insert, or Duplicate Type Name
+                        jsonObj = JSON.parse(response);
+                        if (jsonObj.status === '200') storeArrayItemType.push(storeInput);
+                        if (jsonObj.status === '301') alert('ឈ្មោះមានរួចហើយ សូមធ្វើការកែប្រែម្តងទៀត');
+                    }
+                });
             }
         });
         // ========== show item type ============
@@ -262,7 +264,7 @@
                 // ============= End Parse Json ===========================
                 var _tr = '<tr role="row" class="odd">' +
                     '<td style="display:none;">' + storeValue.data.data[i].id + '</td>' +
-                    '<td>' + storeValue.data.data[i].type_name + '</td>' +
+                    '<td>' + storeValue.data.data[i].item_type_name + '</td>' +
                     '<td>' + stringStatus + '</td>' +
                     '<td class="text-center"> ' +
                     '<ul class="icons-list">'+
