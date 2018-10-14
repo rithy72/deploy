@@ -264,7 +264,7 @@
                 // ============= End Parse Json ===========================
                 var _tr = '<tr role="row" class="odd">' +
                     '<td style="display:none;">' + storeValue.data.data[i].id + '</td>' +
-                    '<td>' + storeValue.data.data[i].type_name + '</td>' +
+                    '<td>' + storeValue.data.data[i].item_type_name + '</td>' +
                     '<td>' + stringStatus + '</td>' +
                     '<td class="text-center"> ' +
                     '<ul class="icons-list">'+

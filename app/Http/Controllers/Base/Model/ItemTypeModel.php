@@ -14,7 +14,7 @@ use App\Http\Controllers\Base\Logic\ItemTypeLogic;
 class ItemTypeModel
 {
     public $id;
-    public $type_name;
+    public $item_type_name;
     public $status;
     public $display_status;
     public $first_note;
@@ -44,7 +44,7 @@ class ItemTypeModel
         $model = ItemTypeModel::Instance();
         $notesFinalize = ItemTypeModel::FinalizeNotes($item_type_model->notes);
         $model->id = $item_type_model->id;
-        $model->type_name = $item_type_model->type_name;
+        $model->item_type_name = $item_type_model->type_name;
         $model->status = $item_type_model->status;
         $model->display_status = ($item_type_model->status === true) ? "Active":"Inactive";
         $model->delete_able = $item_type_model->delete_able;

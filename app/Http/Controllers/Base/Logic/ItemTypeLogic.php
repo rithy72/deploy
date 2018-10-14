@@ -30,8 +30,8 @@ class ItemTypeLogic
     private function ChangeLog(ItemTypeModel $new_object, ItemTypeModel $old_object, $id, $flag, $changelog_array){
         $userAuditLogicInstance = UserAuditLogic::Instance();
         //Name
-        $changelog_array = $userAuditLogicInstance->CompareField(AuditGroup::ITEM_TYPE_NAME, $old_object->type_name,
-            $new_object->type_name, $flag, $changelog_array);
+        $changelog_array = $userAuditLogicInstance->CompareField(AuditGroup::ITEM_TYPE_NAME, $old_object->item_type_name,
+            $new_object->item_type_name, $flag, $changelog_array);
         //First
         $changelog_array = $userAuditLogicInstance->CompareField(AuditGroup::ITEM_FIRST_NOTE, $old_object->first_note,
             $new_object->first_note, $flag, $changelog_array);
@@ -98,9 +98,9 @@ class ItemTypeLogic
     //Create item Type
     public function Create(ItemTypeModel $itemTypeModel){
 
-        if (empty($itemTypeModel->type_name)) return false;
+        if (empty($itemTypeModel->item_type_name)) return false;
 
-        $type_name = $itemTypeModel->type_name;
+        $type_name = $itemTypeModel->item_type_name;
         $first = $itemTypeModel->first_note ?? ItemTypeLogic::FEATURES[0];
         $second = $itemTypeModel->second_note ?? ItemTypeLogic::FEATURES[1];
         $third = $itemTypeModel->third_note ?? ItemTypeLogic::FEATURES[2];
@@ -125,7 +125,7 @@ class ItemTypeLogic
                 ->ChangeLog($itemTypeObj, $itemTypeObj, $itemTypeObj->id, UserActionEnum::INSERT, $changeLogArray);
             //User Auditrail
             UserAuditLogic::Instance()
-                ->UserItemTypeAction($itemTypeObj->id, UserActionEnum::INSERT, $itemTypeObj->type_name,
+                ->UserItemTypeAction($itemTypeObj->id, UserActionEnum::INSERT, $itemTypeObj->item_type_name,
                     $changeLogArray);
 
             return $itemTypeObj;
@@ -137,7 +137,7 @@ class ItemTypeLogic
     //Update Item Type
     public function Update(ItemTypeModel $item_type_object, $id){
         //CheckDuplicate
-        $duplicate = $this->CheckDuplicateBeforeUpdate($item_type_object->type_name, $id);
+        $duplicate = $this->CheckDuplicateBeforeUpdate($item_type_object->item_type_name, $id);
         //
         if (!$duplicate){
             $oldObj = $this->Find($id);
@@ -151,7 +151,7 @@ class ItemTypeLogic
             //Can Update
             DB::table('item_type')->where('id','=', $id)
                 ->update([
-                    'type_name' => $item_type_object->type_name,
+                    'type_name' => $item_type_object->item_type_name,
                     'notes' => $noteString
                 ]);
             $newObj = $this->Find($id);
@@ -160,7 +160,7 @@ class ItemTypeLogic
 
             //User Auditrail
             UserAuditLogic::Instance()
-                ->UserItemTypeAction($id, UserActionEnum::UPDATE, $newObj->type_name, $changeLogArray);
+                ->UserItemTypeAction($id, UserActionEnum::UPDATE, $newObj->item_type_name, $changeLogArray);
 
             return $newObj;
         }else{
@@ -179,7 +179,7 @@ class ItemTypeLogic
 
         //User AuditTrail
         UserAuditLogic::Instance()
-            ->UserItemTypeAction($id, UserActionEnum::DEACTIVATE, $object->type_name, []);
+            ->UserItemTypeAction($id, UserActionEnum::DEACTIVATE, $object->item_type_name, []);
 
         $model = $this->Find($id);
         return $model;
@@ -196,7 +196,7 @@ class ItemTypeLogic
 
         //User AuditTrail
         UserAuditLogic::Instance()
-            ->UserItemTypeAction($id, UserActionEnum::ACTIVATE, $object->type_name, []);
+            ->UserItemTypeAction($id, UserActionEnum::ACTIVATE, $object->item_type_name, []);
 
         $model = $this->Find($id);
         return $model;
@@ -216,7 +216,7 @@ class ItemTypeLogic
 
             //User AuditTrail
             UserAuditLogic::Instance()
-                ->UserItemTypeAction($id, UserActionEnum::DELETE, $model->type_name, []);
+                ->UserItemTypeAction($id, UserActionEnum::DELETE, $model->item_type_name, []);
 
             return true;
         }else{
