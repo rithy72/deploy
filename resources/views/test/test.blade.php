@@ -207,7 +207,7 @@
 
         $.ajax({
             type:"GET",
-            url:"api/user/user_history/6?from_date=&to_date=&group=18&action=&page_size=10",
+            url:"api/user/search?page_size=1",
             //data: obj,
             success:function (response) {
                 console.log(response);

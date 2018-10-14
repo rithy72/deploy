@@ -20,6 +20,7 @@ use App\Http\Controllers\Base\Model\UserModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 
 class UserLogic extends SecureLogic
 {
@@ -329,6 +330,8 @@ class UserLogic extends SecureLogic
             ->where('id', '<>', Auth::id())
             ->where('deleted','=', false)
             ->paginate($page_size);
+        //
+        $usersResult->appends(Input::except('page'));
         //
         $returnArray = array();
         foreach ($usersResult as $user){
