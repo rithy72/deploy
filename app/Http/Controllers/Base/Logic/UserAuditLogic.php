@@ -141,7 +141,7 @@ class UserAuditLogic
             //
             $iemType = ItemTypeLogic::Instance()->Find($new_val->item_type_id);
             $changeLogModel->newValue =
-                $iemType->item_type_name.', '.$new_val->first_feature.', '.$new_val->second_feature.', '.$new_val->third_feature
+                $iemType->type_name.', '.$new_val->first_feature.', '.$new_val->second_feature.', '.$new_val->third_feature
                 .', '.$new_val->fourth_feature;
         }
         //Edit
@@ -150,12 +150,12 @@ class UserAuditLogic
             //
             $iemType = ItemTypeLogic::Instance()->Find($old_val->item_type_id);
             $changeLogModel->oldValue =
-                $iemType->item_type_name.', '.$old_val->first_feature.', '.$old_val->second_feature.', '.$old_val->third_feature
+                $iemType->type_name.', '.$old_val->first_feature.', '.$old_val->second_feature.', '.$old_val->third_feature
                 .', '.$old_val->fourth_feature;
             //
             $iemType = ItemTypeLogic::Instance()->Find($new_val->item_type_id);
             $changeLogModel->newValue =
-                $iemType->item_type_name.', '.$new_val->first_feature.', '.$new_val->second_feature.', '.$new_val->third_feature
+                $iemType->type_name.', '.$new_val->first_feature.', '.$new_val->second_feature.', '.$new_val->third_feature
                 .', '.$new_val->fourth_feature;
         }
         //Delete or Depreciation or Took
@@ -163,7 +163,7 @@ class UserAuditLogic
             //
             $iemType = ItemTypeLogic::Instance()->Find($old_val->item_type_id);
             $changeLogModel->oldValue =
-                $iemType->item_type_name.', '.$old_val->first_feature.', '.$old_val->second_feature.', '.$old_val->third_feature
+                $iemType->type_name.', '.$old_val->first_feature.', '.$old_val->second_feature.', '.$old_val->third_feature
                 .', '.$old_val->fourth_feature;
             //
             $changeLogModel->newValue = "";

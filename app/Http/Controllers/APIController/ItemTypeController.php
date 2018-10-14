@@ -34,14 +34,14 @@ class ItemTypeController extends Controller
         $class = ReturnModel::Instance();
 
         $itemTypeModel = ItemTypeModel::Instance();
-        $itemTypeModel->item_type_name = $request->input('item_type_name','');
+        $itemTypeModel->type_name = $request->input('item_type_name','');
         $itemTypeModel->first_note = $request->input('first_note', ItemTypeLogic::FEATURES[0]);
         $itemTypeModel->second_note = $request->input('first_note', ItemTypeLogic::FEATURES[1]);
         $itemTypeModel->third_note = $request->input('first_note', ItemTypeLogic::FEATURES[2]);
         $itemTypeModel->fourth_note = $request->input('first_note', ItemTypeLogic::FEATURES[3]);
 
 
-        if (empty($itemTypeModel->item_type_name)){
+        if (empty($itemTypeModel->type_name)){
             $class->status = "400";
             $class->data = "Bad Request";
             return json_encode($class);
@@ -66,13 +66,13 @@ class ItemTypeController extends Controller
         $class = ReturnModel::Instance();
 
         $itemTypeModel = ItemTypeModel::Instance();
-        $itemTypeModel->item_type_name = $request->input('item_type_name','');
+        $itemTypeModel->type_name = $request->input('item_type_name','');
         $itemTypeModel->first_note = $request->input('first_note', ItemTypeLogic::FEATURES[0]);
         $itemTypeModel->second_note = $request->input('first_note', ItemTypeLogic::FEATURES[1]);
         $itemTypeModel->third_note = $request->input('first_note', ItemTypeLogic::FEATURES[2]);
         $itemTypeModel->fourth_note = $request->input('first_note', ItemTypeLogic::FEATURES[3]);
 
-        if (empty($itemTypeModel->item_type_name)){
+        if (empty($itemTypeModel->type_name)){
             $class->status = "400";
             $class->data = "Bad Request";
             return json_encode($class);

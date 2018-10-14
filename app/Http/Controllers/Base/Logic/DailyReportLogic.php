@@ -62,13 +62,11 @@ class DailyReportLogic
             ->first();
         //
         $class = new \stdClass();
-        if ($getResult != null){
-            $class = new \stdClass();
-            $class->in_item = $getResult->in_item;
-            $class->out_item = $getResult->out_item;
-            $class->outcome = $getResult->outcome;
-            $class->income = $getResult->income;
-        }
+        $class->in_item = $getResult->in_item ?? 0;
+        $class->out_item = $getResult->out_item ?? 0;
+        $class->outcome = $getResult->outcome ?? 0;
+        $class->income = $getResult->income ?? 0;
+
         //
         return $class;
     }
