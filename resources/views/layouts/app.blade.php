@@ -57,11 +57,6 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                    {{--<li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>--}}
-                    {{--<li><a href="#"><i class="icon-coins"></i> My balance</a></li>--}}
-                    {{--<li><a href="#"><span class="badge bg-blue pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>--}}
-                    {{--<li class="divider"></li>--}}
-                    {{--<li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>--}}
                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="icon-switch2"> @lang('string.logout') </i></a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -170,7 +165,7 @@
 </div>
 <!-- /page container -->
 {{--------- dialog change password user and admin ---------}}
-<form role="form" action="" method="">
+<form role="form" action="api/user/reset_own_password" method="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     <div id="changePassword" class="modal fade">
         <div class="modal-dialog ">
@@ -188,28 +183,28 @@
                                 <div class="form-group">
                                     <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.username')</label>
                                     <div class="col-lg-7">
-                                        <input type="text" placeholder="@lang('string.writeYourUserNameHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                        <input name="email" type="text" placeholder="@lang('string.writeYourUserNameHere...')" id="" class="form-control" style="border: 1px solid grey;">
                                         <br>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.oldPassword')</label>
                                     <div class="col-lg-7">
-                                        <input type="text" placeholder="@lang('string.writeOldPasswordHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                        <input name="old_password" type="text" placeholder="@lang('string.writeOldPasswordHere...')" id="" class="form-control" style="border: 1px solid grey;">
                                         <br>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.newPassword')</label>
                                     <div class="col-lg-7">
-                                        <input type="text" placeholder="@lang('string.writeNewPasswordHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                        <input name = "new_password" type="text" placeholder="@lang('string.writeNewPasswordHere...')" id="" class="form-control" style="border: 1px solid grey;">
                                         <br>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.confirmPassword')</label>
                                     <div class="col-lg-7">
-                                        <input type="text" placeholder="@lang('string.writeNewPasswordHere...')" name="" id="" class="form-control" style="border: 1px solid grey;">
+                                        <input type="text" placeholder="@lang('string.writeNewPasswordHere...')" id="" class="form-control" style="border: 1px solid grey;">
                                         <br>
                                     </div>
                                 </div>
@@ -218,16 +213,16 @@
                     </div>
                 </div>
 
+                {{--{{ csrf_field() }}--}}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
-                    {{ csrf_field() }}
-                    {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
-                    <button type="button" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                    <button type="submit" class="btn btn-primary btn_validate_Rate" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
 </body>
 <!-- Core JS files -->
 <script src="{{asset('/assets/js/plugins/loaders/pace.min.js')}}"></script>

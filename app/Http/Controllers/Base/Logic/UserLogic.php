@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Base\Logic;
 
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
-use App\Http\Controllers\Base\Logic\OtherLogic\SecureLogic;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
@@ -22,7 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 
-class UserLogic extends SecureLogic
+class UserLogic
 {
 
     //User Logic Instance
@@ -277,14 +276,13 @@ class UserLogic extends SecureLogic
             ->where('id','=', $userObj->id)
             ->update([
                 'status' => true,
-                'password' => $new_password,
                 'last_update_date' => DateTimeLogic::Instance()
                     ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
                 'last_update_by' => Auth::id(),
                 'just_updated' => true
             ]);
         //
-        Auth::user()->password = $new_password;
+        //Auth::user()->password = $new_password;
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
         UserAuditLogic::Instance()

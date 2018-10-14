@@ -255,26 +255,33 @@ class UserController extends Controller
 
     //Reset Password
     public function resetOwnPassword(Request $request){
-        $returnModel = ReturnModel::Instance();
-        //
-        $username = $request->email;
-        $oldPassword = $request->old_password;
-        $newPassword = $request->new_password;
-        //
-        $changeResult = UserLogic::Instance()->UserResetOwnPassword($username, $oldPassword, $newPassword);
-        //
-        if ($changeResult){
-            //Insert Success
-            $returnModel->status = "201";
-            $returnModel->data = "Action on logged in user, must login again";
-        }else{
-            //Invalid Username or Password
-            $returnModel->status = "400";
-            $returnModel->data = "Invalid Username or Password";
-        }
-
-        //if ($returnModel->status == "201") Auth::logout();
-        return json_encode($returnModel);
+//        //$returnModel = ReturnModel::Instance();
+//        //
+//        $username = $request->input('email','');
+//        $oldPassword = $request->input('old_password','');
+//        $newPassword = $request->input('new_password','');
+//        //
+//        $changeResult = UserLogic::Instance()->UserResetOwnPassword($username, $oldPassword, $newPassword);
+//        //
+//        if ($changeResult){
+//            //Insert Success
+//            Auth::logout();
+//            return redirect('login');
+//        }else{
+//            //Invalid Username or Password
+//            $userObj = UserLogic::Instance()->Find(Auth::id());
+//            if ($userObj->role == UserRoleEnum::ADMIN){
+//                return redirect('admin/mainform')->with('token','wrong');
+//            }else{
+//                return redirect('admin/invoice')->with('token','wrong');
+//            }
+//        }
+//        //if ($returnModel->status == "201") Auth::logout();
+//        return json_encode($returnModel);
+        $userObj = UserLogic::Instance()->Find(Auth::id());
+        return view('auth.passwords.reset')->with(
+            ['token' => null, 'email' => $userObj->email]
+        );
     }
 
     //Admin Reset Other User Password
