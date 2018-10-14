@@ -325,12 +325,15 @@
         var month = today.getMonth() + 1;
         var year = today.getFullYear();
         var h = today.getHours();
+        var Am_or_Pm = h >= 12 ? 'pm' : 'am';
+        h = h % 12;
+        h = h ? h : 12; // the hour '0' should be '12'
         var m = today.getMinutes();
         var s = today.getSeconds();
         // add a zero in front of numbers<10
         m = checkTime(m);
         s = checkTime(s);
-        document.getElementById('showTime').innerHTML = date + "/" + month + "/" + year + "  " + h + ":" + m + ":" + s;
+        document.getElementById('showTime').innerHTML = date + "/" + month + "/" + year + "  " + h + ":" + m + ":" + s + " " + Am_or_Pm;
         t = setTimeout(function() {
             startTime()
         }, 500);

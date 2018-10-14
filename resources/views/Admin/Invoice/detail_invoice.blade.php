@@ -57,7 +57,7 @@
                         <div class="panel-body">
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.nameCustomer')</label>
+                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.nameCustomer') ៖</label>
                                     <div class="col-md-9">
                                         <p id="customer_name"></p>
                                         <br>
@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.phoneNumber')</label>
+                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.phoneNumber') ៖</label>
                                     <div class="col-md-9">
                                         <p id="phone_number"></p>
                                         <br>
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.dayGetMoney')</label>
+                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.dayGetMoney') ៖</label>
                                     <div class="col-md-9">
                                         <p id="date_in"></p>
                                         <br>
@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.expiredDay')</label>
+                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.expiredDay') ៖</label>
                                     <div class="col-md-9">
                                         <p id="date_out"></p>
                                         <br>
@@ -107,31 +107,31 @@
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">តម្លៃដើមសរុប</p>
+                                    <p style="margin-top: 7px;">តម្លៃដើមសរុប ៖</p>
                                     <p style="margin-top: 6px;margin-left: 30px;" id="grand_total"></p>
                                 </div>
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">@lang('string.situation')</p>
+                                    <p style="margin-top: 7px;">@lang('string.situation') ៖</p>
                                     <p style="margin-top: 6px;margin-left: 30px;" id="status"></p>
                                 </div>
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">តម្លៃដើមបង់រួច</p>
+                                    <p style="margin-top: 7px;">តម្លៃដើមបង់រួច ៖</p>
                                     <p style="margin-top: 6px;margin-left: 30px;" id="paid"></p>
                                 </div>
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">@lang('string.createBy')</p>
+                                    <p style="margin-top: 7px;">@lang('string.createBy') ៖</p>
                                     <p style="margin-top: 6px;margin-left: 30px;" id="createByUser"></p>
                                 </div>
                             </div>
                             <div class="col-xs-12 .col-sm-6 col-md-6">
                                 <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">តម្លៃដើមនៅសល់</p>
+                                    <p style="margin-top: 7px;">តម្លៃដើមនៅសល់ ៖</p>
                                     <p style="margin-top: 6px;margin-left: 30px;" id="luynovsol"></p>
                                 </div>
                             </div>
@@ -350,7 +350,7 @@
             </div>
         </div>
     </div>
-    {{-----  Dialog show detail history detail  -----}}
+    {{-----  Dialog show detail history itemType of one invoice  -----}}
     <div id="show_detail_one_history_Item_of_invoice" class="modal fade">
         <div class="modal-dialog modal-full" style="margin-left: auto;margin-right: auto;width: 79%;">
             <div class="modal-content">
@@ -399,17 +399,20 @@
     </div>
 
     <div id="loading" style="display: none;
-    max-width:350px;
-    max-height: 100px;
+    width: 249px;
+    height: 120px;
     position: fixed;
     top: 50%;
     left: 50%;
     text-align:center;
-    margin-left: -150px;
+    margin-left: -123px;
     margin-top: -100px;
     z-index:2;
     overflow: auto;">
-        <img src="/assets/images/LOADINGgif.gif"/>
+        <div style="max-width: 255px;max-height: 120px;display: inline-flex;background: #fff;">
+            <img style="max-height: 100px;max-width: 100px;" src="/assets/images/newLoading.gif"/>
+            <p style="font-size: 30px;margin-top: 28px;">@lang('string.Loading...')</p>
+        </div>
     </div>
 @endsection
 
@@ -462,20 +465,26 @@
                     document.getElementById("grand_total").innerHTML = getResponse.data.grand_total+" $";
                     document.getElementById("paid").innerHTML = getResponse.data.paid+" $";
                     document.getElementById("luynovsol").innerHTML = getResponse.data.remain+" $";
+                    // ---------- show itemType in one invoice ----------
+                    var showInvoiceInTable = new ItemTypeForOneInvoice("GET" , '../api/item/invoice/'+ _ID +'');
+                    showInvoiceInTable.reads();
+                    // ---------- show history of one invioce -----------
+                    var showHistoryInvoice = new History("GET" , '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date=&to_date=&action=&group=&page_size=15');
+                    showHistoryInvoice.reads();
                 }
             });
         })();
         // ------------ click tap itemType in invoice ----------
-        $(document).on("click","#show_click_tap2",function () {
+        /*$(document).on("click","#show_click_tap2",function () {
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
                 $('#Show_All_itemType_OneInvoice td').remove();
                 var showInvoiceInTable = new ItemTypeForOneInvoice("GET" , '../api/item/invoice/'+ _ID +'');
                 showInvoiceInTable.reads();
             }, 500);
-        });
+        });*/
         // --------- click tap show history of invoice ---------
-        $(document).on("click","#show_click_tap3",function () {
+        /*$(document).on("click","#show_click_tap3",function () {
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
                 oldAutoIncrement = 0;     // clear auto increment in table
@@ -485,7 +494,7 @@
                 var showHistoryInvoice = new History("GET" , '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date=&to_date=&action=&group=&page_size=15');
                 showHistoryInvoice.reads();
             }, 500);
-        });
+        });*/
 
         // ------------ show table itemType of one invoice -----
         var ConvertJson;
@@ -569,6 +578,7 @@
                 searchInvoiceInTable.reads();
             }, 1000);
         });
+    // =====================================================================================
         // ------------ onchange select history ----------------
         var select = document.getElementById('chooseInvoiceOrItemType');
         var chooseInvoice = 1, chooseItemTypeInvoice = 4; // declare var make condition
@@ -603,9 +613,10 @@
             });
         };
         // ------------ function search history ----------------
-        var url; //,_chooseSearch,_historyInvoice,_historyItemType
+        var url;
         $('.btn_Search1').on("click", function () {
-            autoIncrement = 0;
+            oldAutoIncrement = 0;
+            storeValueTheLastPage = 0;
             var _startDate = $('#start_date').val();
             var _toDate = $('#to_date').val();
             var _chooseSearch = $('#chooseInvoiceOrItemType').val();
@@ -621,7 +632,7 @@
                     setToAjax();
                 } else if (Number(_chooseSearch) === chooseItemTypeInvoice){
                     url = '../api/invoice/transaction_history/'+ getResponse.data.id +'?from_date='+_startDate+'&to_date='+_toDate+'&action='+_historyItemType+'&group='+_chooseSearch+'&page_size=15';
-                    setToAjax()
+                    setToAjax();
                 }
             }
             function setToAjax() {
@@ -634,7 +645,7 @@
             }
         });
         // ---- model table ----
-        var ConvertAndStore , oldAutoIncrement = 0;
+        var ConvertAndStore, oldAutoIncrement = 0;
         function ShowDataInTable(getJsonValue) {
             ConvertAndStore = JSON.parse(getJsonValue);
             document.getElementById("page1").innerHTML = ConvertAndStore.data.current_page;

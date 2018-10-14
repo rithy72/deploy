@@ -28,14 +28,15 @@
                     {{----- Merl Item min ton lus -----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-md-2" >
-                                <div class="form-group">
+                            <div class="col-md-3" style="display: flex;">
+                                <div class="form-group" style="width: 100%;">
                                     <span>@lang('string.type')</span>
                                     {{--<div style="display: flex;"></div>--}}
                                     <select class="form-control" id="selectTomNanh">
 
                                     </select>
                                 </div>
+                                <a class="btn btn-danger btn_clear_select2_1" style="margin-top: 20px;margin-bottom: 20px;" title="@lang('string.clearItemType')"><i class="icon-cross3"></i></a>
                             </div>
                             <div class="col-md-5" style="display: flex;margin-top: 21px;">
                                 <input type="text" class="form-control" placeholder="@lang('string.searchItems')" id="store_search" disabled="disabled">
@@ -90,13 +91,14 @@
                     {{----- Merl Item Derl duch gnai -----}}
                     <div class="tab-pane" id="highlighted_tab2">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-md-2">
-                                <span>@lang('string.typeItems')</span>
-                                <div class="form-group">
+                            <div class="col-md-3" style="display: flex;">
+                                <div class="form-group" style="width: 100%;">
+                                    <span>@lang('string.typeItems')</span>
                                     <select class="form-control" id="selectTomNanh1">
 
                                     </select>
                                 </div>
+                                <a class="btn btn-danger btn_clear_select2_2" style="margin-top: 20px;margin-bottom: 20px;" title="@lang('string.clearItemType')"><i class="icon-cross3"></i></a>
                             </div>
                             <div class="col-md-2">
                                 <span>@lang('string.situation')</span>
@@ -163,13 +165,14 @@
                     {{----- Merl Item All -----}}
                     <div class="tab-pane" id="highlighted_tab3">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-md-2">
-                                <span>@lang('string.typeItems')</span>
-                                <div class="form-group">
+                            <div class="col-md-3" style="display: flex;">
+                                <div class="form-group" style="width: 100%;">
+                                    <span>@lang('string.typeItems')</span>
                                     <select class="form-control" id="selectTomNanh2">
 
                                     </select>
                                 </div>
+                                <a class="btn btn-danger btn_clear_select2_3" style="margin-top: 20px;margin-bottom: 20px;" title="@lang('string.clearItemType')"><i class="icon-cross3"></i></a>
                             </div>
                             <div class="col-md-2">
                                 <span>@lang('string.situation')</span>
@@ -541,17 +544,20 @@
     </div>
 
     <div id="loading" style="display: none;
-    max-width:350px;
-    max-height: 100px;
+    width: 249px;
+    height: 120px;
     position: fixed;
     top: 50%;
     left: 50%;
     text-align:center;
-    margin-left: -150px;
+    margin-left: -123px;
     margin-top: -100px;
     z-index:2;
     overflow: auto;">
-        <img src="/assets/images/LOADINGgif.gif"/>
+        <div style="max-width: 255px;max-height: 120px;display: inline-flex;background: #fff;">
+            <img style="max-height: 100px;max-width: 100px;" src="/assets/images/newLoading.gif"/>
+            <p style="font-size: 30px;margin-top: 28px;">@lang('string.Loading...')</p>
+        </div>
     </div>
 @endsection
 
@@ -620,7 +626,7 @@
                     //console.log(data);
                     var GG = JSON.parse(data);
                     const result = $.map(GG.data.data, function (value) {
-                        return {id: value.id, text: value.type_name}
+                        return {id: value.id, text: value.item_type_name}
                     });
                     return {
                         results: result,
@@ -652,7 +658,7 @@
                     //console.log(data);
                     var GG = JSON.parse(data);
                     const result = $.map(GG.data.data, function (value) {
-                        return {id: value.id, text: value.type_name}
+                        return {id: value.id, text: value.item_type_name}
                     });
                     return {
                         results: result,
@@ -684,7 +690,7 @@
                     //console.log(data);
                     var GG = JSON.parse(data);
                     const result = $.map(GG.data.data, function (value) {
-                        return {id: value.id, text: value.type_name}
+                        return {id: value.id, text: value.item_type_name}
                     });
                     return {
                         results: result,
@@ -762,25 +768,31 @@
                 }
             });
         };
-        // -------------- function show item pay yet ------------------
+        // ----------- function show item pay yet --------------
         (function () {
             var showItemNotYetPay = new ItemPayYet("GET" , 'api/item?search=&item_type=&status=1&page_size=15');
             showItemNotYetPay.reads();
         })();
         // -------------- click tap ti 1 ----------------------
-        $(document).on("click","#tab_show_itemType_notYetPay",function () {
+        /*$(document).on("click","#tab_show_itemType_notYetPay",function () {
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
                 $('#Show_All_Item_Pay_Yet td').remove();
                 var showItemNotYetPay = new ItemPayYet("GET" , 'api/item?search=&item_type=&status=1&page_size=15');
                 showItemNotYetPay.reads();
             }, 500);
-        });
-        // -------------- search bnt when select2 choose --------------
+        });*/
+        // -------------- search btn when select2 choose --------------
         $(document).on("click",".search_item_notYetPay",function () {
             var storeItemType = $('#selectTomNanh').val();
             if (storeItemType === null){ storeID_ItemType = "" } else { storeID_ItemType = storeItemType }
-            var url = 'api/item?search=&item_type='+storeID_ItemType+'&status=1&page_size=15';
+            var storeInvoiceId = $('#search_invoice').val();
+            var storeNotice1 = $('#notice1').val();
+            var storeNotice2 = $('#notice2').val();
+            var storeNotice3 = $('#notice3').val();
+            var storeNotice4 = $('#notice4').val();
+            var plusNoticeAll = ''+storeInvoiceId+','+storeNotice1+','+storeNotice2+','+storeNotice3+','+storeNotice4+'';
+            var url = 'api/item?search='+plusNoticeAll+'&item_type='+storeID_ItemType+'&status=1&page_size=15';
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
                 $('#Show_All_Item_Pay_Yet td').remove();
@@ -789,7 +801,7 @@
             }, 1000);
         });
         // -------------- button search notice all itemType -----------
-        var timeout1 = null , storeID_ItemType , ID,n1,n2,n3,n4;
+        var timeout1 = null, storeID_ItemType, ID, n1, n2, n3, n4;
         $(document).on("click",".btn_search_Item_notYetPay",function () {
             var storeItemType = $('#selectTomNanh').val();
             if (storeItemType === null){ storeID_ItemType = "" } else { storeID_ItemType = storeItemType }
@@ -925,21 +937,31 @@
                 }
             });
         };
+        (function () {
+            var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=3,4&page_size=15');
+            showItemExpired.reads();
+        })();
         // ------- function show item out click tap ti 2 -------
-        $(document).on("click","#tab_show_took_itemType",function () {
+        /*$(document).on("click","#tab_show_took_itemType",function () {
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
                 $('#Show_All_ItemOut td').remove();
                 var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=3,4&page_size=15');
                 showItemExpired.reads();
             }, 500);
-        });
+        });*/
         // ------------- search btn took -----------------------
         $(document).on("click",".search_item_took",function () {
             var storeSelectItemType_Id = $('#selectTomNanh1').val();
             var storeStatus = $('#select_status').val();
             if (storeSelectItemType_Id === null){ ItemType_ID = "" } else { ItemType_ID = storeSelectItemType_Id }
-            var url = 'api/item?search=&item_type='+ItemType_ID+'&status='+storeStatus+'&page_size=15';
+            var storeInvoiceID = $('#search_invoice1').val();
+            var storeNotice_1 = $('#notice1_takeOut').val();
+            var storeNotice_2 = $('#notice2_takeOut').val();
+            var storeNotice_3 = $('#notice3_takeOut').val();
+            var storeNotice_4 = $('#notice4_takeOut').val();
+            var NoticeAll = ''+storeInvoiceID+','+storeNotice_1+','+storeNotice_2+','+storeNotice_3+','+storeNotice_4+'';
+            var url = 'api/item?search='+NoticeAll+'&item_type='+ItemType_ID+'&status='+storeStatus+'&page_size=15';
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
                 $('#Show_All_ItemOut td').remove();
@@ -1110,21 +1132,31 @@
                 }
             });
         };
+        (function () {
+            var showItemStatus = new ItemAllStatus("GET" , 'api/item?search=&item_type=&status=&page_size=15');
+            showItemStatus.reads();
+        })();
         // ------- function show item all click tap ti 3 --------
-        $(document).on("click","#tab_show_reportItemType",function () {
+        /*$(document).on("click","#tab_show_reportItemType",function () {
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
                 $('#Show_All_Items_Status td').remove();
                 var showItemStatus = new ItemAllStatus("GET" , 'api/item?search=&item_type=&status=&page_size=15');
                 showItemStatus.reads();
             }, 500);
-        });
+        });*/
         // ------- search btn search history -------------------
         $(document).on("click",".search_item_history_oneInvoice",function () {
             var storeSelectItemType_Id_all = $('#selectTomNanh2').val();
             if (storeSelectItemType_Id_all === null){ ItemType_ID_all = "" } else { ItemType_ID_all = storeSelectItemType_Id_all }
             var storeStatus_all = $('#select_status_all').val();
-            var url = 'api/item?search=&item_type='+ItemType_ID_all+'&status='+storeStatus_all+'&page_size=15';
+            var storeInvoice_ID = $('#search_invoice2').val();
+            var storeNotice_1_all = $('#notice1_all').val();
+            var storeNotice_2_all = $('#notice2_all').val();
+            var storeNotice_3_all = $('#notice3_all').val();
+            var storeNotice_4_all = $('#notice4_all').val();
+            var Notice_all = ''+storeInvoice_ID+','+storeNotice_1_all+','+storeNotice_2_all+','+storeNotice_3_all+','+storeNotice_4_all+'';
+            var url = 'api/item?search='+Notice_all+'&item_type='+ItemType_ID_all+'&status='+storeStatus_all+'&page_size=15';
             clearTimeout(timeout1);
             timeout1 = setTimeout(function () {
                 $('#Show_All_Items_Status td').remove();
@@ -1199,6 +1231,20 @@
                 $('#day_out_').text($(_selectRow).find('td:eq(2)').text());
                 $('#by2_').text($(_selectRow).find('td:eq(3)').text());
             })();
+        });
+
+        // ------------ clear select 2 when user choose itemType all 3 tap --------
+        $('.btn_clear_select2_1').on("click",function () {
+            $('#selectTomNanh').val('').trigger('change');
+            $('#selectTomNanh').text('').trigger('change');
+        });
+        $('.btn_clear_select2_2').on("click",function () {
+            $('#selectTomNanh1').val('').trigger('change');
+            $('#selectTomNanh1').text('').trigger('change');
+        });
+        $('.btn_clear_select2_3').on("click",function () {
+            $('#selectTomNanh2').val('').trigger('change');
+            $('#selectTomNanh2').text('').trigger('change');
         });
     </script>
 @endsection
