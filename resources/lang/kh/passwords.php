@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset' => 'Your password has been reset!',
+    'password' => 'លេខសំងាត់ត្រូវមានយ៉ាងតិច 6តួរ, ហើយត្រូវដូចជាមួយលេខសម្ងាត់បញ្ជាក់',
+    'reset' => 'លេខសំងាត់អ្នកត្រូវបានកែប្រែជោគជ័យ!',
     'sent' => 'We have e-mailed your password reset link!',
     'token' => 'This password reset token is invalid.',
     'user' => "មិនអាចរកឃើញគណនេយ្យ",

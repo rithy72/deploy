@@ -51,4 +51,6 @@ return [
     'users' => 'អ្នកប្រើប្រាស់',
     'actionUsers' => 'សកម្មភាព',
     'reportHistory' => 'របាយការណ៍',
+
+    'password' => 'លេខសំងាត់'
 ];
