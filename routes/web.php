@@ -134,7 +134,7 @@ Route::middleware('auth')->group(function (){
                 Route::delete('/delete/{user_id}','APIController\UserController@delete');
                 Route::put('/deactivate/{user_id}','APIController\UserController@deactivateUser');
                 Route::put('/activate/{user_id}','APIController\UserController@activateUser');
-                Route::post('/reset_own_password','APIController\UserController@resetOwnPassword');
+                //Route::post('/reset_own_password','APIController\UserController@resetOwnPassword');
                 Route::put('/admin_reset_user_password/{user_id}','APIController\UserController@adminReset');
             });
             /* *

@@ -253,11 +253,6 @@ class UserController extends Controller
         return json_encode($returnModel);
     }
 
-    //Reset Password
-    public function resetOwnPassword(Request $request){
-
-    }
-
     //Admin Reset Other User Password
     public function adminReset(Request $request, $id){
         $returnModel = ReturnModel::Instance();
