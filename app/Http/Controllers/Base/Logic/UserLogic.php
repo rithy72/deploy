@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Str;
 
 class UserLogic
 {
@@ -116,7 +117,8 @@ class UserLogic
             AuditGroup::NOTE, $old_model->note, $user_model->note, $flag, $chang_log_array);
         //Role
         $chang_log_array = $userAudit->CompareField(
-            AuditGroup::USER_ROLE, $old_model->display_role, $user_model->display_role, UserActionEnum::INSERT, $chang_log_array);
+            AuditGroup::USER_ROLE, strtolower($old_model->display_role), strtolower($user_model->display_role),
+            UserActionEnum::INSERT, $chang_log_array);
 
         //
         return $chang_log_array;
@@ -264,31 +266,34 @@ class UserLogic
     }
 
     //Reset Password
-    public function UserResetOwnPassword($username, $old_password, $new_password){
-        $userObj = $this->Find(Auth::id());
-        //Check, can not reset
-        if (!Hash::check($old_password, $userObj->password)) return false;
-        if ($username != $userObj->email) return false;
+    public function UserPreps($email){
+        $check = DB::table('password_resets')->where('email','=', trim($email))->first();
+        $dateInstance = DateTimeLogic::Instance();
+        $randString = Str::random(60);
         //
-        $new_password = Hash::make(trim($new_password));
-        //Reset Password, if can
-        DB::table('users')
-            ->where('id','=', $userObj->id)
-            ->update([
-                'status' => true,
-                'last_update_date' => DateTimeLogic::Instance()
-                    ->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-                'last_update_by' => Auth::id(),
-                'just_updated' => true
+        if ($check == null){
+            //Insert New Token
+            DB::table('password_resets')->insert([
+                'email' => trim($email),
+                'token' => Hash::make($randString),
+                'created_at' => $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
             ]);
+        }else{
+            DB::table('password_resets')
+                ->where('email','=', trim($email))
+                ->update([
+                    'token' => Hash::make($randString),
+                    'created_at' => $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
+                ]);
+        }
         //
-        //Auth::user()->password = $new_password;
-        //User Audit
-        $description = $userObj->user_no."-".$userObj->name;
-        UserAuditLogic::Instance()
-            ->UserOnUserAction($userObj->id, UserActionEnum::CHANGE_PASSWORD, $description, []);
-
-        return true;
+        DB::table('users')
+            ->where('id','=', Auth::id())
+            ->update([
+                "just_updated" => false,
+                'remember_token' => $randString
+            ]);
+        return $randString;
     }
 
     //Admin Reset User Password

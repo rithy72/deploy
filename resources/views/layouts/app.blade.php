@@ -52,7 +52,7 @@
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
                     {{--<img src="assets/images/placeholder.jpg" alt="">--}}
-                    <span>{{ Auth::user()->name }}</span>
+                    <span>{{ Auth::user()->user_no.' - '.Auth::user()->name }}</span>
                     <i class="caret"></i>
                 </a>
 
@@ -114,26 +114,10 @@
                             @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="{{('/admin/user')}}"><i class="icon-user"></i> <span>@lang('string.users')</span></a>
-                                {{--<ul>
-                                    <li><a href="#">Horizontal navigation</a></li>
-                                    <li>
-                                        <a href="#">1 columns</a>
-                                        <ul>
-                                            <li><a href="#">Dual sidebars</a></li>
-                                            <li><a href="#">Double sidebars</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Ding dak ey te!!!</a></li>
-                                </ul>--}}
                             </li>
 
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="{{('/admin/history_user')}}"><i class="icon-clipboard3"></i> <span>@lang('string.actionUsers')</span></a>
-                                {{--<ul>
-                                    <li><a href="#" id="layout3">Layout 1</a></li>
-                                    <li><a href="#" id="layout4">Layout 2 <span class="label bg-warning-400">Current</span></a></li>
-                                    <li class="disabled"><a href="#" id="layout5">Layout 3 <span class="label bg-slate-800">Coming soon</span></a></li>
-                                </ul>--}}
                             </li>
                             <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
                                 <a href="{{('/admin/report')}}"><i class="icon-stack-text"></i> <span>@lang('string.reportHistory')</span></a>
@@ -153,6 +137,24 @@
         <div class="content-wrapper">
             <div class="box"> {{--make scroll in content it the most powerful--}}
             <!-- Sidebars overview -->
+            @if ($errors->has('email'))
+                <div class="alert alert-danger alert-dismissible fade in">
+                    <a class="close" data-dismiss="alert" aria-label="close" style="margin-right: 24px">x</a>
+                    <p style="margin-top: 5px">{{ $errors->first('email') }}</p>
+                </div>
+            @endif
+            @if ($errors->has('password'))
+                <div class="alert alert-danger alert-dismissible fade in">
+                    <a class="close" data-dismiss="alert" aria-label="close" style="margin-right: 24px">x</a>
+                    <p style="margin-top: 5px">{{ $errors->first('password') }}</p>
+                </div>
+            @endif
+            @if(session('status'))
+                    <div class="alert alert-success alert-dismissible fade in">
+                        <a class="close" data-dismiss="alert" aria-label="close" style="margin-right: 24px">x</a>
+                        <p style="margin-top: 5px">{{session('status')}}</p>
+                    </div>
+            @endif
              @yield('content')
             <!-- /sidebars overview -->
             </div>
@@ -165,8 +167,9 @@
 </div>
 <!-- /page container -->
 {{--------- dialog change password user and admin ---------}}
-<form role="form" action="api/user/reset_own_password" method="post">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+<form role="form" action="{{ route('password.request') }}" method="POST">
+    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+    @csrf
     <div id="changePassword" class="modal fade">
         <div class="modal-dialog ">
             <div class="modal-content">
@@ -174,40 +177,40 @@
                     <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
                     <h5 class="modal-title">@lang('string.changePassword')</h5>
                 </div>
-
+                <input type="hidden" name="token" value="{{\Illuminate\Support\Facades\Auth::user()->remember_token}}">
                 {{--Change Password Modal--}}
                 <div class="modal-body">
                     <div class="col-md-12">
                         <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer" style="margin-top: -14px;">
                             <div class="datatable-header">
                                 <div class="form-group">
-                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.username')</label>
+                                    <label class="control-label col-lg-5" style="font-size: 15px">Username:</label>
                                     <div class="col-lg-7">
-                                        <input name="email" type="text" placeholder="@lang('string.writeYourUserNameHere...')" id="" class="form-control" style="border: 1px solid grey;">
+                                        <input name="email" id="email" type="text" placeholder="@lang('string.writeYourUserNameHere...')"  class="form-control" style="border: 1px solid grey;" required autofocus>
                                         <br>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.oldPassword')</label>
+                                    <label class="control-label col-lg-5" style="font-size: 15px">Password:</label>
                                     <div class="col-lg-7">
-                                        <input name="old_password" type="text" placeholder="@lang('string.writeOldPasswordHere...')" id="" class="form-control" style="border: 1px solid grey;">
+                                        <input name="password" id="password" type="password" placeholder="@lang('string.writeOldPasswordHere...')" class="form-control" style="border: 1px solid grey;" required>
                                         <br>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.newPassword')</label>
+                                    <label class="control-label col-lg-5" style="font-size: 15px">Confirm Password:</label>
                                     <div class="col-lg-7">
-                                        <input name = "new_password" type="text" placeholder="@lang('string.writeNewPasswordHere...')" id="" class="form-control" style="border: 1px solid grey;">
+                                        <input name="password_confirmation" id="password-confirm" type="password" placeholder="@lang('string.writeNewPasswordHere...')" class="form-control" style="border: 1px solid grey;" required>
                                         <br>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.confirmPassword')</label>
-                                    <div class="col-lg-7">
-                                        <input type="text" placeholder="@lang('string.writeNewPasswordHere...')" id="" class="form-control" style="border: 1px solid grey;">
-                                        <br>
-                                    </div>
-                                </div>
+                                {{--<div class="form-group">--}}
+                                    {{--<label class="control-label col-lg-5" style="font-size: 15px">@lang('string.confirmPassword')</label>--}}
+                                    {{--<div class="col-lg-7">--}}
+                                        {{--<input type="text" placeholder="@lang('string.writeNewPasswordHere...')" id="" class="form-control" style="border: 1px solid grey;">--}}
+                                        {{--<br>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>

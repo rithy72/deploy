@@ -44,13 +44,14 @@ class LoginController extends Controller
     {
         $userObj = UserLogic::Instance()->Find(Auth::id());
         $role = strtolower($userObj->role);
-        if ($userObj->deleted == 1 || $userObj->status == 0) return '/';
+        if ($userObj->deleted == 1 || $userObj->status == 0)
+            return '/login';
         if ($role == UserRoleEnum::ADMIN){
             return '/admin/mainform';
         }elseif ($role == UserRoleEnum::USER){
             return '/admin/invoice';
         }
-        return '/';
+        return '/login';
     }
 
 }
