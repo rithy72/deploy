@@ -52,5 +52,8 @@ return [
     'actionUsers' => 'សកម្មភាព',
     'reportHistory' => 'របាយការណ៍',
 
-    'password' => 'លេខសំងាត់'
+    'password' => 'លេខសំងាត់',
+
+    'can_reset_password' => "អ្នកអាចធ្វើការកែប្រែលេខសំងាត់បាន",
+    'can_not_reset_password' => "អ្នកមិនអាចធ្វើការកែប្រែលេខសំងាត់បានទេ"
 ];

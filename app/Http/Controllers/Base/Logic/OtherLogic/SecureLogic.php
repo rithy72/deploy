@@ -23,7 +23,6 @@ class SecureLogic
 
     //Check Admin Password
     public function CheckAdminPassword($password){
-        $encryptPassword = bcrypt($password);
         $userObj = UserLogic::Instance()->Find(Auth::id());
         //Check
         if (Hash::check($password, $userObj->password)){
@@ -33,5 +32,13 @@ class SecureLogic
         return false;
     }
 
+    //Check Username and Password Current User
+    public function CheckUsernamePassword($username, $password){
+        $userObj = UserLogic::Instance()->Find(Auth::id());
+        //
+        $checkPassword = Hash::check($password, $userObj->password);
+        if ($checkPassword && $userObj->email == $username) return true;
+        return false;
+    }
 
 }

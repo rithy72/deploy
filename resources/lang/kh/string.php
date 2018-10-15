@@ -50,11 +50,11 @@ return[
     'reportHistory' => 'របាយការណ៍',
 // part of username and password
     'changePassword' => 'ធ្វើការផ្លាស់ប្តូរលេខសំងាត់របស់អ្នក',
-    'username' => 'ឈ្មោះលុកចូលប្រើប្រាស់ប្រព័ន្ធ ៖',
+    'username' => 'គណនេយ្យប្រើប្រាស់ ៖',
     'password' => 'លេខសំងាត់',
-    'oldPassword' => 'លេខសំងាត់ចាស់ ៖',
+    'oldPassword' => 'លេខសំងាត់ ៖',
     'newPassword' => 'លេខសំងាត់ថ្មី ៖',
-    'confirmPassword' => 'លេខសំងាត់ថ្មីដូចខាងលើ ៖',
+    'confirmPassword' => 'បញ្ជាក់លេខសំងាត់ថ្មី ៖',
     'writeYourUserNameHere...' => 'សរសេរឈ្មោះលុខចូលប្រើប្រាស់....',
     'writeOldPasswordHere...' => 'សរសេរលេខសំងាត់ចាស់....',
     'writeNewPasswordHere...' => 'សរសេរលេខសំងាត់ថ្មី....',
@@ -175,4 +175,6 @@ return[
     'TrackUserLoginAndLogout' => 'សង្កេតសកម្មភាពអ្នកប្រើប្រាស់',
     'login' => 'អ្នកចូលប្រើប្រាស់ប្រព័ន្ឌ',
     'logout.' => 'អ្នកចេញពីការប្រើប្រាស់ប្រព័ន្ឌ',
+
+    'reset_password_guide' => "សូមបញ្ចូលគណនេយ្យ និងលេខសម្ងាត់ខាងលើដើម្បីធ្វើការបញ្ជាក់"
 ];

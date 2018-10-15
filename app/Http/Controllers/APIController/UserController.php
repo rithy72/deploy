@@ -282,4 +282,23 @@ class UserController extends Controller
         return json_encode($returnModel);
     }
 
+    //Check Username And Password Current User
+    public function checkUser(Request $request){
+        $returnModel = ReturnModel::Instance();
+        //
+        $username = $request->input('email','');
+        $password = $request->input('password','');
+        //
+        $result = SecureLogic::Instance()->CheckUsernamePassword($username, $password);
+        //
+        if ($result){
+            $returnModel->status = "200";
+            $returnModel->data = "Valid Username and Password";
+        }else{
+            $returnModel->status = "400";
+            $returnModel->data = "Invalid Username or Password";
+        }
+
+        return json_encode($returnModel);
+    }
 }
