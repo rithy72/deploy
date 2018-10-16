@@ -133,4 +133,20 @@ class ItemTypeController extends Controller
         return json_encode($class);
     }
 
+    //Item Type History
+    public function history(Request $request, $id){
+        $class = ReturnModel::Instance();
+        $fromDate = $request->input('from_date',"");
+        $toDate = $request->input('to_date',"");
+        $action = $request->input('action', "");
+        $pageSize = $request->input('page_size',10);
+
+        $result = ItemTypeLogic::Instance()->History($fromDate, $toDate, $action, $id, $pageSize);
+
+        $class->status = "200";
+        $class->data = $result;
+
+        return json_encode($class);
+    }
+
 }

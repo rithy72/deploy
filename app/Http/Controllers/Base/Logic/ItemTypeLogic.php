@@ -251,4 +251,13 @@ class ItemTypeLogic
         return $returnModel;
     }
 
+    //Item Type History
+    public function History($from_date, $to_date, $action, $id, $page_size){
+        $allowGroup = array(AuditGroup::ITEM_TYPE);
+        $getResult = UserAuditLogic::Instance()
+            ->search($from_date, $to_date, $allowGroup, AuditGroup::ITEM_TYPE, $action,"", $id, $page_size);
+
+        return $getResult;
+    }
+
 }
