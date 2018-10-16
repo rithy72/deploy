@@ -55,84 +55,103 @@
                     {{----- Merl Detail bos Customer 1 -----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body">
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.nameCustomer') ៖</label>
-                                    <div class="col-md-9">
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.nameCustomer') ៖</label>
+                                    <div class="col-md-8">
                                         <p id="customer_name"></p>
-                                        <br>
                                     </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.phoneNumber') ៖</label>
-                                    <div class="col-md-9">
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.phoneNumber') ៖</label>
+                                    <div class="col-md-8">
                                         <p id="phone_number"></p>
-                                        <br>
                                     </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.dayGetMoney') ៖</label>
-                                    <div class="col-md-9">
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.dayGetMoney') ៖</label>
+                                    <div class="col-md-8">
                                         <p id="date_in"></p>
-                                        <br>
                                     </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.expiredDay') ៖</label>
-                                    <div class="col-md-9">
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.expiredDay') ៖</label>
+                                    <div class="col-md-8">
                                         <p id="date_out"></p>
-                                        <br>
                                     </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.paymentTerm')</label>
-                                    <div class="col-md-9">
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.paymentTerm')</label>
+                                    <div class="col-md-8">
                                         <p id="payment_term"></p>
                                     </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">@lang('string.priceAmountPerMonth')</p>
-                                    <p style="margin-top: 6px;margin-left: 30px;" id="interests_value"></p>
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.priceAmountPerMonth')</label>
+                                    <div class="col-md-8">
+                                        <p id="interests_value"></p>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">តម្លៃដើមសរុប ៖</p>
-                                    <p style="margin-top: 6px;margin-left: 30px;" id="grand_total"></p>
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">តម្លៃដើមសរុប ៖</label>
+                                    <div class="col-md-8">
+                                        <p id="grand_total"></p>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">@lang('string.situation') ៖</p>
-                                    <p style="margin-top: 6px;margin-left: 30px;" id="status"></p>
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.situation') ៖</label>
+                                    <div class="col-md-8">
+                                        <p id="status"></p>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">តម្លៃដើមបង់រួច ៖</p>
-                                    <p style="margin-top: 6px;margin-left: 30px;" id="paid"></p>
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">តម្លៃដើមបង់រួច ៖</label>
+                                    <div class="col-md-8">
+                                        <p id="paid"></p>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">@lang('string.createBy') ៖</p>
-                                    <p style="margin-top: 6px;margin-left: 30px;" id="createByUser"></p>
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.createBy') ៖</label>
+                                    <div class="col-md-8">
+                                        <p id="createByUser"></p>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
-                            <div class="col-xs-12 .col-sm-6 col-md-6">
-                                <div class="form-group col-md-12" style="display: inline-flex;">
-                                    <p style="margin-top: 7px;">តម្លៃដើមនៅសល់ ៖</p>
-                                    <p style="margin-top: 6px;margin-left: 30px;" id="luynovsol"></p>
+                            <div class="col-md-6">
+                                <div class="form-group" style="font-size: 18px;">
+                                    <label class="control-label col-md-4" style="font-size: 18px">តម្លៃដើមនៅសល់ ៖</label>
+                                    <div class="col-md-8">
+                                        <p id="luynovsol"></p>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
                         </div>
