@@ -190,25 +190,25 @@
         {
             "admin_password":"sothea@admin123456",
             "user_info":{
-//                "user_no":"USER-003",
-//                "name":"Johny002",
-//                "phone_number":"089256412",
-//                "note":"New User",
-//                "email":"newuser2@newuser",
-//                "password":"newuser2@newuser123"
-                "new_password":"123456"
+////                "user_no":"USER-001",
+////                "name":"Johny001",
+////                "phone_number":"089256412",
+////                "note":"New User",
+////                "email":"newuser1@user"
+////                "password":"newuser1@user123"
+                "new_password":"1234567"
             }
 
-//            "email":"newuser@newuser",
-//            "old_password":"123456",
+//            "email":"newuser1@user",
+//            "old_password":"newuser1@user123",
 //            "new_password":"1234567"
         };
 
 
         $.ajax({
-            type:"GET",
-            url:"api/user/user_history/6?from_date=&to_date=&group=18&action=&page_size=10",
-            //data: obj,
+            type:"PUT",
+            url:"api/user/activate/4",
+            data: obj,
             success:function (response) {
                 console.log(response);
             }

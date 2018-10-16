@@ -17,4 +17,13 @@ class GeneralStatus
       0 => "ផ្អាកដំណើរការ",
       1 => "ដំណើរការ"
     );
+
+    public static function FinalizeStatus($status){
+        if ($status == 1 || $status == "1"){
+            return true;
+        }elseif ($status == 0 || $status == "0"){
+            return false;
+        }
+        return "";
+    }
 }

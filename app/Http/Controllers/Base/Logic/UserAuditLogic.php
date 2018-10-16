@@ -243,7 +243,7 @@ class UserAuditLogic
             })
             //When user has date range
             ->whereBetween('user_record.date_time', array($fromDate, $toDate))
-            //->orderBy('user_record.date_time','asc')
+            ->orderBy('user_record.date_time','asc')
             ->paginate($page_size);
         //Append
         $getResult->appends(Input::except('page'));

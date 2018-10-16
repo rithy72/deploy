@@ -253,30 +253,6 @@ class UserController extends Controller
         return json_encode($returnModel);
     }
 
-    //Reset Password
-    public function resetOwnPassword(Request $request){
-        $returnModel = ReturnModel::Instance();
-        //
-        $username = $request->email;
-        $oldPassword = $request->old_password;
-        $newPassword = $request->new_password;
-        //
-        $changeResult = UserLogic::Instance()->UserResetOwnPassword($username, $oldPassword, $newPassword);
-        //
-        if ($changeResult){
-            //Insert Success
-            $returnModel->status = "201";
-            $returnModel->data = "Action on logged in user, must login again";
-        }else{
-            //Invalid Username or Password
-            $returnModel->status = "400";
-            $returnModel->data = "Invalid Username or Password";
-        }
-
-        //if ($returnModel->status == "201") Auth::logout();
-        return json_encode($returnModel);
-    }
-
     //Admin Reset Other User Password
     public function adminReset(Request $request, $id){
         $returnModel = ReturnModel::Instance();
@@ -306,4 +282,23 @@ class UserController extends Controller
         return json_encode($returnModel);
     }
 
+    //Check Username And Password Current User
+    public function checkUser(Request $request){
+        $returnModel = ReturnModel::Instance();
+        //
+        $username = $request->input('email','');
+        $password = $request->input('password','');
+        //
+        $result = SecureLogic::Instance()->CheckUsernamePassword($username, $password);
+        //
+        if ($result){
+            $returnModel->status = "200";
+            $returnModel->data = "Valid Username and Password";
+        }else{
+            $returnModel->status = "400";
+            $returnModel->data = "Invalid Username or Password";
+        }
+
+        return json_encode($returnModel);
+    }
 }

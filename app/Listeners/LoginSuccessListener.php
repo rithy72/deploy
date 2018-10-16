@@ -10,11 +10,11 @@ namespace App\Listeners;
 
 
 use App\Http\Controllers\Base\Logic\UserAuditLogic;
+use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 
 class LoginSuccessListener
@@ -37,8 +37,14 @@ class LoginSuccessListener
      */
     public function handle(Login $event)
     {
-        DB::table('users')->where('id','=', Auth::id())->update(["just_updated" => false]);
         //
         UserAuditLogic::Instance()->UserSecurityAction(Auth::id(), UserActionEnum::LOGIN, "", []);
+        //
+        $rememberToken = UserLogic::Instance()->UserPreps(Auth::user()->email);
+        //
+        Auth::user()->remember_token = $rememberToken;
+        //
+
+
     }
 }

@@ -16,7 +16,7 @@ class DateTimeLogic
 
     private const TIME_ZONE = "Asia/Bangkok";
     public const DB_DATE_TIME_FORMAT = "Y-m-d H:i:s";
-    public const SHOW_DATE_TIME_FORMAT = "d/m/Y H:i:s";
+    public const SHOW_DATE_TIME_FORMAT = "d/m/Y g:i:s A";
     public const DB_DATE_FORMAT = "Y-m-d";
     public const SHOW_DATE_FORMAT = "d/m/Y";
 

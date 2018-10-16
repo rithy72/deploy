@@ -36,7 +36,10 @@ class UserMiddleware
     public function handle($request, Closure $next)
     {
 
+        if (Auth::user() == null) return redirect('/login');
+
         $userObj = UserLogic::Instance()->Find(Auth::id());
+
         if ($userObj->just_update == true || $userObj->status == false || $userObj->deleted == true){
             return redirect('/login');
         }

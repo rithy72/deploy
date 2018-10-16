@@ -12,6 +12,8 @@ namespace App\Http\Controllers\Base\Model;
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserModel
 {
@@ -34,10 +36,12 @@ class UserModel
     public $deleted;
     public $just_update;
 
+    //Instance
     public static function Instance(){
         return new UserModel();
     }
 
+    //Finalize User Object
     public static function FinalizeObject($user_object){
         if (empty($user_object) || $user_object == null)
             return UserModel::Instance();
@@ -71,5 +75,12 @@ class UserModel
         $userModel->deleted = $user_object->deleted;
         $userModel->just_update = $user_object->just_updated;
         return $userModel;
+    }
+
+    //Get User Reset Password Token
+    public function GetResetPasswordToken(){
+        $userObj = UserLogic::Instance()->Find(Auth::id());
+        $getResult = DB::table('users')->where('id','=', $userObj->id)->first();
+        return $getResult->remember_token;
     }
 }
