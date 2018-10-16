@@ -140,7 +140,7 @@
                                             </div>
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.note') ៖</label>
                                             <div class="col-lg-9">
-                                                <textarea rows="3" cols="3" class="form-control" placeholder="@lang('string.must_to_write')" style="border: 1px solid grey;" id="note"></textarea>
+                                                <textarea rows="3" cols="3" class="form-control" placeholder="@lang('string.writeHere...')" style="border: 1px solid grey;" id="note"></textarea>
                                             </div>
                                             <div class="col-lg-12">
                                                 <hr>
@@ -209,7 +209,7 @@
                                             </div>
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.note') ៖</label>
                                             <div class="col-lg-9">
-                                                <textarea rows="3" cols="3" class="form-control" placeholder="@lang('string.must_to_write')" style="border: 1px solid grey;" id="note_update"></textarea>
+                                                <textarea rows="3" cols="3" class="form-control" placeholder="@lang('string.writeHere...')" style="border: 1px solid grey;" id="note_update"></textarea>
                                             </div>
                                             <div class="col-lg-12">
                                                 <hr>

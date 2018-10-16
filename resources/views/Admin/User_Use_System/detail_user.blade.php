@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.last_update_date') ៖</label>
+                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.last_update_date')៖</label>
                                     <div class="col-md-8">
                                         <p id="last_create_date"></p>
                                     </div>
