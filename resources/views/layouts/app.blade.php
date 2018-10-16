@@ -403,7 +403,7 @@
                     enabler(status);
                 }
             });
-        }, 500);
+        });
     }
 
     //Switch Warning
@@ -428,12 +428,24 @@
         $('#reset_password_warning').css('color', color);
     }
 
+    //Check New And Confirmation Password
+    function checkNewPassword() {
+        var newPassword = $('#password').val();
+        var confirmNewPassword = $('#password-confirm').val();
+        var enable = true;
+        //
+        if (newPassword.length > 6 || newPassword.length === 6){
+            enable = (newPassword === confirmNewPassword) ? false : true;
+        }
+        //
+        $('#submit_button').prop('disabled', enable);
+    }
+
     //Enable Input and Button
     function enabler(status) {
-        var enable = (status === "200") ? false : true;
+        var enable = (status !== "200") ? true : false;
         $('#password').prop('disabled', enable);
         $('#password-confirm').prop('disabled', enable);
-        $('#submit_button').prop('disabled', enable);
     }
 
     //current password input enter key event
@@ -441,6 +453,23 @@
         if (event.which === 13) {
             checkUsernamePassword();
         }
+    });
+
+    //email input enter key event
+    $('#email').keypress(function (event) {
+        if (event.which === 13) {
+            checkUsernamePassword();
+        }
+    });
+
+    //Check new password
+    $('#password').on('input', function (event) {
+        checkNewPassword()
+    });
+
+    //Check Confirm Password
+    $('#password-confirm').on('input', function (event) {
+        checkNewPassword()
     });
 
     //Check Button On click
