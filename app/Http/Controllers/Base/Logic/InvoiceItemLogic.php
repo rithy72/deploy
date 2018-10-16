@@ -228,6 +228,7 @@ class InvoiceItemLogic
             $outItem = sizeof($items);
         }
 
+        if (empty($outItem) || $outItem == 0) return $outItem;
         //Change Logs
         foreach ($items as $item){
             $changeLogArray = UserAuditLogic::Instance()
