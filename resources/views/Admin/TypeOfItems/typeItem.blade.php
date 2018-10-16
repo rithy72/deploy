@@ -380,7 +380,7 @@
                     var convert = JSON.parse(response);
                     if (convert.status === "200"){
                         alert('ធ្វើការលុបរួចរាល់');
-                        window.location.href = '{{('/admin/item_type')}}';
+                        $(_selectRow).closest('tr').remove();
                     } else if (convert.status === "210"){
                         alert('មិនអាចស្វែងរក ដើម្បីធ្វើការលុបបានឡើយ');
                     }

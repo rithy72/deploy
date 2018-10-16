@@ -44,6 +44,10 @@ Route::middleware('auth')->group(function (){
             Route::get('/user',function (){
                 return view('Admin.User_Use_System.user_use_system');
             })->middleware('admin');
+            //Detail User
+            Route::get('/user/detail_user',function (){
+                return view('Admin.User_Use_System.detail_user');
+            });
             //Action History
             Route::get('/history_user',function (){
                 return view('Admin.Action_History_User.history_user');
