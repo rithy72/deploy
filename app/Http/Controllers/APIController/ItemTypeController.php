@@ -36,9 +36,9 @@ class ItemTypeController extends Controller
         $itemTypeModel = ItemTypeModel::Instance();
         $itemTypeModel->item_type_name = $request->input('item_type_name','');
         $itemTypeModel->first_note = $request->input('first_note', ItemTypeLogic::FEATURES[0]);
-        $itemTypeModel->second_note = $request->input('first_note', ItemTypeLogic::FEATURES[1]);
-        $itemTypeModel->third_note = $request->input('first_note', ItemTypeLogic::FEATURES[2]);
-        $itemTypeModel->fourth_note = $request->input('first_note', ItemTypeLogic::FEATURES[3]);
+        $itemTypeModel->second_note = $request->input('second_note', ItemTypeLogic::FEATURES[1]);
+        $itemTypeModel->third_note = $request->input('third_note', ItemTypeLogic::FEATURES[2]);
+        $itemTypeModel->fourth_note = $request->input('fourth_note', ItemTypeLogic::FEATURES[3]);
 
 
         if (empty($itemTypeModel->item_type_name)){
@@ -68,9 +68,9 @@ class ItemTypeController extends Controller
         $itemTypeModel = ItemTypeModel::Instance();
         $itemTypeModel->item_type_name = $request->input('item_type_name','');
         $itemTypeModel->first_note = $request->input('first_note', ItemTypeLogic::FEATURES[0]);
-        $itemTypeModel->second_note = $request->input('first_note', ItemTypeLogic::FEATURES[1]);
-        $itemTypeModel->third_note = $request->input('first_note', ItemTypeLogic::FEATURES[2]);
-        $itemTypeModel->fourth_note = $request->input('first_note', ItemTypeLogic::FEATURES[3]);
+        $itemTypeModel->second_note = $request->input('second_note', ItemTypeLogic::FEATURES[1]);
+        $itemTypeModel->third_note = $request->input('third_note', ItemTypeLogic::FEATURES[2]);
+        $itemTypeModel->fourth_note = $request->input('fourth_note', ItemTypeLogic::FEATURES[3]);
 
         if (empty($itemTypeModel->item_type_name)){
             $class->status = "400";

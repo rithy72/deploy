@@ -398,6 +398,7 @@
                 success: function (ResponseJson) {
                     var obj = JSON.parse(ResponseJson);
                     var status = obj.status;
+                    console.log(ResponseJson);
                     switchWarning(username, password, status);
                     enabler(status);
                 }
