@@ -74,7 +74,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                  @lang('String.com_name')
+                  @lang('string.com_name')
                 </div>
             </div>
         </div>

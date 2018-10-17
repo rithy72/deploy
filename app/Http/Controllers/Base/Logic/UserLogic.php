@@ -118,7 +118,7 @@ class UserLogic
         //Role
         $chang_log_array = $userAudit->CompareField(
             AuditGroup::USER_ROLE, strtolower($old_model->display_role), strtolower($user_model->display_role),
-            UserActionEnum::INSERT, $chang_log_array);
+            $flag, $chang_log_array);
 
         //
         return $chang_log_array;

@@ -91,6 +91,7 @@ Route::middleware('auth')->group(function (){
                 Route::delete('/{id}','APIController\ItemTypeController@destroy');
                 Route::put('/deactivate/{id}','APIController\ItemTypeController@deactivate');
                 Route::put('/activate/{id}','APIController\ItemTypeController@activate');
+                Route::get('/history/{id}','APIController\ItemTypeController@history');
             });
             /* *
              * Invoice

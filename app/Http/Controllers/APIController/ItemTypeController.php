@@ -36,9 +36,9 @@ class ItemTypeController extends Controller
         $itemTypeModel = ItemTypeModel::Instance();
         $itemTypeModel->item_type_name = $request->input('item_type_name','');
         $itemTypeModel->first_note = $request->input('first_note', ItemTypeLogic::FEATURES[0]);
-        $itemTypeModel->second_note = $request->input('first_note', ItemTypeLogic::FEATURES[1]);
-        $itemTypeModel->third_note = $request->input('first_note', ItemTypeLogic::FEATURES[2]);
-        $itemTypeModel->fourth_note = $request->input('first_note', ItemTypeLogic::FEATURES[3]);
+        $itemTypeModel->second_note = $request->input('second_note', ItemTypeLogic::FEATURES[1]);
+        $itemTypeModel->third_note = $request->input('third_note', ItemTypeLogic::FEATURES[2]);
+        $itemTypeModel->fourth_note = $request->input('fourth_note', ItemTypeLogic::FEATURES[3]);
 
 
         if (empty($itemTypeModel->item_type_name)){
@@ -68,9 +68,9 @@ class ItemTypeController extends Controller
         $itemTypeModel = ItemTypeModel::Instance();
         $itemTypeModel->item_type_name = $request->input('item_type_name','');
         $itemTypeModel->first_note = $request->input('first_note', ItemTypeLogic::FEATURES[0]);
-        $itemTypeModel->second_note = $request->input('first_note', ItemTypeLogic::FEATURES[1]);
-        $itemTypeModel->third_note = $request->input('first_note', ItemTypeLogic::FEATURES[2]);
-        $itemTypeModel->fourth_note = $request->input('first_note', ItemTypeLogic::FEATURES[3]);
+        $itemTypeModel->second_note = $request->input('second_note', ItemTypeLogic::FEATURES[1]);
+        $itemTypeModel->third_note = $request->input('third_note', ItemTypeLogic::FEATURES[2]);
+        $itemTypeModel->fourth_note = $request->input('fourth_note', ItemTypeLogic::FEATURES[3]);
 
         if (empty($itemTypeModel->item_type_name)){
             $class->status = "400";
@@ -129,6 +129,22 @@ class ItemTypeController extends Controller
 
         $class->status = "200";
         $class->data = "Item Type Activate";
+
+        return json_encode($class);
+    }
+
+    //Item Type History
+    public function history(Request $request, $id){
+        $class = ReturnModel::Instance();
+        $fromDate = $request->input('from_date',"");
+        $toDate = $request->input('to_date',"");
+        $action = $request->input('action', "");
+        $pageSize = $request->input('page_size',10);
+
+        $result = ItemTypeLogic::Instance()->History($fromDate, $toDate, $action, $id, $pageSize);
+
+        $class->status = "200";
+        $class->data = $result;
 
         return json_encode($class);
     }
