@@ -38,7 +38,7 @@ return[
     'failed' => 'គណនេយ្យ ឫលេខសម្ងាត់មិនត្រឹមត្រូវ',
     'throttle' => 'សូមរង់ចាំរយះពេល៖ seconds seconds.',
     'logout' => 'ចាកចេញ',
-    'changePass' => 'ផ្តូរលេខសំងាត់',
+    'changePass' => 'ប្តូរលេខសំងាត់',
     'chooseOption' => 'ជ្រើសរើសការធ្វើ',
     'desboard' => 'ផ្ទាំងគ្រប់គ្រង',
     'invoice' => 'វិក្ក័យបត្រ',
