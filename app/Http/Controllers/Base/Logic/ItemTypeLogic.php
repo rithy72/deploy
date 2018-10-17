@@ -135,7 +135,7 @@ class ItemTypeLogic
     }
 
     //Update Item Type
-    public function Update(ItemTypeModel $item_type_object, $id){
+    public function Update($item_type_object, $id){
         //CheckDuplicate
         $duplicate = $this->CheckDuplicateBeforeUpdate($item_type_object->item_type_name, $id);
         //
@@ -143,10 +143,10 @@ class ItemTypeLogic
             $oldObj = $this->Find($id);
             $changeLogArray = array();
             //
-            $first = $itemTypeModel->first_note ?? ItemTypeLogic::FEATURES[0];
-            $second = $itemTypeModel->second_note ?? ItemTypeLogic::FEATURES[1];
-            $third = $itemTypeModel->third_note ?? ItemTypeLogic::FEATURES[2];
-            $fourth = $itemTypeModel->fourth_note ?? ItemTypeLogic::FEATURES[3];
+            $first = $item_type_object->first_note ?? ItemTypeLogic::FEATURES[0];
+            $second = $item_type_object->second_note ?? ItemTypeLogic::FEATURES[1];
+            $third = $item_type_object->third_note ?? ItemTypeLogic::FEATURES[2];
+            $fourth = $item_type_object->fourth_note ?? ItemTypeLogic::FEATURES[3];
             $noteString = $first.','.$second.','.$third.','.$fourth;
             //Can Update
             DB::table('item_type')->where('id','=', $id)
