@@ -5,8 +5,10 @@
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
-                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a></li>
-                <li><a href="{{('/admin/invoice')}}" style="color: #2577e1;"><span>@lang('string.invoice')</span></a></li>
+                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a>
+                </li>
+                <li><a href="{{('/admin/invoice')}}" style="color: #2577e1;"><span>@lang('string.invoice')</span></a>
+                </li>
                 <li class="active"><span>@lang('string.payment')</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
@@ -34,7 +36,10 @@
                         <h4><b>@lang('string.late')៖ </b><b id="late_day_invoice"></b></h4>
                     </div>
                     <div class="col-sm-6 col-md-1">
-                        <button type="button" class="btn yok_duch" id="show_hide1" style="background: red;border-radius: 7px;color: white;border: 1px solid black;display: none;">យកដាច់</button>
+                        <button type="button" class="btn yok_duch" id="show_hide1"
+                                style="background: red;border-radius: 7px;color: white;border: 1px solid black;display: none;">
+                            យកដាច់
+                        </button>
                     </div>
                 </div>
             </div>
@@ -43,7 +48,8 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.nameCustomer')</label>
                     <div class="col-md-9">
-                        <input type="text" placeholder="សរសេរឈ្មោះអតិថិជន...." id="customer_name" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                        <input type="text" placeholder="សរសេរឈ្មោះអតិថិជន...." id="customer_name" class="form-control"
+                               style="border: 1px solid grey;" disabled="disabled">
                         <br>
                     </div>
                 </div>
@@ -52,7 +58,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.phoneNumber')</label>
                     <div class="col-md-9">
-                        <input type="text" placeholder="@lang('string.writePhoneNumberHere...')" id="customer_phone_number" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                        <input type="text" placeholder="@lang('string.writePhoneNumberHere...')"
+                               id="customer_phone_number" class="form-control" style="border: 1px solid grey;"
+                               disabled="disabled">
                         <br>
                     </div>
                 </div>
@@ -61,7 +69,8 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.dayGetMoney')</label>
                     <div class="col-md-9">
-                        <input type="date" id="create_date" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                        <input type="date" id="create_date" class="form-control" style="border: 1px solid grey;"
+                               disabled="disabled">
                         <br>
                     </div>
                 </div>
@@ -70,7 +79,8 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.expiredDay')</label>
                     <div class="col-md-9">
-                        <input type="date" id="end_date" class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                        <input type="date" id="end_date" class="form-control" style="border: 1px solid grey;"
+                               disabled="disabled">
                         <br>
                     </div>
                 </div>
@@ -104,25 +114,39 @@
 
         <div class="datatable-header" style="margin-top: -25px;">
             <legend style="font-size: 17px;"><b style="margin-left: 16px;">ទំនិញបញ្ចាំ</b></legend>
-            <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
+            <div class="dataTables_length" id="DataTables_Table_3_length"
+                 style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
                 <a class="btn btn-success" id="add_item"><i class="icon-add position-left"></i>បន្ថែមទំនិញ</a>
             </div>
         </div>
         <div class="datatable-scroll" style="overflow-x: hidden;">
             <div class="dataTables_scroll">
                 <!--============ scroll body oy trov 1 header table ===============-->
-                <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 250px; width: 100%;">
-                    <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_All_Data_One_Invoice" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                <div class="dataTables_scrollBody"
+                     style="position: relative; overflow: auto; height: 250px; width: 100%;">
+                    <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%"
+                           id="Show_All_Data_One_Invoice" role="grid" aria-describedby="DataTables_Table_3_info"
+                           style="width: 100%;">
                         <thead style="background: #e3e3ea99;">
                         <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.groupItem')</th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice1')</th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice2')</th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice3')</th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice4')</th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Last Name: activate to sort column ascending">រំលស់</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="First Name: activate to sort column descending">@lang('string.id')</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                aria-label="Last Name: activate to sort column ascending">@lang('string.groupItem')</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice1')</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice2')</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice3')</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                aria-label="Last Name: activate to sort column ascending">@lang('string.itemNotice4')</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                aria-label="Last Name: activate to sort column ascending">@lang('string.situation')</th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                aria-label="Last Name: activate to sort column ascending">រំលស់
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -145,8 +169,10 @@
                 <div style="text-align: right;clear: both;">
                     <div class="col-xs-0 col-sm-3 col-md-6"></div>
                     <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
-                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>ប្រាក់ដើមសរុប</b></label>
-                        <input type="text" placeholder="...." id="amount_price" class="form-control col-sm-7 col-md-7" style="border: 1px solid grey;" disabled="disabled">
+                        <label class="control-label col-sm-5 col-md-5"
+                               style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>ប្រាក់ដើមសរុប</b></label>
+                        <input type="text" placeholder="...." id="amount_price" class="form-control col-sm-7 col-md-7"
+                               style="border: 1px solid grey;" disabled="disabled">
                     </div>
                 </div>
                 {{--<div style="text-align: right;clear: both;">
@@ -160,8 +186,10 @@
                     <br>
                     <div class="col-xs-0 col-sm-3 col-md-6"></div>
                     <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
-                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>ប្រាក់ដើមនៅសល់</b></label>
-                        <input type="text" placeholder="...." id="remain" class="form-control col-sm-7 col-md-7" style="border: 1px solid grey;" disabled="disabled">
+                        <label class="control-label col-sm-5 col-md-5"
+                               style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>ប្រាក់ដើមនៅសល់</b></label>
+                        <input type="text" placeholder="...." id="remain" class="form-control col-sm-7 col-md-7"
+                               style="border: 1px solid grey;" disabled="disabled">
                     </div>
                 </div>
             </div>
@@ -178,43 +206,56 @@
                     <br>
                     <div class="col-sm-3 col-md-6"></div>
                     <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
-                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បង់ប្រាក់ដើម</b></label>
-                        <input type="number" placeholder=".... $" id="payMoney" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;" class="col-sm-7 col-md-7">
+                        <label class="control-label col-sm-5 col-md-5"
+                               style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បង់ប្រាក់ដើម</b></label>
+                        <input type="number" placeholder=".... $" id="payMoney"
+                               onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                               style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;"
+                               class="col-sm-7 col-md-7">
                     </div>
                 </div>
             </div>
-                {{--<div style="text-align: right;clear: both;">--}}
-                    {{--<label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ដក់ប្រាក់បន្ថែម  </b><input type="checkbox" id="checkme"></label>--}}
-                    {{--<div class="col-md-6">--}}
-                        {{--<input type="number" placeholder=".... $" id="takeOutPriceMore" disabled="disabled" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">--}}
-                        {{--<br>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+            {{--<div style="text-align: right;clear: both;">--}}
+            {{--<label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ដក់ប្រាក់បន្ថែម  </b><input type="checkbox" id="checkme"></label>--}}
+            {{--<div class="col-md-6">--}}
+            {{--<input type="number" placeholder=".... $" id="takeOutPriceMore" disabled="disabled" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">--}}
+            {{--<br>--}}
+            {{--</div>--}}
+            {{--</div>--}}
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div style="text-align: right;clear: both;">
                     <br>
                     <div class="col-xs-0 col-sm-3 col-md-6"></div>
                     <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
-                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បន្ថែមប្រាក់</b><input type="checkbox" id="checkme"></label>
-                        <input type="number" placeholder=".... $" id="takeOutPriceMore" disabled="disabled" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;" class="col-sm-7 col-md-7">
+                        <label class="control-label col-sm-5 col-md-5"
+                               style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បន្ថែមប្រាក់</b><input
+                                    type="checkbox" id="checkme"></label>
+                        <input type="number" placeholder=".... $" id="takeOutPriceMore" disabled="disabled"
+                               onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                               style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;"
+                               class="col-sm-7 col-md-7">
                     </div>
                 </div>
             </div>
 
-                {{--<div style="text-align: right;clear: both;">--}}
-                    {{--<label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បន្ថែមប្រាក់</b></label>--}}
-                    {{--<div class="col-md-6">--}}
-                        {{--<input type="number" placeholder=".... $" id="bong_kar" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">--}}
-                        {{--<br>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+            {{--<div style="text-align: right;clear: both;">--}}
+            {{--<label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បន្ថែមប្រាក់</b></label>--}}
+            {{--<div class="col-md-6">--}}
+            {{--<input type="number" placeholder=".... $" id="bong_kar" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">--}}
+            {{--<br>--}}
+            {{--</div>--}}
+            {{--</div>--}}
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div style="text-align: right;clear: both;">
                     <br>
                     <div class="col-xs-0 col-sm-3 col-md-6"></div>
                     <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
-                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បង់ការប្រាក់</b></label>
-                        <input type="number" placeholder=".... $" id="bong_kar" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;" class="col-sm-7 col-md-7">
+                        <label class="control-label col-sm-5 col-md-5"
+                               style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បង់ការប្រាក់</b></label>
+                        <input type="number" placeholder=".... $" id="bong_kar"
+                               onkeydown="javascript: return event.keyCode == 69 ? false : true"
+                               style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;"
+                               class="col-sm-7 col-md-7">
                     </div>
                 </div>
             </div>
@@ -223,19 +264,22 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <hr>
                 <div style="margin-top: -14px;margin-bottom: 7px;float: right;">
-                    <a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
-                    <button type="button" class="btn btn-primary payment_Money_of_one_invoice" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                    <a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i
+                                class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
+                    <button type="button" class="btn btn-primary payment_Money_of_one_invoice"
+                            style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i
+                                class="icon-arrow-right13 position-right"></i></button>
                 </div>
             </div>
 
             {{--<div class="col-xs-12 col-sm-12 col-md-12">--}}
-                {{--<hr>--}}
-                {{--<div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">--}}
-                    {{--<button type="button" class="btn btn-primary payment_Money_of_one_invoice" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>--}}
-                {{--</div>--}}
-                {{--<div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">--}}
-                    {{--<a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>--}}
-                {{--</div>--}}
+            {{--<hr>--}}
+            {{--<div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">--}}
+            {{--<button type="button" class="btn btn-primary payment_Money_of_one_invoice" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>--}}
+            {{--</div>--}}
+            {{--<div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">--}}
+            {{--<a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>--}}
+            {{--</div>--}}
             {{--</div>--}}
         </div>
         {{--====================== End footer of pagination ====================--}}
@@ -247,7 +291,9 @@
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_clear_dialog_itemType" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" id="close_clear_dialog_itemType" data-dismiss="modal">
+                            &times;
+                        </button>
                         <h5 class="modal-title">@lang('string.addMoreItemsToInvoice')</h5>
                     </div>
 
@@ -258,35 +304,47 @@
                                     <div class="">
                                         <div class="form-group">
                                             {{--Group Of Items--}}
-                                            <label class="control-label col-md-3" style="font-size: 15px">@lang('string.groupItem')</label>
+                                            <label class="control-label col-md-3"
+                                                   style="font-size: 15px">@lang('string.groupItem')</label>
                                             <div class="col-md-9" style="margin-bottom: 13px;display: flex;">
                                                 <select class="form-control" id="selectTomNanh">
 
                                                 </select>
-                                                <button type="button" class="btn btn-success btn-icon btn-rounded" title="បង្កើតប្រភេទទំនិញថ្មី" id="createNewTypeItem"><i class="icon-plus3"></i></button>
+                                                <button type="button" class="btn btn-success btn-icon btn-rounded"
+                                                        title="បង្កើតប្រភេទទំនិញថ្មី" id="createNewTypeItem"><i
+                                                            class="icon-plus3"></i></button>
                                             </div>
                                             {{--Number som Kol--}}
-                                            <label class="control-label col-md-3" style="font-size: 15px">@lang('string.notice')</label>
+                                            <label class="control-label col-md-3"
+                                                   style="font-size: 15px">@lang('string.notice')</label>
                                             <div class="col-md-9">
-                                                <input type="text" placeholder="@lang('string.itemNotice1')" name="" id="_notice1" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.itemNotice1')" name=""
+                                                       id="_notice1" class="form-control"
+                                                       style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--full name--}}
                                             <label class="control-label col-md-3" style="font-size: 15px"></label>
                                             <div class="col-md-9">
-                                                <input type="text" placeholder="@lang('string.itemNotice2')" name="" id="_notice2" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.itemNotice2')" name=""
+                                                       id="_notice2" class="form-control"
+                                                       style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--phone number--}}
                                             <label class="control-label col-md-3" style="font-size: 15px"></label>
                                             <div class="col-md-9">
-                                                <input type="text" placeholder="@lang('string.itemNotice3')" name="" id="_notice3" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.itemNotice3')" name=""
+                                                       id="_notice3" class="form-control"
+                                                       style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Cost--}}
                                             <label class="control-label col-md-3" style="font-size: 15px"></label>
                                             <div class="col-md-9">
-                                                <input type="text" placeholder="@lang('string.itemNotice4')" name="" id="_notice4" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.itemNotice4')" name=""
+                                                       id="_notice4" class="form-control"
+                                                       style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -297,9 +355,13 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_clear_dialog_itemType" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        <button type="button" class="btn btn-link" id="close_clear_dialog_itemType" data-dismiss="modal"
+                                style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i
+                                    class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
-                        <button type="button" class="btn btn-primary btn_add_more_itemType" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_add_more_itemType"
+                                style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;">
+                            <b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -312,7 +374,8 @@
             <div class="modal-dialog">
                 <div class="modal-content" style="box-shadow: -3px 50px 164px 110px #0006;">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_createNewItemType" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" id="close_createNewItemType" data-dismiss="modal">&times;
+                        </button>
                         <h5 class="modal-title">@lang('string.createNewItems')</h5>
                     </div>
 
@@ -322,9 +385,11 @@
                                 <div class="datatable-header" style="margin-top: -40px;">
                                     <div class="">
                                         <div class="form-group">
-                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.newTypeItem')</label>
+                                            <label class="control-label col-lg-3"
+                                                   style="font-size: 15px">@lang('string.newTypeItem')</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.addNewTypeItemHere...')" id="create" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.addNewTypeItemHere...')"
+                                                       id="create" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                         </div>
@@ -335,9 +400,13 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_createNewItemType" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        <button type="button" class="btn btn-link" id="close_createNewItemType" data-dismiss="modal"
+                                style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i
+                                    class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
-                        <button type="button" class="btn btn-primary btn_create_new_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
+                        <button type="button" class="btn btn-primary btn_create_new_item_type"
+                                style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;">
+                            <b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -364,11 +433,11 @@
 
 @section('script')
     <script>
-        $( document ).ajaxStart(function() {
-            $( "#loading" ).show();
+        $(document).ajaxStart(function () {
+            $("#loading").show();
         });
-        $( document ).ajaxStop(function() {
-            $( "#loading" ).hide();
+        $(document).ajaxStop(function () {
+            $("#loading").hide();
         });
         $.ajaxSetup({
             headers: {
@@ -383,7 +452,7 @@
                 url: "../api/item_group?page_size=15",
                 delay: 1000,
                 data: function (params) {
-                    if (params.term){ // if have user input key in input text it work the statement
+                    if (params.term) { // if have user input key in input text it work the statement
                         query = {
                             search: params.term
                         };
@@ -398,7 +467,7 @@
                     //console.log(data);
                     var GG = JSON.parse(data);
                     const result = $.map(GG.data.data, function (value) {
-                        return {id: value.id, text: value.item_type_name}
+                        return {id: value.id, text: value.item_type_name, object: value}
                     });
                     return {
                         results: result,
@@ -409,25 +478,29 @@
                 }
             }
         });
+        $('#selectTomNanh').on('select2:select', function (e) {
+            var data = e.params.data.object;
+            updateNoticeInputPlaceHolder(data, FLAG.ADD)
+        });
         // dialog add item to invoice
-        $(document).on("click","#add_item",function(){
+        $(document).on("click", "#add_item", function () {
             $('#add_more_item_to_invoice').modal({
                 backdrop: 'static'
             });
         });
         // dialog show create new item
-        $(document).on("click","#createNewTypeItem",function(){
+        $(document).on("click", "#createNewTypeItem", function () {
             $('#createNewTomNanh').modal({
                 backdrop: 'static'
             });
         });
         // --- create new item type, and ,close dialog clear input ---
-        $(document).on("click","#close_createNewItemType",function () {
+        $(document).on("click", "#close_createNewItemType", function () {
             $('#create').val('');
         });
-        $(document).on("click",".btn_create_new_item_type",function () {
+        $(document).on("click", ".btn_create_new_item_type", function () {
             var storeInput = $('#create').val();
-            if (storeInput === ""){
+            if (storeInput === "") {
                 alert('បំពេញសិន មុនពេលធ្វើការបង្កើត');
             } else {
                 $.ajax({
@@ -446,8 +519,9 @@
                 });
             }
         });
+
         // --- show data in invoice ---
-        function show_data_in_table(id,invoice_id,id_itemType,increment,name,notice1,notice2,notice3,notice4,status,checkBox) {
+        function show_data_in_table(id, invoice_id, id_itemType, increment, name, notice1, notice2, notice3, notice4, status, checkBox) {
             var _tr = '<tr>' +
                 '<td style="display:none;">' + id + '</td>' +
                 '<td style="display:none;">' + invoice_id + '</td>' +
@@ -463,12 +537,13 @@
                 '</tr>';
             $('#Show_All_Data_One_Invoice tbody').append(_tr);
         }
+
         var ConvertJson, ConvertJsonArray, storeAutoEncretment = 0;
         (function () {
             var _id = atob($.cookie("KeyInvoice")); // atob = decode from base64,  btoa = encode to base 64
             $.ajax({
                 type: "GET",
-                url: '../api/invoice/'+_id+'',
+                url: '../api/invoice/' + _id + '',
                 success: function (response) {
                     //console.log(response);
                     ConvertJson = JSON.parse(response);
@@ -478,10 +553,10 @@
                     $('#user_create').text(a.user_full_name);
                     $('#late_day_invoice').text(a.late_days);
                     // -- condition pel yok invoice duch or not --
-                    if (a.is_late === false){
+                    if (a.is_late === false) {
                         $('#show_hide').hide();
                         $('#show_hide1').hide();
-                    } else if (a.is_late === true){
+                    } else if (a.is_late === true) {
                         $('#show_hide').show();
                         $('#show_hide1').show();
                     }
@@ -498,27 +573,43 @@
 
                     $('#percent_rate').val(a.interests_rate);
 
-                    $('#interests_value').text(a.interests_value+" $");
-                    $('#amount_price').val(a.grand_total+" $");
-                    $('#remain').val(a.remain+" $");
+                    $('#interests_value').text(a.interests_value + " $");
+                    $('#amount_price').val(a.grand_total + " $");
+                    $('#remain').val(a.remain + " $");
 
                     // ajax request to get data show in table invoiceUpdate
                     $.ajax({
                         type: "GET",
-                        url: '../api/item/invoice/'+_id+'',
+                        url: '../api/item/invoice/' + _id + '',
                         success: function (response) {
                             //console.log(response);
                             ConvertJsonArray = JSON.parse(response);
-                            for (var i = 0; i < ConvertJsonArray.data.length; i++){
-                                if (ConvertJsonArray.data[i].status === 1){
+                            for (var i = 0; i < ConvertJsonArray.data.length; i++) {
+                                if (ConvertJsonArray.data[i].status === 1) {
                                     storeAutoEncretment += 1; // store auto increment
                                     var short = ConvertJsonArray.data[i], notice1, notice2, notice3, notice4;
                                     // condition if notice null convert to empty
-                                    if (short.first_feature === null){notice1 = "";}else{notice1 = short.first_feature}
-                                    if (short.second_feature === null){notice2 = "";}else{notice2 = short.second_feature}
-                                    if (short.third_feature === null){notice3 = "";}else{notice3 = short.third_feature}
-                                    if (short.fourth_feature === null){notice4 = "";}else{notice4 = short.fourth_feature}
-                                    show_data_in_table(short.id,short.invoice_id,short.item_type_id,storeAutoEncretment,short.item_type_name,notice1,notice2,notice3,notice4,short.display_status,'<td><input type="checkbox"></td>');
+                                    if (short.first_feature === null) {
+                                        notice1 = "";
+                                    } else {
+                                        notice1 = short.first_feature
+                                    }
+                                    if (short.second_feature === null) {
+                                        notice2 = "";
+                                    } else {
+                                        notice2 = short.second_feature
+                                    }
+                                    if (short.third_feature === null) {
+                                        notice3 = "";
+                                    } else {
+                                        notice3 = short.third_feature
+                                    }
+                                    if (short.fourth_feature === null) {
+                                        notice4 = "";
+                                    } else {
+                                        notice4 = short.fourth_feature
+                                    }
+                                    show_data_in_table(short.id, short.invoice_id, short.item_type_id, storeAutoEncretment, short.item_type_name, notice1, notice2, notice3, notice4, short.display_status, '<td><input type="checkbox"></td>');
                                 }
                             }
                         }
@@ -539,6 +630,7 @@
             var storeNotice2 = $('#_notice2').val();
             var storeNotice3 = $('#_notice3').val();
             var storeNotice4 = $('#_notice4').val();
+
             function PushArray() {
                 NewArrayItemType.push({
                     "item_type_id": Number(storeSelect2_Value_id),
@@ -548,7 +640,8 @@
                     "fourth_feature": storeNotice4
                 });
             }
-            if($('#takeOutPriceMore').val()){
+
+            if ($('#takeOutPriceMore').val()) {
                 if (storeSelect2_Value_id === null) {
                     alert('ត្រូវជ្រើសរើសទំនិញជាមុនសិន');
                 } else {
@@ -582,22 +675,22 @@
                 }
             }
         });
+
         // --- close and clear input in dialog insert new item type ---
         function clear() {
             $('#selectTomNanh').val('').trigger('change');
             $('#selectTomNanh').text('').trigger('change');
-            $('#_notice1').val('');
-            $('#_notice2').val('');
-            $('#_notice3').val('');
-            $('#_notice4').val('');
+            clearNoticeInput(FLAG.ADD);
+            updateNoticeInputPlaceHolder({}, FLAG.ADD);
         }
-        $(document).on("click","#close_clear_dialog_itemType", function () {
+
+        $(document).on("click", "#close_clear_dialog_itemType", function () {
             clear(); // clear input function
         });
 
         // --- Sent Data to server ---
-        var deleteItemType = new Array(),takeOutPriceMore,bung_kar,storePrakDermNovSol1;
-        $(document).on("click",".payment_Money_of_one_invoice",function () {
+        var deleteItemType = new Array(), takeOutPriceMore, bung_kar, storePrakDermNovSol1;
+        $(document).on("click", ".payment_Money_of_one_invoice", function () {
             bung_kar = $('#bong_kar').val();
             takeOutPriceMore = $('#takeOutPriceMore').val();
             var bung_tlay_derm = $('#payMoney').val();
@@ -607,12 +700,13 @@
             storePrakDermNovSol1 = splitString[0];
 
             $('#Show_All_Data_One_Invoice tbody tr').each(function (row, tr) {
-                if ($(tr).find('input[type="checkbox"]').is(':checked') === true){
+                if ($(tr).find('input[type="checkbox"]').is(':checked') === true) {
                     deleteItemType.push(Number($(tr).find('td:eq(0)').text()));
                 }
             });
+
             // function model request to server
-            function requestToServer(payMoneyRate,payGrandTotal,addMoreCost,ArrayNewItemType,ArrayDeleteItemType,InvoiceID) {
+            function requestToServer(payMoneyRate, payGrandTotal, addMoreCost, ArrayNewItemType, ArrayDeleteItemType, InvoiceID) {
                 var storeValue1 = {
                     "interests_payment": payMoneyRate,
                     "cost_payment": payGrandTotal,
@@ -636,19 +730,20 @@
                     }
                 });
             }
+
             // -- condition when price is bigger or smaller than grand price --
-            if (!takeOutPriceMore){ // value add more money is empty
-                if (Number(bung_tlay_derm) === Number(storePrakDermNovSol1) || Number(bung_tlay_derm) > Number(storePrakDermNovSol1)){
+            if (!takeOutPriceMore) { // value add more money is empty
+                if (Number(bung_tlay_derm) === Number(storePrakDermNovSol1) || Number(bung_tlay_derm) > Number(storePrakDermNovSol1)) {
                     // do not have item type
-                    requestToServer(Number(bung_kar),Number(bung_tlay_derm),Number(takeOutPriceMore),[],deleteItemType,Number(ConvertJson.data.display_id));
+                    requestToServer(Number(bung_kar), Number(bung_tlay_derm), Number(takeOutPriceMore), [], deleteItemType, Number(ConvertJson.data.display_id));
                 } else {
                     // have item type
-                    requestToServer(Number(bung_kar),Number(bung_tlay_derm),Number(takeOutPriceMore),NewArrayItemType,deleteItemType,Number(ConvertJson.data.display_id));
+                    requestToServer(Number(bung_kar), Number(bung_tlay_derm), Number(takeOutPriceMore), NewArrayItemType, deleteItemType, Number(ConvertJson.data.display_id));
                 }
             } else {                               // value add money more not empty
-                if (takeOutPriceMore > 0){         // money must bigger than 0
+                if (takeOutPriceMore > 0) {         // money must bigger than 0
                     // have item type
-                    requestToServer(Number(bung_kar),Number(bung_tlay_derm),Number(takeOutPriceMore),NewArrayItemType,deleteItemType,Number(ConvertJson.data.display_id));
+                    requestToServer(Number(bung_kar), Number(bung_tlay_derm), Number(takeOutPriceMore), NewArrayItemType, deleteItemType, Number(ConvertJson.data.display_id));
                 } else {
                     alert('បញ្ចូលចំនួន ប្រាក់បន្ថែម អោយធំជាង 0');
                 }
@@ -656,8 +751,8 @@
         });
 
         // --- yok invoice duch ---
-        $(document).on("click",".yok_duch",function () {
-            if(confirm('តើអ្នកច្បាស់ដែរឬទេក្នុងការយកវិក្ក័យបត្រនេះដាច់')) {
+        $(document).on("click", ".yok_duch", function () {
+            if (confirm('តើអ្នកច្បាស់ដែរឬទេក្នុងការយកវិក្ក័យបត្រនេះដាច់')) {
                 $.ajax({
                     type: "PUT",
                     url: '../api/invoice/took/' + Number(ConvertJson.data.display_id) + '',
@@ -676,25 +771,79 @@
         });
 
         // ---- ready function if moneyPay > luy nov sol ----
-        $("#payMoney").keyup(function() {
+        $("#payMoney").keyup(function () {
             var storeValuePayMoney = $('#payMoney').val();
             const storeString = $('#remain').val();
             const splitString = storeString.split(" ");
             var storePrakDermNovSol = splitString[0];
-            if(Number(storeValuePayMoney) > Number(storePrakDermNovSol)){
+            if (Number(storeValuePayMoney) > Number(storePrakDermNovSol)) {
                 document.getElementById('payMoney').value = storePrakDermNovSol;
             }
         });
+
         // if check can take more price out of that invoice
         var checker = document.getElementById('checkme');
         var sendbtn = document.getElementById('takeOutPriceMore');
         // when unchecked or checked, run the function
-        checker.onchange = function(){
-            if(this.checked){
+        checker.onchange = function () {
+            if (this.checked) {
                 sendbtn.disabled = false;
             } else {
                 sendbtn.disabled = true;
             }
         };
+
+//====================================== ADD BY SOTHEA =================================================================
+
+        //Get Note Input Id
+        const FLAG = {ADD: 1, UPDATE: 2};
+
+        //Get Notice Input ID
+        function getNoteInputId(flag) {
+            let first_note_input = "_notice1";
+            let second_note_input = "_notice2";
+            let third_note_input = "_notice3";
+            let fourth_note_input = "_notice4";
+            //
+            return [first_note_input, second_note_input, third_note_input, fourth_note_input];
+        }
+
+        //Update Notice Input Placeholder
+        function updateNoticeInputPlaceHolder(object, flag) {
+            let first = (object.first_note) ? object.first_note : "កំណត់សម្កាល់ 1";
+            let second = (object.second_note) ? object.second_note : "កំណត់សម្កាល់ 2";
+            let third = (object.third_note) ? object.third_note : "កំណត់សម្កាល់ 3";
+            let fourth = (object.fourth_note) ? object.fourth_note : "កំណត់សម្កាល់ 4";
+            notices = [first, second, third, fourth];
+            console.log(notices);
+            //
+            inputIdArray = getNoteInputId(flag);
+            //
+            for (i = 0; i < inputIdArray.length; i++){
+                $('#'+inputIdArray[i]).attr('placeholder', notices[i]);
+            }
+        }
+
+        //Clear All Input Text
+        function clearNoticeInput(flag) {
+            inputIdArray = getNoteInputId(flag);
+            //
+            for (i = 0; i < inputIdArray.length; i++){
+                $('#'+inputIdArray[i]).val('');
+            }
+        }
+
+        //Find Item Type By ID
+        function findItemType(id, callback) {
+            $.ajax({
+                type: "GET",
+                url:"../api/item_group/"+id,
+                success: function(response){
+                    jsonObj = JSON.parse(response);
+                    //console.log(jsonObj.data);
+                    callback(obj);
+                }
+            });
+        }
     </script>
 @endsection
