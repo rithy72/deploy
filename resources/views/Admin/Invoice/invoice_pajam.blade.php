@@ -87,7 +87,7 @@
             {{--========================= footer of pagination ====================--}}
             <div class="datatable-footer">
                 <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page1"></b> មាន <b id="first1"></b> វិក្ក័យបត្រទៅដល់ <b id="last1"></b> នៃចំនួនវិក្ក័យបត្រទាំងអស់គឺ <b id="all1"></b> </div>
-                <div class="dataTables_paginate paging_simple_numbers" id="">
+                <div class="dataTables_paginate paging_simple_numbers">
                     <a class="paginate_button previous_show_invoice" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="Item_click_Back" style="display:none;">←</a>
                     <span><a class="paginate_button current" id="Num_Page1" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0"></a></span>
                     <a class="paginate_button next_show_invoice" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="Item_click_Next" style="display:none;">→</a>
