@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function (){
              * */
             Route::prefix('item_group')->group(function (){
                 Route::get('/', 'APIController\ItemTypeController@index');
+                Route::get('/{id}','APIController\ItemTypeController@find');
                 Route::post('/', 'APIController\ItemTypeController@create');
                 Route::put('/{id}','APIController\ItemTypeController@edit');
                 Route::delete('/{id}','APIController\ItemTypeController@destroy');
