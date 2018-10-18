@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function (){
                 return view('Admin.TypeOfItems.typeItem');
             });
             //Detail Item Type
-            Route::get('/detail_one_itemtype',function (){
+            Route::get('/item_type/detail_one_itemtype',function (){
                 return view('Admin.TypeOfItems.detail_one_itemtype');
             });
         });

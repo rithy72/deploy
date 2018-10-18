@@ -135,7 +135,6 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" id="close_create_new" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
-                        <button type="button" class="close_dialog_createNew" id="close_dialog_createNew" data-dismiss="modal" style="display: none">close dialog</button>
                         {{ csrf_field() }}
                         <button type="button" class="btn btn-primary btn_create_new_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
@@ -232,13 +231,13 @@
 
 @section('script')
     <script>
-        // dialog show create new user
+        // dialog create new ItemType
         $(document).on("click","#createTomNagn",function(){
             $('#createNewTomNanh').modal({
                 backdrop: 'static'
             });
         });
-        // dialog show update user
+        // dialog show update ItemType
         $(document).on("click","#update",function(){
             $('#update_user').modal({
                 backdrop: 'static'
@@ -509,7 +508,7 @@
             var _tredite = $(this).closest('tr');
             var _idUnique = $(_tredite).find('td:eq(0)').text();
             $.cookie("KeyItemType", btoa(_idUnique));// atob = decode from base64,  btoa = encode to base 64
-            window.location.href = '{{('/admin/detail_one_itemtype')}}';
+            window.location.href = '{{('/admin/item_type/detail_one_itemtype')}}';
         });
     </script>
 @endsection
