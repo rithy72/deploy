@@ -834,6 +834,7 @@
                 success: function(response){
                     jsonObj = JSON.parse(response);
                     //console.log(jsonObj.data);
+                    obj = jsonObj.data;
                     callback(obj);
                 }
             });

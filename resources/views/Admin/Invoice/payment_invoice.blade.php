@@ -832,18 +832,5 @@
                 $('#'+inputIdArray[i]).val('');
             }
         }
-
-        //Find Item Type By ID
-        function findItemType(id, callback) {
-            $.ajax({
-                type: "GET",
-                url:"../api/item_group/"+id,
-                success: function(response){
-                    jsonObj = JSON.parse(response);
-                    //console.log(jsonObj.data);
-                    callback(obj);
-                }
-            });
-        }
     </script>
 @endsection
