@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 class ItemTypeController extends Controller
 {
 
+    public function find($id){
+        $returnModel = ReturnModel::Instance();
+
+        $result = ItemTypeLogic::Instance()->Find($id);
+
+        $returnModel->status = "200";
+        $returnModel->data = $result;
+        return json_encode($returnModel);
+    }
+
     //Filter Search
     public function index(Request $request)
     {
