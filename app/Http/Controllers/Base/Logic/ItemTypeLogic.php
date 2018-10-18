@@ -233,7 +233,7 @@ class ItemTypeLogic
                 return $query->where('type_name', '=', '%'.$search.'%');
             })
             ->when(!empty($status), function ($query) use ($status){
-                $finalStatus = GeneralStatus::FinalizeStatus(intval($status));
+                $finalStatus = GeneralStatus::FinalizeStatus($status);
                 return $query->where('status', '=', $finalStatus);
             })
             ->paginate($page_size);

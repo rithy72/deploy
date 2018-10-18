@@ -29,8 +29,8 @@
                 <span>@lang('string.chooseSituation')</span>
                 <select class="form-control" id="statusSelect" name="">
                     <option value="">@lang('string.all')</option>
-                    <option value="1">@lang('string.active')</option>
-                    <option value="0">@lang('string.deActive')</option>
+                    <option value="active">@lang('string.active')</option>
+                    <option value="inactive">@lang('string.deActive')</option>
                 </select>
                 <br>
             </div>
