@@ -392,17 +392,20 @@
                 backdrop: 'static'
             });
         });
+
         $( document ).ajaxStart(function() {
             $( "#loading" ).show();
         });
         $( document ).ajaxStop(function() {
             $( "#loading" ).hide();
         });
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         // select group of item
         $("#selectTomNanh").select2({
             ajax: {
@@ -425,7 +428,7 @@
                     //console.log(data);
                     var GG = JSON.parse(data);
                     const result = $.map(GG.data.data, function (value) {
-                        return {id: value.id, text: value.item_type_name}
+                        return {id: value.id, text: value.item_type_name, object: value}
                     });
                     return {
                         results: result,
@@ -458,7 +461,7 @@
                     //console.log(data);
                     var GG = JSON.parse(data);
                     const result = $.map(GG.data.data, function (value) {
-                        return {id: value.id, text: value.item_type_name}
+                        return {id: value.id, text: value.item_type_name, object: value}
                     });
                     return {
                         results: result,
