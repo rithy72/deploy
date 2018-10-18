@@ -19,22 +19,22 @@
 
         <div class="panel-body">
 
-            <div class="col-md-2">
+            <div class="col-sm-4 col-md-2">
                 <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date">
                 <br>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-4 col-md-2">
                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
                 <br>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-4 col-md-2" style="text-align: center;">
             <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                 <br>
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-6 col-md-3">
                 <h5 style="display: inline-flex;margin-top: 21px;"><p>@lang('string.income') ៖</p><p id="in_come" style="margin-left: 5px;"></p></h5>
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-6 col-md-3">
                 <h5 style="display: inline-flex;margin-top: 21px;"><p>@lang('string.pay') ៖</p><p id="out_come" style="margin-left: 5px;"></p></h5>
             </div>
 

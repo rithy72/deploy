@@ -49,7 +49,7 @@
                                     {{--<a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>បង្កើតអ្នកប្រើប្រាស់ថ្មី</a>--}}
                                 </div>
                                 {{------ choose option ------}}
-                                <div class="col-md-2">
+                                <div class="col-sm-3 col-md-3">
                                     <span>@lang('string.chooseOption')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="chooseInvoiceOrItemType1">
@@ -63,7 +63,7 @@
                                     </div>
                                 </div>
                                 {{------ show option invoice ------}}
-                                <div class="col-md-2" style="display: none;" id="show_situation_invoice1">
+                                <div class="col-sm-3 col-md-3" style="display: none;" id="show_situation_invoice1">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_invoice1">
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 {{------ show option item Type ------}}
-                                <div class="col-md-2" style="display: none;" id="show_action_ItemType1">
+                                <div class="col-sm-3 col-md-3" style="display: none;" id="show_action_ItemType1">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_action_itemType1">
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                                 {{------ show option item Type ------}}
-                                <div class="col-md-2" style="display: none;" id="show_action_user1">
+                                <div class="col-sm-3 col-md-3" style="display: none;" id="show_action_user1">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_action_user1">
@@ -103,7 +103,7 @@
                                     </div>
                                 </div>
                                 {{----- show option situation items -----}}
-                                <div class="col-md-2" style="display: none;" id="show_situation_itemType1">
+                                <div class="col-sm-3 col-md-3" style="display: none;" id="show_situation_itemType1">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_itemType1">
@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 {{------ show security user login and logout ------}}
-                                <div class="col-md-2" style="display: none;" id="show_action_security_login_logout1">
+                                <div class="col-sm-3 col-md-3" style="display: none;" id="show_action_security_login_logout1">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_security_login_logout1">
@@ -123,7 +123,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <a class="btn btn-primary btn_search_these_day" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                                <div class="col-xs-12 col-sm-2 col-md-2" style="text-align: center;">
+                                    <a class="btn btn-primary btn_search_these_day" style="margin-top: 19px;margin-bottom: 6px"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                                </div>
+
                                 <br/><br/>
                                 <div class="datatable-header" style="margin-top: -19px;"></div>
                                 <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -165,14 +168,14 @@
                         {{---------------tap 2---------------}}
                         <div class="tab-pane" id="highlighted-tab2">
                             <div class="panel-body">
-                                <div class="col-md-2">
+                                <div class="col-sm-2 col-md-2">
                                     <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date">
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-sm-2 col-md-2">
                                     <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
                                 </div>
                                 {{------ choose option ------}}
-                                <div class="col-md-2">
+                                <div class="col-sm-3 col-md-2">
                                     <span>@lang('string.chooseOption')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="chooseInvoiceOrItemType">
@@ -186,7 +189,7 @@
                                     </div>
                                 </div>
                                 {{------ show option invoice ------}}
-                                <div class="col-md-2" style="display: none;" id="show_situation_invoice">
+                                <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_invoice">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_invoice">
@@ -199,7 +202,7 @@
                                     </div>
                                 </div>
                                 {{------ show option item Type ------}}
-                                <div class="col-md-2" style="display: none;" id="show_action_ItemType">
+                                <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_ItemType">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_action_itemType">
@@ -212,7 +215,7 @@
                                     </div>
                                 </div>
                                 {{------ show option item Type ------}}
-                                <div class="col-md-2" style="display: none;" id="show_action_user">
+                                <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_user">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_action_user">
@@ -226,7 +229,7 @@
                                     </div>
                                 </div>
                                 {{----- show option situation items -----}}
-                                <div class="col-md-2" style="display: none;" id="show_situation_itemType">
+                                <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_itemType">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_itemType">
@@ -237,7 +240,7 @@
                                     </div>
                                 </div>
                                 {{------ show security user login and logout ------}}
-                                <div class="col-md-2" style="display: none;" id="show_action_security_login_logout">
+                                <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_security_login_logout">
                                     <span>@lang('string.situation')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_security_login_logout">
@@ -246,7 +249,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                                <div class="col-xs-12 col-sm-2" style="text-align: center;">
+                                    <a class="btn btn-primary btn-Search" style="margin-top: 19px;margin-bottom:6px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                                </div>
                                 <br/><br/>
                                 <div class="datatable-header" style="margin-top: -19px;"></div>
                                 <div class="datatable-scroll" style="overflow-x: hidden;">

@@ -20,11 +20,7 @@
         </div>
 
         <div class="panel-body">
-            <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 19px;">
-                <a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>@lang('string.createNewUser')</a>
-            </div>
-
-            <div class="col-md-2">
+            <div class="col-sm-6 col-md-2">
                 <span>@lang('string.fine')</span>
                 <div class="form-group">
                     <select class="form-control" id="find_user_way">
@@ -34,7 +30,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-6 col-md-2">
                 <span>@lang('string.situation')</span>
                 <div class="form-group">
                     <select class="form-control" id="find_status_user">
@@ -44,12 +40,17 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-5 col-md-3">
                 <span>.</span><input type="text" id="search_input" class="form-control" placeholder="@lang('string.searchItems')">
             </div>
-            <a class="btn btn-primary btn_search_user" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
-            <br/><br/>
-            <div class="datatable-header" style="margin-top: -19px;"></div>
+            <div class="col-sm-3 col-md-2" style="text-align: center;">
+                <a class="btn btn-primary btn_search_user" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+            </div>
+            <div class="co-sm-4 col-md-3" style="text-align: center;">
+                <a class="btn btn-success" id="createTomNagn" style="margin-bottom: -54px;"><i class="icon-add position-left"></i>@lang('string.createNewUser')</a>
+            </div>
+            <br/>
+            <div class="datatable-header" style=""></div>
             <div class="datatable-scroll" style="overflow-x: hidden;">
                 <div class="dataTables_scroll">
                     <!--============ scroll body oy trov 1 header table ===============-->
@@ -178,6 +179,14 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_update" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_update" style="margin-left: 5px;"></p></h5>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -247,6 +256,16 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_delete" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_delete" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -285,6 +304,16 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_active" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_active" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -339,6 +368,16 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_deActive" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_DeActive" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -377,6 +416,16 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_reset_password" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_reset_password" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -618,6 +667,8 @@
             (function(){
                 $(_selectRow).find('td:eq(8)').text() === "true" ? $( "#user_no_update" ).prop( "disabled", false ) : $( "#user_no_update" ).prop( "disabled", true );
                 $('#user_no_update').val($(_selectRow).find('td:eq(1)').text());
+                $('#show_user_no_dialog_update').text($(_selectRow).find('td:eq(1)').text()); // store in text update
+                $('#show_name_dialog_update').text($(_selectRow).find('td:eq(2)').text()); // store in text dialog update
                 $('#name_update').val($(_selectRow).find('td:eq(2)').text());
                 $('#phoneNumber_update').val($(_selectRow).find('td:eq(3)').text());
                 $('#email_update').val($(_selectRow).find('td:eq(7)').text());
@@ -676,6 +727,10 @@
         $(document).on("click","#delete_User",function(){
             $('#show_dialog_delete').modal({ backdrop: 'static' });
             _selectRow = $(this).closest('tr'); // make closet with table row for delete
+            (function () {
+                $('#show_user_no_dialog_delete').text($(_selectRow).find('td:eq(1)').text());
+                $('#show_name_dialog_delete').text($(_selectRow).find('td:eq(2)').text());
+            })();
         });
         $('.btn_delete_User').on("click",function(){
             var storePasswordAdminToDeleteUser = $('#password_admin_delete').val();
@@ -707,6 +762,10 @@
         $(document).on("click","#active",function(){
             $('#show_activate_user').modal({ backdrop: 'static' });
             _selectRow = $(this).closest('tr');
+            (function () {
+                $('#show_user_no_dialog_active').text($(_selectRow).find('td:eq(1)').text());
+                $('#show_name_dialog_active').text($(_selectRow).find('td:eq(2)').text());
+            })();
         });
         $(document).on("click","#close_activate_user",function () {
             $('#password_User_active').val('');
@@ -748,6 +807,10 @@
         $(document).on("click","#deActive",function(){
             $('#show_dialog_deActive_user').modal({ backdrop: 'static' });
             _selectRow = $(this).closest('tr');
+            (function () {
+                $('#show_user_no_dialog_DeActive').text($(_selectRow).find('td:eq(1)').text());
+                $('#show_name_dialog_deActive').text($(_selectRow).find('td:eq(2)').text());
+            })();
         });
         $(document).on("click","#close_dialog_deActive",function () {
             $('#password_admin_deActive').val('');
@@ -819,6 +882,10 @@
         $(document).on("click","#reset_pass_user",function(){
             $('#show_dialog_reset_password_user').modal({backdrop: 'static'});
             _selectRow = $(this).closest('tr');
+            (function () {
+                $('#show_user_no_dialog_reset_password').text($(_selectRow).find('td:eq(1)').text());
+                $('#show_name_dialog_reset_password').text($(_selectRow).find('td:eq(2)').text());
+            })();
         });
         $(document).on("click","#close_dialog_reset_user",function () {
             $('#password_User_reset').val('');

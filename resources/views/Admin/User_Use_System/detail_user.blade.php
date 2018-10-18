@@ -21,17 +21,17 @@
 
         <div class="panel-body" style="padding: 0">
             {{-- Header show button and invoice id  --}}
-            <div class="col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
-                <div class="col-md-8" style="margin-top: -6px;margin-bottom: 0;">
-                    <div class="col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
+                <div class="col-sm-5 col-md-7" style="margin-top: -6px;margin-bottom: 0;">
+                    <div class="col-sm-12 col-md-6">
                         <h3><b>@lang('string.nameUser') ៖ </b><b id="name_user"></b></h3>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-12 col-md-6">
                         <h3><b>តួរនាទី ៖ </b><b id="turnati"></b></h3>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;margin-bottom: 0;">
+                <div class="col-sm-7 col-md-5" style="text-align: center;">
+                    <div class="" style="margin-top: 13px;margin-bottom: 0;">
                         <a class="btn btn-success" id="createNewUser_tap3" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
                             <button type="button" class="btn btn-primary" id="update" style="margin-bottom: 4px;"><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
                         <div class="btn-group">
@@ -51,97 +51,103 @@
             </div>
             {{-- End --}}
             {{-- Show choose --}}
+            <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="tabbable">
-                <ul class="nav nav-tabs nav-tabs-highlight">
-                    <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">@lang('string.generalInformation_user')</a></li>
-                    <li id="show_click_tap2"><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">@lang('string.history_of_admin_modify_to_user')</a></li>
-                    <li id="show_click_tap3"><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.audit_trail_of_user')</a></li>
-                </ul>
+                    <ul class="nav nav-tabs nav-tabs-highlight">
+                        <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">@lang('string.generalInformation_user')</a></li>
+                        <li id="show_click_tap2"><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">@lang('string.history_of_admin_modify_to_user')</a></li>
+                        <li id="show_click_tap3"><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.audit_trail_of_user')</a></li>
+                    </ul>
 
                 <div class="tab-content">
                     {{--=========== Merl Detail bos User 1 ===============-----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body">
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.number') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-4 col-md-4" style="font-size: 14px">@lang('string.number') ៖</label>
+                                    <div class="col-sm-8 col-md-8col-md-8">
                                         <p id="User_No"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.phoneNumber') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.phoneNumber') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="phone_number"></p>
 
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.email') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.email') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="email"></p>
+
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.situation') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.situation') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="status"></p>
+
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.create_date') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.create_date') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="create_date"></p>
 
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.create_by') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.create_by') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="create_by"></p>
 
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.last_update_date')៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.last_update_date') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="last_create_date"></p>
+
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.last_update_by') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.last_update_by') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="last_create_by"></p>
+
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.note') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.note') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="note"></p>
+
                                     </div>
                                     <br>
                                 </div>
@@ -151,13 +157,13 @@
                     {{--====== History create or modify by admin to user ====--}}
                     <div class="tab-pane" id="highlighted-tab2">
                         <div class="panel-body">
-                            <div class="col-md-2">
+                            <div class="col-sm-3 col-md-2">
                                 <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date_tap2">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-sm-3 col-md-2">
                                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date_tap2">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-sm-3 col-md-3">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="search_status_tap2">
@@ -170,7 +176,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <a class="btn btn-primary btn-Search-tap2" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            <div class="col-xs-12 col-sm-3" style="text-align: center;">
+                                <a class="btn btn-primary btn-Search-tap2" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            </div>
                             <br/><br/>
 
                             <div class="datatable-header" style="margin-top: -30px;"></div>
@@ -211,14 +219,14 @@
                     {{--========== History all action of one user ===========--}}
                     <div class="tab-pane" id="highlighted-tab4">
                         <div class="panel-body">
-                            <div class="col-md-2">
+                            <div class="col-sm-6 col-md-2">
                                 <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date_tap3">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-sm-6 col-md-2">
                                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date_tap3">
                             </div>
                             {{------ choose option ------}}
-                            <div class="col-md-2">
+                            <div class="col-sm-6 col-md-2">
                                 <span>@lang('string.chooseOption')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="chooseInvoiceOrItemType1">
@@ -232,7 +240,7 @@
                                 </div>
                             </div>
                             {{------ show option invoice ------}}
-                            <div class="col-md-2" style="display: none;" id="show_situation_invoice1">
+                            <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_invoice1">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_user_tap3">
@@ -245,7 +253,7 @@
                                 </div>
                             </div>
                             {{------ show option item Type ------}}
-                            <div class="col-md-2" style="display: none;" id="show_action_ItemType1">
+                            <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_ItemType1">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_action_itemType_tap3">
@@ -258,7 +266,7 @@
                                 </div>
                             </div>
                             {{------ show option item Type ------}}
-                            <div class="col-md-2" style="display: none;" id="show_action_user1">
+                            <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_user1">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_action_user_tap3">
@@ -272,7 +280,7 @@
                                 </div>
                             </div>
                             {{----- show option situation items -----}}
-                            <div class="col-md-2" style="display: none;" id="show_situation_itemType1">
+                            <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_itemType1">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_itemType_tap3">
@@ -283,7 +291,7 @@
                                 </div>
                             </div>
                             {{------ show security user login and logout ------}}
-                            <div class="col-md-2" style="display: none;" id="show_action_security_login_logout1">
+                            <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_security_login_logout1">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_security_login_logout_tap3">
@@ -292,8 +300,9 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <a class="btn btn-primary btn_Search_tap3" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            <div class="col-sm-3 col-md-2" style="text-align: center;">
+                                <a class="btn btn-primary btn_Search_tap3" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            </div>
                             <br/><br/>
 
                             <div class="datatable-header" style="margin-top: -30px;"></div>
@@ -332,6 +341,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -477,6 +487,14 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_update" style="margin-left: 5px;"></p></h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_update" style="margin-left: 5px;"></p></h5>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -546,6 +564,16 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_delete" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_delete" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -584,6 +612,16 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_deActive" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_deActive" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -622,6 +660,16 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_active" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_active" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -676,6 +724,16 @@
                     </div>
 
                     <div class="modal-body">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_reset_Pass" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_reset_Pass" style="margin-left: 5px;"></p></h5>
+                                <br><br>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
@@ -764,7 +822,7 @@
                     // show button if active or deActive
                     ConvertJson.data.status === 1 ? $('#link_active').hide() && $('#link_deActive').show() : $('#link_active').show() && $('#link_deActive').hide();
                     // show text active or deActive
-                    var texts = ConvertJson.data.status === 1 ? '<span class="label label-success" style="font-size: 16px;">@lang('string.active')</span>' : '<span class="label label-default" style="font-size: 16px;">@lang('string.deActive')</span>';
+                    var texts = ConvertJson.data.status === 1 ? '<span class="label label-success" style="font-size: 13px;">@lang('string.active')</span>' : '<span class="label label-default" style="font-size: 13px;">@lang('string.deActive')</span>';
                     $('#status').html(texts);
                     $('#name_user').text(ConvertJson.data.name);
                     $('#turnati').text(ConvertJson.data.display_role);
@@ -1196,6 +1254,9 @@
                 $('#phoneNumber_update').val(ConvertJson.data.phone_number);
                 $('#email_update').val(ConvertJson.data.email);
                 $('#note_update').val(ConvertJson.data.note);
+
+                $('#show_user_no_dialog_update').text(ConvertJson.data.user_no);
+                $('#show_name_dialog_update').text(ConvertJson.data.name);
             })();
         });
         $('.btn_update_to_server').on("click",function () {
@@ -1247,7 +1308,12 @@
             } else {alert('បំពេញលេខសំគាល់អ្នកប្រើប្រាស់សិន');}
         });
         // ------------------- delete User -----------------------
-        $(document).on("click","#delete_User",function(){$('#show_dialog_delete').modal({ backdrop: 'static' });});
+        $(document).on("click","#delete_User",function(){$('#show_dialog_delete').modal({ backdrop: 'static' });
+            (function () {
+                $('#show_user_no_dialog_delete').text(ConvertJson.data.user_no);
+                $('#show_name_dialog_delete').text(ConvertJson.data.name);
+            })();
+        });
         $(document).on("click","#close_dialog_delete",function () {$('#password_admin_delete').val('');});
         $('.btn_delete_User').on("click",function(){
             var storePasswordAdminToDeleteUser = $('#password_admin_delete').val();
@@ -1272,7 +1338,12 @@
             } else {alert('បំពេញលេខសំងាត់អេតមីុនជាមុនសិន ទើបធ្វើការលុបអ្នកប្រើប្រាស់បាន');}
         });
         // ------------------- DeActivate user -------------------
-        $(document).on("click","#deActive",function(){$('#show_dialog_deActive_user').modal({ backdrop: 'static' });});
+        $(document).on("click","#deActive",function(){$('#show_dialog_deActive_user').modal({ backdrop: 'static' });
+            (function () {
+                $('#show_user_no_dialog_deActive').text(ConvertJson.data.user_no);
+                $('#show_name_dialog_deActive').text(ConvertJson.data.name);
+            })();
+        });
         $(document).on("click","#close_dialog_deActive",function () {$('#password_admin_deActive').val('');});
         $('.btn_deActive_user').on("click",function(){
             var storePasswordAdminToDeActiveUser = $('#password_admin_deActive').val();
@@ -1295,7 +1366,12 @@
             } else {alert('បំពេញលេខសំងាត់អេតមីុនជាមុនសិន ទើបផ្មាកដំណើរការអ្នកប្រើប្រាស់បាន');}
         });
         // ------------------- activate user ----------------------
-        $(document).on("click","#active",function(){$('#show_activate_user').modal({ backdrop: 'static' });});
+        $(document).on("click","#active",function(){$('#show_activate_user').modal({ backdrop: 'static' });
+            (function () {
+                $('#show_user_no_dialog_active').text(ConvertJson.data.user_no);
+                $('#show_name_dialog_active').text(ConvertJson.data.user_no);
+            })();
+        });
         $(document).on("click","#close_activate_user",function () {
             $('#password_User_active').val('');
             $('#confirm_pass_user_active').val('');
@@ -1334,7 +1410,12 @@
         });
         // ------------------- reset password dialog --------------
         $(document).on("click","#reset_pass_user",function(){
-            $('#show_dialog_reset_password_user').modal({backdrop: 'static'})});
+            $('#show_dialog_reset_password_user').modal({backdrop: 'static'});
+            (function () {
+                $('#show_user_no_dialog_reset_Pass').text(ConvertJson.data.user_no);
+                $('#show_name_dialog_reset_Pass').text(ConvertJson.data.name);
+            })();
+        });
         $(document).on("click","#close_dialog_reset_user",function () {
             $('#password_User_reset').val('');
             $('#confirm_pass_user_reset').val('');

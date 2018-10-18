@@ -199,4 +199,6 @@ return[
     'itemType_notice2' => 'កំណត់សំគាល់ទី២...',
     'itemType_notice3' => 'កំណត់សំគាល់ទី៣...',
     'itemType_notice4' => 'កំណត់សំគាល់ទី៤...',
+    'detail_itemType' => 'ពណ៍មានលំអិតទំនិញ',
+    'name' => 'ឈ្មោះ',
 ];
