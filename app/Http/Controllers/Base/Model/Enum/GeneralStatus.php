@@ -19,9 +19,9 @@ class GeneralStatus
     );
 
     public static function FinalizeStatus($status){
-        if ($status == 1 || $status == "1"){
+        if ($status == "active"){
             return true;
-        }elseif ($status == 0 || $status == "0"){
+        }elseif ($status == "inactive"){
             return false;
         }
         return "";

@@ -185,7 +185,7 @@
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <button type="button" class="close" id="close_update_rate" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h5 class="modal-title">@lang('string.changePassword')</h5>
                 </div>
                 <input type="hidden" name="token" value="{{\Illuminate\Support\Facades\Auth::user()->remember_token}}">
@@ -234,7 +234,7 @@
                                     <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.newPassword')</label>
                                     <div class="col-lg-7">
                                         <input name="password" id="password" type="password"
-                                               placeholder=""
+                                               placeholder="" autocomplete=""
                                                class="form-control" style="border: 1px solid grey;" disabled required>
                                         <br>
                                     </div>
@@ -244,7 +244,7 @@
                                     <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.confirmPassword')</label>
                                     <div class="col-lg-7">
                                         <input name="password_confirmation" id="password-confirm" type="password"
-                                               placeholder=""
+                                               placeholder="" autocomplete=""
                                                class="form-control" style="border: 1px solid grey;" disabled required>
                                         <br>
                                     </div>
@@ -256,7 +256,7 @@
 
                 {{--{{ csrf_field() }}--}}
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal"
+                    <button type="button" class="btn btn-link" data-dismiss="modal"
                             style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i
                                 class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                     <button type="submit" class="btn btn-primary btn_validate_Rate"
@@ -337,7 +337,6 @@
 
 <!-- Theme JS files -->
 <script src="{{asset('assets/js/src/jquery.table2excel.js')}}"></script>
-<script src="{{asset('assets/js/layout_sidebar_sticky.js')}}"></script>
 <!-- /theme JS files -->
 
 <!--Button Component-->

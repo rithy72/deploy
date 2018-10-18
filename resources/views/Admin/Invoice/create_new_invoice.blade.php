@@ -723,19 +723,13 @@
             // clear insert item type
             $('#selectTomNanh').val('').trigger('change');
             $('#selectTomNanh').text('').trigger('change');
-            $('#notice1').val('');
-            $('#notice2').val('');
-            $('#notice3').val('');
-            $('#notice4').val('');
+            clearNoticeInput(FLAG.ADD);
 
             // clear update item type
             $('#selectTomNanh1').val('').trigger('change');
             $('#selectTomNanh1').text('').trigger('change');
             $('#numberAuto').val('');
-            $('#notice_1').val('');
-            $('#notice_2').val('');
-            $('#notice_3').val('');
-            $('#notice_4').val('');
+            clearNoticeInput(FLAG.UPDATE);
         });
         // delete item type in table
         $(document).on("click", "#delete_item", function () {
@@ -809,7 +803,6 @@
 
         //Update Notice Input Placeholder
         function updateNoticeInputPlaceHolder(object, flag) {
-            console.log(object);
             let first = (object.first_note) ? object.first_note : "កំណត់សម្កាល់ 1";
             let second = (object.second_note) ? object.second_note : "កំណត់សម្កាល់ 2";
             let third = (object.third_note) ? object.third_note : "កំណត់សម្កាល់ 3";
@@ -818,7 +811,6 @@
             console.log(notices);
             //
             inputIdArray = getNoteInputId(flag);
-            console.log(inputIdArray)
             //
             for (i = 0; i < inputIdArray.length; i++){
                 $('#'+inputIdArray[i]).attr('placeholder', notices[i]);

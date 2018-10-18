@@ -5,7 +5,8 @@
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
             <ul class="breadcrumb breadcrumb-caret position-right">
-                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a></li>
+                <li><a href="{{('/admin/mainform')}}" style="color: #2577e1;"><span>@lang('string.mainForm')</span></a>
+                </li>
                 <li class="active"><span>@lang('string.users')</span></li>
                 {{--<li class="active">Default collapsible</li>--}}
             </ul>
@@ -35,8 +36,8 @@
                 <div class="form-group">
                     <select class="form-control" id="find_status_user">
                         <option value="">@lang('string.all')</option>
-                        <option value="1">@lang('string.active')</option>
-                        <option value="0">@lang('string.deActive')</option>
+                        <option value="active">@lang('string.active')</option>
+                        <option value="inactive">@lang('string.deActive')</option>
                     </select>
                 </div>
             </div>
@@ -54,8 +55,11 @@
             <div class="datatable-scroll" style="overflow-x: hidden;">
                 <div class="dataTables_scroll">
                     <!--============ scroll body oy trov 1 header table ===============-->
-                    <div class="dataTables_scrollBody" style="position: relative; overflow: auto; height: 400px; width: 100%;">
-                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%" id="Show_User_In_Table" role="grid" aria-describedby="DataTables_Table_3_info" style="width: 100%;">
+                    <div class="dataTables_scrollBody"
+                         style="position: relative; overflow: auto; height: 400px; width: 100%;">
+                        <table class="table datatable-scroll-y table-hover dataTable no-footer" width="100%"
+                               id="Show_User_In_Table" role="grid" aria-describedby="DataTables_Table_3_info"
+                               style="width: 100%;">
                             <thead style="background: #e3e3ea99;">
                             <tr role="row">
                                 <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="First Name: activate to sort column descending">@lang('string.number')</th>
@@ -75,11 +79,16 @@
             </div>
             {{--========================= footer of pagination ====================--}}
             <div class="datatable-footer">
-                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b id="page1"></b> មាន <b id="first1"></b> បញ្ជីអ្នកប្រើប្រាស់ទៅដស់ <b id="last1"></b> នៃបញ្ជីអ្នកប្រើប្រាស់ទាំងអស់គឺ <b id="all1"></b> </div>
+                <div class="dataTables_info" id="DataTables_Table_3_info" role="status" aria-live="polite">ទំព័រ <b
+                            id="page1"></b> មាន <b id="first1"></b> បញ្ជីអ្នកប្រើប្រាស់ទៅដស់ <b id="last1"></b>
+                    នៃបញ្ជីអ្នកប្រើប្រាស់ទាំងអស់គឺ <b id="all1"></b></div>
                 <div class="dataTables_paginate paging_simple_numbers" id="">
-                    <a class="paginate_button previous_show_user" aria-controls="DataTables_Table_3" data-dt-idx="0" tabindex="0" id="Item_click_Back" style="display:none;">←</a>
-                    <span><a class="paginate_button current" id="Num_Page1" aria-controls="DataTables_Table_3" data-dt-idx="1" tabindex="0"></a></span>
-                    <a class="paginate_button next_show_user" aria-controls="DataTables_Table_3" data-dt-idx="3" tabindex="0" id="Item_click_Next" style="display:none;">→</a>
+                    <a class="paginate_button previous_show_user" aria-controls="DataTables_Table_3" data-dt-idx="0"
+                       tabindex="0" id="Item_click_Back" style="display:none;">←</a>
+                    <span><a class="paginate_button current" id="Num_Page1" aria-controls="DataTables_Table_3"
+                             data-dt-idx="1" tabindex="0"></a></span>
+                    <a class="paginate_button next_show_user" aria-controls="DataTables_Table_3" data-dt-idx="3"
+                       tabindex="0" id="Item_click_Next" style="display:none;">→</a>
                 </div>
             </div>
             {{--====================== End footer of pagination ====================--}}
@@ -93,7 +102,8 @@
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_create_new_user" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" id="close_create_new_user" data-dismiss="modal">&times;
+                        </button>
                         <h5 class="modal-title">@lang('string.createNewUser')</h5>
                     </div>
 
@@ -862,16 +872,16 @@
             var url = ConvertJson.data.next_page_url;
             if (ConvertJson.data.next_page_url === null){
                 alert('មិនអាចខ្លីកទៅទៀតបានទេ ពីព្រោះគឺជាទំព័រចុងក្រោយ');
-            }else {
+            } else {
                 $('#Show_User_In_Table td').remove();
-                var clickNext = new ShowUserInTable("GET" , url);
+                var clickNext = new ShowUserInTable("GET", url);
                 clickNext.reads();
             }
         });
 
 
         // dialog show create new user
-        $(document).on("click","#createTomNagn",function(){
+        $(document).on("click", "#createTomNagn", function () {
             $('#createNewTomNanh').modal({
                 backdrop: 'static'
             });
@@ -879,7 +889,7 @@
 
 
         // ------------------- reset password dialog --------------
-        $(document).on("click","#reset_pass_user",function(){
+        $(document).on("click", "#reset_pass_user", function () {
             $('#show_dialog_reset_password_user').modal({backdrop: 'static'});
             _selectRow = $(this).closest('tr');
             (function () {
@@ -887,12 +897,12 @@
                 $('#show_name_dialog_reset_password').text($(_selectRow).find('td:eq(2)').text());
             })();
         });
-        $(document).on("click","#close_dialog_reset_user",function () {
+        $(document).on("click", "#close_dialog_reset_user", function () {
             $('#password_User_reset').val('');
             $('#confirm_pass_user_reset').val('');
             $('#pass_admin_reset').val('');
         });
-        $('.btn_reset_User').on("click",function(){
+        $('.btn_reset_User').on("click", function () {
             var passwordUser = $('#password_User_reset').val();
             var confirmPassUser = $('#confirm_pass_user_reset').val();
             var pass_admin = $('#pass_admin_reset').val();
@@ -902,29 +912,35 @@
                     "new_password": passwordUser
                 }
             };
-            if(passwordUser && confirmPassUser){
-                if(passwordUser === confirmPassUser){
-                    if(pass_admin){
+            if (passwordUser && confirmPassUser) {
+                if (passwordUser === confirmPassUser) {
+                    if (pass_admin) {
                         $.ajax({
-                            type:"PUT",
-                            url: 'api/user/admin_reset_user_password/'+$(_selectRow).find('td:eq(0)').text()+'',
+                            type: "PUT",
+                            url: 'api/user/admin_reset_user_password/' + $(_selectRow).find('td:eq(0)').text() + '',
                             data: storeModelResetPassUser,
-                            success:function (ResponseDeActivate) {
+                            success: function (ResponseDeActivate) {
                                 var ConvertResponse = JSON.parse(ResponseDeActivate);
-                                if (ConvertResponse.status === "200"){
+                                if (ConvertResponse.status === "200") {
                                     alert('ផ្លាស់ប្តូរលេខសំងាត់របស់អ្នកប្រើប្រាស់បានជោគជ័យ');
                                     window.location.href = '{{('/admin/user')}}';
-                                } else if (ConvertResponse.status === "401"){
+                                } else if (ConvertResponse.status === "401") {
                                     alert('មិនមែនជាអេតមីុន ឬក៌ លេខសំងាត់អេតមីុនមិនត្រឹមត្រូវ');
                                 }
                             }
                         })
-                    } else {alert('បំពេញលេខសំងាត់អេតមីុនជាមុនសិន ទើបផ្លាស់ប្តូរលេខសំងាត់អ្នកប្រើប្រាស់បាន');}
-                } else {alert('លេខសំងាត់ និង លេខសំងាត់ម្តងទៀត ត្រូវតែដូចគ្នា');}
-            } else {alert('បំពេញ លេខសំងាត់ និង លេខសំងាត់ម្តងទៀត ជាមុនសិន');}
+                    } else {
+                        alert('បំពេញលេខសំងាត់អេតមីុនជាមុនសិន ទើបផ្លាស់ប្តូរលេខសំងាត់អ្នកប្រើប្រាស់បាន');
+                    }
+                } else {
+                    alert('លេខសំងាត់ និង លេខសំងាត់ម្តងទៀត ត្រូវតែដូចគ្នា');
+                }
+            } else {
+                alert('បំពេញ លេខសំងាត់ និង លេខសំងាត់ម្តងទៀត ជាមុនសិន');
+            }
         });
         // ---------------- go to detail user blade -----------------
-        $(document).on("click","#detail_one_user",function () {
+        $(document).on("click", "#detail_one_user", function () {
             _selectRow = $(this).closest('tr');
             var _idUnique_user = $(_selectRow).find('td:eq(0)').text();
             $.cookie("KeyUser", btoa(_idUnique_user));// atob = decode from base64,  btoa = encode to base 64

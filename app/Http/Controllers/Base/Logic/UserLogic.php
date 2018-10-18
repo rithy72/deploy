@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Base\Logic;
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
+use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use App\Http\Controllers\Base\Model\Enum\UserSearchOptionEnum;
@@ -328,7 +329,8 @@ class UserLogic
             })
             //When user want status
             ->when(!empty($status), function ($query) use ($status){
-                return $query->where('status', '=', $status);
+                $finalStatus = GeneralStatus::FinalizeStatus($status);
+                return $query->where('status', '=', $finalStatus);
             })
             ->where('id', '<>', Auth::id())
             ->where('deleted','=', false)
