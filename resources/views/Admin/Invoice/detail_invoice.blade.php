@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+@section('style')
+    <style>
+        #font_size{font-size: 14px;}
+    </style>
+@endsection
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -23,8 +27,8 @@
 
         <div class="panel-body" style="padding: 0">
             {{-- Header show button and invoice id  --}}
-            <div class="col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
-                <div class="col-md-8" style="margin-top: -6px;margin-bottom: 0;">
+            <div class="col-sm12 col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
+                <div class="col-sm-8 col-md-8" style="margin-top: -6px;margin-bottom: 0;">
                     <div class="col-md-6">
                         <h3><b>@lang('string.invoiceId') ៖ </b><b id="id_invoice"></b></h3>
                     </div>
@@ -32,8 +36,8 @@
                         <h3><b>@lang('string.createBy') ៖ </b><b id="employee_name"></b></h3>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;margin-bottom: 0;">
+                <div class="col-sm-4 col-md-4">
+                    <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;">
                         <a href="{{('/admin/invoice/create_new_invoice')}}" class="btn btn-success" id="" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
                         @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                         <button type="button" class="btn btn-primary" id="update_invoice" style="margin-bottom: 4px;" disabled="disabled"><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
@@ -55,100 +59,100 @@
                     {{----- Merl Detail bos Customer 1 -----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body">
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.nameCustomer') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.nameCustomer') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="customer_name"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.phoneNumber') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.phoneNumber') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="phone_number"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.dayGetMoney') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.dayGetMoney') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="date_in"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.expiredDay') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.expiredDay') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="date_out"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.paymentTerm')</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.paymentTerm')</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="payment_term"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.priceAmountPerMonth')</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.priceAmountPerMonth')</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="interests_value"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">តម្លៃដើមសរុប ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">តម្លៃដើមសរុប ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="grand_total"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.situation') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.situation') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="status"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">តម្លៃដើមបង់រួច ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">តម្លៃដើមបង់រួច ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="paid"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">@lang('string.createBy') ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.createBy') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="createByUser"></p>
                                     </div>
                                     <br>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group" style="font-size: 18px;">
-                                    <label class="control-label col-md-4" style="font-size: 18px">តម្លៃដើមនៅសល់ ៖</label>
-                                    <div class="col-md-8">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">តម្លៃដើមនៅសល់ ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="luynovsol"></p>
                                     </div>
                                     <br>
@@ -189,7 +193,7 @@
                 {{----- Merl ka bong brak bos Customer -----}}
                     <div class="tab-pane" id="highlighted-tab2">
                         <div class="panel-body">
-                            <div class="col-md-3">
+                            <div class="col-xs-5 col-sm-5 col-md-3">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="search_status">
@@ -239,13 +243,13 @@
                 {{----- Merl ka update invoice bos Customer 1 -----}}
                     <div class="tab-pane" id="highlighted-tab4">
                         <div class="panel-body">
-                            <div class="col-md-2">
+                            <div class="col-sm-3 col-md-2">
                                 <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-sm-3 col-md-2">
                                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-sm-3 col-md-2">
                                 <span>@lang('string.chooseOption')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="chooseInvoiceOrItemType">
@@ -255,7 +259,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2" style="display: none;" id="show_situation_invoice">
+                            <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_invoice">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_invoice">
@@ -267,7 +271,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2" style="display: none;" id="show_situation_itemType">
+                            <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_itemType">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_itemType">

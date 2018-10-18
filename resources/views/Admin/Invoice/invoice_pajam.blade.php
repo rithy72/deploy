@@ -1,31 +1,5 @@
 @extends('layouts.app')
-@section('style')
-    <style>
-        /*tr:nth-child(even){background-color: #efefefb3}*/
-        /*#table_show_frontEnd {
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
 
-        #table_show_frontEnd td, #table_show_frontEnd th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        #table_show_frontEnd tr:nth-child(even){background-color: #f2f2f2;}
-
-        #table_show_frontEnd tr:hover {background-color: #ddd;}
-        td {  height: 35px;  }
-        #table_show_frontEnd th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #37474F;
-            color: white;
-        }*/
-    </style>
-@endsection
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -72,7 +46,9 @@
             <div class="col-md-3">
                 <span>.</span><input type="text" id="search" class="form-control" placeholder="ស្វែងរកវត្ថុ">
             </div>
-            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+            <div class="col-xs-6 col-sm-4 col-md-1">
+                <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+            </div>
 
 
             <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 19px;">

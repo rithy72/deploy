@@ -38,7 +38,7 @@ return[
     'failed' => 'គណនេយ្យ ឫលេខសម្ងាត់មិនត្រឹមត្រូវ',
     'throttle' => 'សូមរង់ចាំរយះពេល៖ seconds seconds.',
     'logout' => 'ចាកចេញ',
-    'changePass' => 'ផ្តូរលេខសំងាត់',
+    'changePass' => 'ប្តូរលេខសំងាត់',
     'chooseOption' => 'ជ្រើសរើសការធ្វើ',
     'desboard' => 'ផ្ទាំងគ្រប់គ្រង',
     'invoice' => 'វិក្ក័យបត្រ',
@@ -194,5 +194,9 @@ return[
     'last_update_by' => 'កែប្រែដោយ',
     'history_of_admin_modify_to_user' => 'ប្រវត្តិការកែប្រែដោយអេដមុីនលើអ្នកប្រើប្រាស់',
     'audit_trail_of_user' => 'ប្រវត្តិការកែប្រែដោយអ្នកប្រើប្រាស់',
-    'reset_password_guide' => 'សូមបញ្ចូលគណនេយ្យ និងលេខសំងាត់ខាងលើដើម្បីបញ្ជាក់'
+    'reset_password_guide' => 'សូមបញ្ចូលគណនេយ្យ និងលេខសំងាត់ខាងលើដើម្បីបញ្ជាក់',
+    'itemType_notice1' => 'កំណត់សំគាល់ទី១...',
+    'itemType_notice2' => 'កំណត់សំគាល់ទី២...',
+    'itemType_notice3' => 'កំណត់សំគាល់ទី៣...',
+    'itemType_notice4' => 'កំណត់សំគាល់ទី៤...',
 ];

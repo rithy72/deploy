@@ -23,23 +23,23 @@
         <div class="panel-body">
             {{-- Header show button and invoice id  --}}
             <div class="col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
-                <div class="col-md-10" style="margin-top: -20px;margin-bottom: 15px;">
-                    <div class="col-md-4">
+                <div class="col-sm-12 col-md-12" style="margin-top: -20px;margin-bottom: 15px;">
+                    <div class="col-sm-6 col-md-3">
                         <h4><b>@lang('string.invoiceId') ៖ </b><b id="invoice_id"></b></h4>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-6 col-md-3">
                         <h4><b>@lang('string.createBy') ៖ </b><b id="user_create"></b></h4>
                     </div>
-                    <div class="col-md-4" style="color: red;display: none;" id="show_hide">
+                    <div class="col-sm-6 col-md-5" style="color: red;display: none;" id="show_hide">
                         <h4><b>@lang('string.late')៖ </b><b id="late_day_invoice"></b></h4>
                     </div>
-                </div>
-                <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -13px;">
-                    <button type="button" class="btn yok_duch" id="show_hide1" style="background: red;border-radius: 7px;color: white;border: 1px solid black;display: none;">យកដាច់</button>
+                    <div class="col-sm-6 col-md-1">
+                        <button type="button" class="btn yok_duch" id="show_hide1" style="background: red;border-radius: 7px;color: white;border: 1px solid black;display: none;">យកដាច់</button>
+                    </div>
                 </div>
             </div>
             {{-- End --}}
-            <div class="col-xs-12 .col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.nameCustomer')</label>
                     <div class="col-md-9">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 .col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.phoneNumber')</label>
                     <div class="col-md-9">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 .col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.dayGetMoney')</label>
                     <div class="col-md-9">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 .col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.expiredDay')</label>
                     <div class="col-md-9">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 .col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.paymentTerm')</label>
                     <div class="col-md-9">
@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 .col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">
                 <div class="form-group col-md-12" style="display: inline-flex;">
                     <p style="margin-top: 7px;">@lang('string.priceAmountPerMonth')</p>
                     <p style="margin-top: 6px;margin-left: 30px;" id="interests_value"></p>
@@ -134,57 +134,113 @@
         </div>
         {{--========================= footer of pagination ====================--}}
         <div class="datatable-footer">
-            <div class="col-xs-12 .col-sm-12 col-md-12">
-                <div style="text-align: right;clear: both;">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                {{--<div style="text-align: right;clear: both;">
                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ប្រាក់ដើមសរុប</b></label>
                     <div class="col-md-6">
                         <input type="text" placeholder="...." id="amount_price" class="form-control" style="border: 1px solid grey;" disabled="disabled">
                         <br>
                     </div>
-                </div>
+                </div>--}}
                 <div style="text-align: right;clear: both;">
+                    <div class="col-xs-0 col-sm-3 col-md-6"></div>
+                    <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
+                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>ប្រាក់ដើមសរុប</b></label>
+                        <input type="text" placeholder="...." id="amount_price" class="form-control col-sm-7 col-md-7" style="border: 1px solid grey;" disabled="disabled">
+                    </div>
+                </div>
+                {{--<div style="text-align: right;clear: both;">
                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ប្រាក់ដើមនៅសល់</b></label>
                     <div class="col-md-6">
                         <input type="text" placeholder="...." id="remain" class="form-control" style="border: 1px solid grey;" disabled="disabled">
                         <br>
                     </div>
-                </div>
+                </div>--}}
                 <div style="text-align: right;clear: both;">
+                    <br>
+                    <div class="col-xs-0 col-sm-3 col-md-6"></div>
+                    <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
+                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>ប្រាក់ដើមនៅសល់</b></label>
+                        <input type="text" placeholder="...." id="remain" class="form-control col-sm-7 col-md-7" style="border: 1px solid grey;" disabled="disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                {{--<div style="text-align: right;clear: both;">
                     <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បង់ប្រាក់ដើម</b></label>
                     <div class="col-md-6">
-                        {{--<input type="text" placeholder="...." id="payMoney" class="form-control" style="border: 1px solid grey;">--}}
+                        --}}{{--<input type="text" placeholder="...." id="payMoney" class="form-control" style="border: 1px solid grey;">--}}{{--
                         <input type="number" placeholder=".... $" id="payMoney" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">
                         <br>
                     </div>
-                </div>
+                </div>--}}
                 <div style="text-align: right;clear: both;">
-                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ដក់ប្រាក់បន្ថែម  </b><input type="checkbox" id="checkme"></label>
-                    <div class="col-md-6">
-                        <input type="number" placeholder=".... $" id="takeOutPriceMore" disabled="disabled" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">
-                        <br>
-                    </div>
-                </div>
-                <div style="text-align: right;clear: both;">
-                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បង់ការប្រាក់</b></label>
-                    <div class="col-md-6">
-                        <input type="number" placeholder=".... $" id="bong_kar" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">
-                        <br>
+                    <br>
+                    <div class="col-sm-3 col-md-6"></div>
+                    <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
+                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បង់ប្រាក់ដើម</b></label>
+                        <input type="number" placeholder=".... $" id="payMoney" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;" class="col-sm-7 col-md-7">
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+                {{--<div style="text-align: right;clear: both;">--}}
+                    {{--<label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>ដក់ប្រាក់បន្ថែម  </b><input type="checkbox" id="checkme"></label>--}}
+                    {{--<div class="col-md-6">--}}
+                        {{--<input type="number" placeholder=".... $" id="takeOutPriceMore" disabled="disabled" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">--}}
+                        {{--<br>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div style="text-align: right;clear: both;">
+                    <br>
+                    <div class="col-xs-0 col-sm-3 col-md-6"></div>
+                    <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
+                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បន្ថែមប្រាក់</b><input type="checkbox" id="checkme"></label>
+                        <input type="number" placeholder=".... $" id="takeOutPriceMore" disabled="disabled" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;" class="col-sm-7 col-md-7">
+                    </div>
+                </div>
+            </div>
+
+                {{--<div style="text-align: right;clear: both;">--}}
+                    {{--<label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;"><b>បន្ថែមប្រាក់</b></label>--}}
+                    {{--<div class="col-md-6">--}}
+                        {{--<input type="number" placeholder=".... $" id="bong_kar" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;">--}}
+                        {{--<br>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div style="text-align: right;clear: both;">
+                    <br>
+                    <div class="col-xs-0 col-sm-3 col-md-6"></div>
+                    <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
+                        <label class="control-label col-sm-5 col-md-5" style="font-size: 15px; margin-top: 6px;margin-right: 4px;"><b>បង់ការប្រាក់</b></label>
+                        <input type="number" placeholder=".... $" id="bong_kar" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;" class="col-sm-7 col-md-7">
+                    </div>
+                </div>
+            </div>
+            {{--</div>--}}
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <hr>
-                <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
+                <div style="margin-top: -14px;margin-bottom: 7px;float: right;">
+                    <a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
                     <button type="button" class="btn btn-primary payment_Money_of_one_invoice" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                 </div>
-                <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
-                    <a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
-                </div>
             </div>
+
+            {{--<div class="col-xs-12 col-sm-12 col-md-12">--}}
+                {{--<hr>--}}
+                {{--<div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">--}}
+                    {{--<button type="button" class="btn btn-primary payment_Money_of_one_invoice" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>--}}
+                {{--</div>--}}
+                {{--<div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">--}}
+                    {{--<a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
         {{--====================== End footer of pagination ====================--}}
     </div>
-    {{--=================== dialog add more item type ====================--}}
+    {{----- dialog add more item type -------}}
     <form role="form" action="" method="">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div id="add_more_item_to_invoice" class="modal fade">
@@ -196,42 +252,40 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer">
                                 <div class="datatable-header" style="margin-top: -40px;">
                                     <div class="">
                                         <div class="form-group">
                                             {{--Group Of Items--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.groupItem')</label>
-                                            <div class="col-lg-7" style="margin-bottom: 13px;">
+                                            <label class="control-label col-md-3" style="font-size: 15px">@lang('string.groupItem')</label>
+                                            <div class="col-md-9" style="margin-bottom: 13px;display: flex;">
                                                 <select class="form-control" id="selectTomNanh">
 
                                                 </select>
-                                            </div>
-                                            <div class="col-lg-2" style="margin-bottom: 13px;">
                                                 <button type="button" class="btn btn-success btn-icon btn-rounded" title="បង្កើតប្រភេទទំនិញថ្មី" id="createNewTypeItem"><i class="icon-plus3"></i></button>
                                             </div>
                                             {{--Number som Kol--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.notice')</label>
-                                            <div class="col-lg-9">
+                                            <label class="control-label col-md-3" style="font-size: 15px">@lang('string.notice')</label>
+                                            <div class="col-md-9">
                                                 <input type="text" placeholder="@lang('string.itemNotice1')" name="" id="_notice1" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--full name--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
-                                            <div class="col-lg-9">
+                                            <label class="control-label col-md-3" style="font-size: 15px"></label>
+                                            <div class="col-md-9">
                                                 <input type="text" placeholder="@lang('string.itemNotice2')" name="" id="_notice2" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--phone number--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
-                                            <div class="col-lg-9">
+                                            <label class="control-label col-md-3" style="font-size: 15px"></label>
+                                            <div class="col-md-9">
                                                 <input type="text" placeholder="@lang('string.itemNotice3')" name="" id="_notice3" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Cost--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
-                                            <div class="col-lg-9">
+                                            <label class="control-label col-md-3" style="font-size: 15px"></label>
+                                            <div class="col-md-9">
                                                 <input type="text" placeholder="@lang('string.itemNotice4')" name="" id="_notice4" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
@@ -245,7 +299,6 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" id="close_clear_dialog_itemType" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
-                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
                         <button type="button" class="btn btn-primary btn_add_more_itemType" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
                 </div>

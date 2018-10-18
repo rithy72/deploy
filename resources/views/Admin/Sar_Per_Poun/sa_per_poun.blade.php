@@ -28,7 +28,7 @@
                     {{----- Merl Item min ton lus -----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-md-3" style="display: flex;">
+                            <div class="col-sm-4 col-md-3" style="display: flex;">
                                 <div class="form-group" style="width: 100%;">
                                     <span>@lang('string.type')</span>
                                     {{--<div style="display: flex;"></div>--}}
@@ -38,12 +38,12 @@
                                 </div>
                                 <a class="btn btn-danger btn_clear_select2_1" style="margin-top: 20px;margin-bottom: 20px;" title="@lang('string.clearItemType')"><i class="icon-cross3"></i></a>
                             </div>
-                            <div class="col-md-5" style="display: flex;margin-top: 21px;">
+                            <div class="col-sm-5 col-md-5" style="display: flex;margin-top: 21px;">
                                 <input type="text" class="form-control" placeholder="@lang('string.searchItems')" id="store_search" disabled="disabled">
                                 <a class="btn btn-primary btn-Search"><i class="icon-filter3"></i></a>
                             </div>
-                            <div class="col-md-2" style="display: flex;margin-top: 1px;">
-                            <a class="btn btn-primary search_item_notYetPay" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            <div class="col-sm-2 col-md-2" style="margin-top: 1px;text-align: center;margin-bottom: 5px;">
+                            <a class="btn btn-primary search_item_notYetPay" style="margin-top: 20px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             </div>
                             {{--<div class="dataTables_length">--}}
                                 {{--<div class="btn-group" style="margin-top: 20px;">--}}
@@ -91,7 +91,7 @@
                     {{----- Merl Item Derl duch gnai -----}}
                     <div class="tab-pane" id="highlighted_tab2">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-md-3" style="display: flex;">
+                            <div class="col-sm-3 col-md-3" style="display: flex;">
                                 <div class="form-group" style="width: 100%;">
                                     <span>@lang('string.typeItems')</span>
                                     <select class="form-control" id="selectTomNanh1">
@@ -100,7 +100,7 @@
                                 </div>
                                 <a class="btn btn-danger btn_clear_select2_2" style="margin-top: 20px;margin-bottom: 20px;" title="@lang('string.clearItemType')"><i class="icon-cross3"></i></a>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-sm-2 col-md-2">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="select_status">
@@ -110,13 +110,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4" style="display: flex;margin-top: 21px;">
+                            <div class="col-sm-3 col-md-4" style="display: flex;margin-top: 21px;">
                                 <span>.</span><input type="text" id="show_search_notice" class="form-control" placeholder="@lang('string.searchItems')" disabled="disabled">
                                 <a class="btn btn-primary searchItemTakeOut"><i class="icon-filter3"></i></a>
                                 {{--<a class="btn btn-primary search_item_notYetPay" style="margin-left: 15px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>--}}
                             </div>
-                            <div class="col-md-2" style="display: flex;margin-top: 1px;">
-                                <a class="btn btn-primary search_item_took" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            <div class="col-sm-4 col-md-2" style="text-align: center;margin-bottom: 5px;">
+                                <a class="btn btn-primary search_item_took" style="margin-top: 21px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             </div>
                             {{--<div class="dataTables_length">--}}
                                 {{--<div class="btn-group" style="margin-top: 20px;">--}}
@@ -165,7 +165,7 @@
                     {{----- Merl Item All -----}}
                     <div class="tab-pane" id="highlighted_tab3">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-md-3" style="display: flex;">
+                            <div class="col-sm-3 col-md-3" style="display: flex;">
                                 <div class="form-group" style="width: 100%;">
                                     <span>@lang('string.typeItems')</span>
                                     <select class="form-control" id="selectTomNanh2">
@@ -174,7 +174,7 @@
                                 </div>
                                 <a class="btn btn-danger btn_clear_select2_3" style="margin-top: 20px;margin-bottom: 20px;" title="@lang('string.clearItemType')"><i class="icon-cross3"></i></a>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-sm-2 col-md-2">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="select_status_all">
@@ -186,12 +186,12 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4" style="display: flex;margin-top: 21px;">
+                            <div class="col-sm-3 col-md-4" style="display: flex;margin-top: 21px;">
                                 <span>.</span><input type="text" class="form-control" placeholder="@lang('string.searchItems')" id="all_notice_show" disabled="disabled">
                                 <a class="btn btn-primary btn_search_all_items"><i class="icon-filter3"></i></a>
                             </div>
-                            <div class="col-md-2" style="display: flex;margin-top: 1px;">
-                                <a class="btn btn-primary search_item_history_oneInvoice" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            <div class="col-sm-4 col-md-2" style="margin-top: 1px;text-align: center;margin-bottom: 5px;">
+                                <a class="btn btn-primary search_item_history_oneInvoice" style="margin-top: 20px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             </div>
 
                             {{--<div class="dataTables_length">--}}
@@ -506,32 +506,33 @@
 
                 <div class="modal-body">
                     <div>
-                        <div class="col-md-10 col-md-offset-1" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                        <div class="col-sm-12 col-md-10 col-md-offset-1" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.invoiceID') ៖</p><p id="invoiceID_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.type') ៖</p><p id="type_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-sm-12 col-md-12">
                                 <h5 style="display: inline-flex;"><p>@lang('string.notice') </p><p id="notice_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+
+                            <div class="col-sm-12 col-md-12">
                                 <h5 style="display: inline-flex;"><p>@lang('string.situationItemTypeOfOneInvoice') ៖</p><p id="situationItemType_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-12">
                                 <h5 style="display: inline-flex;"><p>@lang('string.takeOutWithPrice') ៖</p><p id="price_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.dayTakeIn') ៖</p><p id="day_in_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by1_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.dayTakeOut') ៖</p><p id="day_out_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by2_" style="margin-left: 5px;"></p></h5>
                             </div>
                         </div>

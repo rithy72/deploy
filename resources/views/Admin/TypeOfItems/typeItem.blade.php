@@ -21,23 +21,27 @@
         </div>
 
         <div class="panel-body">
-            <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 19px;">
-                <a class="btn btn-success" id="createTomNagn"><i class="icon-add position-left"></i>@lang('string.createNewItems')</a>
-            </div>
-
-            <div class="col-md-3">
+            <div class="col-sm-3 col-md-3">
                 <span>.</span><input type="text" class="form-control" id="search" placeholder="@lang('string.searchTypeItems')">
+                <br>
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-3 col-md-3">
                 <span>@lang('string.chooseSituation')</span>
                 <select class="form-control" id="statusSelect" name="">
                     <option value="">@lang('string.all')</option>
                     <option value="1">@lang('string.active')</option>
                     <option value="0">@lang('string.deActive')</option>
                 </select>
+                <br>
             </div>
-            <a class="btn btn-primary btn-Search" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
-            <br/><br/>
+            <div class="col-xs-12 col-sm-3 col-md-2" style="text-align: center;">
+                <a class="btn btn-primary btn-Search" style="margin-top: 20px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-4" style="margin-top: 19px;text-align: center;">
+                <a class="btn btn-success" id="createTomNagn" style="margin-bottom: 5px;"><i class="icon-add position-left"></i>@lang('string.createNewItems')</a>
+            </div>
+
+
             <div class="datatable-header" style="margin-top: -19px;"></div>
             <div class="datatable-scroll" style="overflow-x: hidden;">
                 <div class="dataTables_scroll">
@@ -95,6 +99,34 @@
                                                 <br>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.notice')</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice1')" id="notice_itemType_1" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice2')" id="notice_itemType_2" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice3')" id="notice_itemType_3" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice4')" id="notice_itemType_4" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +167,34 @@
                                                 <br>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.notice')</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice1')" id="notice_itemType_update_1" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice2')" id="notice_itemType_update_2" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice3')" id="notice_itemType_update_3" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice4')" id="notice_itemType_update_4" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +204,6 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-link" id="close_update_rate" data-dismiss="modal" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
-                        {{--<button type="submit" class="btn btn-primary" id="create_update_rate_dialog" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px; display: none"><b>បោះបង់</b></button>--}}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="button" class="btn btn-primary btn_update_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
@@ -198,20 +257,31 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
+        function clearInputCreateNewItemType() {
+            $('#new_item_type').val('');
+            $('#notice_itemType_1').val('');
+            $('#notice_itemType_2').val('');
+            $('#notice_itemType_3').val('');
+            $('#notice_itemType_4').val('');
+            $('.close_dialog_createNew').click();
+        }
         //create new item type, and ,close dialog clear input
         var storeArrayItemType = [];
         $(document).on("click","#close_create_new",function () {
             if (storeArrayItemType.length > 0){
-                $('#new_item_type').val('');
-                $('.close_dialog_createNew').click();
+                clearInputCreateNewItemType();
                 window.location.href = '{{('/admin/item_type')}}';
             } else {
-                $('#new_item_type').val('');
-                $('.close_dialog_createNew').click();
+                clearInputCreateNewItemType();
             }
         });
         $(document).on("click",".btn_create_new_item_type",function () {
             var storeInput = $('#new_item_type').val();
+            var store_notice1 = $('#notice_itemType_1').val();
+            var store_notice2 = $('#notice_itemType_2').val();
+            var store_notice3 = $('#notice_itemType_3').val();
+            var store_notice4 = $('#notice_itemType_4').val();
             if (storeInput === ""){
                 alert('បំពេញសិន មុនពេលធ្វើការបង្កើត');
             } else {
@@ -219,7 +289,7 @@
                 $.ajax({
                     type: "POST",
                     url: 'api/item_group',
-                    data: {"item_type_name": storeInput},
+                    data: {"item_type_name": storeInput,"first_note":store_notice1, "second_note":store_notice2, "third_note":store_notice3, "fourth_note":store_notice4},
                     success: function (response) {
                         //TODO: Alert Success Insert, or Duplicate Type Name
                         jsonObj = JSON.parse(response);
@@ -266,6 +336,10 @@
                     '<td style="display:none;">' + storeValue.data.data[i].id + '</td>' +
                     '<td>' + storeValue.data.data[i].item_type_name + '</td>' +
                     '<td>' + stringStatus + '</td>' +
+                    '<td style="display:none;">' + storeValue.data.data[i].first_note + '</td>' +
+                    '<td style="display:none;">' + storeValue.data.data[i].second_note + '</td>' +
+                    '<td style="display:none;">' + storeValue.data.data[i].third_note + '</td>' +
+                    '<td style="display:none;">' + storeValue.data.data[i].fourth_note + '</td>' +
                     '<td class="text-center"> ' +
                     '<ul class="icons-list">'+
                     '<li class="dropdown">'+
@@ -275,6 +349,7 @@
                     '<ul class="dropdown-menu dropdown-menu-right">'+
                     '<li id="update"><a><i class="icon-pencil7"></i>@lang('string.update')</a></li>'+
                     stringShowDeActiveOrActive +
+                    '<li id="detail_itemType"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
                     stringDeletable +
                     '</ul>'+
                     '</li>'+
@@ -309,26 +384,33 @@
         $(document).on("click","#update",function () {
             var _selectRow = $(this).closest('tr');
             _storeID = $(_selectRow).find('td:eq(0)').text();
-            var _storeNameItemType = $(_selectRow).find('td:eq(1)').text();
             (function(){
-                $('#updateItem').val(_storeNameItemType);
+                $('#updateItem').val($(_selectRow).find('td:eq(1)').text());
+                $('#notice_itemType_update_1').val($(_selectRow).find('td:eq(3)').text());
+                $('#notice_itemType_update_2').val($(_selectRow).find('td:eq(4)').text());
+                $('#notice_itemType_update_3').val($(_selectRow).find('td:eq(5)').text());
+                $('#notice_itemType_update_4').val($(_selectRow).find('td:eq(6)').text());
             })();
         });
         var _storeID;
         $(".btn_update_item_type").click(function () {
             var storeInput = $('#updateItem').val();
+            var store_update_note_itemType_1 = $('#notice_itemType_update_1').val();
+            var store_update_note_itemType_2 = $('#notice_itemType_update_2').val();
+            var store_update_note_itemType_3 = $('#notice_itemType_update_3').val();
+            var store_update_note_itemType_4 = $('#notice_itemType_update_4').val();
             if (storeInput === ""){
                 alert('បំពេញសិន មុនពេលធ្វើការកែប្រែ');
             } else {
                 $.ajax({
                     type: "PUT",
                     url: 'api/item_group/' + _storeID + '',
-                    data: {"item_type_name": storeInput},
+                    data: {"item_type_name": storeInput,"first_note":store_update_note_itemType_1,"second_note":store_update_note_itemType_2, "third_note":store_update_note_itemType_3,"fourth_note":store_update_note_itemType_4},
                     success: function (response) {
+                        console.log(response);
                         var convert = JSON.parse(response);
                         if (convert.status === "200") {
                             alert('ធ្វើការកែប្រែរួចរាល់');
-                            $('#updateItem').val('');
                             window.location.href = '{{('/admin/item_type')}}';
                         } else if (convert.status === "301") {
                             alert('ឈ្មោះមានរួចហើយ សូមធ្វើការកែប្រែម្តងទៀត');
@@ -353,7 +435,7 @@
                 }
             });
         });
-        //================================= make deActive  ======================================
+        //================================= make deActive  =====================================
         $(document).on("click","#deActive",function () {
             var _selectRow = $(this).closest('tr');
             _storeID = $(_selectRow).find('td:eq(0)').text();
@@ -409,7 +491,7 @@
                 clickNext.reads();
             }
         });
-        //======================= Click button Search Item ========================================
+        //======================= Click button Search Item =====================================
         var timeout1 = null;
         $('.btn-Search').click(function () {
             var _getSearch = $('#search').val();
@@ -421,6 +503,13 @@
                 var searchItemType = new Constructor("GET" , url);
                 searchItemType.reads();
             }, 1000);
+        });
+        //======================= payment one invoice ==========================================
+        $(document).on("click", "#detail_itemType", function () {
+            var _tredite = $(this).closest('tr');
+            var _idUnique = $(_tredite).find('td:eq(0)').text();
+            $.cookie("KeyItemType", btoa(_idUnique));// atob = decode from base64,  btoa = encode to base 64
+            window.location.href = '{{('/admin/detail_one_itemtype')}}';
         });
     </script>
 @endsection

@@ -207,20 +207,18 @@
                                     </div>
                                 </div>
                                 {{--Current Password--}}
-                                <div class="form-group">
-                                    <label class="control-label col-lg-5"
-                                           style="font-size: 15px">@lang('string.oldPassword')</label>
-                                    <div class="col-lg-7">
+                                <div class="form-group" style="margin-bottom: 145px;">
+                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.oldPassword')</label>
+                                    <div class="col-lg-7" style="display: flex;">
                                         <input type="text" placeholder=""
                                                id="cur_password"
                                                class="form-control" style="border: 1px solid grey;" required
                                                autocomplete="">
-                                        <br>
+                                        {{--Check Button--}}
+                                        <a class="btn btn-success btn_clear_select2_2" id="check_button"
+                                           title="@lang('string.changePass')">
+                                        <i class="icon-checkmark4 icon-checked"></i></a>
                                     </div>
-                                    {{--Check Button--}}
-                                    <a class="btn btn-success btn_clear_select2_2" id="check_button"
-                                       style="margin-top: 20px;margin-bottom: 20px;"
-                                       title="@lang('string.clearItemType')"><i class="icon-checked"></i></a>
                                 </div>
 
                                 <div id="warning_div">
@@ -423,9 +421,9 @@
             }
         }
         //
-        $("#reset_password_warning").detach();
-        $("#warning_div").append(component);
-        $('#reset_password_warning').css('color', color);
+        $("#reset_password_warning").detach(); // clear in dev
+        $("#warning_div").append(component); // add new component from condition if above
+        $('#reset_password_warning').css('color', color); // than set color to it from condition true or false
     }
 
     //Check New And Confirmation Password
