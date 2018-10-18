@@ -770,10 +770,10 @@
             });
         };
         // ----------- function show item pay yet --------------
-//        (function () {
-//            var showItemNotYetPay = new ItemPayYet("GET" , 'api/item?search=&item_type=&status=1&page_size=15');
-//            showItemNotYetPay.reads();
-//        })();
+        (function () {
+            var showItemNotYetPay = new ItemPayYet("GET" , 'api/item?search=&item_type=&status=1&page_size=15');
+            showItemNotYetPay.reads();
+        })();
         // -------------- click tap ti 1 ----------------------
         /*$(document).on("click","#tab_show_itemType_notYetPay",function () {
             clearTimeout(timeout1);
@@ -938,10 +938,10 @@
                 }
             });
         };
-//        (function () {
-//            var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=3,4&page_size=15');
-//            showItemExpired.reads();
-//        })();
+        (function () {
+            var showItemExpired = new ItemExpired("GET" , 'api/item?search=&item_type=&status=3,4&page_size=15');
+            showItemExpired.reads();
+        })();
         // ------- function show item out click tap ti 2 -------
         /*$(document).on("click","#tab_show_took_itemType",function () {
             clearTimeout(timeout1);
@@ -1133,10 +1133,10 @@
                 }
             });
         };
-//        (function () {
-//            var showItemStatus = new ItemAllStatus("GET" , 'api/item?search=&item_type=&status=&page_size=15');
-//            showItemStatus.reads();
-//        })();
+        (function () {
+            var showItemStatus = new ItemAllStatus("GET" , 'api/item?search=&item_type=&status=&page_size=15');
+            showItemStatus.reads();
+        })();
         // ------- function show item all click tap ti 3 --------
         /*$(document).on("click","#tab_show_reportItemType",function () {
             clearTimeout(timeout1);
