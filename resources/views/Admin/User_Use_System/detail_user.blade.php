@@ -164,7 +164,7 @@
                                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date_tap2">
                             </div>
                             <div class="col-sm-3 col-md-3">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="search_status_tap2">
                                         <option value="">@lang('string.all')</option>
@@ -227,21 +227,21 @@
                             </div>
                             {{------ choose option ------}}
                             <div class="col-sm-6 col-md-2">
-                                <span>@lang('string.chooseOption')</span>
+                                <span>@lang('string.choose_audit_group')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="chooseInvoiceOrItemType1">
                                         <option selected="selected" value=""></option>
                                         <option value="1">@lang('string.invoice')</option>
-                                        <option value="2">@lang('string.actionOfItemType')</option>
+                                        <option value="2">@lang('string.type')</option>
+                                        <option value="4">@lang('string.item')</option>
                                         <option value="3">@lang('string.users')</option>
-                                        <option value="4">@lang('string.allItems')</option>
                                         <option value="18">@lang('string.TrackUserLoginAndLogout')</option>
                                     </select>
                                 </div>
                             </div>
                             {{------ show option invoice ------}}
                             <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_invoice1">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_user_tap3">
                                         <option value="1">@lang('string.create')</option>
@@ -254,7 +254,7 @@
                             </div>
                             {{------ show option item Type ------}}
                             <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_ItemType1">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_action_itemType_tap3">
                                         <option value="1">@lang('string.create')</option>
@@ -267,7 +267,7 @@
                             </div>
                             {{------ show option item Type ------}}
                             <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_user1">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_action_user_tap3">
                                         <option value="1">@lang('string.create')</option>
@@ -281,7 +281,7 @@
                             </div>
                             {{----- show option situation items -----}}
                             <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_itemType1">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_itemType_tap3">
                                         <option value="11">@lang('string.add')</option>
@@ -292,7 +292,7 @@
                             </div>
                             {{------ show security user login and logout ------}}
                             <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_security_login_logout1">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_security_login_logout_tap3">
                                         <option value="14">@lang('string.login')</option>
@@ -426,7 +426,7 @@
                                             {{--phone number--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.phoneNumber') ៖</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.writeHere...')" id="phoneNumber" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="..." id="phoneNumber" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Account--}}
@@ -449,7 +449,7 @@
                                             </div>
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.note') ៖</label>
                                             <div class="col-lg-9">
-                                                <textarea rows="3" cols="3" class="form-control" placeholder="@lang('string.must_to_write')" style="border: 1px solid grey;" id="note_tap3"></textarea>
+                                                <textarea rows="3" cols="3" class="form-control" placeholder="..." style="border: 1px solid grey;" id="note_tap3"></textarea>
                                             </div>
                                             <div class="col-lg-12">
                                                 <hr>
@@ -517,7 +517,7 @@
                                             {{--phone number--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.phoneNumber') ៖</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.writeHere...')" id="phoneNumber_update" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="..." id="phoneNumber_update" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Account--}}
@@ -528,7 +528,7 @@
                                             </div>
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.note') ៖</label>
                                             <div class="col-lg-9">
-                                                <textarea rows="3" cols="3" class="form-control" placeholder="@lang('string.must_to_write')" style="border: 1px solid grey;" id="note_update"></textarea>
+                                                <textarea rows="3" cols="3" class="form-control" placeholder="..." style="border: 1px solid grey;" id="note_update"></textarea>
                                             </div>
                                             <div class="col-lg-12">
                                                 <hr>

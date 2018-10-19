@@ -349,9 +349,9 @@
                     '<i class="icon-menu9"></i>'+
                     '</a>'+
                     '<ul class="dropdown-menu dropdown-menu-right">'+
+                    '<li id="detail_itemType"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
                     '<li id="update"><a><i class="icon-pencil7"></i>@lang('string.update')</a></li>'+
                     stringShowDeActiveOrActive +
-                    '<li id="detail_itemType"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
                     stringDeletable +
                     '</ul>'+
                     '</li>'+

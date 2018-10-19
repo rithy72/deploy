@@ -128,7 +128,7 @@
                                         {{--phone number--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.phoneNumber') ៖</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.writeHere...')" id="phoneNumber" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="..." id="phoneNumber" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Account--}}
@@ -151,7 +151,7 @@
                                             </div>
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.note') ៖</label>
                                             <div class="col-lg-9">
-                                                <textarea rows="3" cols="3" class="form-control" placeholder="@lang('string.writeHere...')" style="border: 1px solid grey;" id="note"></textarea>
+                                                <textarea rows="3" cols="3" class="form-control" placeholder="..." style="border: 1px solid grey;" id="note"></textarea>
                                             </div>
                                             <div class="col-lg-12">
                                                 <hr>
@@ -219,7 +219,7 @@
                                             {{--phone number--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.phoneNumber') ៖</label>
                                             <div class="col-lg-9">
-                                                <input type="text" placeholder="@lang('string.writeHere...')" id="phoneNumber_update" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="..." id="phoneNumber_update" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Account--}}
@@ -230,7 +230,7 @@
                                             </div>
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.note') ៖</label>
                                             <div class="col-lg-9">
-                                                <textarea rows="3" cols="3" class="form-control" placeholder="@lang('string.writeHere...')" style="border: 1px solid grey;" id="note_update"></textarea>
+                                                <textarea rows="3" cols="3" class="form-control" placeholder="..." style="border: 1px solid grey;" id="note_update"></textarea>
                                             </div>
                                             <div class="col-lg-12">
                                                 <hr>
@@ -573,11 +573,11 @@
                     '<i class="icon-menu9"></i>'+
                     '</a>'+
                     '<ul class="dropdown-menu dropdown-menu-right">'+
+                    '<li id="detail_one_user"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
                     '<li id="update"><a><i class="icon-pencil7"></i>@lang('string.update')</a></li>'+
                     stringShowDeActiveOrActive +
-                    deleteUser +
-                    '<li id="detail_one_user"><a><i class="icon-certificate"></i>@lang('string.details')</a></li>' +
                     '<li id="reset_pass_user"><a><i class="icon-user-lock"></i>@lang('string.reset_password_user')</a></li>' +
+                    deleteUser +
                     '</ul>'+
                     '</li>'+
                     '</ul>'+

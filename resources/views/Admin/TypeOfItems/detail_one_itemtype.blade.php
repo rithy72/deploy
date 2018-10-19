@@ -132,7 +132,7 @@
                                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
                             </div>
                             <div class="col-sm-3 col-md-3">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="status_itemType">
                                         <option selected="selected" value="">@lang('string.all')</option>

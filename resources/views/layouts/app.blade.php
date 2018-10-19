@@ -21,7 +21,7 @@
             overflow-y: auto;
         }
         body {
-            font-family: 'Khmer OS Battambang', sans-serif;
+            font-family: 'Khmer OS Battambang', sans-serif; !important;
         }
     </style>
 </head>
@@ -59,15 +59,22 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a id="ChangePassword">
+                            <i class=" icon-user-check">
+                                @lang('string.changePass')
+                            </i>
+                        </a>
+                    </li>
                     <li><a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                    class="icon-switch2"> @lang('string.logout') </i></a>
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i
+                                    class="icon-switch2">
+                                @lang('string.logout')
+                            </i></a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                    </li>
-                    <li>
-                        <a id="ChangePassword"><i class=" icon-user-check"> @lang('string.changePass') </i></a>
                     </li>
                 </ul>
             </li>

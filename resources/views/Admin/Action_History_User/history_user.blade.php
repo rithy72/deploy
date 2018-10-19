@@ -50,21 +50,21 @@
                                 </div>
                                 {{------ choose option ------}}
                                 <div class="col-sm-3 col-md-3">
-                                    <span>@lang('string.chooseOption')</span>
+                                    <span>@lang('string.choose_audit_group')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="chooseInvoiceOrItemType1">
                                             <option selected="selected" value=""></option>
                                             <option value="1">@lang('string.invoice')</option>
-                                            <option value="2">@lang('string.actionOfItemType')</option>
+                                            <option value="2">@lang('string.type')</option>
+                                            <option value="4">@lang('string.item')</option>
                                             <option value="3">@lang('string.users')</option>
-                                            <option value="4">@lang('string.allItems')</option>
                                             <option value="18">@lang('string.TrackUserLoginAndLogout')</option>
                                         </select>
                                     </div>
                                 </div>
                                 {{------ show option invoice ------}}
                                 <div class="col-sm-3 col-md-3" style="display: none;" id="show_situation_invoice1">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_invoice1">
                                             <option value="1">@lang('string.create')</option>
@@ -77,7 +77,7 @@
                                 </div>
                                 {{------ show option item Type ------}}
                                 <div class="col-sm-3 col-md-3" style="display: none;" id="show_action_ItemType1">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_action_itemType1">
                                             <option value="1">@lang('string.create')</option>
@@ -90,7 +90,7 @@
                                 </div>
                                 {{------ show option item Type ------}}
                                 <div class="col-sm-3 col-md-3" style="display: none;" id="show_action_user1">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_action_user1">
                                             <option value="1">@lang('string.create')</option>
@@ -104,7 +104,7 @@
                                 </div>
                                 {{----- show option situation items -----}}
                                 <div class="col-sm-3 col-md-3" style="display: none;" id="show_situation_itemType1">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_itemType1">
                                             <option value="11">@lang('string.add')</option>
@@ -115,7 +115,7 @@
                                 </div>
                                 {{------ show security user login and logout ------}}
                                 <div class="col-sm-3 col-md-3" style="display: none;" id="show_action_security_login_logout1">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_security_login_logout1">
                                             <option value="14">@lang('string.login')</option>
@@ -176,21 +176,21 @@
                                 </div>
                                 {{------ choose option ------}}
                                 <div class="col-sm-3 col-md-2">
-                                    <span>@lang('string.chooseOption')</span>
+                                    <span>@lang('string.choose_audit_group')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="chooseInvoiceOrItemType">
                                             <option selected="selected" value=""></option>
                                             <option value="1">@lang('string.invoice')</option>
-                                            <option value="2">@lang('string.actionOfItemType')</option>
+                                            <option value="2">@lang('string.type')</option>
+                                            <option value="4">@lang('string.item')</option>
                                             <option value="3">@lang('string.users')</option>
-                                            <option value="4">@lang('string.allItems')</option>
                                             <option value="18">@lang('string.TrackUserLoginAndLogout')</option>
                                         </select>
                                     </div>
                                 </div>
                                 {{------ show option invoice ------}}
                                 <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_invoice">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_invoice">
                                             <option value="1">@lang('string.create')</option>
@@ -203,7 +203,7 @@
                                 </div>
                                 {{------ show option item Type ------}}
                                 <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_ItemType">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_action_itemType">
                                             <option value="1">@lang('string.create')</option>
@@ -216,7 +216,7 @@
                                 </div>
                                 {{------ show option item Type ------}}
                                 <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_user">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_action_user">
                                             <option value="1">@lang('string.create')</option>
@@ -230,7 +230,7 @@
                                 </div>
                                 {{----- show option situation items -----}}
                                 <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_itemType">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_itemType">
                                             <option value="11">@lang('string.add')</option>
@@ -241,7 +241,7 @@
                                 </div>
                                 {{------ show security user login and logout ------}}
                                 <div class="col-sm-3 col-md-2" style="display: none;" id="show_action_security_login_logout">
-                                    <span>@lang('string.situation')</span>
+                                    <span>@lang('string.actions')</span>
                                     <div class="form-group">
                                         <select class="form-control" id="history_security_login_logout">
                                             <option value="14">@lang('string.login')</option>

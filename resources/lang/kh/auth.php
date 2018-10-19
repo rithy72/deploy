@@ -12,32 +12,6 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'mainForm' => 'ទំព័រដើម',
-    'search' => 'ធ្វើការស្វែងរក',
-    'createNewInvoice' => 'បង្កើតវិក្ក័យបត្រថ្មី',
-    'addMoreItems' => 'បន្ថែមទំនិញ',
-    'createNewItems' => 'បង្កើតប្រភេទទំនិញថ្មី',
-    'cancel' => 'បោះបង់',
-    'save' => 'រក្សាទុក',
-    'createNewUser' => 'បង្កើតអ្នកប្រើប្រាស់ថ្មី',
-    'createNew' => 'បង្កើតថ្មី',
-    'update' => 'កែប្រែ',
-    'updateInvoice' => 'កែប្រែវិក្ក័យបត្រ',
-    'detail' => 'ពណ៍មានលម្អិត',
-    'payment' => 'បង់ប្រាក់',
-    'generalInformation' => 'ព័ណមានទូទៅ',
-    'action' => 'ប្រតិបត្តិការ',
-    'invoiceId' => 'លេខបង្កាន់ដៃ',
-    'createBy' => 'បង្កើតដោយ',
-    'late' => 'យឺតអស់រយៈពេល',
-    'type' => 'ប្រភេទទំនិញ',
-
-    'itemAll_In_Inventory' => 'ទំនិញក្នុងឃ្លាំង',
-    'itemIn' => 'ទំនិញចូល',
-    'pay' => 'ចំណាយ',
-    'itemOut' => 'ទំនិញចេញ',
-    'income' => 'ចំណូល',
-
     'failed' => 'គណនេយ្យ ឫលេខសម្ងាត់មិនត្រឹមត្រូវ',
     'throttle' => 'សូមរង់ចាំរយះពេល៖ seconds seconds.',
     'logout' => 'ចាកចេញ',

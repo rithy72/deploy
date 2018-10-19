@@ -53,7 +53,7 @@
                 <ul class="nav nav-tabs nav-tabs-highlight">
                     <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">@lang('string.generalInformation')</a></li>
                     <li id="show_click_tap2"><a href="#highlighted-tab2" data-toggle="tab" aria-expanded="true">ទំនិញបញ្ចាំ</a></li>
-                    <li id="show_click_tap3"><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.history')</a></li>
+                    <li id="show_click_tap3"><a href="#highlighted-tab4" data-toggle="tab" aria-expanded="true">@lang('string.invoice_history')</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -251,7 +251,7 @@
                                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
                             </div>
                             <div class="col-sm-6 col-md-2">
-                                <span>@lang('string.chooseOption')</span>
+                                <span>@lang('string.choose_audit_group')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="chooseInvoiceOrItemType">
                                         <option selected="selected" value=""></option>
@@ -261,7 +261,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_invoice">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_invoice">
                                         <option value="1">@lang('string.create')</option>
@@ -273,7 +273,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3 col-md-2" style="display: none;" id="show_situation_itemType">
-                                <span>@lang('string.situation')</span>
+                                <span>@lang('string.actions')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="history_itemType">
                                         <option value="11">@lang('string.add')</option>
