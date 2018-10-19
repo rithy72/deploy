@@ -334,14 +334,13 @@
 <script src="{{asset('/assets/js/plugins/ui/drilldown.js')}}"></script>
 <!-- /core JS files -->
 
-<!-- core JS Grape -->
-<script src="{{'https://code.highcharts.com/highcharts.js'}}"></script>
-<script src="{{'https://code.highcharts.com/modules/exporting.js'}}"></script>
-<script src="{{'https://code.highcharts.com/modules/export-data.js'}}"></script>
+{{--<!-- core JS Grape -->--}}
+{{--<script src="{{'https://code.highcharts.com/highcharts.js'}}"></script>--}}
+{{--<script src="{{'https://code.highcharts.com/modules/exporting.js'}}"></script>--}}
+{{--<script src="{{'https://code.highcharts.com/modules/export-data.js'}}"></script>--}}
 
 <script src="{{asset('/assets/js/jquerysession.js')}}"></script>
 <script src="{{asset('/assets/js/site.js')}}"></script>
-<!-- /core JS Grape -->
 
 <!-- Theme JS Validation -->
 <script src="{{asset('/assets/js/plugins/forms/validation/validate.min.js')}}"></script>
@@ -401,7 +400,6 @@
 <script type="text/javascript" src="{{asset('/assets/js/plugins/buttons/spin.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/assets/js/plugins/buttons/ladda.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/assets/js/pages/components_buttons.js')}}"></script>
-
 <script type="text/javascript" src="{{asset('/assets/js/plugins/notifications/pnotify.min.js')}}"></script>
 
 @yield("script")
