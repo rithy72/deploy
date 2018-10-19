@@ -19,8 +19,9 @@
         .box {
             height: 90vh;
             overflow-y: auto;
-            /*background-color: #333;
-            color: #fff;*/
+        }
+        body {
+            font-family: 'Khmer Kep', sans-serif;
         }
     </style>
 </head>
