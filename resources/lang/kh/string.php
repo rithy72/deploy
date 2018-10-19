@@ -205,5 +205,7 @@ return[
     'name' => 'ឈ្មោះ',
     'name_itemType' => 'ឈ្មោះប្រភេទទំនិញ ៖',
     'invoice_history' => 'ប្រវត្តិកែប្រែ និងប្រត្តិបត្តការ',
-    'choose_audit_group' => 'ជ្រើសរើសក្រុម'
+    'choose_audit_group' => 'ជ្រើសរើសក្រុម',
+    'addMoreItemsToInvoice' => 'បន្ថែមទំនិញ',
+    'updateItemsOfInvoice' => 'កែប្រែទំនិញ'
 ];
