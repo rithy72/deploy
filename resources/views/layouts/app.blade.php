@@ -99,39 +99,90 @@
 
                             <!-- Main -->
                             @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
-                                <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;"><a
+                                <li
+                                        @if ($active_form == \App\Http\Controllers\Forms\Forms::DASHBOARD) class="active" @endif
+                                        style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;"
+                                >
+                                    <a
                                             href="{{('/admin/mainform')}}"><i class="icon-home4"></i>
-                                        <span> @lang('string.desboard') </span></a></li>
+                                        <span> @lang('string.desboard') </span>
+                                    </a>
+                                </li>
                             @endif
-                            <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
+                            <li
+                                    @if ($active_form == \App\Http\Controllers\Forms\Forms::INVOICE) class="active" @endif
+                                    style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;"
+                            >
                                 <a href="{{('/admin/invoice')}}"><i class="icon-copy"></i>
-                                    <span>@lang('string.invoice')</span></a>
-                                {{--<ul>--}}
-                                {{--<li><a href="#">Boxed full width</a></li>--}}
-                                {{--</ul>--}}
+                                    <span>@lang('string.invoice')</span>
+                                </a>
                             </li>
-                            <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                <a><i class="icon-store"></i> <span>{{__('auth.inventory')}}</span></a>
+                            <li
+                                    @if ($active_form == \App\Http\Controllers\Forms\Forms::INVENTORY_ITEM_TYPE
+                                    || $active_form == \App\Http\Controllers\Forms\Forms::INVENTORY_ITEMS
+                                    )
+                                    class="active"
+                                    @endif
+                                    style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;"
+                            >
+                                <a>
+                                    <i class="icon-store"></i> <span>{{__('auth.inventory')}}</span>
+                                </a>
                                 <ul>
-                                    <li><a href="{{('/admin/inventory')}}"
-                                           id="layout3">@lang('string.inventoryItems')</a></li>
-                                    <li><a href="{{('/admin/item_type')}}" id="layout3">@lang('string.typeItems')</a>
+                                    <li
+                                            @if ($active_form == \App\Http\Controllers\Forms\Forms::INVENTORY_ITEMS)
+                                            class="active"
+                                            @endif
+                                    >
+                                        <a href="{{('/admin/inventory')}}" id="layout3">
+                                            @lang('string.inventoryItems')
+                                        </a>
+                                    </li>
+                                    <li
+                                            @if ($active_form == \App\Http\Controllers\Forms\Forms::INVENTORY_ITEM_TYPE)
+                                            class="active"
+                                            @endif
+                                    >
+                                        <a href="{{('/admin/item_type')}}" id="layout3">
+                                            @lang('string.typeItems')
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
                             @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
-                                <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                    <a href="{{('/admin/user')}}"><i class="icon-user"></i>
-                                        <span>@lang('string.users')</span></a>
+                                <li
+                                        @if ($active_form == \App\Http\Controllers\Forms\Forms::USER)
+                                        class="active"
+                                        @endif
+                                        style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;"
+                                >
+                                    <a href="{{('/admin/user')}}">
+                                        <i class="icon-user"></i>
+                                        <span>@lang('string.users')</span>
+                                    </a>
                                 </li>
 
-                                <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                    <a href="{{('/admin/history_user')}}"><i class="icon-clipboard3"></i>
-                                        <span>@lang('string.actionUsers')</span></a>
+                                <li
+                                        @if ($active_form == \App\Http\Controllers\Forms\Forms::AUDIT_TRAIL)
+                                        class="active"
+                                        @endif
+                                        style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;"
+                                >
+                                    <a href="{{('/admin/history_user')}}">
+                                        <i class="icon-clipboard3"></i>
+                                        <span>@lang('string.actionUsers')</span>
+                                    </a>
                                 </li>
-                                <li style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;">
-                                    <a href="{{('/admin/report')}}"><i class="icon-stack-text"></i>
-                                        <span>@lang('string.reportHistory')</span></a>
+                                <li
+                                        @if ($active_form == \App\Http\Controllers\Forms\Forms::DAILY_REPORT)
+                                        class="active"
+                                        @endif
+                                        style="border: 0.1px solid grey;border-left: 0px;border-right: 0px;border-top: 0px;"
+                                >
+                                    <a href="{{('/admin/report')}}">
+                                        <i class="icon-stack-text"></i>
+                                        <span>@lang('string.reportHistory')</span>
+                                    </a>
                                 </li>
                                 <!-- /main -->
                             @endif
@@ -197,7 +248,8 @@
                             <div class="datatable-header">
                                 {{--Username--}}
                                 <div class="form-group">
-                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.username')</label>
+                                    <label class="control-label col-lg-5"
+                                           style="font-size: 15px">@lang('string.username')</label>
                                     <div class="col-lg-7">
                                         <input name="email" id="email" type="text"
                                                placeholder=""
@@ -207,8 +259,9 @@
                                     </div>
                                 </div>
                                 {{--Current Password--}}
-                                <div class="form-group" style="margin-bottom: 145px;">
-                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.oldPassword')</label>
+                                <div class="form-group mb-10">
+                                    <label class="control-label col-lg-5"
+                                           style="font-size: 15px">@lang('string.oldPassword')</label>
                                     <div class="col-lg-7" style="display: flex;">
                                         <input type="text" placeholder=""
                                                id="cur_password"
@@ -217,12 +270,12 @@
                                         {{--Check Button--}}
                                         <a class="btn btn-success btn_clear_select2_2" id="check_button"
                                            title="@lang('string.changePass')">
-                                        <i class="icon-checkmark4 icon-checked"></i></a>
+                                            <i class="icon-checkmark4 icon-checked"></i></a>
                                     </div>
                                 </div>
 
-                                <div id="warning_div">
-                                    <p id="reset_password_warning" class="control-label"
+                                <div id="warning_div" class="mt-10">
+                                    <p id="reset_password_warning"
                                        style="margin-bottom: 20px; color: red">
                                         @lang('string.reset_password_guide')
                                     </p>
@@ -231,7 +284,8 @@
 
                                 {{--New Password--}}
                                 <div class="form-group">
-                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.newPassword')</label>
+                                    <label class="control-label col-lg-5"
+                                           style="font-size: 15px">@lang('string.newPassword')</label>
                                     <div class="col-lg-7">
                                         <input name="password" id="password" type="password"
                                                placeholder="" autocomplete=""
@@ -241,7 +295,8 @@
                                 </div>
                                 {{--Confrim New Password--}}
                                 <div class="form-group">
-                                    <label class="control-label col-lg-5" style="font-size: 15px">@lang('string.confirmPassword')</label>
+                                    <label class="control-label col-lg-5"
+                                           style="font-size: 15px">@lang('string.confirmPassword')</label>
                                     <div class="col-lg-7">
                                         <input name="password_confirmation" id="password-confirm" type="password"
                                                placeholder="" autocomplete=""
@@ -260,7 +315,8 @@
                             style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i
                                 class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                     <button type="submit" class="btn btn-primary btn_validate_Rate"
-                            style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;" id="submit_button" disabled>
+                            style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;" id="submit_button"
+                            disabled>
                         <b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                 </div>
             </div>
@@ -431,7 +487,7 @@
         var confirmNewPassword = $('#password-confirm').val();
         var enable = true;
         //
-        if (newPassword.length > 6 || newPassword.length === 6){
+        if (newPassword.length > 6 || newPassword.length === 6) {
             enable = (newPassword === confirmNewPassword) ? false : true;
         }
         //
@@ -470,7 +526,7 @@
     });
 
     //Check Button On click
-    $( "#check_button" ).click(function() {
+    $("#check_button").click(function () {
         checkUsernamePassword()
     });
 
