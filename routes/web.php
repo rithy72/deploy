@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\Forms\Forms;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,55 +31,68 @@ Route::middleware('auth')->group(function (){
         Route::group(['middleware' => 'user'], function (){
             //Dash board
             Route::get('/mainform',function (){
-                return view('Admin.admin_main');
+                return view('Admin.admin_main')
+                    ->with('active_form', Forms::DASHBOARD);
             })->middleware('admin');
             //Invoice
             Route::get('/invoice',function (){
-                return view('Admin.Invoice.invoice_pajam');
+                return view('Admin.Invoice.invoice_pajam')
+                    ->with('active_form', Forms::INVOICE);
             });
             //Inventory
             Route::get('/inventory',function (){
-                return view('Admin.Sar_Per_Poun.sa_per_poun');
+                return view('Admin.Sar_Per_Poun.sa_per_poun')
+                    ->with('active_form', Forms::INVENTORY_ITEMS);
             });
             //User
             Route::get('/user',function (){
-                return view('Admin.User_Use_System.user_use_system');
+                return view('Admin.User_Use_System.user_use_system')
+                    ->with('active_form', Forms::USER);
             })->middleware('admin');
             //Detail User
             Route::get('/user/detail_user',function (){
-                return view('Admin.User_Use_System.detail_user');
+                return view('Admin.User_Use_System.detail_user')
+                    ->with('active_form', Forms::USER);
             });
             //Action History
             Route::get('/history_user',function (){
-                return view('Admin.Action_History_User.history_user');
+                return view('Admin.Action_History_User.history_user')
+                    ->with('active_form', Forms::AUDIT_TRAIL);
             })->middleware('admin');
             //Create new invoice
             Route::get('/invoice/create_new_invoice',function (){
-                return view('Admin.Invoice.create_new_invoice');
+                return view('Admin.Invoice.create_new_invoice')
+                    ->with('active_form', Forms::INVOICE);
             });
             //Invoice detail
             Route::get('/invoice/invoice_detail',function (){
-                return view('Admin.Invoice.detail_invoice');
+                return view('Admin.Invoice.detail_invoice')
+                    ->with('active_form', Forms::INVOICE);
             });
             //Update Invoice
             Route::get('/invoice/update_invoice',function (){
-                return view('Admin.Invoice.update_invoice');
+                return view('Admin.Invoice.update_invoice')
+                    ->with('active_form', Forms::INVOICE);
             })->middleware('admin');
             //Invoice Payment
             Route::get('/invoice/invoice_payment',function (){
-                return view('Admin.Invoice.payment_invoice');
+                return view('Admin.Invoice.payment_invoice')
+                    ->with('active_form', Forms::INVOICE);
             });
             //Daily Report
             Route::get('/report',function (){
-                return view('Admin.Ror_Bay_kar.ror_bay_kar');
+                return view('Admin.Ror_Bay_kar.ror_bay_kar')
+                    ->with('active_form', Forms::DAILY_REPORT);
             })->middleware('admin');
             //Item Type
             Route::get('/item_type',function (){
-                return view('Admin.TypeOfItems.typeItem');
+                return view('Admin.TypeOfItems.typeItem')
+                    ->with('active_form', Forms::INVENTORY_ITEM_TYPE);
             });
             //Detail Item Type
             Route::get('/item_type/detail_one_itemtype',function (){
-                return view('Admin.TypeOfItems.detail_one_itemtype');
+                return view('Admin.TypeOfItems.detail_one_itemtype')
+                    ->with('active_form', Forms::INVENTORY_ITEM_TYPE);
             });
         });
 
