@@ -37,7 +37,7 @@
             <div class="col-xs-12 col-sm-3 col-md-2" style="text-align: center;">
                 <a class="btn btn-primary btn-Search" style="margin-top: 20px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4" style="margin-top: 19px;text-align: center;">
+            <div class="col-xs-12 col-sm-3 col-md-4" style="margin-top: 19px;text-align: right;">
                 <a class="btn btn-success" id="createTomNagn" style="margin-bottom: 5px;"><i class="icon-add position-left"></i>@lang('string.createNewItems')</a>
             </div>
 
@@ -83,7 +83,7 @@
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" id="close_create_new">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" id="close_create_new">&times;</button>
                         <h5 class="modal-title">@lang('string.createNewItem')</h5>
                     </div>
 
@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" id="close_create_new" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
+                        <button type="button" class="btn btn-link" data-dismiss="modal" id="close_create_new" style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
                         <button type="button" class="btn btn-primary btn_create_new_item_type" style="border: 1px solid #0a0a0a;margin-top: 12px;margin-bottom: -9px;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                     </div>
@@ -263,7 +263,7 @@
             $('#notice_itemType_2').val('');
             $('#notice_itemType_3').val('');
             $('#notice_itemType_4').val('');
-            $('.close_dialog_createNew').click();
+           // $('#close_create_new').click(); // click close dialog create new
         }
         //create new item type, and ,close dialog clear input
         var storeArrayItemType = [];
@@ -284,7 +284,7 @@
             if (storeInput === ""){
                 alert('បំពេញសិន មុនពេលធ្វើការបង្កើត');
             } else {
-                $('#new_item_type').val('');
+                //$('#new_item_type').val('');
                 $.ajax({
                     type: "POST",
                     url: 'api/item_group',
@@ -292,8 +292,11 @@
                     success: function (response) {
                         //TODO: Alert Success Insert, or Duplicate Type Name
                         jsonObj = JSON.parse(response);
-                        if (jsonObj.status === '200') storeArrayItemType.push(storeInput);
-                        if (jsonObj.status === '301') alert('ឈ្មោះមានរួចហើយ សូមធ្វើការកែប្រែម្តងទៀត');
+                        if (jsonObj.status === '200'){
+                            storeArrayItemType.push(storeInput);
+                            alert('បង្កើតទំនិញជោគជ័យ');
+                            clearInputCreateNewItemType();
+                        } else if (jsonObj.status === '301') {alert('ឈ្មោះមានរួចហើយ សូមធ្វើការកែប្រែម្តងទៀត');}
                     }
                 });
             }

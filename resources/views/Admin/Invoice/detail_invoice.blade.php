@@ -28,7 +28,7 @@
         <div class="panel-body" style="padding: 0">
             {{-- Header show button and invoice id  --}}
             <div class="col-sm12 col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
-                <div class="col-sm-8 col-md-8" style="margin-top: -6px;margin-bottom: 0;">
+                <div class="col-sm-4 col-md-7" style="margin-top: -6px;margin-bottom: 0;">
                     <div class="col-md-6">
                         <h3><b>@lang('string.invoiceId') ៖ </b><b id="id_invoice"></b></h3>
                     </div>
@@ -36,8 +36,8 @@
                         <h3><b>@lang('string.createBy') ៖ </b><b id="employee_name"></b></h3>
                     </div>
                 </div>
-                <div class="col-sm-4 col-md-4">
-                    <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: 13px;">
+                <div class="col-sm-8 col-md-5">
+                    <div style="margin-top: 13px;text-align: right;">
                         <a href="{{('/admin/invoice/create_new_invoice')}}" class="btn btn-success" id="" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
                         @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                         <button type="button" class="btn btn-primary" id="update_invoice" style="margin-bottom: 4px;" disabled="disabled"><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
@@ -48,6 +48,7 @@
             </div>
             {{-- End --}}
             {{-- Show choose --}}
+            <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="tabbable">
                 <ul class="nav nav-tabs nav-tabs-highlight">
                     <li class="active"><a href="#highlighted_tab1" data-toggle="tab" aria-expanded="false">@lang('string.generalInformation')</a></li>
@@ -243,13 +244,13 @@
                 {{----- Merl ka update invoice bos Customer 1 -----}}
                     <div class="tab-pane" id="highlighted-tab4">
                         <div class="panel-body">
-                            <div class="col-sm-3 col-md-2">
+                            <div class="col-sm-6 col-md-2">
                                 <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date">
                             </div>
-                            <div class="col-sm-3 col-md-2">
+                            <div class="col-sm-6 col-md-2">
                                 <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
                             </div>
-                            <div class="col-sm-3 col-md-2">
+                            <div class="col-sm-6 col-md-2">
                                 <span>@lang('string.chooseOption')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="chooseInvoiceOrItemType">
@@ -281,7 +282,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <a class="btn btn-primary btn_Search1" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            <div style="text-align: center;" class="col-sm-2 col-md-2">
+                                <a class="btn btn-primary btn_Search1" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            </div>
                             <br/><br/>
 
                             <div class="datatable-header" style="margin-top: -30px;"></div>
@@ -320,6 +323,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -385,31 +389,31 @@
                 <div class="modal-body">
                     <div>
                         <div class="col-md-10 col-md-offset-1" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.invoiceID') ៖</p><p id="invoiceID_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.type') ៖</p><p id="type_" style="margin-left: 5px;"></p></h5>
                             </div>
                             <div class="col-md-12">
                                 <h5 style="display: inline-flex;"><p>@lang('string.notice') </p><p id="notice_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <h5 style="display: inline-flex;"><p>@lang('string.situationItemTypeOfOneInvoice') ៖</p><p id="situationItemType_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <h5 style="display: inline-flex;"><p>@lang('string.takeOutWithPrice') ៖</p><p id="price_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.dayTakeIn') ៖</p><p id="day_in_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by1_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.dayTakeOut') ៖</p><p id="day_out_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by2_" style="margin-left: 5px;"></p></h5>
                             </div>
                         </div>

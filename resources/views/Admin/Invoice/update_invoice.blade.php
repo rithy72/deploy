@@ -162,12 +162,11 @@
                 </div>--}}
 
                 <div style="text-align: right;clear: both;">
-                    <div class="col-xs-0 col-sm-3 col-md-6"></div>
-                    <div class="col-xs-12 col-sm-9 col-md-6" style="display: flex;">
-                        <label class="control-label"
-                               style="font-size: 15px; margin-top: 6px;margin-right: 5px;"><b>@lang('string.amountPrice')</b></label>
-                        <input type="text" placeholder="បញ្ចូលតំលៃទីនេះ..." name="" id="amount_price"
-                               class="form-control" style="border: 1px solid grey;" disabled="disabled">
+                    <div class="col-xs-0 col-sm-3 col-md-5"></div>
+                    <div class="col-xs-12 col-sm-9 col-md-7" style="display: flex;">
+                        <label class="control-label col-xs-4 col-sm-4 col-md-4" style="font-size: 15px; margin-top: 6px;margin-right: 5px;"><b>@lang('string.amountPrice')៖</b></label>
+
+                        <input type="text" placeholder="បញ្ចូលតំលៃទីនេះ..." name="" id="amount_price" class="form-control col-xs-8 col-md-8" style="border: 1px solid grey;" disabled="disabled">
                         <br>
                     </div>
                 </div>

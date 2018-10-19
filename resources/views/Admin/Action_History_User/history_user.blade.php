@@ -168,10 +168,10 @@
                         {{---------------tap 2---------------}}
                         <div class="tab-pane" id="highlighted-tab2">
                             <div class="panel-body">
-                                <div class="col-sm-2 col-md-2">
+                                <div class="col-sm-6 col-md-2">
                                     <span>@lang('string.startDate')</span><input type="date" class="form-control" id="start_date">
                                 </div>
-                                <div class="col-sm-2 col-md-2">
+                                <div class="col-sm-6 col-md-2">
                                     <span>@lang('string.startDateTo')</span><input type="date" class="form-control" id="to_date">
                                 </div>
                                 {{------ choose option ------}}

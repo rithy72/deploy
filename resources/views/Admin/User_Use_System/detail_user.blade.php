@@ -30,7 +30,7 @@
                         <h3><b>តួរនាទី ៖ </b><b id="turnati"></b></h3>
                     </div>
                 </div>
-                <div class="col-sm-7 col-md-5" style="text-align: center;">
+                <div class="col-sm-7 col-md-5" style="text-align: right;">
                     <div class="" style="margin-top: 13px;margin-bottom: 0;">
                         <a class="btn btn-success" id="createNewUser_tap3" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
                             <button type="button" class="btn btn-primary" id="update" style="margin-bottom: 4px;"><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
@@ -65,8 +65,8 @@
                         <div class="panel-body">
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" style="font-size: 14px;">
-                                    <label class="control-label col-sm-4 col-md-4" style="font-size: 14px">@lang('string.number') ៖</label>
-                                    <div class="col-sm-8 col-md-8col-md-8">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.number') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
                                         <p id="User_No"></p>
                                     </div>
                                     <br>
@@ -442,7 +442,7 @@
                                                 <br>
                                             </div>
                                             {{--password 2--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px;margin-top: 6px;">@lang('string.confirm_pass')</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px;">@lang('string.confirm_pass')</label>
                                             <div class="col-lg-9">
                                                 <input type="password" placeholder="@lang('string.must_to_write')" id="confirm_pass_user" class="form-control" style="border: 1px solid grey;">
                                                 <br>
@@ -488,11 +488,13 @@
 
                     <div class="modal-body">
                         <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_update" style="margin-left: 5px;"></p></h5>
+                                <br>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_update" style="margin-left: 5px;"></p></h5>
+                                <br>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -565,13 +567,13 @@
 
                     <div class="modal-body">
                         <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_delete" style="margin-left: 5px;"></p></h5>
-                                <br><br>
+                                <br>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_delete" style="margin-left: 5px;"></p></h5>
-                                <br><br>
+                                <br>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -613,13 +615,13 @@
 
                     <div class="modal-body">
                         <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_deActive" style="margin-left: 5px;"></p></h5>
-                                <br><br>
+                                <br>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_deActive" style="margin-left: 5px;"></p></h5>
-                                <br><br>
+                                <br>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -661,13 +663,13 @@
 
                     <div class="modal-body">
                         <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_active" style="margin-left: 5px;"></p></h5>
-                                <br><br>
+                                <br>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_active" style="margin-left: 5px;"></p></h5>
-                                <br><br>
+                                <br>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -725,13 +727,13 @@
 
                     <div class="modal-body">
                         <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.name') ៖</p><p id="show_name_dialog_reset_Pass" style="margin-left: 5px;"></p></h5>
-                                <br><br>
+                                <br>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.number') ៖</p><p id="show_user_no_dialog_reset_Pass" style="margin-left: 5px;"></p></h5>
-                                <br><br>
+                                <br>
                             </div>
                         </div>
                         <div class="col-md-12">

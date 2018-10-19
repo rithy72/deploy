@@ -128,11 +128,11 @@
         <div class="datatable-footer">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div style="text-align: right;clear: both;">
-                    <div class="col-xs-0 col-sm-3 col-md-6"></div>
-                    <div class="col-xs-12 col-sm-9 col-md-6"style="display: flex;">
-                        <label class="control-label" style="font-size: 15px; margin-top: 6px;margin-right: 5px;"><b>@lang('string.amountPrice')៖</b></label>
+                    <div class="col-xs-0 col-sm-3 col-md-5"></div>
+                    <div class="col-xs-12 col-sm-9 col-md-7" style="display: flex;">
+                        <label class="control-label col-xs-4 col-sm-4 col-md-4" style="font-size: 15px; margin-top: 6px;margin-right: 5px;"><b>@lang('string.amountPrice')៖</b></label>
 
-                        <input type="text" placeholder="បញ្ចូលតំលៃទីនេះ..." name="" id="priceAmount" class="form-control" style="border: 1px solid grey;">
+                        <input type="text" placeholder="បញ្ចូលតំលៃទីនេះ..." name="" id="priceAmount" class="form-control col-xs-8 col-md-8" style="border: 1px solid grey;">
                         <br>
                     </div>
                 </div>
@@ -143,11 +143,9 @@
                     <a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
                     <button type="button" class="btn btn-primary" id="btnSentToServer" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
                 </div>
-                <div class="dataTables_length" id="DataTables_Table_3_length"
-                     style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
-                    <a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i
-                                class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
-                </div>
+                {{--<div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">--}}
+                    {{--<a href="{{('/admin/invoice')}}" class="btn" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>--}}
+                {{--</div>--}}
             </div>
 
             {{--<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_3_paginate">

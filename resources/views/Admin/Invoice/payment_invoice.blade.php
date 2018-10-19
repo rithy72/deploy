@@ -105,10 +105,18 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="form-group col-md-12" style="display: inline-flex;">
-                    <p style="margin-top: 7px;">@lang('string.priceAmountPerMonth')</p>
-                    <p style="margin-top: 6px;margin-left: 30px;" id="interests_value"></p>
+                <div class="form-group">
+                    <label class="control-label col-md-3" style="font-size: 15px">@lang('string.priceAmountPerMonth')</label>
+                    <div class="col-md-9">
+                        <input type="text" id="interests_value" class="form-control" style="border: 1px solid grey;"
+                               disabled="disabled">
+                        <br>
+                    </div>
                 </div>
+                {{--<div class="" style="display: inline-flex;">--}}
+                    {{--<p style="margin-top: 7px;">@lang('string.priceAmountPerMonth')</p>--}}
+                    {{--<p style="margin-top: 6px;margin-left: 30px;" id="interests_value"></p>--}}
+                {{--</div>--}}
             </div>
         </div>
 
@@ -573,7 +581,7 @@
 
                     $('#percent_rate').val(a.interests_rate);
 
-                    $('#interests_value').text(a.interests_value + " $");
+                    $('#interests_value').val(a.interests_value + " $");
                     $('#amount_price').val(a.grand_total + " $");
                     $('#remain').val(a.remain + " $");
 
