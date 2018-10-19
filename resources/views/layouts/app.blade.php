@@ -21,7 +21,7 @@
             overflow-y: auto;
         }
         body {
-            font-family: 'Khmer Kep', sans-serif;
+            font-family: 'Khmer OS Battambang', sans-serif;
         }
     </style>
 </head>

@@ -1532,7 +1532,7 @@
             updateNoticeInputPlaceHolder({}, FLAG.ALL_ITEM);
         });
 
-        //====================================== ADD BY SOTHEA =================================================================
+//====================================== ADD BY SOTHEA =================================================================
 
         //Get Note Input Id
         const FLAG = {NOT_DEPRECIATION: 1, OUT_ITEM: 2, ALL_ITEM: 3};
