@@ -503,7 +503,7 @@
         $("#selectTomNanh").select2({
             ajax: {
                 method: "GET",
-                url: "../api/item_group?page_size=15",
+                url: "../api/item_group?status=active&page_size=15",
                 delay: 1000,
                 data: function (params) {
                     if (params.term) { // if have user input key in input text it work the statement
@@ -541,7 +541,7 @@
         $("#selectTomNanh1").select2({
             ajax: {
                 method: "GET",
-                url: "../api/item_group?page_size=15",
+                url: "../api/item_group?status=active&page_size=15",
                 delay: 1000,
                 data: function (params) {
                     if (params.term) { // if have user input key in input text it work the statement

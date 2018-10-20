@@ -348,7 +348,7 @@
                                         <div class="form-group">
                                             {{-- number invoice --}}
                                             <label class="control-label col-lg-3"
-                                                   style="font-size: 15px">@lang('string.invoiceID')</label>
+                                                   style="font-size: 15px">@lang('string.invoiceID')៖</label>
                                             <div class="col-lg-9" style="margin-bottom: 13px;">
                                                 <input type="text" class="form-control" disabled="disabled"
                                                        placeholder="....." style="border: 1px solid grey;"
@@ -482,7 +482,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="control-label col-lg-4"
-                                                   style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')</label>
+                                                   style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')៖</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
                                                 {{--<input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">--}}
                                                 <input type="text" placeholder="@lang('string.SearchInvoiceID')"
@@ -545,7 +545,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="control-label col-lg-4"
-                                                   style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')</label>
+                                                   style="font-size: 15px;margin-top: 6px;">@lang('string.invoiceID')៖</label>
                                             <div class="col-lg-8" style="margin-bottom: 13px;">
                                                 {{--<input type="number" placeholder="@lang('string.SearchInvoiceID')" id="search_invoice1" onkeydown="javascript: return event.keyCode == 69 ? false : true" style="display: block;width: 98%;height: 36px;padding: 7px 12px;font-size: 13px;color: #333333;background-color: #fff;border: 1px solid #0003;border-radius: 3px;border: 1px solid grey;margin-bottom: 5px;">--}}
                                                 <input type="text" placeholder="@lang('string.SearchInvoiceID')"
@@ -1531,7 +1531,7 @@
             updateNoticeInputPlaceHolder({}, FLAG.ALL_ITEM);
         });
 
-        //====================================== ADD BY SOTHEA =================================================================
+//====================================== ADD BY SOTHEA =================================================================
 
         //Get Note Input Id
         const FLAG = {NOT_DEPRECIATION: 1, OUT_ITEM: 2, ALL_ITEM: 3};

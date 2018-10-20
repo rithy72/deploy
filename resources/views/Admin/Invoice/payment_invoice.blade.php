@@ -33,14 +33,16 @@
                         <h4><b>@lang('string.createBy') ៖ </b><b id="user_create"></b></h4>
                     </div>
                     <div class="col-sm-6 col-md-5" style="color: red;display: none;" id="show_hide">
-                        <h4><b>@lang('string.late')៖ </b><b id="late_day_invoice"></b></h4>
+                        <h4><b>@lang('string.late')៖ </b><b id="late_day_invoice"></b><b> @lang('string.day')</b></h4>
                     </div>
+                    @if(\Illuminate\Support\Facades\Auth::user()->role == \App\Http\Controllers\Base\Model\Enum\UserRoleEnum::ADMIN)
                     <div class="col-sm-6 col-md-1">
                         <button type="button" class="btn yok_duch" id="show_hide1"
                                 style="background: red;border-radius: 7px;color: white;border: 1px solid black;display: none;">
                             យកដាច់
                         </button>
                     </div>
+                    @endif
                 </div>
             </div>
             {{-- End --}}
@@ -485,7 +487,7 @@
         $("#selectTomNanh").select2({
             ajax: {
                 method: "GET",
-                url: "../api/item_group?page_size=15",
+                url: "../api/item_group?status=active&page_size=15",
                 delay: 1000,
                 data: function (params) {
                     if (params.term) { // if have user input key in input text it work the statement

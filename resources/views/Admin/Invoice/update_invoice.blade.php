@@ -112,7 +112,7 @@
             <div class="dataTables_length" id="DataTables_Table_3_length"
                  style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
                 <a class="btn btn-success createNewCountry" id="add_item"><i
-                            class="icon-add position-left"></i>{{__('auth.addMoreItems')}}</a>
+                            class="icon-add position-left"></i>{{__('string.addMoreItemsToInvoice')}}</a>
             </div>
         </div>
         <div class="datatable-scroll" style="overflow-x: hidden;">
@@ -476,7 +476,7 @@
         $("#selectTomNanh").select2({
             ajax: {
                 method: "GET",
-                url: "../api/item_group?page_size=15",
+                url: "../api/item_group?status=active&page_size=15",
                 delay: 1000,
                 data: function (params) {
                     if (params.term) { // if have user input key in input text it work the statement
@@ -514,7 +514,7 @@
         $("#selectTomNanh1").select2({
             ajax: {
                 method: "GET",
-                url: "../api/item_group?page_size=15",
+                url: "../api/item_group?status=active&page_size=15",
                 delay: 1000,
                 data: function (params) {
                     if (params.term) { // if have user input key in input text it work the statement

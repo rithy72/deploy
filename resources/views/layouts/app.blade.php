@@ -19,8 +19,9 @@
         .box {
             height: 90vh;
             overflow-y: auto;
-            /*background-color: #333;
-            color: #fff;*/
+        }
+        body {
+            font-family: 'Khmer OS Battambang', sans-serif; !important;
         }
     </style>
 </head>
@@ -58,15 +59,22 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a id="ChangePassword">
+                            <i class=" icon-user-check">
+                                @lang('string.changePass')
+                            </i>
+                        </a>
+                    </li>
                     <li><a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
-                                    class="icon-switch2"> @lang('string.logout') </i></a>
+                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i
+                                    class="icon-switch2">
+                                @lang('string.logout')
+                            </i></a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
-                    </li>
-                    <li>
-                        <a id="ChangePassword"><i class=" icon-user-check"> @lang('string.changePass') </i></a>
                     </li>
                 </ul>
             </li>
@@ -340,14 +348,13 @@
 <script src="{{asset('/assets/js/plugins/ui/drilldown.js')}}"></script>
 <!-- /core JS files -->
 
-<!-- core JS Grape -->
-<script src="{{'https://code.highcharts.com/highcharts.js'}}"></script>
-<script src="{{'https://code.highcharts.com/modules/exporting.js'}}"></script>
-<script src="{{'https://code.highcharts.com/modules/export-data.js'}}"></script>
+{{--<!-- core JS Grape -->--}}
+{{--<script src="{{'https://code.highcharts.com/highcharts.js'}}"></script>--}}
+{{--<script src="{{'https://code.highcharts.com/modules/exporting.js'}}"></script>--}}
+{{--<script src="{{'https://code.highcharts.com/modules/export-data.js'}}"></script>--}}
 
 <script src="{{asset('/assets/js/jquerysession.js')}}"></script>
 <script src="{{asset('/assets/js/site.js')}}"></script>
-<!-- /core JS Grape -->
 
 <!-- Theme JS Validation -->
 <script src="{{asset('/assets/js/plugins/forms/validation/validate.min.js')}}"></script>
@@ -407,7 +414,6 @@
 <script type="text/javascript" src="{{asset('/assets/js/plugins/buttons/spin.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/assets/js/plugins/buttons/ladda.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/assets/js/pages/components_buttons.js')}}"></script>
-
 <script type="text/javascript" src="{{asset('/assets/js/plugins/notifications/pnotify.min.js')}}"></script>
 
 @yield("script")
