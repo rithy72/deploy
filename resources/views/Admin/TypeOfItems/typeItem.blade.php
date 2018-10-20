@@ -34,10 +34,10 @@
                 </select>
                 <br>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-2" style="text-align: center;">
+            <div class="col-xs-6 col-sm-3 col-md-2">
                 <a class="btn btn-primary btn-Search" style="margin-top: 20px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-4" style="margin-top: 19px;text-align: right;">
+            <div class="col-xs-6 col-sm-3 col-md-4" style="margin-top: 19px;text-align: right;">
                 <a class="btn btn-success" id="createTomNagn" style="margin-bottom: 5px;"><i class="icon-add position-left"></i>@lang('string.createNewItems')</a>
             </div>
 

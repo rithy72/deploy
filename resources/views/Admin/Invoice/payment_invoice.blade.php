@@ -69,7 +69,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.dayGetMoney')</label>
                     <div class="col-md-9">
-                        <input type="date" id="create_date" class="form-control" style="border: 1px solid grey;"
+                        <input type="text" id="create_date" class="form-control" style="border: 1px solid grey;"
                                disabled="disabled">
                         <br>
                     </div>
@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-3" style="font-size: 15px">@lang('string.expiredDay')</label>
                     <div class="col-md-9">
-                        <input type="date" id="end_date" class="form-control" style="border: 1px solid grey;"
+                        <input type="text" id="end_date" class="form-control" style="border: 1px solid grey;"
                                disabled="disabled">
                         <br>
                     </div>
@@ -401,6 +401,34 @@
                                                 <br>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.notice')</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice1')" id="notice_itemType_1" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice2')" id="notice_itemType_2" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice3')" id="notice_itemType_3" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice4')" id="notice_itemType_4" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -505,16 +533,24 @@
         // --- create new item type, and ,close dialog clear input ---
         $(document).on("click", "#close_createNewItemType", function () {
             $('#create').val('');
+            $('#notice_itemType_1').val('');
+            $('#notice_itemType_2').val('');
+            $('#notice_itemType_3').val('');
+            $('#notice_itemType_4').val('');
         });
         $(document).on("click", ".btn_create_new_item_type", function () {
             var storeInput = $('#create').val();
+            var store_notice1 = $('#notice_itemType_1').val();
+            var store_notice2 = $('#notice_itemType_2').val();
+            var store_notice3 = $('#notice_itemType_3').val();
+            var store_notice4 = $('#notice_itemType_4').val();
             if (storeInput === "") {
-                alert('បំពេញសិន មុនពេលធ្វើការបង្កើត');
+                alert('បំពេញឈ្មោះសិន មុនពេលធ្វើការបង្កើត');
             } else {
                 $.ajax({
                     type: "POST",
                     url: '../api/item_group',
-                    data: {"item_type_name": storeInput},
+                    data: {"item_type_name": storeInput,"first_note":store_notice1, "second_note":store_notice2, "third_note":store_notice3, "fourth_note":store_notice4},
                     success: function (response) {
                         var convert = JSON.parse(response);
                         if (convert.status === "200") {
@@ -573,10 +609,10 @@
                     $('#customer_name').val(a.customer_name);
                     $('#customer_phone_number').val(a.customer_phone);
 
-                    const storeString = a.created_date;
-                    const splitString = storeString.split(" ");
-                    //document.getElementById("create_date").value = splitString[0];
-                    $('#create_date').val(splitString[0]);
+                    //const storeString = a.created_date;
+                    //const splitString = storeString.split(" ");
+
+                    $('#create_date').val(a.created_date);
                     $('#end_date').val(a.expire_date);
 
                     $('#percent_rate').val(a.interests_rate);

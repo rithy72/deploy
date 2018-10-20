@@ -152,15 +152,6 @@
         {{--========================= footer of pagination ====================--}}
         <div class="datatable-footer">
             <div class="col-xs-12 col-sm-12 col-md-12">
-
-                {{--<div style="text-align: right;clear: both;">
-                    <label class="control-label col-md-6" style="font-size: 15px; margin-top: 6px;margin-right: 5px;"><b>@lang('string.amountPrice')</b></label>
-                    <div class="col-md-6">
-                        <input type="text" placeholder="@lang('string.addPriceHere...')" name="" id="amount_price" class="form-control" style="border: 1px solid grey;" disabled="disabled">
-                        <br>
-                    </div>
-                </div>--}}
-
                 <div style="text-align: right;clear: both;">
                     <div class="col-xs-0 col-sm-3 col-md-5"></div>
                     <div class="col-xs-12 col-sm-9 col-md-7" style="display: flex;">
@@ -171,17 +162,6 @@
                     </div>
                 </div>
             </div>
-
-            {{--<div class="col-md-12">
-                <hr>
-                <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
-                    <button type="button" class="btn btn-primary update_invoice" style="width: 110px; border: 1px solid black;"><b>@lang('string.save')</b><i class="icon-arrow-right13 position-right"></i></button>
-                </div>
-                <div class="dataTables_length" id="DataTables_Table_3_length" style="margin-top: -14px;margin-bottom: 7px;margin-right: 13px;">
-                    <a href="{{('/admin/invoice')}}" class="btn createNewCountry" style="border: 1px solid;width: 110px;"><i class="icon-arrow-left12 position-left"></i><b>@lang('string.cancel')</b></a>
-                </div>
-            </div>--}}
-
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <hr>
                 <div style="margin-top: -14px;margin-bottom: 7px;float: right;">
@@ -393,6 +373,34 @@
                                                 <br>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.notice')</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice1')" id="notice_itemType_1" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice2')" id="notice_itemType_2" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice3')" id="notice_itemType_3" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-3" style="font-size: 15px"></label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.itemType_notice4')" id="notice_itemType_4" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -543,20 +551,28 @@
         //create new item type, and ,close dialog clear input
         $(document).on("click", "#close_createNewItem", function () {
             $('#new_item_type').val('');
+            $('#notice_itemType_1').val('');
+            $('#notice_itemType_2').val('');
+            $('#notice_itemType_3').val('');
+            $('#notice_itemType_4').val('');
         });
         $(document).on("click", ".btn_create_new_item_type", function () {
             var storeInput = $('#new_item_type').val();
+            var store_notice1 = $('#notice_itemType_1').val();
+            var store_notice2 = $('#notice_itemType_2').val();
+            var store_notice3 = $('#notice_itemType_3').val();
+            var store_notice4 = $('#notice_itemType_4').val();
             if (storeInput === "") {
-                alert('បំពេញសិន មុនពេលធ្វើការបង្កើត');
+                alert('បំពេញឈ្មោះសិន មុនពេលធ្វើការបង្កើត');
             } else {
                 $.ajax({
                     type: "POST",
                     url: '../api/item_group',
-                    data: {"item_type_name": storeInput},
+                    data: {"item_type_name": storeInput,"first_note":store_notice1, "second_note":store_notice2, "third_note":store_notice3, "fourth_note":store_notice4},
                     success: function (response) {
                         var convert = JSON.parse(response);
                         if (convert.status === "200") {
-                            alert('ធ្វើការបង្កើតរួចរាល់');
+                            alert('ធ្វើការបង្កើតជោគជ័យ');
                             document.getElementById("close_createNewItem").click();
                         } else if (convert.status === "301") {
                             alert('ឈ្មោះមានរួចហើយ សូមធ្វើការបញ្ចូលម្តងទៀត');

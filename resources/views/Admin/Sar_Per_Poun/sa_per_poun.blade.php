@@ -121,7 +121,7 @@
                     {{----- Merl Item Derl duch gnai -----}}
                     <div class="tab-pane" id="highlighted_tab2">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-sm-3 col-md-3" style="display: flex;">
+                            <div class="col-sm-6 col-md-3" style="display: flex;">
                                 <div class="form-group" style="width: 100%;">
                                     <span>@lang('string.typeItems')</span>
                                     <select class="form-control" id="selectTomNanh1">
@@ -132,7 +132,7 @@
                                    style="margin-top: 20px;margin-bottom: 20px;"
                                    title="@lang('string.clearItemType')"><i class="icon-cross3"></i></a>
                             </div>
-                            <div class="col-sm-2 col-md-2">
+                            <div class="col-sm-6 col-md-2">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="select_status">
@@ -142,13 +142,12 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-3 col-md-4" style="display: flex;margin-top: 21px;">
+                            <div class="col-sm-6 col-md-4" style="display: flex;margin-top: 21px;">
                                 <span>.</span><input type="text" id="show_search_notice" class="form-control"
                                                      placeholder="@lang('string.searchItems')" disabled="disabled">
                                 <a class="btn btn-primary searchItemTakeOut"><i class="icon-filter3"></i></a>
-                                {{--<a class="btn btn-primary search_item_notYetPay" style="margin-left: 15px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>--}}
                             </div>
-                            <div class="col-sm-4 col-md-2" style="text-align: center;margin-bottom: 5px;">
+                            <div class="col-sm-2 col-md-2" style="text-align: center;margin-bottom: 5px;">
                                 <a class="btn btn-primary search_item_took" style="margin-top: 21px;"><i
                                             class="icon-search4 position-left"></i>@lang('string.search')</a>
                             </div>
@@ -223,7 +222,7 @@
                     {{----- Merl Item All -----}}
                     <div class="tab-pane" id="highlighted_tab3">
                         <div class="panel-body" style="padding: 10px;">
-                            <div class="col-sm-3 col-md-3" style="display: flex;">
+                            <div class="col-sm-6 col-md-3" style="display: flex;">
                                 <div class="form-group" style="width: 100%;">
                                     <span>@lang('string.typeItems')</span>
                                     <select class="form-control" id="selectTomNanh2">
@@ -234,7 +233,7 @@
                                    style="margin-top: 20px;margin-bottom: 20px;"
                                    title="@lang('string.clearItemType')"><i class="icon-cross3"></i></a>
                             </div>
-                            <div class="col-sm-2 col-md-2">
+                            <div class="col-sm-6 col-md-2">
                                 <span>@lang('string.situation')</span>
                                 <div class="form-group">
                                     <select class="form-control" id="select_status_all">
@@ -246,13 +245,13 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-3 col-md-4" style="display: flex;margin-top: 21px;">
+                            <div class="col-sm-6 col-md-4" style="display: flex;margin-top: 21px;">
                                 <span>.</span><input type="text" class="form-control"
                                                      placeholder="@lang('string.searchItems')" id="all_notice_show"
                                                      disabled="disabled">
                                 <a class="btn btn-primary btn_search_all_items"><i class="icon-filter3"></i></a>
                             </div>
-                            <div class="col-sm-4 col-md-2"
+                            <div class="col-sm-2 col-md-2"
                                  style="margin-top: 1px;text-align: center;margin-bottom: 5px;">
                                 <a class="btn btn-primary search_item_history_oneInvoice" style="margin-top: 20px;"><i
                                             class="icon-search4 position-left"></i>@lang('string.search')</a>
@@ -516,7 +515,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" data-dismiss="modal"
+                        <button type="button" class="btn btn-link" id="close_search_Item_not_yat_pay" data-dismiss="modal"
                                 style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i
                                     class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
@@ -579,7 +578,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" data-dismiss="modal"
+                        <button type="button" class="btn btn-link" id="close_itemTookOut" data-dismiss="modal"
                                 style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i
                                     class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
@@ -644,7 +643,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link" data-dismiss="modal"
+                        <button type="button" class="btn btn-link" id="close_all_items_status" data-dismiss="modal"
                                 style="border: 1px solid #eca5a5;margin-top: 12px;margin-bottom: -9px;"><i
                                     class="icon-arrow-left12 position-left"></i>@lang('string.cancel')</button>
                         {{ csrf_field() }}
@@ -658,7 +657,7 @@
     </form>
     {{-----  Dialog show detail history detail  -----}}
     <div id="show_detail_one_history_change_log" class="modal fade">
-        <div class="modal-dialog modal-full" style="margin-left: auto;margin-right: auto;width: 79%;">
+        <div class="modal-dialog modal-full" style="margin-left: auto;margin-right: auto;width: 65%;">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button type="button" class="close" data-dismiss="modal">×</button>
@@ -667,12 +666,12 @@
 
                 <div class="modal-body">
                     <div>
-                        <div class="col-sm-12 col-md-10 col-md-offset-1" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-sm-6 col-md-6">
+                        <div class="col-sm-12 col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-sm-7 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.invoiceID') ៖</p>
                                     <p id="invoiceID_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-sm-5 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.type') ៖</p>
                                     <p id="type_" style="margin-left: 5px;"></p></h5>
                             </div>
@@ -998,7 +997,7 @@
                 searchItemPayYet.reads();
             }, 1000);
         });
-        // -------------- button search notice all itemType -----------
+        // -------------- button search item not yet pay -----------
         var timeout1 = null, storeID_ItemType, ID, n1, n2, n3, n4;
         $(document).on("click", ".btn_search_Item_notYetPay", function () {
             var storeItemType = $('#selectTomNanh').val();
@@ -1075,9 +1074,9 @@
 
         // --------------- clear input text notice ---------------------
         function clearSearchNotice() {
-            $('#close_search_notice').click();
-            $('#close_itemTakeOut').click();
-            $('#close_item_all_status').click();
+            $('#close_search_Item_not_yat_pay').click();
+            $('#close_itemTookOut').click();
+            $('#close_all_items_status').click();
         }
 
 

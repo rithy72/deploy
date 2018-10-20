@@ -21,6 +21,7 @@
         </div>
 
         <div class="panel-body">
+            <div class="col-sm-12 col-md-12" style="margin-bottom: 8px;">
             <div class="col-sm-6 col-md-2">
                 <span>@lang('string.fine')</span>
                 <div class="form-group">
@@ -44,13 +45,14 @@
             <div class="col-sm-5 col-md-3">
                 <span>.</span><input type="text" id="search_input" class="form-control" placeholder="@lang('string.searchItems')">
             </div>
-            <div class="col-sm-3 col-md-2" style="text-align: center;">
+            <div class="col-xs-5 col-sm-3 col-md-2">
                 <a class="btn btn-primary btn_search_user" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
             </div>
-            <div class="co-sm-4 col-md-3" style="text-align: right;">
+            <div class="col-sm-4 col-md-3" style="text-align: right;">
                 <a class="btn btn-success" id="createTomNagn" style="margin-bottom: -54px;"><i class="icon-add position-left"></i>@lang('string.createNewUser')</a>
             </div>
-            <br/>
+                <br>
+            </div>
             <div class="datatable-header" style=""></div>
             <div class="datatable-scroll" style="overflow-x: hidden;">
                 <div class="dataTables_scroll">

@@ -340,10 +340,10 @@
                 <div class="modal-body">
                     <div class="datatable-header" style="margin-top: -30px;">
                         <div class="col-md-8" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.UserAction') ៖</p><p id="name" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.do') ៖</p><p id="do_action" style="margin-left: 5px;"></p></h5>
                             </div>
                         </div>
@@ -379,7 +379,7 @@
     </div>
     {{-----  Dialog show detail history itemType of one invoice  -----}}
     <div id="show_detail_one_history_Item_of_invoice" class="modal fade">
-        <div class="modal-dialog modal-full" style="margin-left: auto;margin-right: auto;width: 79%;">
+        <div class="modal-dialog modal-full" style="margin-left: auto;margin-right: auto;width: 65%;">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button type="button" class="close" data-dismiss="modal">×</button>
@@ -388,11 +388,11 @@
 
                 <div class="modal-body">
                     <div>
-                        <div class="col-md-10 col-md-offset-1" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-sm-6 col-md-6">
+                        <div class="col-md-12" style="margin-top: -6px;margin-bottom: 0;">
+                            <div class="col-sm-7 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.invoiceID') ៖</p><p id="invoiceID_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-sm-5 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.type') ៖</p><p id="type_" style="margin-left: 5px;"></p></h5>
                             </div>
                             <div class="col-md-12">
@@ -404,16 +404,16 @@
                             <div class="col-md-12">
                                 <h5 style="display: inline-flex;"><p>@lang('string.takeOutWithPrice') ៖</p><p id="price_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-sm-7 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.dayTakeIn') ៖</p><p id="day_in_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-sm-5 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by1_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-sm-7 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.dayTakeOut') ៖</p><p id="day_out_" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-sm-5 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.by') ៖</p><p id="by2_" style="margin-left: 5px;"></p></h5>
                             </div>
                         </div>
@@ -450,6 +450,11 @@
         });
         $( document ).ajaxStop(function() {
             $( "#loading" ).hide();
+        });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
         // ------------------ show data for detail ----------------------
         var getResponse , _ID ;

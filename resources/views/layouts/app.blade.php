@@ -233,7 +233,7 @@
     {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
     @csrf
     <div id="changePassword" class="modal fade">
-        <div class="modal-dialog ">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -241,28 +241,29 @@
                 </div>
                 <input type="hidden" name="token" value="{{\Illuminate\Support\Facades\Auth::user()->remember_token}}">
                 {{--Change Password Modal--}}
-                <div class="modal-body">
-                    <div class="col-md-12">
-                        <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper no-footer"
-                             style="margin-top: -14px;">
+                <div class="modal-body" style="padding: 5px;">
+
+                        <div class="dataTables_wrapper no-footer">
                             <div class="datatable-header">
                                 {{--Username--}}
-                                <div class="form-group">
-                                    <label class="control-label col-lg-5"
-                                           style="font-size: 15px">@lang('string.username')</label>
-                                    <div class="col-lg-7">
-                                        <input name="email" id="email" type="text"
-                                               placeholder=""
-                                               class="form-control" style="border: 1px solid grey;" required
-                                               autocomplete="">
-                                        <br>
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-5 col-md-5"
+                                               style="font-size: 15px">@lang('string.username')</label>
+                                        <div class="col-sm-7 col-md-7">
+                                            <input name="email" id="email" type="text"
+                                                   placeholder=""
+                                                   class="form-control" style="border: 1px solid grey;" required
+                                                   autocomplete="">
+                                            <br>
+                                        </div>
                                     </div>
                                 </div>
                                 {{--Current Password--}}
-                                <div class="form-group mb-10">
-                                    <label class="control-label col-lg-5"
+                                <div class="col-sm-12 col-md-12">
+                                    <label class="control-label col-sm-5 col-md-5"
                                            style="font-size: 15px">@lang('string.oldPassword')</label>
-                                    <div class="col-lg-7" style="display: flex;">
+                                    <div class="col-sm-7 col-md-7" style="display: flex;">
                                         <input type="text" placeholder=""
                                                id="cur_password"
                                                class="form-control" style="border: 1px solid grey;" required
@@ -271,42 +272,47 @@
                                         <a class="btn btn-success btn_clear_select2_2" id="check_button"
                                            title="@lang('string.changePass')">
                                             <i class="icon-checkmark4 icon-checked"></i></a>
+                                        <br>
                                     </div>
                                 </div>
 
-                                <div id="warning_div" class="mt-10">
-                                    <p id="reset_password_warning"
-                                       style="margin-bottom: 20px; color: red">
-                                        @lang('string.reset_password_guide')
-                                    </p>
+                                <div class="col-sm-12 col-md-12" style="margin-bottom: 20px;margin-top: 20px;">
+                                    <div id="warning_div">
+                                        <p id="reset_password_warning"
+                                           style="color: red;">
+                                            @lang('string.reset_password_guide')
+                                        </p>
+                                    </div>
                                 </div>
-
-
                                 {{--New Password--}}
-                                <div class="form-group">
-                                    <label class="control-label col-lg-5"
-                                           style="font-size: 15px">@lang('string.newPassword')</label>
-                                    <div class="col-lg-7">
-                                        <input name="password" id="password" type="password"
-                                               placeholder="" autocomplete=""
-                                               class="form-control" style="border: 1px solid grey;" disabled required>
-                                        <br>
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-5 col-md-5"
+                                               style="font-size: 15px">@lang('string.newPassword')</label>
+                                        <div class="col-sm-7 col-md-7">
+                                            <input name="password" id="password" type="password"
+                                                   placeholder="" autocomplete=""
+                                                   class="form-control" style="border: 1px solid grey;" disabled required>
+                                            <br>
+                                        </div>
                                     </div>
                                 </div>
                                 {{--Confrim New Password--}}
-                                <div class="form-group">
-                                    <label class="control-label col-lg-5"
-                                           style="font-size: 15px">@lang('string.confirmPassword')</label>
-                                    <div class="col-lg-7">
-                                        <input name="password_confirmation" id="password-confirm" type="password"
-                                               placeholder="" autocomplete=""
-                                               class="form-control" style="border: 1px solid grey;" disabled required>
-                                        <br>
+                                <div class="col-sm-12 col-md-12" style="margin-bottom: 15px;">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-5 col-md-5"
+                                               style="font-size: 15px">@lang('string.confirmPassword')</label>
+                                        <div class="col-sm-7 col-md-7">
+                                            <input name="password_confirmation" id="password-confirm" type="password"
+                                                   placeholder="" autocomplete=""
+                                                   class="form-control" style="border: 1px solid grey;" disabled
+                                                   required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                 </div>
 
                 {{--{{ csrf_field() }}--}}

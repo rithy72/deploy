@@ -176,8 +176,8 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-3" style="text-align: center;">
-                                <a class="btn btn-primary btn-Search-tap2" style="margin-top: 19px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
+                            <div class="col-xs-12 col-sm-1" style="text-align: center;">
+                                <a class="btn btn-primary btn-Search-tap2" style="margin-top: 19px;margin-bottom: 5px;"><i class="icon-search4 position-left"></i>@lang('string.search')</a>
                             </div>
                             <br/><br/>
 

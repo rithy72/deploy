@@ -334,10 +334,10 @@
                 <div class="modal-body">
                     <div class="datatable-header" style="margin-top: -30px;">
                         <div class="col-md-8" style="margin-top: -6px;margin-bottom: 0;">
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.UserAction') ៖</p><p id="name" style="margin-left: 5px;"></p></h5>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-sm-6 col-md-6">
                                 <h5 style="display: inline-flex;"><p>@lang('string.do') ៖</p><p id="do_action" style="margin-left: 5px;"></p></h5>
                             </div>
                         </div>
