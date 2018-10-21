@@ -72,6 +72,7 @@
                                             <option value="6">@lang('string.paymentRate')</option>
                                             <option value="7">@lang('string.paymentGrand-Total')</option>
                                             <option value="8">@lang('string.addMoreCost')</option>
+                                            <option value="9">@lang('string.took')</option>
                                         </select>
                                     </div>
                                 </div>
@@ -198,6 +199,7 @@
                                             <option value="6">@lang('string.paymentRate')</option>
                                             <option value="7">@lang('string.paymentGrand-Total')</option>
                                             <option value="8">@lang('string.addMoreCost')</option>
+                                            <option value="9">@lang('string.took')</option>
                                         </select>
                                     </div>
                                 </div>

@@ -47,5 +47,61 @@ class InitLogic extends Controller
                 'created_date' =>
                     DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
             ]);
+
+        //Phorn
+        $userModel = UserModel::Instance();
+        $userModel->user_no = "P001";
+        $userModel->name = "Phorn";
+        $userModel->phone_number = "-";
+        $userModel->note = "";
+        $userModel->role = UserRoleEnum::ADMIN;
+        $userModel->username = "phorn@admin";
+        $userModel->password = "phorn@admin123456";
+        $userModel->email = "phorn@gmail.com";
+        $userModel->status = true;
+        $userModel->delete_able = false;
+        $userId = DB::table('users')
+            ->insertGetId([
+                'user_no' => $userModel->user_no,
+                'name' => $userModel->name,
+                'phone_number' => $userModel->phone_number,
+                'username' => $userModel->username,
+                'password' => bcrypt($userModel->password),
+                'email' => $userModel->email,
+                'role' => $userModel->role,
+                'note' => $userModel->note,
+                'status' => true,
+                'delete_able' => false,
+                'created_date' =>
+                    DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+            ]);
+
+        //Rithy
+        $userModel = UserModel::Instance();
+        $userModel->user_no = "R001";
+        $userModel->name = "Rithy";
+        $userModel->phone_number = "-";
+        $userModel->note = "";
+        $userModel->role = UserRoleEnum::ADMIN;
+        $userModel->username = "rithy@admin";
+        $userModel->password = "rithy@admin123456";
+        $userModel->email = "rithy@gmail.com";
+        $userModel->status = true;
+        $userModel->delete_able = false;
+        $userId = DB::table('users')
+            ->insertGetId([
+                'user_no' => $userModel->user_no,
+                'name' => $userModel->name,
+                'phone_number' => $userModel->phone_number,
+                'username' => $userModel->username,
+                'password' => bcrypt($userModel->password),
+                'email' => $userModel->email,
+                'role' => $userModel->role,
+                'note' => $userModel->note,
+                'status' => true,
+                'delete_able' => false,
+                'created_date' =>
+                    DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
+            ]);
     }
 }
