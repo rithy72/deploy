@@ -95,8 +95,8 @@
                                     {{ __('ចូលប្រើប្រាស់') }}
                                 </button>
 
-                                {{--href="{{ route('password.request') }}--}}
-                                <a class="btn btn-link" href="#">
+                                {{--href="{{ route('password.request') }}" --}}
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
                                     @lang('string.forgot_password')
                                 </a>
                             </div>
