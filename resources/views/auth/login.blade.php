@@ -96,7 +96,7 @@
                                 </button>
 
                                 {{--href="{{ route('password.request') }}" --}}
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link" href="#">
                                     @lang('string.forgot_password')
                                 </a>
                             </div>
