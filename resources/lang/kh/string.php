@@ -207,5 +207,8 @@ return[
     'invoice_history' => 'ប្រវត្តិកែប្រែ និងប្រត្តិបត្តការ',
     'choose_audit_group' => 'ជ្រើសរើសក្រុម',
     'addMoreItemsToInvoice' => 'បន្ថែមទំនិញ',
-    'updateItemsOfInvoice' => 'កែប្រែទំនិញ'
+    'updateItemsOfInvoice' => 'កែប្រែទំនិញ',
+
+    'final_create_date' => 'ថ្ងៃកែប្រែចុងក្រោយ',
+    'do_by' => 'ធ្វើដោយ',
 ];

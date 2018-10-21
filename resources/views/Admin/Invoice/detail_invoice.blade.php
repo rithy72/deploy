@@ -5,6 +5,30 @@
     </style>
 @endsection
 @section('content')
+
+                {{--<div class="panel-body">
+                    <fieldset>
+                        <legend class="text-semibold">
+                            <i class="icon-file-text2 position-left"></i>
+                            Enter your information
+                            <a class="control-arrow" data-toggle="collapse" data-target="#demo1" aria-expanded="true">
+                                <i class="icon-circle-down2"></i>
+                            </a>
+                        </legend>
+
+                        <div class="collapse in" id="demo1" aria-expanded="true" style="">
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Enter your name:</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" placeholder="Eugene Kopyov">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>--}}
+
+
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <!--<h6 class="panel-title">Default panel</h6>-->
@@ -60,6 +84,10 @@
                     {{----- Merl Detail bos Customer 1 -----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body">
+                            <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
+                                <i class="icon-user-tie position-left"></i>
+                                ពត៌មានអតិថិជន
+                            </legend>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" id="font_size">
                                     <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.nameCustomer') ៖</label>
@@ -74,6 +102,19 @@
                                     <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.phoneNumber') ៖</label>
                                     <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="phone_number"></p>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
+                                <i class="icon-file-text2 position-left"></i>
+                                ពត៌មានវិក័យបត្រ
+                            </legend>
+                            <div class="col-sm-6 col-md-6" style="margin-right: 50%;">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.situation') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
+                                        <p id="status"></p>
                                     </div>
                                     <br>
                                 </div>
@@ -125,27 +166,9 @@
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" id="font_size">
-                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.situation') ៖</label>
-                                    <div class="col-xs-5 col-sm-6 col-md-8">
-                                        <p id="status"></p>
-                                    </div>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6">
-                                <div class="form-group" id="font_size">
                                     <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">តម្លៃដើមបង់រួច ៖</label>
                                     <div class="col-xs-5 col-sm-6 col-md-8">
                                         <p id="paid"></p>
-                                    </div>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6">
-                                <div class="form-group" id="font_size">
-                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.createBy') ៖</label>
-                                    <div class="col-xs-5 col-sm-6 col-md-8">
-                                        <p id="createByUser"></p>
                                     </div>
                                     <br>
                                 </div>
@@ -159,8 +182,47 @@
                                     <br>
                                 </div>
                             </div>
+                            <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
+                                <i class="icon-pencil7 position-left"></i>
+                                សង្ចេបប្រវត្តិកែប្រែ
+                            </legend>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.create_date') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
+                                        <p id="date_in1"></p>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.create_by') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
+                                        <p id="createByUser"></p>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.final_create_date') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
+                                        <p id="date_update_final"></p>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" id="font_size">
+                                    <label class="control-label col-xs-7 col-sm-6 col-md-4" id="font_size">@lang('string.do_by') ៖</label>
+                                    <div class="col-xs-5 col-sm-6 col-md-8">
+                                        <p id="date_update_final_by"></p>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
                         </div>
-
                         {{--========================= footer of pagination ====================--}}
                         {{--<div class="datatable-footer">
                             <div class="col-xs-12 .col-sm-12 col-md-12">
@@ -484,6 +546,7 @@
 
                     //document.getElementById("date_in").innerHTML = getResponse.data.created_date.slice(0, 10); // best
                     document.getElementById("date_in").innerHTML = getResponse.data.created_date;
+                    document.getElementById("date_in1").innerHTML = getResponse.data.created_date;
 //                    const storeString = getResponse.data.created_date;
 //                    const splitString = storeString.split(" ");
 //                    document.getElementById("date_in").innerHTML = splitString[0];
@@ -493,6 +556,9 @@
                     document.getElementById("interests_value").innerHTML = getResponse.data.interests_value+" $";
                     document.getElementById("status").innerHTML = getResponse.data.display_status;
                     document.getElementById("createByUser").innerHTML = getResponse.data.user_full_name;
+
+                    document.getElementById("date_update_final").innerHTML = getResponse.data.final_date_time;
+                    document.getElementById("date_update_final_by").innerHTML = getResponse.data.final_action_user;
 
                     document.getElementById("grand_total").innerHTML = getResponse.data.grand_total+" $";
                     document.getElementById("paid").innerHTML = getResponse.data.paid+" $";

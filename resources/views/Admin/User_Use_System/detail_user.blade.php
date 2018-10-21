@@ -22,15 +22,15 @@
         <div class="panel-body" style="padding: 0">
             {{-- Header show button and invoice id  --}}
             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-bottom: 13px;margin-top: 6px;">
-                <div class="col-sm-5 col-md-7" style="margin-top: -6px;margin-bottom: 0;">
-                    <div class="col-sm-12 col-md-6">
-                        <h3><b>@lang('string.nameUser') ៖ </b><b id="name_user"></b></h3>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <h3><b>តួរនាទី ៖ </b><b id="turnati"></b></h3>
-                    </div>
-                </div>
-                <div class="col-sm-7 col-md-5" style="text-align: right;">
+                {{--<div class="col-sm-5 col-md-7" style="margin-top: -6px;margin-bottom: 0;">--}}
+                    {{--<div class="col-sm-12 col-md-6">--}}
+                        {{--<h3><b>@lang('string.nameUser') ៖ </b><b id="name_user"></b></h3>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-sm-12 col-md-6">--}}
+                        {{--<h3><b>តួរនាទី ៖ </b><b id="turnati"></b></h3>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                <div style="text-align: right;">
                     <div class="" style="margin-top: 13px;margin-bottom: 0;">
                         <a class="btn btn-success" id="createNewUser_tap3" style="margin-bottom: 4px;"><i class="icon-add position-left" ></i>@lang('string.createNew')</a> ||
                             <button type="button" class="btn btn-primary" id="update" style="margin-bottom: 4px;"><i class="icon-pencil7 position-left"></i>@lang('string.update')</button> ||
@@ -63,11 +63,25 @@
                     {{--=========== Merl Detail bos User 1 ===============-----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body">
+                            <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
+                                <i class="icon-user position-left"></i>
+                                ពត៌មានអ្នកប្រើប្រាស់
+                            </legend>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" style="font-size: 14px;">
                                     <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.number') ៖</label>
                                     <div class="col-sm-7 col-md-7">
                                         <p id="User_No"></p>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.nameUser') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
+                                        <p id="name_user"></p>
+
                                     </div>
                                     <br>
                                 </div>
@@ -92,6 +106,19 @@
                                     <br>
                                 </div>
                             </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.note') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
+                                        <p id="note"></p>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
+                                <i class="icon-user-check position-left"></i>
+                                សង្ខែបប្រវត្តិកែប្រែ
+                            </legend>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" style="font-size: 14px;">
                                     <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.situation') ៖</label>
@@ -137,16 +164,6 @@
                                     <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.last_update_by') ៖</label>
                                     <div class="col-sm-7 col-md-7">
                                         <p id="last_create_by"></p>
-
-                                    </div>
-                                    <br>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-6">
-                                <div class="form-group" style="font-size: 14px;">
-                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.note') ៖</label>
-                                    <div class="col-sm-7 col-md-7">
-                                        <p id="note"></p>
 
                                     </div>
                                     <br>

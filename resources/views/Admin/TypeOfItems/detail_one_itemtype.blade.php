@@ -61,6 +61,10 @@
                     {{--=========== Merl Detail bos User 1 ===============-----}}
                     <div class="tab-pane active" id="highlighted_tab1">
                         <div class="panel-body">
+                            <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
+                                <i class="icon-file-text position-left"></i>
+                                ពត៌មានប្រភេទទំនិញ
+                            </legend>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" style="font-size: 14px;">
                                     <label class="control-label col-sm-5 col-md-4" style="font-size: 14px">@lang('string.name_itemType')</label>
@@ -80,6 +84,10 @@
                                     <br>
                                 </div>
                             </div>
+                            <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
+                                <i class="icon-drawer3 position-left"></i>
+                                សម្កាល់សម្រាប់ចំណាំ
+                            </legend>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" style="font-size: 14px;">
                                     <label class="control-label col-sm-5 col-md-4" style="font-size: 14px">@lang('string.itemType_notice_1')</label>
