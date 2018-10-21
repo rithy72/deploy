@@ -110,12 +110,10 @@ class UserLogic
         //Phone
         $chang_log_array = $userAudit->CompareField(
             AuditGroup::PHONE, $old_model->phone_number, $user_model->phone_number, $flag, $chang_log_array);
-        //Email
-        $chang_log_array = $userAudit->CompareField(
-            AuditGroup::EMAIL, $old_model->email, $user_model->email, $flag, $chang_log_array);
+
         //Username
         $chang_log_array = $userAudit->CompareField(
-            AuditGroup::USERNAME, $old_model->username, $user_model->username, $flag, $chang_log_array);
+            AuditGroup::USERNAME, $old_model->username, $user_model->email, $flag, $chang_log_array);
         //Note
         $chang_log_array = $userAudit->CompareField(
             AuditGroup::NOTE, $old_model->note, $user_model->note, $flag, $chang_log_array);
