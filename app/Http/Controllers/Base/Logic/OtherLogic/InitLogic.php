@@ -27,8 +27,9 @@ class InitLogic extends Controller
         $userModel->phone_number = "-";
         $userModel->note = "";
         $userModel->role = UserRoleEnum::ADMIN;
-        $userModel->email = "sothea@admin";
+        $userModel->username = "sothea@admin";
         $userModel->password = "sothea@admin123456";
+        $userModel->email = "chansotheabo46@gmail.com";
         $userModel->status = true;
         $userModel->delete_able = false;
         $userId = DB::table('users')
@@ -36,60 +37,9 @@ class InitLogic extends Controller
                 'user_no' => $userModel->user_no,
                 'name' => $userModel->name,
                 'phone_number' => $userModel->phone_number,
-                'email' => $userModel->email,
+                'username' => $userModel->username,
                 'password' => bcrypt($userModel->password),
-                'role' => $userModel->role,
-                'note' => $userModel->note,
-                'status' => true,
-                'delete_able' => false,
-                'created_date' =>
-                    DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-            ]);
-
-        //Phorn
-        $userModel = UserModel::Instance();
-        $userModel->user_no = "P001";
-        $userModel->name = "Phorn";
-        $userModel->phone_number = "-";
-        $userModel->note = "";
-        $userModel->role = UserRoleEnum::ADMIN;
-        $userModel->email = "phorn@admin";
-        $userModel->password = "phorn@admin123456";
-        $userModel->status = true;
-        $userModel->delete_able = false;
-        $userId = DB::table('users')
-            ->insertGetId([
-                'user_no' => $userModel->user_no,
-                'name' => $userModel->name,
-                'phone_number' => $userModel->phone_number,
                 'email' => $userModel->email,
-                'password' => bcrypt($userModel->password),
-                'role' => $userModel->role,
-                'note' => $userModel->note,
-                'status' => true,
-                'delete_able' => false,
-                'created_date' =>
-                    DateTimeLogic::Instance()->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT),
-            ]);
-
-        //Rithy
-        $userModel = UserModel::Instance();
-        $userModel->user_no = "R001";
-        $userModel->name = "Rithy";
-        $userModel->phone_number = "-";
-        $userModel->note = "";
-        $userModel->role = UserRoleEnum::ADMIN;
-        $userModel->email = "rithy@admin";
-        $userModel->password = "rithy@admin123456";
-        $userModel->status = true;
-        $userModel->delete_able = false;
-        $userId = DB::table('users')
-            ->insertGetId([
-                'user_no' => $userModel->user_no,
-                'name' => $userModel->name,
-                'phone_number' => $userModel->phone_number,
-                'email' => $userModel->email,
-                'password' => bcrypt($userModel->password),
                 'role' => $userModel->role,
                 'note' => $userModel->note,
                 'status' => true,

@@ -37,7 +37,7 @@ class SecureLogic
         $userObj = UserLogic::Instance()->Find(Auth::id());
         //
         $checkPassword = Hash::check($password, $userObj->password);
-        if ($checkPassword && $userObj->email == $username) return true;
+        if ($checkPassword && $userObj->username == $username) return true;
         return false;
     }
 

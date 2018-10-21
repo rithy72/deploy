@@ -1,10 +1,38 @@
-@extends('layouts.app')
+{{--@extends('layouts.app')--}}
 
-@section('content')
+{{--@section('content')--}}
+<html>
+<header>
+    <meta charset="UTF-8">
+    <title>@lang('string.com_name')</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    {{--<link href="{{asset('/assets/css/icons/icomoon/styles.css')}}" rel="stylesheet">--}}
+    {{--<link href="{{asset('/assets/css/bootstrap.css')}}" rel="stylesheet">--}}
+    {{--<link href="{{asset('/assets/css/core.css')}}" rel="stylesheet">--}}
+    {{--<link href="{{asset('/assets/css/components.css')}}" rel="stylesheet">--}}
+    {{--<link href="{{asset('/assets/css/colors.css')}}" rel="stylesheet">--}}
+    {{--<link rel="stylesheet" type="text/css" href="{{asset('/assets/css/extras/animate.min.css')}}">--}}
+    {{--<link rel="stylesheet" href="{{ asset('/css/style.css') }}">--}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    @yield('style')
+    <style>
+        .box {
+            height: 90vh;
+            overflow-y: auto;
+        }
+        body {
+            font-family: 'Khmer OS Battambang', sans-serif; !important;
+        }
+    </style>
+</header>
+<body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="margin-top: 30px; !important;">
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
@@ -62,4 +90,7 @@
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>
+
+{{--@endsection--}}

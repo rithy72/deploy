@@ -133,10 +133,16 @@
                                                 <input type="text" placeholder="..." id="phoneNumber" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
-                                            {{--Account--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.accounting')</label>
+                                            {{--Email--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px">Email ៖</label>
                                             <div class="col-lg-9">
                                                 <input type="email" placeholder="@lang('string.must_to_write')" id="email" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                            {{--Username--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.accounting')</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="@lang('string.must_to_write')" id="username" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--password 1--}}
@@ -224,10 +230,16 @@
                                                 <input type="text" placeholder="..." id="phoneNumber_update" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
+                                            {{--Email--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px">Email ៖</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" placeholder="..." id="email_update" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
                                             {{--Account--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.accounting')</label>
                                             <div class="col-lg-9">
-                                                <input type="email" placeholder="@lang('string.must_to_write')" id="email_update" class="form-control" style="border: 1px solid grey;">
+                                                <input type="text" placeholder="@lang('string.must_to_write')" id="username_update" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.note') ៖</label>
@@ -566,8 +578,9 @@
                     '<td>' + short.display_role + '</td>' +
                     '<td>' + stringStatus + '</td>' +
                     '<td style="display:none;">' + short.note + '</td>' +
-                    '<td style="display:none;">' + short.email + '</td>' +
+                    '<td style="display:none;">' + short.username + '</td>' +
                     '<td style="display:none;">' + short.delete_able + '</td>' +
+                    '<td style="display:none;">' + short.email + '</td>' +
                     '<td class="text-center"> ' +
                     '<ul class="icons-list">'+
                     '<li class="dropdown">'+
@@ -611,7 +624,8 @@
             var user_no = $('#user_no').val();
             var name = $('#name').val();
             var phone_number = $('#phoneNumber').val();
-            var email_user = $('#email').val();
+            var email = $('#email').val();
+            var username = $('#username').val();
             var password_User = $('#password_User').val();
             var confirm_password_user = $('#confirm_pass_user').val();
             var note = $('#note').val();
@@ -622,7 +636,7 @@
                 if (!name){
                     alert('បំពេញឈ្មោះអ្នកប្រើប្រាស់សិន');
                 } else {
-                    if (!email_user){
+                    if (!username){
                         alert('បំពេញគណនេយ្យអ្នកប្រើប្រាស់សិន');
                     } else {
                         if (!password_User || !confirm_password_user){
@@ -641,7 +655,8 @@
                                             "name": name,
                                             "phone_number": phone_number,
                                             "note": note,
-                                            "email": email_user,
+                                            "email":email,
+                                            "username": username,
                                             "password": password_User
                                         }
                                     };
@@ -685,21 +700,23 @@
                 $('#show_name_dialog_update').text($(_selectRow).find('td:eq(2)').text()); // store in text dialog update
                 $('#name_update').val($(_selectRow).find('td:eq(2)').text());
                 $('#phoneNumber_update').val($(_selectRow).find('td:eq(3)').text());
-                $('#email_update').val($(_selectRow).find('td:eq(7)').text());
+                $('#username_update').val($(_selectRow).find('td:eq(7)').text());
                 $('#note_update').val($(_selectRow).find('td:eq(6)').text());
+                $('#email_update').val($(_selectRow).find('td:eq(9)').text())
             })();
         });
         $('.btn_update_to_server').on("click",function () {
             var user_no_update = $('#user_no_update').val();
             var name_update = $('#name_update').val();
             var phone_number_update = $('#phoneNumber_update').val();
-            var email_user_update = $('#email_update').val();
+            var email = $('#email_update').val();
+            var username_update = $('#username_update').val();
             var note_update = $('#note_update').val();
             var password_admin_update = $('#pass_admin_update').val();
             // condition
             if(user_no_update) {
                 if(name_update){
-                    if(email_user_update){
+                    if(username_update){
                         if(password_admin_update){
                             var updateModel = {
                                 "admin_password": password_admin_update,
@@ -708,7 +725,8 @@
                                     "name": name_update,
                                     "phone_number": phone_number_update,
                                     "note": note_update,
-                                    "email": email_user_update
+                                    "username": username_update,
+                                    "email":email
                                 }
                             };
                             // request

@@ -207,10 +207,10 @@
         <div class="content-wrapper">
             <div class="box"> {{--make scroll in content it the most powerful--}}
             <!-- Sidebars overview -->
-                @if ($errors->has('email'))
+                @if ($errors->has('email') || $errors->has('username'))
                     <div class="alert alert-danger alert-dismissible fade in">
                         <a class="close" data-dismiss="alert" aria-label="close" style="margin-right: 24px">x</a>
-                        <p style="margin-top: 5px">{{ $errors->first('email') }}</p>
+                        <p style="margin-top: 5px">{{ $errors->first('email') }}{{ $errors->first('username') }}</p>
                     </div>
                 @endif
                 @if ($errors->has('password'))
@@ -259,7 +259,7 @@
                                         <label class="control-label col-sm-5 col-md-5"
                                                style="font-size: 15px">@lang('string.username')</label>
                                         <div class="col-sm-7 col-md-7">
-                                            <input name="email" id="email" type="text"
+                                            <input name="username" id="username" type="text"
                                                    placeholder=""
                                                    class="form-control" style="border: 1px solid grey;" required
                                                    autocomplete="">
@@ -450,14 +450,15 @@
 
     //Check User
     function checkUsernamePassword() {
-        var username = $('#email').val();
+        var username = $('#username').val();
         var password = $('#cur_password').val();
+        console.log(username+" , "+password);
         var result = setTimeout(function () {
             $.ajax({
                 type: "POST",
                 url: "api/user/check_current_secure",
                 data: {
-                    'email': username,
+                    'username': username,
                     'password': password
                 },
                 success: function (ResponseJson) {

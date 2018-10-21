@@ -16,6 +16,7 @@ class UserResetPassword extends Migration
         //
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
+            $table->string('username')->index();
             $table->string('token')->index();
             $table->timestamp('created_at');
         });

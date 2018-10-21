@@ -8,6 +8,7 @@ use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ResetPasswordController extends Controller
@@ -46,9 +47,37 @@ class ResetPasswordController extends Controller
     {
         return [
             'token' => 'required',
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required|confirmed|min:6',
         ];
+    }
+
+
+    /**
+     * Get the password reset credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        return $request->only(
+            'username', 'password', 'password_confirmation', 'token'
+        );
+    }
+
+    /**
+     * Get the response for a failed password reset.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    protected function sendResetFailedResponse(Request $request, $response)
+    {
+        return redirect()->back()
+            ->withInput($request->only('username'))
+            ->withErrors(['username' => trans($response)]);
     }
 
     /**
@@ -59,21 +88,26 @@ class ResetPasswordController extends Controller
      */
     protected function sendResetResponse($response)
     {
-        $userObj = UserLogic::Instance()->Find(Auth::id());
-        $role = strtolower($userObj->role);
-        //Audit Trail
-        $description = $userObj->user_no."-".$userObj->name;
-        UserAuditLogic::Instance()->UserOnUserAction($userObj->id, UserActionEnum::CHANGE_PASSWORD, $description, []);
-        //Prep User
-        $rememberToken = UserLogic::Instance()->UserPreps($userObj->email);
-        Auth::user()->remember_token = $rememberToken;
-        //Redirect after success
-        if ($role == UserRoleEnum::ADMIN){
-            return redirect('/admin/mainform')
+        if (Auth::user() == null){
+            return redirect($this->redirectPath())
                 ->with('status', trans($response));
         }else{
-            return redirect('/admin/invoice')
-                ->with('status', trans($response));
+            $userObj = UserLogic::Instance()->Find(Auth::id());
+            $role = strtolower($userObj->role);
+            //Audit Trail
+            $description = $userObj->user_no."-".$userObj->name;
+            UserAuditLogic::Instance()->UserOnUserAction($userObj->id, UserActionEnum::CHANGE_PASSWORD, $description, []);
+            //Prep User
+            $rememberToken = UserLogic::Instance()->UserPreps($userObj->email, $userObj->username);
+            Auth::user()->remember_token = $rememberToken;
+            //Redirect after success
+            if ($role == UserRoleEnum::ADMIN){
+                return redirect('/admin/mainform')
+                    ->with('status', trans($response));
+            }else{
+                return redirect('/admin/invoice')
+                    ->with('status', trans($response));
+            }
         }
     }
 }

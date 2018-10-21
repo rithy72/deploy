@@ -25,6 +25,7 @@ class UserModel
     public $role;
     public $display_role;
     public $email;
+    public $username;
     public $password;
     public $status;
     public $display_status;
@@ -56,6 +57,7 @@ class UserModel
         $userModel->role = $user_object->role;
         $userModel->display_role = ucfirst($user_object->role);
         $userModel->email = (isset($user_object->email) && !empty($user_object->phone_number)) ? $user_object->email:"";
+        $userModel->username = (isset($user_object->username) && !empty($user_object->username)) ? $user_object->username : "";
         $userModel->password = (isset($user_object->password) && !empty($user_object->phone_number)) ? $user_object->password:"";
         $userModel->status = $user_object->status;
         $userModel->display_status = GeneralStatus::DisplayStatus[$user_object->status];

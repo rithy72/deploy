@@ -31,15 +31,6 @@ class UserLogic
         return new UserLogic();
     }
 
-    //Check Username Before Insert
-    private function checkUsernameInsert($user_name){
-        $count = DB::table('users')
-            ->where('email','=', $user_name)
-            ->where('deleted','=', false)
-            ->count();
-        if ($count > 0) return false;
-        return true;
-    }
     //Check User Number Before Insert
     private function checkUserNumberInsert($user_number){
         $count = DB::table('users')
@@ -49,11 +40,20 @@ class UserLogic
         if ($count > 0) return false;
         return true;
     }
+    //Check Username Before Insert
+    private function checkUsernameInsert($user_number){
+        $count = DB::table('users')
+            ->where('username','=', $user_number)
+            ->where('deleted','=', false)
+            ->count();
+        if ($count > 0) return false;
+        return true;
+    }
 
     //Check Username Before update
     private function checkUsernameUpdate($user_name, $id){
         $count = DB::table('users')
-            ->where('email','=', $user_name)
+            ->where('username','=', $user_name)
             ->where('id', '<>', $id)
             ->where('deleted','=', false)
             ->count();
@@ -127,7 +127,7 @@ class UserLogic
 
     //Add New User Logic
     public function CreateUser($user){
-        $validateUsername = $this->checkUsernameInsert($user->email);
+        $validateUsername = $this->checkUsernameInsert($user->username);
         $validateUserNumber = $this->checkUserNumberInsert($user->user_no);
         $changeLogArray = array();
         //
@@ -142,6 +142,7 @@ class UserLogic
                 'name' => $user->name,
                 'phone_number' => $user->phone_number,
                 'email' => $user->email,
+                'username' => $user->username,
                 'password' => bcrypt($user->password),
                 'role' => strtolower(UserRoleEnum::USER),
                 'note' => $user->note,
@@ -169,7 +170,7 @@ class UserLogic
         $userRole = UserRoleEnum::USER;
         if ($userOldObj->role == UserRoleEnum::ADMIN) $userRole = UserRoleEnum::ADMIN;
 
-        $validateUsername = $this->checkUsernameUpdate($user->email, $id);
+        $validateUsername = $this->checkUsernameUpdate($user->username, $id);
         $validateUserNumber = $this->checkUserNumberUpdate($user->user_no, $id);
         $changeLogArray = array();
         //
@@ -187,6 +188,7 @@ class UserLogic
                 'name' => $user->name,
                 'phone_number' => $user->phone_number,
                 'email' => $user->email,
+                'username' => $user->username,
                 'role' => strtolower($userRole),
                 'note' => $user->note,
                 'delete_able' => true,
@@ -267,7 +269,7 @@ class UserLogic
     }
 
     //Reset Password
-    public function UserPreps($email){
+    public function UserPreps($email, $username){
         $check = DB::table('password_resets')->where('email','=', trim($email))->first();
         $dateInstance = DateTimeLogic::Instance();
         $randString = Str::random(60);
@@ -275,6 +277,7 @@ class UserLogic
         if ($check == null){
             //Insert New Token
             DB::table('password_resets')->insert([
+                'username' => trim($username),
                 'email' => trim($email),
                 'token' => Hash::make($randString),
                 'created_at' => $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
@@ -282,6 +285,7 @@ class UserLogic
         }else{
             DB::table('password_resets')
                 ->where('email','=', trim($email))
+                ->where('username','=', trim($username))
                 ->update([
                     'token' => Hash::make($randString),
                     'created_at' => $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)

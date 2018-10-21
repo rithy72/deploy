@@ -86,6 +86,7 @@ class UserController extends Controller
             $userModel->note = $userInfo->note;
             //$userModel->role = $userInfo->role;
             $userModel->email = trim($userInfo->email);
+            $userModel->username = trim($userInfo->username);
             $userModel->password = trim($userInfo->password);
             //
             $insertResult = UserLogic::Instance()->CreateUser($userModel);
@@ -130,6 +131,7 @@ class UserController extends Controller
             $userModel->name = $userInfo->name;
             $userModel->phone_number = $userInfo->phone_number;
             $userModel->note = $userInfo->note;
+            $userModel->username = $userInfo->username;
             $userModel->email = trim($userInfo->email);
             //
             $updateResult = UserLogic::Instance()->UpdateUser($userModel, $user_id);
@@ -286,7 +288,7 @@ class UserController extends Controller
     public function checkUser(Request $request){
         $returnModel = ReturnModel::Instance();
         //
-        $username = $request->input('email','');
+        $username = $request->input('username','');
         $password = $request->input('password','');
         //
         $result = SecureLogic::Instance()->CheckUsernamePassword($username, $password);

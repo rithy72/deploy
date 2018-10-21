@@ -40,7 +40,7 @@ class LoginSuccessListener
         //
         UserAuditLogic::Instance()->UserSecurityAction(Auth::id(), UserActionEnum::LOGIN, "", []);
         //
-        $rememberToken = UserLogic::Instance()->UserPreps(Auth::user()->email);
+        $rememberToken = UserLogic::Instance()->UserPreps(Auth::user()->email, Auth::user()->username);
         //
         Auth::user()->remember_token = $rememberToken;
         //
