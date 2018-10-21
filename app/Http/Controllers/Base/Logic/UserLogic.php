@@ -110,9 +110,12 @@ class UserLogic
         //Phone
         $chang_log_array = $userAudit->CompareField(
             AuditGroup::PHONE, $old_model->phone_number, $user_model->phone_number, $flag, $chang_log_array);
+        //Email
+        $chang_log_array = $userAudit->CompareField(
+            AuditGroup::EMAIL, $old_model->email, $user_model->email, $flag, $chang_log_array);
         //Username
         $chang_log_array = $userAudit->CompareField(
-            AuditGroup::USERNAME, $old_model->email, $user_model->email, $flag, $chang_log_array);
+            AuditGroup::USERNAME, $old_model->username, $user_model->username, $flag, $chang_log_array);
         //Note
         $chang_log_array = $userAudit->CompareField(
             AuditGroup::NOTE, $old_model->note, $user_model->note, $flag, $chang_log_array);
@@ -141,9 +144,9 @@ class UserLogic
                 'user_no' => $user->user_no,
                 'name' => $user->name,
                 'phone_number' => $user->phone_number,
-                'email' => $user->email,
-                'username' => $user->username,
-                'password' => bcrypt($user->password),
+                'email' => trim($user->email),
+                'username' => trim($user->username),
+                'password' => bcrypt(trim($user->password)),
                 'role' => strtolower(UserRoleEnum::USER),
                 'note' => $user->note,
                 'status' => true,
@@ -187,8 +190,8 @@ class UserLogic
                 'user_no' => $user->user_no,
                 'name' => $user->name,
                 'phone_number' => $user->phone_number,
-                'email' => $user->email,
-                'username' => $user->username,
+                'email' => trim($user->email),
+                'username' => trim($user->username),
                 'role' => strtolower($userRole),
                 'note' => $user->note,
                 'delete_able' => true,

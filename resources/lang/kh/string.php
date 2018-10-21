@@ -22,7 +22,7 @@ return[
     'details' => 'ចូលមើល',
     'payment' => 'បង់ប្រាក់',
     'paymentTerm' =>'អត្រាការប្រាក់ ៖',
-    'generalInformation' => 'ព័ណមានទូទៅ',
+    'generalInformation' => 'ពត៌មានទូរទៅ',
     'action' => 'ប្រតិបត្តិការ',
     'invoiceId' => 'លេខវិក័្កយបត្រ',
     'createBy' => 'បង្កើតដោយ ',
@@ -51,7 +51,7 @@ return[
 // part of username and password
     'changePassword' => 'ធ្វើការផ្លាស់ប្តូរលេខសំងាត់របស់អ្នក',
     'username' => 'គណនេយ្យប្រើប្រាស់ ៖',
-    'password' => 'លេខសំងាត់៖ ',
+    'password' => 'លេខសំងាត់ ',
     'oldPassword' => 'លេខសំងាត់ចាស់ ៖',
     'newPassword' => 'លេខសំងាត់ថ្មី ៖',
     'confirmPassword' => 'លេខសំងាត់ថ្មីដូចខាងលើ ៖',
@@ -184,7 +184,7 @@ return[
     'new_password' => 'លេខសំងាត់ថ្មី',
     'reset_password_user_' => 'ផ្លាស់ប្តូរលេខសំងាត់របស់អ្នកប្រើប្រាស់',
     'detail_user' => 'ពណ៌មានលំអិតអ្នកប្រើប្រាស់',
-    'generalInformation_user' => 'ពណ៌មានទូរទៅ',
+    'generalInformation_user' => 'ពត៌មានទូរទៅ',
     'email' => 'គណនេយ្យប្រើប្រាស់',
     'create_date' => 'ធ្វើការបង្កើតនៅថ្ងៃ',
     'create_by' => 'បង្កើតដោយ',
@@ -211,4 +211,8 @@ return[
 
     'final_create_date' => 'ថ្ងៃកែប្រែចុងក្រោយ',
     'do_by' => 'ធ្វើដោយ',
+    'summary_history' => 'សង្ខេបប្រវត្តិកែប្រែ',
+    'email_real' => 'អ៊ីម៉ែល',
+    'user_information' => 'ពត៌មានអ្នកប្រើប្រាស់',
+    'invoice_information' => 'ពត៌មានវិក្ក័យបត្រ',
 ];

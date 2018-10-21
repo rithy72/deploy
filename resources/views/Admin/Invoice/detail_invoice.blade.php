@@ -108,7 +108,7 @@
                             </div>
                             <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
                                 <i class="icon-file-text2 position-left"></i>
-                                ពត៌មានវិក័យបត្រ
+                                @lang('string.invoice_information')
                             </legend>
                             <div class="col-sm-6 col-md-6" style="margin-right: 50%;">
                                 <div class="form-group" id="font_size">
@@ -184,7 +184,7 @@
                             </div>
                             <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
                                 <i class="icon-pencil7 position-left"></i>
-                                សង្ចេបប្រវត្តិកែប្រែ
+                                @lang('string.summary_history')
                             </legend>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" id="font_size">

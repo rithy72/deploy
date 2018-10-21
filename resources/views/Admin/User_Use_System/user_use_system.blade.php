@@ -134,9 +134,9 @@
                                                 <br>
                                             </div>
                                             {{--Email--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">Email ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.email_real') ៖</label>
                                             <div class="col-lg-9">
-                                                <input type="email" placeholder="@lang('string.must_to_write')" id="email" class="form-control" style="border: 1px solid grey;">
+                                                <input type="email" placeholder="..." id="email" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--Username--}}
@@ -152,7 +152,7 @@
                                                 <br>
                                             </div>
                                             {{--password 2--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px;">@lang('string.confirm_pass')</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px;">@lang('string.confirm_pass') ៖</label>
                                             <div class="col-lg-9">
                                                 <input type="password" placeholder="@lang('string.must_to_write')" id="confirm_pass_user" class="form-control" style="border: 1px solid grey;">
                                                 <br>
@@ -231,7 +231,7 @@
                                                 <br>
                                             </div>
                                             {{--Email--}}
-                                            <label class="control-label col-lg-3" style="font-size: 15px">Email ៖</label>
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.email_real') ៖</label>
                                             <div class="col-lg-9">
                                                 <input type="text" placeholder="..." id="email_update" class="form-control" style="border: 1px solid grey;">
                                                 <br>

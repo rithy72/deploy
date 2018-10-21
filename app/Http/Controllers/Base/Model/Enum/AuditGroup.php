@@ -30,6 +30,7 @@ class AuditGroup
     public const USER_FULLNAME = 13;
     public const NOTE = 14;
     public const USERNAME = 15;
+    public const EMAIL = 25;
     public const PASSWORD = 16;
     public const USER_ROLE = 17;
     //
@@ -66,6 +67,7 @@ class AuditGroup
         22 => "ចំណាំទី 2",
         23 => "ចំណាំទី 3",
         24 => "ចំណាំទី 4",
+        25 => "អ៊ីម៉ែល"
     );
 
 }

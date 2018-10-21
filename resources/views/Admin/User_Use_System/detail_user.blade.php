@@ -65,7 +65,7 @@
                         <div class="panel-body">
                             <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
                                 <i class="icon-user position-left"></i>
-                                ពត៌មានអ្នកប្រើប្រាស់
+                                @lang('string.user_information')
                             </legend>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" style="font-size: 14px;">
@@ -98,9 +98,19 @@
                             </div>
                             <div class="col-sm-6 col-md-6">
                                 <div class="form-group" style="font-size: 14px;">
-                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.email') ៖</label>
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.email_real') ៖</label>
                                     <div class="col-sm-7 col-md-7">
                                         <p id="email"></p>
+
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6" style="margin-right: 50%;">
+                                <div class="form-group" style="font-size: 14px;">
+                                    <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.email') ៖</label>
+                                    <div class="col-sm-7 col-md-7">
+                                        <p id="show_username"></p>
 
                                     </div>
                                     <br>
@@ -117,9 +127,9 @@
                             </div>
                             <legend class="text-semibold col-xs-12 col-sm-12 col-md-12" style="font-size: initial;">
                                 <i class="icon-user-check position-left"></i>
-                                សង្ខែបប្រវត្តិកែប្រែ
+                                @lang('string.summary_history')
                             </legend>
-                            <div class="col-sm-6 col-md-6">
+                            <div class="col-sm-6 col-md-6" style=" margin-right: 50%;">
                                 <div class="form-group" style="font-size: 14px;">
                                     <label class="control-label col-sm-5 col-md-5" style="font-size: 14px">@lang('string.situation') ៖</label>
                                     <div class="col-sm-7 col-md-7">
@@ -446,10 +456,16 @@
                                                 <input type="text" placeholder="..." id="phoneNumber" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
-                                            {{--Account--}}
+                                            {{--Email--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.email_real')</label>
+                                            <div class="col-lg-9">
+                                                <input type="email" placeholder="..." id="email_tap3" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                            {{--Username--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.accounting')</label>
                                             <div class="col-lg-9">
-                                                <input type="email" placeholder="@lang('string.must_to_write')" id="email_tap3" class="form-control" style="border: 1px solid grey;">
+                                                <input type="email" placeholder="@lang('string.must_to_write')" id="username_tap3" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             {{--password 1--}}
@@ -537,10 +553,16 @@
                                                 <input type="text" placeholder="..." id="phoneNumber_update" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
-                                            {{--Account--}}
+                                            {{--Eamil--}}
+                                            <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.email_real')</label>
+                                            <div class="col-lg-9">
+                                                <input type="email" placeholder="..." id="email_update" class="form-control" style="border: 1px solid grey;">
+                                                <br>
+                                            </div>
+                                            {{--Username--}}
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.accounting')</label>
                                             <div class="col-lg-9">
-                                                <input type="email" placeholder="@lang('string.must_to_write')" id="email_update" class="form-control" style="border: 1px solid grey;">
+                                                <input type="email" placeholder="@lang('string.must_to_write')" id="username_update" class="form-control" style="border: 1px solid grey;">
                                                 <br>
                                             </div>
                                             <label class="control-label col-lg-3" style="font-size: 15px">@lang('string.note') ៖</label>
@@ -853,6 +875,7 @@
                     $('#last_create_date').text(ConvertJson.data.last_update_date);
                     $('#last_create_by').text(ConvertJson.data.last_update_by);
                     $('#note').text(ConvertJson.data.note);
+                    $('#show_username').text(ConvertJson.data.username);
                     // ------------------- show user in table tape 2 -----------------
                     var ShowAuto_tap2 = new ShowHistoryTap2("GET",'../api/user/user_history/'+_ID+'?from_date=&to_date=&action=&page_size=15');
                     ShowAuto_tap2.reads();
@@ -1193,6 +1216,7 @@
             var name = $('#name_tap3').val();
             var phone_number = $('#phoneNumber').val();
             var email_user = $('#email_tap3').val();
+            var username = $('#username_tap3').val();
             var password_User = $('#password_User').val();
             var confirm_password_user = $('#confirm_pass_user').val();
             var note = $('#note_tap3').val();
@@ -1203,7 +1227,7 @@
                 if (!name){
                     alert('បំពេញឈ្មោះអ្នកប្រើប្រាស់សិន');
                 } else {
-                    if (!email_user){
+                    if (!username){
                         alert('បំពេញគណនេយ្យអ្នកប្រើប្រាស់សិន');
                     } else {
                         if (!password_User || !confirm_password_user){
@@ -1223,6 +1247,7 @@
                                             "phone_number": phone_number,
                                             "note": note,
                                             "email": email_user,
+                                            "username" : username,
                                             "password": password_User
                                         }
                                     };
@@ -1273,6 +1298,7 @@
                 $('#phoneNumber_update').val(ConvertJson.data.phone_number);
                 $('#email_update').val(ConvertJson.data.email);
                 $('#note_update').val(ConvertJson.data.note);
+                $('#username_update').val(ConvertJson.data.username);
 
                 $('#show_user_no_dialog_update').text(ConvertJson.data.user_no);
                 $('#show_name_dialog_update').text(ConvertJson.data.name);
@@ -1283,12 +1309,13 @@
             var name_update = $('#name_update').val();
             var phone_number_update = $('#phoneNumber_update').val();
             var email_user_update = $('#email_update').val();
+            var username_update = $('#username_update').val();
             var note_update = $('#note_update').val();
             var password_admin_update = $('#pass_admin_update').val();
             // condition
             if(user_no_update) {
                 if(name_update){
-                    if(email_user_update){
+                    if(username_update){
                         if(password_admin_update){
                             var updateModel = {
                                 "admin_password": password_admin_update,
@@ -1297,7 +1324,8 @@
                                     "name": name_update,
                                     "phone_number": phone_number_update,
                                     "note": note_update,
-                                    "email": email_user_update
+                                    "email": email_user_update,
+                                    "username" : username_update
                                 }
                             };
                             // request
