@@ -674,6 +674,8 @@
                                                 alert('គណនេយ្យមានរួចម្តងមកហើយ');
                                             } else if (ConvertResponse.status === "301"){
                                                 alert('លេខសំគាលអ្នកប្រើប្រាស់មានម្តងមកហើយ');
+                                            }else if (ConvertResponse.status === "302"){
+                                                alert('អុីម៉ែលធ្លាប់មានប្រើប្រាស់ក្នុងប្រព័ន្ឋ');
                                             } else if (ConvertResponse.status === "400"){
                                                 alert('ព័ត៌មានបំពេញទៅមិនគ្រប់គ្រាន់');
                                             } else if (ConvertResponse.status === "401"){
@@ -743,6 +745,8 @@
                                         alert('គណនេយ្យមានរួចម្តងមកហើយ');
                                     } else if (ConvertResponse.status === "301"){
                                         alert('លេខសំគាលអ្នកប្រើប្រាស់មានម្តងមកហើយ');
+                                    }else if (ConvertResponse.status === "302"){
+                                        alert('អុីម៉ែលធ្លាប់មានប្រើប្រាស់ក្នុងប្រព័ន្ឋ');
                                     } else if (ConvertResponse.status === "400"){
                                         alert('ព័ត៌មានបំពេញទៅមិនគ្រប់គ្រាន់');
                                     } else if (ConvertResponse.status === "401"){

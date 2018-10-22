@@ -85,4 +85,63 @@ class UserModel
         $getResult = DB::table('users')->where('id','=', $userObj->id)->first();
         return $getResult->remember_token;
     }
+
+    //Check User Number Before Insert
+    public static function checkUserNumberInsert($user_number){
+        $count = DB::table('users')
+            ->where('user_no','=', $user_number)
+            ->where('deleted','=', false)
+            ->count();
+        if ($count > 0) return false;
+        return true;
+    }
+    //Check Username Before Insert
+    public static function checkUsernameInsert($user_number){
+        $count = DB::table('users')
+            ->where('username','=', $user_number)
+            ->where('deleted','=', false)
+            ->count();
+        if ($count > 0) return false;
+        return true;
+    }
+    //Check UserEmail Before Insert
+    public static function checkEmailBeforeInsert($email){
+        $count = DB::table('users')
+            ->where('email','=', $email)
+            ->where('deleted','=', false)
+            ->count();
+        if ($count > 0) return false;
+        return true;
+    }
+
+    //Check Username Before update
+    public static function checkUsernameUpdate($user_name, $id){
+        $count = DB::table('users')
+            ->where('username','=', $user_name)
+            ->where('id', '<>', $id)
+            ->where('deleted','=', false)
+            ->count();
+        if ($count > 0) return false;
+        return true;
+    }
+    //Check User Number Before Update
+    public static function checkUserNumberUpdate($user_number, $id){
+        $count = DB::table('users')
+            ->where('user_no','=', $user_number)
+            ->where('id', '<>', $id)
+            ->where('deleted','=', false)
+            ->count();
+        if ($count > 0) return false;
+        return true;
+    }
+    //Check User Email Before Update
+    public static function checkUserEmailBeforeUpdate($email, $id){
+        $count = DB::table('users')
+            ->where('email','=', $email)
+            ->where('id', '<>', $id)
+            ->where('deleted','=', false)
+            ->count();
+        if ($count > 0) return false;
+        return true;
+    }
 }

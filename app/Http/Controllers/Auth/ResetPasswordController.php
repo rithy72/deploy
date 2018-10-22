@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Base\Logic\OtherLogic\UserAndResetPasswordToken;
 use App\Http\Controllers\Base\Logic\UserAuditLogic;
 use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
@@ -45,11 +46,20 @@ class ResetPasswordController extends Controller
 
     protected function rules()
     {
-        return [
-            'token' => 'required',
-            'username' => 'required',
-            'password' => 'required|confirmed|min:6',
-        ];
+        if (Auth::user() == null){
+            return [
+                'token' => 'required',
+                'email' => 'required',
+                'password' => 'required|confirmed|min:6',
+            ];
+        }else{
+            return [
+                'token' => 'required',
+                'username' => 'required',
+                'password' => 'required|confirmed|min:6',
+            ];
+        }
+
     }
 
 
@@ -61,9 +71,15 @@ class ResetPasswordController extends Controller
      */
     protected function credentials(Request $request)
     {
-        return $request->only(
-            'username', 'password', 'password_confirmation', 'token'
-        );
+        if (Auth::user() == null){
+            return $request->only(
+                'email', 'password', 'password_confirmation', 'token'
+            );
+        }else{
+            return $request->only(
+                'username', 'password', 'password_confirmation', 'token'
+            );
+        }
     }
 
     /**
@@ -98,7 +114,7 @@ class ResetPasswordController extends Controller
             $description = $userObj->user_no."-".$userObj->name;
             UserAuditLogic::Instance()->UserOnUserAction($userObj->id, UserActionEnum::CHANGE_PASSWORD, $description, []);
             //Prep User
-            $rememberToken = UserLogic::Instance()->UserPreps($userObj->email, $userObj->username);
+            $rememberToken = UserAndResetPasswordToken::Instance()->UserPreps($userObj->email, $userObj->username);
             Auth::user()->remember_token = $rememberToken;
             //Redirect after success
             if ($role == UserRoleEnum::ADMIN){

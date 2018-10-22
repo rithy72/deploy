@@ -9,8 +9,8 @@
 namespace App\Listeners;
 
 
+use App\Http\Controllers\Base\Logic\OtherLogic\UserAndResetPasswordToken;
 use App\Http\Controllers\Base\Logic\UserAuditLogic;
-use App\Http\Controllers\Base\Logic\UserLogic;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
@@ -40,9 +40,9 @@ class LoginSuccessListener
         //
         UserAuditLogic::Instance()->UserSecurityAction(Auth::id(), UserActionEnum::LOGIN, "", []);
         //
-        $rememberToken = UserLogic::Instance()->UserPreps(Auth::user()->email, Auth::user()->username);
+        $rememberToken = UserAndResetPasswordToken::Instance()->UserPreps(Auth::user()->email, Auth::user()->username);
         //
-        Auth::user()->remember_token = $rememberToken;
+        Auth::user()->setRememberToken($rememberToken);
         //
 
 

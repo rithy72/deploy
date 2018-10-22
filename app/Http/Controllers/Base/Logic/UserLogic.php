@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Base\Logic;
 
 
 use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Logic\OtherLogic\UserAndResetPasswordToken;
 use App\Http\Controllers\Base\Model\Enum\AuditGroup;
 use App\Http\Controllers\Base\Model\Enum\GeneralStatus;
 use App\Http\Controllers\Base\Model\Enum\UserActionEnum;
@@ -21,7 +22,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Str;
 
 class UserLogic
 {
@@ -29,46 +29,6 @@ class UserLogic
     //User Logic Instance
     public static function Instance(){
         return new UserLogic();
-    }
-
-    //Check User Number Before Insert
-    private function checkUserNumberInsert($user_number){
-        $count = DB::table('users')
-            ->where('user_no','=', $user_number)
-            ->where('deleted','=', false)
-            ->count();
-        if ($count > 0) return false;
-        return true;
-    }
-    //Check Username Before Insert
-    private function checkUsernameInsert($user_number){
-        $count = DB::table('users')
-            ->where('username','=', $user_number)
-            ->where('deleted','=', false)
-            ->count();
-        if ($count > 0) return false;
-        return true;
-    }
-
-    //Check Username Before update
-    private function checkUsernameUpdate($user_name, $id){
-        $count = DB::table('users')
-            ->where('username','=', $user_name)
-            ->where('id', '<>', $id)
-            ->where('deleted','=', false)
-            ->count();
-        if ($count > 0) return false;
-        return true;
-    }
-    //Check User Number Before Update
-    private function checkUserNumberUpdate($user_number, $id){
-        $count = DB::table('users')
-            ->where('user_no','=', $user_number)
-            ->where('id', '<>', $id)
-            ->where('deleted','=', false)
-            ->count();
-        if ($count > 0) return false;
-        return true;
     }
 
     //Check if user can be delete
@@ -128,8 +88,8 @@ class UserLogic
 
     //Add New User Logic
     public function CreateUser($user){
-        $validateUsername = $this->checkUsernameInsert($user->username);
-        $validateUserNumber = $this->checkUserNumberInsert($user->user_no);
+        $validateUsername = UserModel::checkUsernameInsert($user->username);
+        $validateUserNumber = UserModel::checkUserNumberInsert($user->user_no);
         $changeLogArray = array();
         //
         if (empty($user->name)) return "400";
@@ -170,9 +130,9 @@ class UserLogic
         $userOldObj = $this->Find($id);
         $userRole = UserRoleEnum::USER;
         if ($userOldObj->role == UserRoleEnum::ADMIN) $userRole = UserRoleEnum::ADMIN;
-
-        $validateUsername = $this->checkUsernameUpdate($user->username, $id);
-        $validateUserNumber = $this->checkUserNumberUpdate($user->user_no, $id);
+        //
+        $validateUsername = UserModel::checkUsernameUpdate($user->username, $id);
+        $validateUserNumber = UserModel::checkUserNumberUpdate($user->user_no, $id);
         $changeLogArray = array();
         //
         if (!$validateUsername) return "300";
@@ -228,6 +188,8 @@ class UserLogic
         $description = $userObj->user_no."-".$userObj->name;
         UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::DELETE, $description, []);
         //
+        UserAndResetPasswordToken::Instance()->ClearToken();
+        //
         return true;
     }
 
@@ -248,6 +210,8 @@ class UserLogic
         //User Audit
         $description = $userObj->user_no."-".$userObj->name;
         UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::DEACTIVATE, $description, []);
+        //Clear Token
+        UserAndResetPasswordToken::Instance()->ClearToken();
     }
 
     //Activate
@@ -267,39 +231,6 @@ class UserLogic
         $description = $userObj->user_no."-".$userObj->name;
         UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::ACTIVATE, $description, []);
         UserAuditLogic::Instance()->UserOnUserAction($id, UserActionEnum::CHANGE_PASSWORD, $description, []);
-    }
-
-    //Reset Password
-    public function UserPreps($email, $username){
-        $check = DB::table('password_resets')->where('email','=', trim($email))->first();
-        $dateInstance = DateTimeLogic::Instance();
-        $randString = Str::random(60);
-        //
-        if ($check == null){
-            //Insert New Token
-            DB::table('password_resets')->insert([
-                'username' => trim($username),
-                'email' => trim($email),
-                'token' => Hash::make($randString),
-                'created_at' => $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
-            ]);
-        }else{
-            DB::table('password_resets')
-                ->where('email','=', trim($email))
-                ->where('username','=', trim($username))
-                ->update([
-                    'token' => Hash::make($randString),
-                    'created_at' => $dateInstance->GetCurrentDateTime(DateTimeLogic::DB_DATE_TIME_FORMAT)
-                ]);
-        }
-        //
-        DB::table('users')
-            ->where('id','=', Auth::id())
-            ->update([
-                "just_updated" => false,
-                'remember_token' => $randString
-            ]);
-        return $randString;
     }
 
     //Admin Reset User Password

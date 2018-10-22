@@ -60,7 +60,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="username" class="col-sm-4 col-form-label text-md-right">{{ __('គណនេយ្យ') }}</label>
+                            <label for="username" class="col-sm-4 col-form-label text-md-right">{{ __('គណនេយ្យប្រើប្រាស់') }}</label>
 
                             <div class="col-md-6">
                                 <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="" required autofocus>
@@ -96,9 +96,9 @@
                                 </button>
 
                                 {{--href="{{ route('password.request') }}" --}}
-                                <a class="btn btn-link" href="#">
-                                    @lang('string.forgot_password')
-                                </a>
+                                {{--<a class="btn btn-link" href="{{ route('password.request') }}">--}}
+                                    {{--@lang('string.forgot_password')--}}
+                                {{--</a>--}}
                             </div>
                         </div>
                     </form>

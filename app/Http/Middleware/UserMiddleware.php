@@ -2,10 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Base\Logic\OtherLogic\UserAndResetPasswordToken;
 use App\Http\Controllers\Base\Logic\UserLogic;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserMiddleware
 {
@@ -37,13 +39,18 @@ class UserMiddleware
     {
 
         if (Auth::user() == null) return redirect('/login');
-
+        //
         $userObj = UserLogic::Instance()->Find(Auth::id());
-
+        //
         if ($userObj->just_update == true || $userObj->status == false || $userObj->deleted == true){
+            Auth::logout();
+            Session::flush();
             return redirect('/login');
         }
-
+        //
+        Auth::user()
+            ->setRememberToken(UserAndResetPasswordToken::Instance()->UserPreps($userObj->email, $userObj->username));
+        //
         return $next($request);
     }
 }

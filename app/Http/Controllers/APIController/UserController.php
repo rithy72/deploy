@@ -107,6 +107,10 @@ class UserController extends Controller
                 //Lack Information
                 $returnModel->status = $insertResult;
                 $returnModel->data = "Lack Information";
+            }elseif ($insertResult == "302"){
+                //Duplicate User Number
+                $returnModel->status = $insertResult;
+                $returnModel->data = "Email has been use in the system";
             }
         }else{
             //When user user maybe not admin or the password is wrong
@@ -153,6 +157,10 @@ class UserController extends Controller
                 //Duplicate User Number
                 $returnModel->status = $updateResult;
                 $returnModel->data = "Duplicate User Number";
+            }elseif ($updateResult == "302"){
+                //Duplicate User Email
+                $returnModel->status = $updateResult;
+                $returnModel->data = "Email has been used";
             }
         }else{
             //When user user maybe not admin or the password is wrong
@@ -303,4 +311,5 @@ class UserController extends Controller
 
         return json_encode($returnModel);
     }
+
 }
