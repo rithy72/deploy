@@ -174,7 +174,7 @@ return[
     'login' => 'ចូលប្រើប្រាស់',
     'logout.' => 'ចាកចេញ',
     'note' => 'កំណត់បន្ថែម',
-    'pass_admin' => 'លេខសំងាត់គណនេយ្យមេ៖',
+    'pass_admin' => 'លេខសំងាត់ Admin៖',
     'confirm_pass' => 'លេខសំងាត់ម្តងទៀត',
     'must_to_write' => 'ចាំបាច់...',
     'reset_password_user' => 'កែប្រែលេខសំងាត់',
