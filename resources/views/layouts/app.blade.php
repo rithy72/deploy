@@ -52,11 +52,13 @@
         <ul class="nav navbar-nav navbar-right">
 
             <li class="dropdown dropdown-user">
+                @if(\Illuminate\Support\Facades\Auth::user())
                 <a class="dropdown-toggle" data-toggle="dropdown">
                     {{--<img src="assets/images/placeholder.jpg" alt="">--}}
-                    <span>{{ Auth::user()->user_no??"".' - '.Auth::user()->name??"" }}</span>
+                    <span>{{ Auth::user()->user_no.' - '.Auth::user()->name }}</span>
                     <i class="caret"></i>
                 </a>
+                @endif
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
