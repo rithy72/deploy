@@ -176,10 +176,10 @@ class InvoicePaymentLogic
         $changeLogArray = array();
         //Add More Item
         foreach ($items as $item){
-            InvoiceItemLogic::Instance()->Create($item, $invoice_id);
+            $itemId = InvoiceItemLogic::Instance()->Create($item, $invoice_id);
 
             //Change Log
-            $itemObj = InvoiceItemLogic::Instance()->Find($item);
+            $itemObj = InvoiceItemLogic::Instance()->Find($itemId);
             $changeLogArray = UserAuditLogic::Instance()
                 ->CompareEditItem((object)$itemObj, (object)$itemObj, $changeLogArray, UserActionEnum::Add);
         }

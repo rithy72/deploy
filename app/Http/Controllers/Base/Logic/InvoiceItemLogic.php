@@ -127,7 +127,7 @@ class InvoiceItemLogic
     public function Create($invoice_item_model, $invoice_id){
         //Insert Invoice Items
         $insertResult = DB::table('invoice_item')
-            ->insert([
+            ->insertGetId([
                 'invoice_id' => $invoice_id,
                 'item_type_id' => $invoice_item_model['item_type_id'],
                 'first_feature' => $invoice_item_model['first_feature'],
