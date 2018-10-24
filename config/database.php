@@ -52,6 +52,7 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
+            'dump_binary_path' => 'C:\wamp64\bin\mysql\mysql5.7.21\bin',
         ],
 
         'pgsql' => [

@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Mail;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,8 +25,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+         $schedule->command('backup:run --only-db')->everyTenMinutes()->after(function (){
+            $appname = config('app.name');
+            $dir = storage_path('app');
+            $complete = $dir.'\/'.$appname;
+            $files = scandir($complete, SCANDIR_SORT_DESCENDING);
+            $newest_file = $files[0];
+            Mail::raw('Backup Bitch', function ($email) use ($complete, $newest_file){
+                $email->to('chansotheabo46@gmail.com')
+                    ->attach($complete.'\/'.$newest_file)
+                    ->subject('Backup Bitch');
+            });
+         });
     }
 
     /**
