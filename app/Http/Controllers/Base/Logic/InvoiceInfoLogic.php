@@ -312,7 +312,7 @@ class InvoiceInfoLogic
 
         $allowGroup = array(AuditGroup::ITEM, AuditGroup::INVOICE);
         $getResult = UserAuditLogic::Instance()
-            ->search($from_date, $to_date, $allowGroup, $group, $action, "", $invoice_id, $page_size);
+            ->search($from_date, $to_date, $allowGroup, $group, $action, "", $invoice_id, $page_size, 'asc');
         return $getResult;
     }
 

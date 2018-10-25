@@ -203,7 +203,7 @@ class UserAuditLogic
     }
 
     //Filter Search
-    public function search($from_date, $to_date, $allow_group, $group, $action, $user_id, $parent_id, $page_size){
+    public function search($from_date, $to_date, $allow_group, $group, $action, $user_id, $parent_id, $page_size, $order_by = "desc"){
         $dateInstance = DateTimeLogic::Instance();
         $startOfUsing = DailyReportLogic::Instance()->GetStartDayOfUsing();
         //
@@ -243,7 +243,7 @@ class UserAuditLogic
             })
             //When user has date range
             ->whereBetween('user_record.date_time', array($fromDate, $toDate))
-            ->orderBy('user_record.date_time','asc')
+            ->orderBy('user_record.date_time',$order_by)
             ->paginate($page_size);
         //Append
         $getResult->appends(Input::except('page'));

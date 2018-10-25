@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Base\Logic\NotificationLogic;
 use App\Http\Controllers\Base\Logic\OtherLogic\InvoicePaymentLogic;
 use Illuminate\Http\Request;
 
@@ -22,16 +23,24 @@ class TestController extends Controller
 
     public function API(){
 
-//        $appname = config('app.name');
-//        $dir = storage_path('app');
-//        $complete = $dir.'\/'.$appname;
-//        $files = scandir($complete, SCANDIR_SORT_DESCENDING);
-//        $newest_file = $files[0];
-//        Mail::raw('Backup Bitch', function ($email) use ($complete, $newest_file){
-//            $email->to('chansotheabo46@gmail.com')
-//                ->attach($complete.'\/'.$newest_file)
-//                ->subject('Backup Bitch');
-//        });
-
+        $jsonString = "{
+  \"email\":\"chansotheabo@gmail.com\",
+  \"notification\":{
+    \"backup_data\": true,
+    \"invoice\": {
+      \"insert\": true,
+      \"edit\": false,
+      \"payment\": true,
+      \"took\": false
+    },
+    \"item\": {
+      \"add\": false,
+      \"depreciation\": false,
+      \"sale\": false
+    }
+  }
+}";
+        $model = NotificationLogic::Instance()->Insert(json_decode($jsonString));
+        return json_encode($model);
     }
 }
