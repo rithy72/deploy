@@ -153,6 +153,7 @@ class DailyReportLogic
         //
         $getResult = DB::table('daily_report')
             ->whereBetween('date', array($fromDate, $toDate))
+            ->orderBy('date', 'desc')
             ->paginate($page_size);
 
         $getResult->appends(Input::except("page"));
