@@ -1024,5 +1024,18 @@
                 }
             });
         }
+
+        //Validate Notice
+        function validateNotice(first, second, third, fourth) {
+            array = [first, second, third, fourth];
+            valid = false;
+            for (i = 0; i < array.length; i++){
+                if (array[i] !== "" && array[i] !== null){
+                    valid = true;
+                    return valid;
+                }
+            }
+            return valid;
+        }
     </script>
 @endsection

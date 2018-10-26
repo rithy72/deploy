@@ -616,16 +616,17 @@
             if ($('#selectTomNanh').val() === null) {
                 alert('បញ្ចូលនិងជ្រើសរើសឈ្មោះទំនិញ');
             } else {
-                if ($('#notice1').val() === "") {
+                var _Notice1 = $('#notice1').val();
+                var _Notice2 = $('#notice2').val();
+                var _Notice3 = $('#notice3').val();
+                var _Notice4 = $('#notice4').val();
+                validResult = validateNotice(_Notice1, _Notice2, _Notice3, _Notice4);
+                if (validResult === false) {
                     alert('សូមមេត្តាបញ្ជូលកំណត់សំគាល់យ៉ាងហោចណាស់ ១');
                 } else {
                     var storeSelect2 = $('#selectTomNanh').val();     // store value from select 2
                     //var storeSelectText = $('#selectTomNanh').text();     // store text from select 2
                     var storeSelectText = $("#selectTomNanh option:selected").text();     // store text from select 2
-                    var _Notice1 = $('#notice1').val();
-                    var _Notice2 = $('#notice2').val();
-                    var _Notice3 = $('#notice3').val();
-                    var _Notice4 = $('#notice4').val();
 
                     var _tr = '<tr>' +
                         '<td style="display:none;">' + storeSelect2 + '</td>' +
@@ -871,6 +872,18 @@
                     callback(obj);
                 }
             });
+        }
+
+        function validateNotice(first, second, third, fourth) {
+            array = [first, second, third, fourth];
+            valid = false;
+            for (i = 0; i < array.length; i++){
+                if (array[i] !== "" && array[i] !== null){
+                    valid = true;
+                    return valid;
+                }
+            }
+            return valid;
         }
 
     </script>
