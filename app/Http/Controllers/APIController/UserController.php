@@ -84,7 +84,7 @@ class UserController extends Controller
             $userModel->name = $userInfo->name;
             $userModel->phone_number = $userInfo->phone_number;
             $userModel->note = $userInfo->note;
-            //$userModel->role = $userInfo->role;
+            //$userModel->role = (Auth::user()->role == UserRoleEnum::SUPER) ? $userInfo->role : UserRoleEnum::USER;
             $userModel->email = trim($userInfo->email);
             $userModel->username = trim($userInfo->username);
             $userModel->password = trim($userInfo->password);
@@ -137,6 +137,7 @@ class UserController extends Controller
             $userModel->note = $userInfo->note;
             $userModel->username = $userInfo->username;
             $userModel->email = trim($userInfo->email);
+            //$userModel->role = (Auth::user()->role == UserRoleEnum::SUPER) ? $userInfo->role : UserRoleEnum::USER;
             //
             $updateResult = UserLogic::Instance()->UpdateUser($userModel, $user_id);
             //

@@ -215,5 +215,6 @@ return[
     'email_real' => 'អ៊ីម៉ែល',
     'user_information' => 'ពត៌មានអ្នកប្រើប្រាស់',
     'invoice_information' => 'ពត៌មានវិក្ក័យបត្រ',
-    'forgot_password' => 'ភ្លេចលេខសំងាត់មែនទេ ?'
+    'forgot_password' => 'ភ្លេចលេខសំងាត់មែនទេ ?',
+    'user_role' => 'តួនាទី'
 ];

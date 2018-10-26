@@ -34,21 +34,9 @@ class CreateUsersTable extends Migration
             $table->boolean('deleted')->default(false);
             $table->boolean('just_updated')->default(false);
         });
-        //Create Super User
-//        DB::table('users')->insert(array(
-//            [
-//               'name' => 'Super User',
-//               'email' => 'admin@admin',
-//               'password' => bcrypt("admin@admin123456"),
-//               'role' => 'admin'
-//            ],
-//            [
-//                'name' => 'Normal User',
-//                'email' => 'user@user',
-//                'password' => bcrypt("user@user123456"),
-//                'role' => 'user'
-//            ]
-//        ));
+
+        //Init User
+        \App\Http\Controllers\Base\Logic\OtherLogic\InitLogic::InitSuperUser();
     }
 
     /**

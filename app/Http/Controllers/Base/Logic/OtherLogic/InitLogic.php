@@ -20,6 +20,7 @@ class InitLogic extends Controller
         //Check
         $count = DB::table('users')->count();
         if ($count > 0) return;
+
         //Sothea
         $userModel = UserModel::Instance();
         $userModel->user_no = "S001";

@@ -31,6 +31,6 @@ class EmailNotification extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('email_notification');
+        Schema::dropIfExists('notification');
     }
 }

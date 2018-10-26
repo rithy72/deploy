@@ -8,10 +8,10 @@
 
 namespace App\Http\Controllers\Base\Logic;
 
-
-use App\Http\Controllers\Base\Model\NotificationModel\NotificationData;
-use App\Http\Controllers\Base\Model\NotificationModel\NotificationPrivilegesModel;
+use App\Http\Controllers\Base\Logic\OtherLogic\DateTimeLogic;
+use App\Http\Controllers\Base\Model\Enum\UserRoleEnum;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class NotificationLogic
 {
@@ -20,31 +20,43 @@ class NotificationLogic
         return new NotificationLogic();
     }
 
-    //Change Log
-    private function ChangeLog(){
-
+    public function GetAdminEmail(){
+        $result = DB::table('users')->select('email')
+            ->where('role','=', UserRoleEnum::ADMIN)->get();
+        //
+        $mails = array();
+        foreach ($result as $item){
+            if (!empty($item)){
+                array_push($mails, $item->email);
+            }
+        }
+        //
+        return $mails;
     }
 
-    //Insert
-    public function Insert(NotificationData $model){
-        if (empty($model->email)) return "401";
+    //Backup Database
+    public function SendBackupFile(){
+        $model = NotificationLogic::Instance()->GetAdminEmail();
+        $appname = config('app.name');
+        $dir = storage_path('app');
+        $complete = $dir.'\/'.$appname;
+        $files = scandir($complete, SCANDIR_SORT_DESCENDING);
+        $newest_file = $files[0];
+        $body = 'This is the back up data of: '.DateTimeLogic::Instance()
+                ->GetCurrentDateTime(DateTimeLogic::SHOW_DATE_TIME_FORMAT);
         //
-        $model->notify = NotificationPrivilegesModel::Instance()->FinalizeModel($model->notify);
-        //
-        $insertId = DB::table('notification')
-            ->insertGetId([
-                'email' => $model->email,
-                'messenger' => $model->messenger ?? "",
-                'telegram' => $model->telegram ?? "",
-                'notify' => json_encode($model->notify)
-            ]);
-        //
-        $model->id = $insertId;
-        return $model;
+        foreach ($model as $mail){
+            Mail::raw($body, function ($email) use ($complete, $newest_file, $mail){
+                $email
+                    ->to($mail)
+                    ->attach($complete.'\/'.$newest_file)
+                    ->subject('Database Backup');
+            });
+        }
     }
 
-    //Update
-    public function Edit(NotificationData $model, $id){
+    //Invoice Transaction
+    public function InvoiceTransactionAlert(){
 
     }
 }

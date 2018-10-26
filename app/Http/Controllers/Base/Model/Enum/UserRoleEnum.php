@@ -13,4 +13,5 @@ class UserRoleEnum
 {
     public const ADMIN = "admin";
     public const USER = "user";
+    public const SUPER = "super";
 }
