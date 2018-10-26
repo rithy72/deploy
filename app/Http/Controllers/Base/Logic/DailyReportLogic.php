@@ -182,10 +182,10 @@ class DailyReportLogic
             ->whereBetween('date', array($fromDate, $toDate))->sum('outcome');
         $returnModel->sum_income = DB::table('daily_report')
             ->whereBetween('date', array($fromDate, $toDate))->sum('income');
-        $returnModel->sum_in_items = DB::table('daily_report')
-            ->whereBetween('date', array($fromDate, $toDate))->sum('in_item');
-        $returnModel->sum_out_items = DB::table('daily_report')
-            ->whereBetween('date', array($fromDate, $toDate))->sum('out_item');
+//        $returnModel->sum_in_items = DB::table('daily_report')
+//            ->whereBetween('date', array($fromDate, $toDate))->sum('in_item');
+//        $returnModel->sum_out_items = DB::table('daily_report')
+//            ->whereBetween('date', array($fromDate, $toDate))->sum('out_item');
 
         return $returnModel;
     }

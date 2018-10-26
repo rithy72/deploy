@@ -26,7 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('backup:run --only-db')->everyTenMinutes()->after(function (){
+        //Backup Database
+         $schedule->command('backup:run --only-db')->everyTenMinutes()->withoutOverlapping()->after(function (){
             $appname = config('app.name');
             $dir = storage_path('app');
             $complete = $dir.'\/'.$appname;
@@ -41,6 +42,8 @@ class Kernel extends ConsoleKernel
                     ->subject('Database Backup');
             });
          });
+         //Clear Old Backup File
+        $schedule->command('backup:clear')->sundays()->withoutOverlapping();
     }
 
     /**

@@ -27,7 +27,7 @@ class InvoicePaymentLogic
     }
 
     //Transaction Record
-    private function TransactionRecord($invoice_id, $transaction_type, $amount){
+    public function TransactionRecord($invoice_id, $transaction_type, $amount){
         $insertResult = DB::table('invoice_payment_record')
             ->insertGetId([
                 'invoice_id' => $invoice_id,

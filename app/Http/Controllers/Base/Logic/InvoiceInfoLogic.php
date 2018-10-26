@@ -158,6 +158,7 @@ class InvoiceInfoLogic
             return false;
         }else{
             //Insert Invoice
+            $grandTotal = abs( $invoice_info_model->grand_total);
             $insertID = DB::table('invoice_info')
                 ->insertGetId([
                     'customer_name' => $invoice_info_model->customer_name,
@@ -167,8 +168,8 @@ class InvoiceInfoLogic
                         ->AddDaysToCurrentDateDBFormat(30, DateTimeLogic::DB_DATE_TIME_FORMAT),
                     'user_id' => Auth::id(),
                     'status' => InvoiceStatusEnum::OPEN,
-                    'grand_total' => $invoice_info_model->grand_total,
-                    'remain' => $invoice_info_model->grand_total,
+                    'grand_total' => $grandTotal,
+                    'remain' => $grandTotal,
                     'interests_rate' => intval($invoice_info_model->interests_rate),
                 ]);
             //Change Log
@@ -186,6 +187,10 @@ class InvoiceInfoLogic
                 $changeLogArray = UserAuditLogic::Instance()
                     ->CompareEditItem((object)$item, (object)$item, $changeLogArray, UserActionEnum::Add);
             }
+
+            //Transaction Record
+            InvoicePaymentLogic::Instance()
+                ->TransactionRecord($insertID, UserActionEnum::INSERT, $grandTotal);
 
             //User Audit
             UserAuditLogic::Instance()

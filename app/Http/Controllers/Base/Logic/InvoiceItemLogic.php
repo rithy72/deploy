@@ -262,6 +262,10 @@ class InvoiceItemLogic
                 'sale_price' => floatval($sale_price)
             ]);
 
+        //Transaction Record
+        InvoicePaymentLogic::Instance()
+            ->TransactionRecord($item->invoice_id, UserActionEnum::SALE_ITEM, $sale_price);
+
         //Update Daily Report
         DailyReportLogic::Instance()->UpdateCurrentReport(0, abs(1), 0, abs($sale_price));
 

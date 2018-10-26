@@ -21,7 +21,11 @@ class NotificationLogic
     }
 
     //Change Log
+    private function ChangeLog(){
 
+    }
+
+    //Insert
     public function Insert(NotificationData $model){
         if (empty($model->email)) return "401";
         //
@@ -39,15 +43,8 @@ class NotificationLogic
         return $model;
     }
 
-    //Insert
-
-    public function Edit(NotificationData $model, $id){
-
-    }
-
     //Update
-
-    private function ChangeLog($old_obj, $new_obj, $flag, $change_log_array){
+    public function Edit(NotificationData $model, $id){
 
     }
 }
